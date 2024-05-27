@@ -10,7 +10,7 @@
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
                     <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_orders')</p>
+                        <p class="text-sm text-[#808191]">@lang('lang.Total_users')</p>
                         <h2 class="text-2xl font-semibold mt-1">1</h2>
                     </div>
                     <div>
@@ -25,7 +25,7 @@
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
                     <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Pending_orders')</p>
+                        <p class="text-sm text-[#808191]">@lang('lang.Buy_Orders')</p>
                         <h2 class="text-2xl font-semibold mt-1">0</h2>
                     </div>
                     <div>
@@ -40,8 +40,8 @@
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
                     <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_product')</p>
-                        <h2 class="text-2xl font-semibold mt-1">1}</h2>
+                        <p class="text-sm text-[#808191]">@lang('lang.Sell_Requests')</p>
+                        <h2 class="text-2xl font-semibold mt-1">1</h2>
                     </div>
                     <div>
                         <img width="60px" height="60px" src="{{ asset('images/icons/total-product.svg') }}"
@@ -55,7 +55,7 @@
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
                     <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_customers')</p>
+                        <p class="text-sm text-[#808191]">@lang('lang.Total_Revenue')</p>
                         <h2 class="text-2xl font-semibold mt-1">1</h2>
                     </div>
                     <div>
@@ -73,7 +73,7 @@
 <div class="lg:flex gap-14 mt-16 px-3 ">
     <div class="lg:w-[60%] w-full">
         <div class=" shadow-med p-3 rounded-xl">
-            <h2 class="text-xl  font-semibold  ml-6">@lang('lang.Earning')</h2>
+            <h2 class="text-xl  font-semibold  ml-6">@lang('lang.Earnings')</h2>
             <div id="earningChart" class="mt-4" style="height: 370px; width: 100%;"></div>
 
         </div>

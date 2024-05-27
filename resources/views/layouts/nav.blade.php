@@ -17,7 +17,7 @@
     class="fixed  bg-primary text-white top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
     aria-label="Sidebar">
     <div class="flex  justify-center mt-[30px] pr-4 mb-3">
-        <a href="../"> <img class=" w-48" src="{{ asset('') }}" alt="Logo"></a>
+        <a href="../"> <img class=" w-48" src="{{ asset('./images/logo.svg') }}" alt="Logo"></a>
     </div>
     <div class="h-full  py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
         <ul class="space-y-2  pl-3 pr-6 font-medium">

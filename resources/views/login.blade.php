@@ -18,15 +18,15 @@
             class="bg-primary w-full sm:w-1/2 md:w-9/12 lg:w-1/2 shadow-md flex flex-col md:flex-row items-center mx-5 sm:m-0 rounded ">
             <div class="w-full md:w-1/2 hidden md:flex flex-col justify-center items-center text-white relative">
                 <div>
-                    <img class="w-52    absolute left-1/2  -translate-x-[50%] top-[-100%]" src="{{ asset('') }}"
-                        alt="LOGO">
+                    <img class="w-52    absolute left-1/2  -translate-x-[50%] top-[-100%]"
+                        src="{{ asset('./images/logo.svg') }}" alt="LOGO">
                 </div>
                 <h1 class="text-3xl">Hello</h1>
                 <p class="text-5xl font-extrabold">Welcome!</p>
             </div>
             <div class="bg-white w-full md:w-1/2 flex flex-col items-center py-32 px-8">
                 <div class="md:hidden block pb-5">
-                    <img class="w-52 " src="{{ asset('') }}" alt="LOGO">
+                    <img class="w-52 " src="{{ asset('./images/logo.svg') }}" alt="LOGO">
                 </div>
                 <h3 class="text-3xl font-bold text-primary mb-4">
                     LOGIN
