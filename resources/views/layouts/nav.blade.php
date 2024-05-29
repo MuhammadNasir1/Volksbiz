@@ -10,7 +10,7 @@
         </svg>
     </button>
     <div class=" md:hidden flex justify-center m-auto">
-        <img class="w-48" src="{{ asset('images/Horeca-green.svg') }}" alt="logo">
+        <img class="w-48" src="{{ asset('./images/logo.svg') }}" alt="logo">
     </div>
 </div>
 <aside id="sidebar-multi-level-sidebar"
@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li>
-                <a href="../"
+                <a href="../bussinessList"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <img src="{{ asset('./images/icons/list.svg') }}" width="20" height="20" alt="">
                     </svg>
@@ -42,7 +42,7 @@
                 </a>
             </li>
             <li>
-                <a href="../"
+                <a href="../categoryList"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <img src="{{ asset('./images/icons/cat_list.svg') }}" width="20" height="20" alt="">
                     </svg>
@@ -50,7 +50,7 @@
                 </a>
             </li>
             <li>
-                <a href="../"
+                <a href="../saleRequests"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <img src="{{ asset('./images/icons/sale.svg') }}" width="20" height="20" alt="">
                     </svg>
@@ -87,7 +87,7 @@
                 </a>
             </li>
             <li>
-                <a href="../"
+                <a href="../orders"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <img src="{{ asset('./images/icons/Vector.svg') }}" width="20" height="20" alt="">
                     </svg>
@@ -95,7 +95,7 @@
                 </a>
             </li>
             <li>
-                <a href="../"
+                <a href="../blogs"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <img src="{{ asset('./images/icons/blog.svg') }}" width="20" height="20" alt="">
                     </svg>
@@ -103,7 +103,7 @@
                 </a>
             </li>
             <li>
-                <a href="../"
+                <a href="../reviewsAndExperience"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <img src="{{ asset('./images/icons/review.svg') }}" width="20" height="20" alt="">
                     </svg>

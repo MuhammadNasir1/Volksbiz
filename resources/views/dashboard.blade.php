@@ -14,7 +14,10 @@
                         <h2 class="text-2xl font-semibold mt-1">1</h2>
                     </div>
                     <div>
-                        <div class="icon-bg h-[60px] w-[60px] bg-[#339B96] rounded-full"></div>
+                        <div
+                            class="icon-bg h-[60px] w-[60px] bg-[#339B96] rounded-full flex justify-center items-center">
+                            <i class="fa-solid fa-users text-white text-2xl"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -28,7 +31,10 @@
                         <h2 class="text-2xl font-semibold mt-1">0</h2>
                     </div>
                     <div>
-                        <div class="icon-bg h-[60px] w-[60px] bg-[#339b96a5] rounded-full"></div>
+                        <div
+                            class="icon-bg h-[60px] w-[60px] bg-[#a4c2da] rounded-full  flex justify-center items-center">
+                            <i class="fa-solid fa-cart-arrow-down text-white text-2xl"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,7 +48,11 @@
                         <h2 class="text-2xl font-semibold mt-1">1</h2>
                     </div>
                     <div>
-                        <div class="icon-bg h-[60px] w-[60px] bg-[#26056D] rounded-full"></div>
+                        <div
+                            class="icon-bg h-[60px] w-[60px] bg-[#26056D] rounded-full  flex justify-center items-center">
+                            <img src="{{ asset('./images/icons/sale.svg') }}" width="28" height="28"
+                                alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,7 +66,11 @@
                         <h2 class="text-2xl font-semibold mt-1">1</h2>
                     </div>
                     <div>
-                        <div class="icon-bg h-[60px] w-[60px] bg-[#D95975] rounded-full"></div>
+                        <div
+                            class="icon-bg h-[60px] w-[60px] bg-[#D95975] rounded-full flex justify-center items-center">
+                            <img src="{{ asset('./images/icons/dollar.svg') }}" width="18" height="18"
+                                alt="">
+                        </div>
                     </div>
                 </div>
             </div>

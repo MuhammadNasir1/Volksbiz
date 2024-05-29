@@ -46,7 +46,27 @@ Route::get('email', function () {
 
     return view("emails.parent");
 });
-Route::get('bussiness-list', function () {
+Route::get('bussinessList', function () {
 
     return view("businesses_list");
+});
+Route::get('categoryList', function () {
+
+    return view("category_list");
+});
+Route::get('saleRequests', function () {
+
+    return view("sale_requests");
+});
+Route::get('orders', function () {
+
+    return view("orders");
+});
+Route::get('reviewsAndExperience', function () {
+
+    return view("review");
+});
+Route::get('blogs', function () {
+
+    return view("blogs");
 });
