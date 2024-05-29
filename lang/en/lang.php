@@ -53,6 +53,8 @@ return [
     'Type' => 'Type',
     'Author' => 'Author',
     'Update' => 'Update',
+    'Notifications' => 'Notifications',
+    'View_all' => 'View All',
     'Enter_City' => 'Enter City',
     'Enter_Country' => 'Enter Country',
     'All_Blogs' => 'All Blogs',
