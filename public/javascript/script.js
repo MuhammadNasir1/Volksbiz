@@ -1,6 +1,6 @@
 //  register page password show and hide
 
-let passinputs = document.querySelectorAll('.passinput');
+let passinputs = document.querySelectorAll(".passinput");
 let eyebtns = document.querySelectorAll(".eyeicon");
 
 eyebtns.forEach((btn, index) => {
@@ -15,3 +15,5 @@ eyebtns.forEach((btn, index) => {
         }
     });
 });
+
+//

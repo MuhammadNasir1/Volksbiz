@@ -46,3 +46,7 @@ Route::get('email', function () {
 
     return view("emails.parent");
 });
+Route::get('bussiness-list', function () {
+
+    return view("businesses_list");
+});

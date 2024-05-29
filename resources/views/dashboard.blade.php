@@ -14,8 +14,7 @@
                         <h2 class="text-2xl font-semibold mt-1">1</h2>
                     </div>
                     <div>
-                        <img width="60px" height="60px" src="{{ asset('images/icons/total_orders.svg') }}"
-                            alt="Orders">
+                        <div class="icon-bg h-[60px] w-[60px] bg-[#339B96] rounded-full"></div>
                     </div>
                 </div>
             </div>
@@ -29,8 +28,7 @@
                         <h2 class="text-2xl font-semibold mt-1">0</h2>
                     </div>
                     <div>
-                        <img width="52px" height=52px" src="{{ asset('images/icons/pending-orders.svg') }}"
-                            alt="Pending Orders">
+                        <div class="icon-bg h-[60px] w-[60px] bg-[#339b96a5] rounded-full"></div>
                     </div>
                 </div>
             </div>
@@ -44,8 +42,7 @@
                         <h2 class="text-2xl font-semibold mt-1">1</h2>
                     </div>
                     <div>
-                        <img width="60px" height="60px" src="{{ asset('images/icons/total-product.svg') }}"
-                            alt="Product">
+                        <div class="icon-bg h-[60px] w-[60px] bg-[#26056D] rounded-full"></div>
                     </div>
                 </div>
             </div>
@@ -59,8 +56,7 @@
                         <h2 class="text-2xl font-semibold mt-1">1</h2>
                     </div>
                     <div>
-                        <img width="50px" height="50px" src="{{ asset('images/icons/customers.svg') }}"
-                            alt="Customers">
+                        <div class="icon-bg h-[60px] w-[60px] bg-[#D95975] rounded-full"></div>
                     </div>
                 </div>
             </div>
@@ -139,14 +135,14 @@
     </div>
     <div class="lg:w-[40%] w-full">
         <div class=" shadow-med p-3 rounded-xl">
-            <h2 class="text-xl  font-semibold ml-6">@lang('lang.Orders')</h2>
+            <h2 class="text-xl  font-semibold ml-6">@lang('lang.Users_&_Plan')</h2>
             <div id="studentChart" class="mt-4" style="height: 370px; width: 100%;"></div>
         </div>
         <div class=" shadow-med p-3 rounded-xl mt-10">
 
             <div>
                 <div class="flex justify-between px-6">
-                    <h2 class="text-xl  font-semibold ">@lang('lang.Orders')</h2>
+                    <h2 class="text-xl  font-semibold ">@lang('lang.Requests')</h2>
                 </div>
                 <div id="attendanceChart" class="mt-4" style="height: 270px; width: 100%;"></div>
                 <div class="mt-8 mx-10">

@@ -14,7 +14,7 @@
     </div>
 </div>
 <aside id="sidebar-multi-level-sidebar"
-    class="fixed  bg-primary text-white top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+    class="fixed  bg-primary text-white top-0 left-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0"
     aria-label="Sidebar">
     <div class="flex  justify-center mt-[30px] pr-4 mb-3">
         <a href="../"> <img class=" w-48" src="{{ asset('./images/logo.svg') }}" alt="Logo"></a>
@@ -24,7 +24,7 @@
             <li>
                 <a href="../"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg width="20" height="15" viewBox="0 0 16 15" fill="none"
+                    <svg width="20" height="20" viewBox="0 0 16 15" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M0.5 7.33333C0.5 7.88562 0.947715 8.33333 1.5 8.33333H6.16667C6.71895 8.33333 7.16667 7.88562 7.16667 7.33333V1C7.16667 0.447715 6.71895 0 6.16667 0H1.5C0.947714 0 0.5 0.447715 0.5 1V7.33333ZM0.5 14C0.5 14.5523 0.947715 15 1.5 15H6.16667C6.71895 15 7.16667 14.5523 7.16667 14V11C7.16667 10.4477 6.71895 10 6.16667 10H1.5C0.947714 10 0.5 10.4477 0.5 11V14ZM8.83333 14C8.83333 14.5523 9.28105 15 9.83333 15H14.5C15.0523 15 15.5 14.5523 15.5 14V7.66667C15.5 7.11438 15.0523 6.66667 14.5 6.66667H9.83333C9.28105 6.66667 8.83333 7.11438 8.83333 7.66667V14ZM9.83333 0C9.28105 0 8.83333 0.447715 8.83333 1V4C8.83333 4.55228 9.28105 5 9.83333 5H14.5C15.0523 5 15.5 4.55228 15.5 4V1C15.5 0.447715 15.0523 0 14.5 0H9.83333Z"
@@ -34,9 +34,33 @@
                 </a>
             </li>
             <li>
+                <a href="../"
+                    class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <img src="{{ asset('./images/icons/list.svg') }}" width="20" height="20" alt="">
+                    </svg>
+                    <span class="ms-3">@lang('lang.Businesses_List')</span>
+                </a>
+            </li>
+            <li>
+                <a href="../"
+                    class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <img src="{{ asset('./images/icons/cat_list.svg') }}" width="20" height="20" alt="">
+                    </svg>
+                    <span class="ms-3">@lang('lang.Category_List')</span>
+                </a>
+            </li>
+            <li>
+                <a href="../"
+                    class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <img src="{{ asset('./images/icons/sale.svg') }}" width="20" height="20" alt="">
+                    </svg>
+                    <span class="ms-3">@lang('lang.Sale_Requests')</span>
+                </a>
+            </li>
+            <li>
                 <a href="../customers"
-                    class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg width="20" height="18" viewBox="0 0 20 14" fill="none"
+                    class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <svg width="20" height="20" viewBox="0 0 20 14" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M10.0002 7.98469C11.491 7.98469 12.6995 6.77614 12.6995 5.28531C12.6995 3.79449 11.491 2.58594 10.0002 2.58594C8.50933 2.58594 7.30078 3.79449 7.30078 5.28531C7.30078 6.77614 8.50933 7.98469 10.0002 7.98469Z"
@@ -63,8 +87,32 @@
                 </a>
             </li>
             <li>
+                <a href="../"
+                    class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <img src="{{ asset('./images/icons/Vector.svg') }}" width="20" height="20" alt="">
+                    </svg>
+                    <span class="ms-3">@lang('lang.Orders')</span>
+                </a>
+            </li>
+            <li>
+                <a href="../"
+                    class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <img src="{{ asset('./images/icons/blog.svg') }}" width="20" height="20" alt="">
+                    </svg>
+                    <span class="ms-3">@lang('lang.Blogs')</span>
+                </a>
+            </li>
+            <li>
+                <a href="../"
+                    class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <img src="{{ asset('./images/icons/review.svg') }}" width="20" height="20" alt="">
+                    </svg>
+                    <span class="ms-3">@lang('lang.Reviews_&_Experience')</span>
+                </a>
+            </li>
+            <li>
                 <a href="../setting"
-                    class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg width="20" height="20" viewBox="0 0 20 22" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -75,27 +123,7 @@
                     <span class="flex-1 ms-3 whitespace-nowrap">@lang('lang.Setting')</span>
                 </a>
             </li>
-            <li>
-                <a href="../help"
-                    class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg width="20" height="20" viewBox="0 0 20 21" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M20 10.2207C20 15.7435 15.5228 20.2207 10 20.2207C4.47715 20.2207 0 15.7435 0 10.2207C0 4.69786 4.47715 0.220703 10 0.220703C15.5228 0.220703 20 4.69786 20 10.2207ZM1.82439 10.2207C1.82439 14.736 5.48474 18.3963 10 18.3963C14.5153 18.3963 18.1756 14.736 18.1756 10.2207C18.1756 5.70544 14.5153 2.04509 10 2.04509C5.48474 2.04509 1.82439 5.70544 1.82439 10.2207Z"
-                            fill="white" />
-                        <circle cx="10" cy="10.2207" r="9" fill="white" />
-                        <path
-                            d="M11.364 15.6752C11.364 16.4283 10.7534 17.0388 10.0004 17.0388C9.24726 17.0388 8.63672 16.4283 8.63672 15.6752C8.63672 14.9221 9.24726 14.3115 10.0004 14.3115C10.7534 14.3115 11.364 14.9221 11.364 15.6752Z"
-                            fill="#339B96" />
-                        <path
-                            d="M9.09109 10.2206V12.0388C9.09109 12.0388 9.09109 12.9479 10.0002 12.9479C10.9093 12.9479 10.9093 12.0388 10.9093 12.0388V10.2206C10.9093 10.2206 11.3449 10.096 11.5119 10.0282C11.5119 10.0282 11.8155 9.9198 12.0281 9.75661C12.2407 9.59352 12.433 9.39971 12.6051 9.17543C12.7873 8.95107 12.929 8.69107 13.0302 8.39535C13.1314 8.09964 13.182 7.86043 13.182 7.49334C13.182 6.88153 13.0454 6.25402 12.7721 5.79516C12.5089 5.32611 12.1344 4.96412 11.6485 4.70921C11.1627 4.44409 10.5959 4.31152 9.94809 4.31152C9.54327 4.31152 9.18391 4.36251 8.87018 4.46448C8.55636 4.55625 8.27809 4.68371 8.03513 4.84686C7.80233 4.99981 7.60495 5.17316 7.44301 5.3669C7.29119 5.55044 7.16973 5.72889 7.07863 5.90223C6.98754 6.07558 6.92681 6.22852 6.89644 6.36109C6.83571 6.55482 6.81041 6.71288 6.82053 6.83524C6.84077 6.9576 6.9015 7.05957 7.00272 7.14114C7.10394 7.22271 7.26082 7.30939 7.47337 7.40116C7.69605 7.47254 7.86812 7.49803 7.98958 7.47764C8.12116 7.45724 8.22745 7.39606 8.30845 7.2941C8.30845 7.2941 8.74 6.68033 8.86145 6.55797C8.99309 6.42541 9.155 6.32345 9.34736 6.25207C9.53964 6.1705 9.75727 6.12971 10.0002 6.12971C10.5265 6.12971 10.9162 6.25717 11.1693 6.51209C11.4324 6.75681 11.5119 6.9627 11.5119 7.43175C11.5119 7.74785 11.4563 8.00278 11.3449 8.19651C11.2335 8.39025 11.0868 8.54834 10.9046 8.67071C10.9046 8.67071 10.6572 8.76525 10.4547 8.85698C10.2625 8.93852 9.90936 9.07343 9.72718 9.17543C9.55509 9.26716 9.45864 9.36362 9.34736 9.50643C9.236 9.64916 9.09109 9.97589 9.09109 10.2206Z"
-                            fill="#339B96" />
-                    </svg>
 
-
-                    <span class="flex-1 ms-3 whitespace-nowrap">@lang('lang.Help')</span>
-                </a>
-            </li>
 
             <li class="absolute bottom-5">
                 <form action="../weblogout" method="post" class=" cursor-pointer" id="logoutform">
