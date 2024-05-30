@@ -51,6 +51,8 @@ return [
     'Status' => 'Status',
     'Email' => 'Email',
     'Type' => 'Type',
+    'Sell' => 'Sell',
+    'Buy' => 'Buy',
     'Author' => 'Author',
     'Update' => 'Update',
     'Notifications' => 'Notifications',

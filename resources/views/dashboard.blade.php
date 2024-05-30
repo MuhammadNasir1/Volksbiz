@@ -162,11 +162,11 @@
                 <div class="mt-8 mx-10">
                     <div class="flex justify-around">
                         <div class="flex flex-col items-center">
-                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Pending')</p>
+                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Sell')</p>
                             <h2 class="text-secondary text-3xl  mt-2 font-bold">84%</h2>
                         </div>
                         <div class="flex flex-col items-center">
-                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Confirm')</p>
+                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Buy')</p>
                             <h2 class="text-primary text-3xl  mt-2  font-bold">34%</h2>
                         </div>
 
