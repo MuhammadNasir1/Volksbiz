@@ -95,4 +95,13 @@ return [
     'Select_Bussiness_Category' => 'Select Bussiness Category',
     'All_Reviews_&_Experience' => 'All Reviews & Experience',
     'Review_&_Experience' => 'Review & Experience',
+    'Image' => 'Image',
+    'Review' => 'Review',
+    'Rating' => 'Rating',
+    'Subject' => 'Subject',
+    'Experience' => 'Experience',
+    'Enter_Your_Experience' => 'Enter Your Experience',
+    'Business_Category' => 'Business Category',
+    'Enter_Subject' => 'Enter Subject',
+    'Select_Status' => 'Select Status',
 ];
