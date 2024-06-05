@@ -312,7 +312,8 @@
                             @lang('lang.Notifications')
                         </div>
                         <div class="divide-y divide-white mr-5">
-                            <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p class="text-center my-3">No Recent Notification</p>
+                            {{-- <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
 
                                 <div class="w-full ps-3 pb-3 border-b-2 border-primary">
                                     <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
@@ -320,34 +321,7 @@
                                         what's up? All set for the presentation?"</div>
                                     <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
                                 </div>
-                            </a>
-                            <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-
-                                <div class="w-full ps-3 pb-3 border-b-2 border-primary">
-                                    <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
-                                            class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey,
-                                        what's up? All set for the presentation?"</div>
-                                    <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
-                                </div>
-                            </a>
-                            <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-
-                                <div class="w-full ps-3 pb-3 border-b-2 border-primary">
-                                    <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
-                                            class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey,
-                                        what's up? All set for the presentation?"</div>
-                                    <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
-                                </div>
-                            </a>
-                            <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-
-                                <div class="w-full ps-3 pb-3 border-b-2 border-primary">
-                                    <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
-                                            class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey,
-                                        what's up? All set for the presentation?"</div>
-                                    <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
-                                </div>
-                            </a>
+                            </a> --}}
 
 
 
