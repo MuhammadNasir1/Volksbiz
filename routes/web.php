@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddBusinessController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\ordersController;
 use App\Http\Controllers\productController;
@@ -76,4 +77,8 @@ Route::controller(AddCategoryController::class)->group(function () {
     Route::post('addCategory', 'addcategory')->name('addCategory');
     Route::get('categoryList', 'categoryData')->name('categoryData');
     Route::get('deleteCategory/{id}', 'delCategory')->name('deleteCategory');
+});
+Route::controller(AddBusinessController::class)->group(function () {
+
+    Route::post('addBusiness', 'addBusiness')->name('addBusiness');
 });

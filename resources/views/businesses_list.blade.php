@@ -92,7 +92,7 @@
 <div id="addcustomermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full  rounded-3xl  max-w-6xl max-h-full ">
-        <form id="customerData" method="post" enctype="multipart/form-data">
+        <form id="customerData" action="{{ route('addBusiness') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -130,7 +130,7 @@
                                             class="font-semibold">@lang('lang.Upload')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" />
+                                <input id="dropzone-file" type="file" class="hidden" name="bus_img1" />
                             </label>
                             <label for="dropzone-file"
                                 class="flex flex-col items-center justify-center w-[144px] text-ecnter h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -145,7 +145,7 @@
                                             class="font-semibold">@lang('lang.Upload')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" />
+                                <input id="dropzone-file" type="file" class="hidden" name="bus_img2" />
                             </label>
                             <label for="dropzone-file"
                                 class="flex flex-col items-center justify-center w-[144px] text-ecnter h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -160,7 +160,7 @@
                                             class="font-semibold">@lang('lang.Upload')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" />
+                                <input id="dropzone-file" type="file" class="hidden" name="bus_img3" />
                             </label>
                             <label for="dropzone-file"
                                 class="flex flex-col items-center justify-center w-[144px] text-ecnter h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -175,7 +175,7 @@
                                             class="font-semibold">@lang('lang.Upload')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" />
+                                <input id="dropzone-file" type="file" class="hidden" name="bus_img4" />
                             </label>
 
 
@@ -202,7 +202,7 @@
                                             class="font-semibold">@lang('lang.Upload_Video')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" />
+                                <input id="dropzone-file" type="file" name="bus_video" class="hidden" />
                             </label>
 
 
@@ -212,11 +212,11 @@
                     </div>
 
                     <div class="w-[50%] flex gap-9 mt-5 items-center">
-                        <label for="select_category">@lang('lang.Category')</label>
+                        <label for="bus_category">@lang('lang.Category')</label>
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px]
                              focus:border-primary   h-[40px] text-[14px]"
-                            name=select_category" id="interval">
+                            name=bus_category" id="bus_category">
                             <option value=""> @lang('lang.Select_Category')</option>
                             <option value="today"> @lang('lang.Today')</option>
                             <option value="last_week"> @lang('lang.This_Week')</option>
@@ -224,32 +224,32 @@
                         </select>
                     </div>
                     <div class=" flex gap-20 mt-5 items-center">
-                        <label for="bu_title">@lang('lang.Title')</label>
+                        <label for="bus_title">@lang('lang.Title')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                            name="bu_title" id="bu_title" placeholder=" @lang('lang.Title')">
+                            name="bus_title" id="bus_title" placeholder=" @lang('lang.Title')">
                     </div>
                     <div class="w-full  lg:gap-9 mt-5 lg:items-center flex lg:flex-row flex-col">
-                        <div class="lg:w-[50%] w-full flex items-center gap-20">
-                            <label for="select_city">@lang('lang.City')</label>
+                        <div class="lg:w-[50%] w-full flex items-center  lg:mt-0 mt-5 gap-12">
+                            <label for="bus_country">@lang('lang.Country')</label>
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px]
-                             focus:border-primary   h-[40px] text-[14px]"
-                                name=select_city" id="select_city">
-                                <option value=""> @lang('lang.Select_City')</option>
+                            focus:border-primary   h-[40px] text-[14px]"
+                                name=bus_country" id="bus_country">
+                                <option value=""> @lang('lang.Select_Country')</option>
                                 <option value="today"> @lang('lang.Today')</option>
                                 <option value="last_week"> @lang('lang.This_Week')</option>
                                 <option value="last_month"> @lang('lang.This_Month')</option>
                             </select>
                         </div>
-                        <div class="lg:w-[50%] w-full flex items-center gap-12 lg:gap-6 lg:mt-0 mt-5">
-                            <label for="select_country">@lang('lang.Country')</label>
+                        <div class="lg:w-[50%] w-full flex items-center  gap-6">
+                            <label for="bus_city">@lang('lang.City')</label>
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px]
-                             focus:border-primary   h-[40px] text-[14px]"
-                                name=select_country" id="select_country">
-                                <option value=""> @lang('lang.Select_Country')</option>
+                         focus:border-primary   h-[40px] text-[14px]"
+                                name=bus_city" id="bus_city">
+                                <option value=""> @lang('lang.Select_City')</option>
                                 <option value="today"> @lang('lang.Today')</option>
                                 <option value="last_week"> @lang('lang.This_Week')</option>
                                 <option value="last_month"> @lang('lang.This_Month')</option>
@@ -257,17 +257,17 @@
                         </div>
                     </div>
                     <div class=" flex gap-5 mt-5 ">
-                        <label class="" for="bu_description">@lang('lang.Description')</label>
-                        <textarea name="bu_description" id="bu_description"
+                        <label class="" for="bus_description">@lang('lang.Description')</label>
+                        <textarea name="bus_description" id="bus_description"
                             class="w-full h-28  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
                             placeholder="@lang('lang.Description')"></textarea>
                     </div>
                     <div class=" flex gap-16 ps-2 mt-5 items-center">
-                        <label for="bu_price">@lang('lang.Price')</label>
+                        <label for="bus_price">@lang('lang.Price')</label>
                         <input type="text" required
                             class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                            name="bu_price" id="bu_price" placeholder=" @lang('lang.Price')">
+                            name="bus_price" id="bus_price" placeholder=" @lang('lang.Price')">
                     </div>
                 </div>
 
