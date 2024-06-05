@@ -4,7 +4,9 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\ordersController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\userController;
+use App\Models\AddCategory;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AddCategoryController;
 
 // language route
 Route::get('/lang', [userController::class, 'language_change']);
@@ -50,10 +52,7 @@ Route::get('bussinessList', function () {
 
     return view("businesses_list");
 });
-Route::get('categoryList', function () {
 
-    return view("category_list");
-});
 Route::get('saleRequests', function () {
 
     return view("sale_requests");
@@ -69,4 +68,12 @@ Route::get('reviewsAndExperience', function () {
 Route::get('blogs', function () {
 
     return view("blogs");
+});
+
+
+Route::controller(AddCategoryController::class)->group(function () {
+
+    Route::post('addCategory', 'addcategory')->name('addCategory');
+    Route::get('categoryList', 'categoryData')->name('categoryData');
+    Route::get('deleteCategory/{id}', 'delCategory')->name('deleteCategory');
 });

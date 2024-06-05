@@ -31,21 +31,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Title</td>
-                            <td>Category Data</td>
-                            <td>
-                                <div class="flex gap-5 items-center justify-center">
+                        @foreach ($category_data as $data)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td> <img class="h-20 w-20 rounded-full" src="{{ asset($data->category_image) }}"
+                                        alt="product Image">
+                                </td>
+                                <td>{{ $data->category_name }}</td>
+                                <td>
+                                    <div class="flex gap-5 items-center justify-center">
 
-                                    <a href=""><img width="38px" src="{{ asset('images/icons/edits.svg') }}"
-                                            alt="update"></a>
-                                    <a href=""> <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                            alt="Delete"></a>
+                                        <a href=""><img width="38px"
+                                                src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
+                                        <a href="{{ route('deleteCategory', $data->id) }}"> <img width="38px"
+                                                src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
 
-                                </div>
-                            </td>
-                        </tr>
+                                    </div>
+                                </td>
+                                {{-- <td><img src="{{ asset($data->category_name) }}" alt=""></td> --}}
+                            </tr>
+                        @endforeach
                         {{-- @foreach ($customers as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
@@ -82,7 +87,7 @@
 <div id="addcustomermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full  rounded-3xl  max-w-3xl max-h-full ">
-        <form id="customerData" method="post" enctype="multipart/form-data">
+        <form id="customerData" action="{{ route('addCategory') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -120,16 +125,19 @@
                                             class="font-semibold">100*100</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" />
+                                <input id="dropzone-file" type="file" class="hidden" / name="category_image">
+
+
                             </label>
                         </div>
                     </div>
                     <div class=" flex gap-12 ps-2 mt-5 items-center">
-                        <label for="cat_category">@lang('lang.Category')</label>
-                        <input type="text" required
+                        <label for="category_name">@lang('lang.Category')</label>
+                        <input type="text"
                             class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                            name="cat_category" id="cat_category" placeholder=" @lang('lang.Category')">
+                            name="category_name" id="category_name" placeholder=" @lang('lang.Category')">
+
                     </div>
                 </div>
 
