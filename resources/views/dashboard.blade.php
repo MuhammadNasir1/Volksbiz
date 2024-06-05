@@ -183,9 +183,9 @@
         CanvasJS.addColorSet("colors",
             [
 
-                "#EDBD58",
+                "#417dfc",
                 "#339B96",
-                "#027C56",
+                "#13242C",
 
             ]);
         var chart = new CanvasJS.Chart("earningChart", {
@@ -206,7 +206,7 @@
                     name: "Received",
                     type: "area",
                     fillOpacity: 100,
-                    color: "#edbd58",
+                    color: "#417dfc",
                     markerSize: 0,
                     dataPoints: [{
                             x: new Date(2017, 1, 6),
@@ -242,7 +242,7 @@
 
                     name: "Sent",
                     type: "area",
-                    color: "#027C56",
+                    color: "#13242C",
                     fillOpacity: 100,
                     markerSize: 2,
                     dataPoints: [{
@@ -325,12 +325,12 @@
                 indexLabelPlacement: "inside",
                 dataPoints: [{
                         y: 67,
-                        color: "#edbd58",
+                        color: "#417dfc",
                         label: "Students"
                     },
                     {
                         y: 28,
-                        color: "#027C56",
+                        color: "#13242C",
                         label: "Teachers"
                     },
 
