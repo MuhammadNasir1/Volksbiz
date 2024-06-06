@@ -33,29 +33,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <video src="https://videos.pexels.com/video-files/4974708/4974708-sd_640_360_25fps.mp4"
-                                    controls loop width="250px"></video>
-                            </td>
-                            <td>Title</td>
-                            <td>Category Data</td>
-                            <td>Lorem ipsum dolor sit amet.</td>
-                            <td>Location Data</td>
-                            <td>
-                                <div class="flex gap-5 items-center justify-center">
-                                    <button data-modal-target="updatecustomermodal"
-                                        data-modal-toggle="updatecustomermodal" class="cursor-pointer ">
-                                        <img width="38px" src="{{ asset('images/icons/views.svg') }}"
-                                            alt="View"></button>
-                                    <a href=""><img width="38px" src="{{ asset('images/icons/edits.svg') }}"
-                                            alt="update"></a>
-                                    <a href=""> <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                            alt="Delete"></a>
+                        @foreach ($bussiness_list as $list_data)
+                            <tr>
+                                <td>
+                                    <video src="{{ asset($list_data->bus_video) }}" controls loop width="300px"
+                                        class="max-h-[200px]"></video>
+                                </td>
+                                <td>{{ $list_data->bus_title }}</td>
+                                <td>{{ $list_data->bus_category }}</td>
+                                <td>{{ $list_data->bus_description }}</td>
+                                <td>{{ $list_data->bus_country }}/{{ $list_data->bus_city }}</td>
+                                <td>
+                                    <div class="flex gap-5 items-center justify-center">
+                                        <button data-modal-target="updatecustomermodal"
+                                            data-modal-toggle="updatecustomermodal" class="cursor-pointer ">
+                                            <img width="38px" src="{{ asset('images/icons/views.svg') }}"
+                                                alt="View"></button>
+                                        <a href=""><img width="38px"
+                                                src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
+                                        <a href="{{ route('delBusiness', $list_data->id) }}"> <img width="38px"
+                                                src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
 
-                                </div>
-                            </td>
-                        </tr>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         {{-- @foreach ($customers as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>

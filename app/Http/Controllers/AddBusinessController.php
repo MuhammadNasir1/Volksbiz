@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AddBusiness;
 use Illuminate\Http\Request;
+use Spatie\LaravelIgnition\FlareMiddleware\AddJobs;
 
 class AddBusinessController extends Controller
 {
@@ -68,9 +69,32 @@ class AddBusinessController extends Controller
             ]);
 
             $add_business->save();
-            return redirect('bussinessList');
+            return redirect('businessList');
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
+        }
+    }
+
+    public function bussinessList()
+    {
+        $bussiness_list = AddBusiness::all();
+        return view('businesses_list', compact('bussiness_list'));
+    }
+
+    public function delBusiness(string $id)
+    {
+        $business_details = AddBusiness::find($id);
+        $business_details->delete();
+        return redirect('../businessList');
+    }
+
+    public function getBusiness()
+    {
+        try {
+            $business = AddBusiness::all();
+            return response()->json(['sucess' => true, 'message' => 'Data Get Sucessfully', 'business' => $business], 200);
+        } catch (\Exception $e) {
+            return response()->json(['sucess' => false, 'message' => $e->getMessage()], 500);
         }
     }
 }

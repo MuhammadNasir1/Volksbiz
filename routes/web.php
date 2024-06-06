@@ -49,10 +49,7 @@ Route::get('email', function () {
 
     return view("emails.parent");
 });
-Route::get('bussinessList', function () {
 
-    return view("businesses_list");
-});
 
 Route::get('saleRequests', function () {
 
@@ -84,3 +81,5 @@ Route::controller(AddCategoryController::class)->group(function () {
 // });
 
 Route::post('/addBusiness', [AddBusinessController::class,  'addBusiness']);
+Route::get('/businessList', [AddBusinessController::class,  'bussinessList']);
+Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'])->name('delBusiness');

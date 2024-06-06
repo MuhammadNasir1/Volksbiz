@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddBusinessController;
 use App\Http\Controllers\AddCategoryController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\userController;
@@ -34,3 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
 // category api
 
 Route::get('/getCategories', [AddCategoryController::class, 'getCategories']);
+
+//Business api
+
+Route::get('/getBusiness', [AddBusinessController::class, 'getBusiness']);
