@@ -78,7 +78,9 @@ Route::controller(AddCategoryController::class)->group(function () {
     Route::get('categoryList', 'categoryData')->name('categoryData');
     Route::get('deleteCategory/{id}', 'delCategory')->name('deleteCategory');
 });
-Route::controller(AddBusinessController::class)->group(function () {
+// Route::controller(AddBusinessController::class)->group(function () {
 
-    Route::post('addBusiness', 'addBusiness')->name('addBusiness');
-});
+//     Route::post('addBusiness', 'addBusiness')->name('addBusiness');
+// });
+
+Route::post('/addBusiness', [AddBusinessController::class,  'addBusiness']);

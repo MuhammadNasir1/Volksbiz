@@ -92,7 +92,7 @@
 <div id="addcustomermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full  rounded-3xl  max-w-6xl max-h-full ">
-        <form id="customerData" action="{{ route('addBusiness') }}" method="post" enctype="multipart/form-data">
+        <form action="../addBusiness" method="post" enctype="multipart/form-data">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -117,7 +117,7 @@
                         <div class="">@lang('lang.Images')</div>
 
                         <div class="flex items-center  w-full gap-14 flex-wrap">
-                            <label for="dropzone-file"
+                            <label for="dropzone-file1"
                                 class="flex flex-col items-center justify-center w-[144px] text-ecnter h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                 <div class="flex flex-col items-center justify-center pt-5 text-center">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -130,9 +130,9 @@
                                             class="font-semibold">@lang('lang.Upload')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" name="bus_img1" />
+                                <input id="dropzone-file1" type="file" class="hidden" name="bus_img1" />
                             </label>
-                            <label for="dropzone-file"
+                            <label for="dropzone-file2"
                                 class="flex flex-col items-center justify-center w-[144px] text-ecnter h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                 <div class="flex flex-col items-center justify-center pt-5 text-center">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -145,9 +145,9 @@
                                             class="font-semibold">@lang('lang.Upload')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" name="bus_img2" />
+                                <input id="dropzone-file2" type="file" class="hidden" name="bus_img2" />
                             </label>
-                            <label for="dropzone-file"
+                            <label for="dropzone-file3"
                                 class="flex flex-col items-center justify-center w-[144px] text-ecnter h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                 <div class="flex flex-col items-center justify-center pt-5 text-center">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -160,9 +160,9 @@
                                             class="font-semibold">@lang('lang.Upload')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" name="bus_img3" />
+                                <input id="dropzone-file3" type="file" class="hidden" name="bus_img3" />
                             </label>
-                            <label for="dropzone-file"
+                            <label for="dropzone-file4"
                                 class="flex flex-col items-center justify-center w-[144px] text-ecnter h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                 <div class="flex flex-col items-center justify-center pt-5 text-center">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -175,7 +175,7 @@
                                             class="font-semibold">@lang('lang.Upload')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" class="hidden" name="bus_img4" />
+                                <input id="dropzone-file4" type="file" class="hidden" name="bus_img4" />
                             </label>
 
 
@@ -189,7 +189,7 @@
                         <div class="">@lang('lang.Videos')</div>
 
                         <div class="flex items-center  w-full gap-14">
-                            <label for="dropzone-file"
+                            <label for="dropzone-file5"
                                 class="flex flex-col items-center justify-center w-[331px] text-ecnter h-[180px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                 <div class="flex flex-col items-center justify-center pt-5 text-center">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -202,7 +202,7 @@
                                             class="font-semibold">@lang('lang.Upload_Video')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file" type="file" name="bus_video" class="hidden" />
+                                <input id="dropzone-file5" type="file" name="bus_video" class="hidden" />
                             </label>
 
 
@@ -216,7 +216,7 @@
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px]
                              focus:border-primary   h-[40px] text-[14px]"
-                            name=bus_category" id="bus_category">
+                            name="bus_category" id="bus_category">
                             <option value=""> @lang('lang.Select_Category')</option>
                             <option value="today"> @lang('lang.Today')</option>
                             <option value="last_week"> @lang('lang.This_Week')</option>
@@ -236,7 +236,7 @@
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px]
                             focus:border-primary   h-[40px] text-[14px]"
-                                name=bus_country" id="bus_country">
+                                name="bus_country" id="bus_country">
                                 <option value=""> @lang('lang.Select_Country')</option>
                                 <option value="today"> @lang('lang.Today')</option>
                                 <option value="last_week"> @lang('lang.This_Week')</option>
@@ -248,7 +248,7 @@
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px]
                          focus:border-primary   h-[40px] text-[14px]"
-                                name=bus_city" id="bus_city">
+                                name="bus_city" id="bus_city">
                                 <option value=""> @lang('lang.Select_City')</option>
                                 <option value="today"> @lang('lang.Today')</option>
                                 <option value="last_week"> @lang('lang.This_Week')</option>

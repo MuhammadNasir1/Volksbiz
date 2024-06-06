@@ -44,4 +44,14 @@ class AddCategoryController extends Controller
         $delCat->delete();
         return redirect()->route('categoryData');
     }
+
+    public function getCategories()
+    {
+        try {
+            $categories  = AddCategory::all();
+            return response()->json(['success' => true, 'message' => "Data  get successfully", 'categories' => $categories], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 }

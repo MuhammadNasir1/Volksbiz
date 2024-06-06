@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('add_businesses', function (Blueprint $table) {
             $table->id();
-            $table->string('bus_img1');
-            $table->string('bus_img2');
-            $table->string('bus_img3');
-            $table->string('bus_img4');
-            $table->string('bus_video');
+            $table->string('bus_img1')->nullable();
+            $table->string('bus_img2')->nullable();
+            $table->string('bus_img3')->nullable();
+            $table->string('bus_img4')->nullable();
+            $table->string('bus_video')->nullable();
             $table->string('bus_category');
             $table->string('bus_title');
             $table->string('bus_country');

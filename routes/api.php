@@ -1,16 +1,8 @@
 <?php
 
+use App\Http\Controllers\AddCategoryController;
 use App\Http\Controllers\authController;
-use App\Http\Controllers\coursesController;
-use App\Http\Controllers\ordersController;
-use App\Http\Controllers\parentController;
-use App\Http\Controllers\productController;
-use App\Http\Controllers\studentController;
-use App\Http\Controllers\teacherController;
-use App\Http\Controllers\teachingController;
-use App\Http\Controllers\trainingController;
 use App\Http\Controllers\userController;
-use App\Models\product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -38,3 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/updateSettings', [authController::class, 'updateSettings']);
     Route::get('/getUserProfile', [authController::class, 'getUserProfile']);
 });
+
+// category api
+
+Route::get('/getCategories', [AddCategoryController::class, 'getCategories']);
