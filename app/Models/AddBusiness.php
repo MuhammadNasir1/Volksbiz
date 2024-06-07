@@ -16,6 +16,7 @@ class AddBusiness extends Model
         'bus_img2',
         'bus_img3',
         'bus_img4',
+        'bus_images',
         'bus_video',
         'bus_category',
         'bus_title',

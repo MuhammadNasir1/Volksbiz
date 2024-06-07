@@ -84,6 +84,7 @@ class authController extends Controller
                 'name' => 'required|string',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:8',
+                'role' => 'nullable',
             ]);
 
             $user = User::create([
@@ -98,7 +99,7 @@ class authController extends Controller
                 'user_id' => $user->id,
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
-                'role' => $validatedData['role'],
+                'role' => "user",
             ]]);
             return response()->json([
                 'token' => $token,
