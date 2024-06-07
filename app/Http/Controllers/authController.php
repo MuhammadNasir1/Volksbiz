@@ -112,7 +112,7 @@ class authController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid credentials',
-                'errors' => $e->validator->getMessageBag(),
+                'errors' => $e->getMessage(),
             ], 401);
         } catch (\Exception $e) {
             return response()->json([
