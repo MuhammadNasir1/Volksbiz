@@ -107,13 +107,13 @@ class authController extends Controller
                 'success' => true,
                 'user' => $user,
                 'message' => 'Register successful',
-            ], 201);
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid credentials',
                 'errors' => $e->validator->getMessageBag(),
-            ], 422);
+            ], 401);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -160,8 +160,8 @@ class authController extends Controller
                 return response()->json([
                     'message' => 'Wrong credentials',
                     'success' => false,
-                    'status' => 'eror',
-                ], 422);
+                    'status' => 'error',
+                ], 401);
             }
         } catch (\Exception $eror) {
 
