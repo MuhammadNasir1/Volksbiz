@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AddBusiness extends Model
 {
     use HasFactory;
-
+    public $table = "businesses";
     public $timestamps = false;
 
     protected  $fillable = [

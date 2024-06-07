@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('add_businesses', function (Blueprint $table) {
+        Schema::create('businesses', function (Blueprint $table) {
             $table->id();
             $table->string('bus_img1')->nullable();
             $table->string('bus_img2')->nullable();
             $table->string('bus_img3')->nullable();
             $table->string('bus_img4')->nullable();
+            $table->string('bus_images')->nullable();
             $table->string('bus_video')->nullable();
             $table->string('bus_category');
             $table->string('bus_title');
@@ -24,7 +25,6 @@ return new class extends Migration
             $table->string('bus_city');
             $table->text('bus_description');
             $table->string('bus_price');
-            $table->dateTime('bus_datetime')->useCurrent();
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('add_businesses');
+        Schema::dropIfExists('businesses');
     }
 };

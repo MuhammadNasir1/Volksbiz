@@ -84,14 +84,12 @@ class authController extends Controller
                 'name' => 'required|string',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:8',
-                // 'role' => 'required|in:teacher,admin,parent',
-                'role' => 'required',
             ]);
 
             $user = User::create([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
-                'role' => $validatedData['role'],
+                'role' => "user",
                 'password' => Hash::make($validatedData['password']),
             ]);
 
