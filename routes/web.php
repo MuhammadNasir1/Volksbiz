@@ -68,6 +68,10 @@ Route::get('blogs', function () {
 
     return view("blogs");
 });
+Route::get('addBlog', function () {
+
+    return view("blog_page");
+});
 
 
 Route::controller(AddCategoryController::class)->group(function () {
