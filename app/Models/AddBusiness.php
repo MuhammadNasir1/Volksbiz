@@ -9,7 +9,7 @@ class AddBusiness extends Model
 {
     use HasFactory;
     public $table = "businesses";
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected  $fillable = [
         'images',

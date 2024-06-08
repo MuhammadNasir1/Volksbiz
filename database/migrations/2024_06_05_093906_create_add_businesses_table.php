@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('city');
             $table->text('description');
             $table->string('price');
+            $table->timestamps();
         });
     }
 

@@ -9,7 +9,7 @@ class Experience extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    public $timestamps = true;
     public $fillable = [
         'status',
         'user_id',
