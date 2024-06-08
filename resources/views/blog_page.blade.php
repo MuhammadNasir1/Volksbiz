@@ -13,8 +13,10 @@
         <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Customers')</h1>
     </div>
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
-        <form action="" method="post" class="px-10 pb-5">
+        <form action="../blog" method="post" class="px-10 pb-5">
+            @csrf
             <textarea name="addBlog" id="editor" class="h-[500px]"></textarea>
+            <button>Save</button>
         </form>
     </div>
 </div>

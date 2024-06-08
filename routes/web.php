@@ -89,5 +89,4 @@ Route::post('/addBusiness', [AddBusinessController::class,  'addBusiness']);
 Route::get('/businessList', [AddBusinessController::class,  'bussinessList']);
 Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'])->name('delBusiness');
 
-
-Route::post('/addExperience', [ExperienceController::class, 'addExperience']);
+Route::post('/blog', [userController::class,  'blog']);

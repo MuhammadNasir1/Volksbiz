@@ -109,4 +109,11 @@ class userController extends Controller
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
         }
     }
+
+
+    public function blog(Request $request)
+    {
+        $blog  =   json_encode($request['addBlog']);
+        echo $blog;
+    }
 }
