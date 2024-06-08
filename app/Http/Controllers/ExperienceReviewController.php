@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experience;
+use App\Models\Reviews;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ExperienceReviewController extends Controller
@@ -55,9 +57,60 @@ class ExperienceReviewController extends Controller
     {
         try {
             $experiences = Experience::all();
+            foreach ($experiences as $experience) {
+                $userId = $experience->user_id;
+                $user = User::where('id', $userId)->first();
+                $experience->user = $user;
+            }
             return response()->json(["success" => true, "message" => "Data get successfull", "data" => $experiences], 200);
         } catch (\Exception $e) {
             return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+        }
+    }
+
+
+    // add review
+
+    public function  addReviews(Request $request)
+    {
+
+        try {
+
+            $validateData = $request->validate([
+                "status" => "required",
+                "user_id" => "required",
+                "rating" => "required|numeric",
+                "location" => "required",
+                "description" => "required",
+
+            ]);
+
+            $review = Reviews::create([
+                "status" => $validateData['status'],
+                "user_id" => $validateData['user_id'],
+                "rating" => $validateData['rating'],
+                "location" => $validateData['location'],
+                "description" => $validateData['description'],
+            ]);
+            return response()->json(['success' => true,  "message" => "Review  add successfully", "data" => $review], 201);
+        } catch (\Exception $e) {
+            return response()->json(['success' => true,  "message" => $e->getMessage()], 500);
+        }
+    }
+    public function getReviews()
+    {
+
+        try {
+            $reviews = Reviews::all();
+            foreach ($reviews as $review) {
+                $userId  =   $review->user_id;
+                $user = User::where('id', $userId)->first();
+                $review->user = $user;
+            }
+
+            return response()->json(['success' => true,  "message" => "Review  get successfully", "data" => $reviews], 201);
+        } catch (\Exception $e) {
+            return response()->json(['success' => true,  "message" => $e->getMessage()], 500);
         }
     }
 }

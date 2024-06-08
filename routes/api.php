@@ -45,3 +45,6 @@ Route::get('/getBusiness', [AddBusinessController::class, 'getBusiness']);
 // Experience & Review
 Route::post('addExperience', [ExperienceReviewController::class, 'addExperience']);
 Route::get('getExperience', [ExperienceReviewController::class, 'getExperience']);
+
+Route::post('addReviews', [ExperienceReviewController::class, 'addReviews']);
+Route::get('getReviews', [ExperienceReviewController::class, 'getReviews']);
