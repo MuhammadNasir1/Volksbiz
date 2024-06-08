@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('status');
             $table->string('user_id');
+            $table->string('location');
             $table->string('image')->nullable();
             $table->string('subject')->nullable();
             $table->string('category');

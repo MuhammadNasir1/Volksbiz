@@ -13,6 +13,7 @@ class Experience extends Model
     public $fillable = [
         'status',
         'user_id',
+        'location',
         'subject',
         'category',
         'description',
