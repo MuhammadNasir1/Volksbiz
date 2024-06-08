@@ -92,7 +92,7 @@ class ExperienceReviewController extends Controller
                 "location" => $validateData['location'],
                 "description" => $validateData['description'],
             ]);
-            return response()->json(['success' => true,  "message" => "Review  add successfully", "data" => $review], 201);
+            return response()->json(['success' => true,  "message" => "Review  add successfully", "data" => $review], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => true,  "message" => $e->getMessage()], 500);
         }
@@ -108,7 +108,7 @@ class ExperienceReviewController extends Controller
                 $review->user = $user;
             }
 
-            return response()->json(['success' => true,  "message" => "Review  get successfully", "data" => $reviews], 201);
+            return response()->json(['success' => true,  "message" => "Review  get successfully", "data" => $reviews], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => true,  "message" => $e->getMessage()], 500);
         }

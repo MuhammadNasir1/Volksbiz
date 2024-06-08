@@ -48,3 +48,6 @@ Route::get('getExperience', [ExperienceReviewController::class, 'getExperience']
 
 Route::post('addReviews', [ExperienceReviewController::class, 'addReviews']);
 Route::get('getReviews', [ExperienceReviewController::class, 'getReviews']);
+
+// contact us data insert
+Route::post('addContactUs', [userController::class, 'addContactUs']);

@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 use  Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpMail;
+use App\Models\Contact_us;
 use App\Models\students;
 use App\Models\teacher;
 use App\Models\teacher_rec;
@@ -107,6 +108,31 @@ class userController extends Controller
             return response()->json(['success' => true,  'message' => "Customer get successfully ", 'customers' => $customers]);
         } catch (\Exception $e) {
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
+        }
+    }
+
+    public function addContactUs(Request $request)
+    {
+        try {
+            $validateData = $request->validate([
+                "name" => "required",
+                "email" => "required",
+                "subject" => "nullable",
+                "message" => "required",
+
+            ]);
+
+            $contactData = Contact_us::create([
+                "name" => $validateData['name'],
+                "email" => $validateData['email'],
+                "subject" => $validateData['subject'],
+                "message" => $validateData['message'],
+
+            ]);
+
+            return response()->json(['success' => true,  'message'  => "Data add successfully", "data" => $contactData], 201);
+        } catch (\Exception $e) {
+            return response()->json(['success', false, 'message' => $e->getMessage()], 500);
         }
     }
 
