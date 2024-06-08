@@ -55,6 +55,7 @@ class ExperienceReviewController extends Controller
     {
         try {
             $experiences = Experience::all();
+            return response()->json(["success" => true, "message" => "Data get successfull", "data" => $experiences], 200);
         } catch (\Exception $e) {
             return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
         }
