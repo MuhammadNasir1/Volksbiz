@@ -91,8 +91,11 @@ class AddBusinessController extends Controller
     public function getBusiness()
     {
         try {
-            $business = AddBusiness::all();
-            return response()->json(['sucess' => true, 'message' => 'Data Get Sucessfully', 'business' => $business], 200);
+            $businesses = AddBusiness::all();
+            foreach ($businesses as $business) {
+                $business->images = json_decode($business->images);
+            }
+            return response()->json(['sucess' => true, 'message' => 'Data Get Sucessfully', 'business' => $businesses], 200);
         } catch (\Exception $e) {
             return response()->json(['sucess' => false, 'message' => $e->getMessage()], 500);
         }
