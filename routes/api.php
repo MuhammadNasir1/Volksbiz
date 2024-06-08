@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddBusinessController;
 use App\Http\Controllers\AddCategoryController;
 use App\Http\Controllers\authController;
+use App\Http\Controllers\ExperienceReviewController;
 use App\Http\Controllers\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,3 +40,7 @@ Route::get('/getCategories', [AddCategoryController::class, 'getCategories']);
 //Business api
 
 Route::get('/getBusiness', [AddBusinessController::class, 'getBusiness']);
+
+
+// Experience & Review
+Route::post('addExperience', [ExperienceReviewController::class, 'addExperience']);

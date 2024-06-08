@@ -10,4 +10,13 @@ class Experience extends Model
     use HasFactory;
 
     public $timestamps = false;
+    public $fillable = [
+        'status',
+        'user_id',
+        'subject',
+        'category',
+        'description',
+        'image',
+
+    ];
 }

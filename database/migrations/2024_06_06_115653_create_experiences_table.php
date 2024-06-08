@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('subject')->nullable();
             $table->string('category');
             $table->string('description');
-            $table->dateTime('datetime');
         });
     }
 
