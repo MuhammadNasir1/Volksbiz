@@ -253,6 +253,7 @@ class authController extends Controller
     public function changepasword(Request $request)
     {
         try {
+
             $user = Auth()->user();
 
             if (!$user) {
