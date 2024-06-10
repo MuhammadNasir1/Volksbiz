@@ -248,4 +248,42 @@ class authController extends Controller
 
         return view('dashboard');
     }
+
+
+    public function changepasword(Request $request)
+    {
+        try {
+            $user = Auth()->user();
+
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
+            }
+
+            $validatedData = $request->validate([
+                "old_password" => "required",
+                "new_password" => "required",
+                "confirm_password" => "required"
+
+            ]);
+
+            $oldPassword = $request['old_password'];
+            $userOldPass = $user->password;
+
+            if (Hash::check($oldPassword, $userOldPass)) {
+                if ($validatedData['new_password'] == $validatedData['confirm_password']) {
+                    $user->password = Hash::make($validatedData['new_password']);
+                    $user->save();
+                } else {
+                    return response()->json(['success' => false, 'message' => 'New password and confirm password do not match'], 401);
+                }
+                return response()->json(['success' => true, 'message' => 'Profile Updated!']);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Old password do not match'], 401);
+            }
+
+            return response()->json(['success' => true, 'message' => 'Password updated!'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 }
