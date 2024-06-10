@@ -14,7 +14,6 @@ class ExperienceReviewController extends Controller
     {
         try {
             $validateData = $request->validate([
-                "status" => "required",
                 "user_id" => "required",
                 "location" => "required",
                 "image" => "nullable|image|mimes:jpeg,png,jpg,gif,svg",
@@ -34,7 +33,7 @@ class ExperienceReviewController extends Controller
             }
 
             $experience = Experience::create([
-                'status' => $validateData['status'],
+                'status' => "de-active",
                 'user_id' => $validateData['user_id'],
                 'location' => $validateData['location'],
                 'subject' => $validateData['subject'],
@@ -77,7 +76,6 @@ class ExperienceReviewController extends Controller
         try {
 
             $validateData = $request->validate([
-                "status" => "required",
                 "user_id" => "required",
                 "rating" => "required|numeric",
                 "location" => "required",
@@ -86,7 +84,7 @@ class ExperienceReviewController extends Controller
             ]);
 
             $review = Reviews::create([
-                "status" => $validateData['status'],
+                'status' => "de-active",
                 "user_id" => $validateData['user_id'],
                 "rating" => $validateData['rating'],
                 "location" => $validateData['location'],
