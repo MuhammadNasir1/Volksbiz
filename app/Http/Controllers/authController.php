@@ -17,22 +17,23 @@ class authController extends Controller
     public function updateSettings(Request $request)
     {
         try {
-            $user = Auth()->user();
+            $user = User::where('id', $request['user_id'])->first();
 
             if (!$user) {
-                return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
+                return response()->json(['success' => false, 'message' => 'User not found.'], 401);
             }
 
-            $validatedData = $request->validate([
-                'name' => 'nullable',
-                'phone' => 'nullable',
-                'address' => 'nullable',
-                'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            ]);
+            $user->name = $request['name'];
+            $user->about = $request['about'];
+            $user->company = $request['company'];
+            $user->job = $request['job'];
+            $user->country = $request['country'];
+            $user->address = $request['address'];
+            $user->phone = $request['phone'];
+            if ($request->has('email')) {
+                $user->email = $request['email'];
+            }
 
-            $user->name = $validatedData['name'];
-            $user->phone = $validatedData['phone'];
-            $user->address = $validatedData['address'];
 
             if ($request->hasFile('upload_image')) {
                 $image = $request->file('upload_image');
@@ -41,9 +42,8 @@ class authController extends Controller
                 $user->user_image = 'storage/user_images/' . $imageName;
             }
 
+            // $user->update($request->except('upload_image'));
             $user->save();
-
-
             return response()->json(['success' => true, 'message' => 'Profile Updated!', 'updated_data' => $user], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 400);
