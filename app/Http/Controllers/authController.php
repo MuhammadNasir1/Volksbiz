@@ -17,11 +17,12 @@ class authController extends Controller
     public function updateSettings(Request $request)
     {
         try {
-            $user = User::where('id', $request['user_id'])->first();
+            $user = Auth()->user();
 
             if (!$user) {
-                return response()->json(['success' => false, 'message' => 'User not found.'], 401);
+                return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
             }
+
 
             $user->name = $request['name'];
             $user->about = $request['about'];
@@ -291,10 +292,10 @@ class authController extends Controller
     {
         try {
 
-            $user = User::where('id', $request['user_id'])->first();
+            $user = Auth()->user();
 
             if (!$user) {
-                return response()->json(['success' => false, 'message' => 'User not found.'], 401);
+                return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
             }
 
             $validatedData = $request->validate([
