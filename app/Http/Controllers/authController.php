@@ -13,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 class authController extends Controller
 {
 
-    // update UserDetails
+    // update UserDetails`
     public function updateSettings(Request $request)
     {
         try {
@@ -133,7 +133,6 @@ class authController extends Controller
 
 
             $user = User::where('email',  $request->email)->first();
-            $role = $user->role;
             $name = $user->name;
             if ($user && Hash::check($request->password, $user->password)) {
 
@@ -142,7 +141,7 @@ class authController extends Controller
                     'user_id' => $user->id,
                     'name' => $name,
                     'email' => $validatedData['email'],
-                    'role' =>  $role,
+                    'role' =>  $user->role,
                 ]]);
                 session(['user_image' => [
                     'user_image' => $user['user_image'],
