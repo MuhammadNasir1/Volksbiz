@@ -133,13 +133,12 @@ class authController extends Controller
 
 
             $user = User::where('email',  $request->email)->first();
-            $name = $user->name;
             if ($user && Hash::check($request->password, $user->password)) {
 
                 $token = $user->createToken($request->email)->plainTextToken;
                 session(['user_det' => [
                     'user_id' => $user->id,
-                    'name' => $name,
+                    'name' => $user->name,
                     'email' => $validatedData['email'],
                     'role' =>  $user->role,
                 ]]);
