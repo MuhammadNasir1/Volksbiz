@@ -54,23 +54,31 @@ class authController extends Controller
     public function getUserProfile()
     {
         try {
+            // $user = Auth()->user();
+
+            // if (!$user) {
+            //     return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
+            // }
+
+            // $userdata = [
+            //     [
+            //         'id' => $user->id,
+            //         'name' => $user->name,
+            //         'email' => $user->email,
+            //         'role' => $user->role,
+            //         'address' => $user->address,
+            //         'user_image' => $user->user_image,
+            //     ]
+            // ];
+            // $userdata  = $user->all();
+
             $user = Auth()->user();
 
             if (!$user) {
                 return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
             }
 
-            $userdata = [
-                [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'role' => $user->role,
-                    'address' => $user->address,
-                    'user_image' => $user->user_image,
-                ]
-            ];
-
+            $userdata = $user->toArray();
             return response()->json(['success' => true, 'message' => 'Data retrieved successfully!', 'userdata' => $userdata], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 400);

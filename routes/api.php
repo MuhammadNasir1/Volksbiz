@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/changepasword', [authController::class, 'changepasword']);
     Route::post('/updateProfile', [authController::class, 'updateSettings']);
     Route::post('logout', [authController::class, 'logout']);
-    Route::get('/getUserProfile', [authController::class, 'getUserProfile']);
+    Route::get('/getUser', [authController::class, 'getUserProfile']);
 });
 
 // category api
