@@ -39,6 +39,7 @@ Route::get('/getCategories', [AddCategoryController::class, 'getCategories']);
 //Business api
 
 Route::get('/getBusiness', [AddBusinessController::class, 'getBusiness']);
+Route::post('/orderBusiness', [AddBusinessController::class, 'orderBusiness']);
 
 
 // Experience & Review

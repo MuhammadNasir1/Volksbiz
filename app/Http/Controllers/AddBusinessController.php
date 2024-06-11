@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AddBusiness;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Spatie\LaravelIgnition\FlareMiddleware\AddJobs;
 
@@ -96,6 +97,26 @@ class AddBusinessController extends Controller
                 $business->images = json_decode($business->images);
             }
             return response()->json(['sucess' => true, 'message' => 'Data Get Sucessfully', 'business' => $businesses], 200);
+        } catch (\Exception $e) {
+            return response()->json(['sucess' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+
+    public function orderBusiness(Request $request)
+    {
+        try {
+
+            $validatedData = $request->validate([
+                'user_id' => "required",
+                'businuess_id' => "required",
+            ]);
+
+            $OrderData = Order::create([
+                'user_id' => $validatedData['user_id'],
+                'businuess_id' => $validatedData['businuess_id'],
+                'status' => "pending",
+            ]);
+            return response()->json(['sucess' => true, 'message' => 'Data add sucessfully', 'data' => $OrderData], 201);
         } catch (\Exception $e) {
             return response()->json(['sucess' => false, 'message' => $e->getMessage()], 500);
         }
