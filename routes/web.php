@@ -92,5 +92,5 @@ Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'
 
 
 Route::post('/addblog', [BlogsController::class,  'insert']);
-// Route::post('/upload-image', [userController::class,  'uploadFile']);
 Route::post('/upload-image', [BlogsController::class, 'upload'])->name('upload.image');
+Route::get('/getBlogs', [BlogsController::class, 'getBlogs']);

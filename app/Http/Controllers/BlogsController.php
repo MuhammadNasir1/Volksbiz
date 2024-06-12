@@ -56,4 +56,17 @@ class BlogsController extends Controller
             return response()->json(['success' => false, "message" => $e->getMessage()], 400);
         }
     }
+
+    function getBlogs()
+    {
+        try {
+            $blogs = Blogs::all();
+            foreach ($blogs as $blog) {
+                $blog->content = htmlspecialchars_decode($blog->content);
+            }
+            return response()->json(['success' => true, "message" => "Data add successfully", "data"  => $blogs], 201);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, "message" => $e->getMessage()], 400);
+        }
+    }
 }
