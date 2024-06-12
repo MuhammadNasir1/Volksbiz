@@ -90,3 +90,6 @@ Route::get('/businessList', [AddBusinessController::class,  'bussinessList']);
 Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'])->name('delBusiness');
 
 Route::post('/blog', [userController::class,  'blog']);
+Route::post('/save-content', [userController::class,  'savecontent']);
+// Route::post('/upload-image', [userController::class,  'uploadFile']);
+Route::post('/upload-image', [userController::class, 'upload'])->name('upload.image');

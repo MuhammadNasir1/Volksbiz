@@ -16,6 +16,7 @@ use App\Models\teacher_rec;
 use App\Models\training;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class userController extends Controller
 {
@@ -141,5 +142,27 @@ class userController extends Controller
     {
         $blog  =   json_encode($request['addBlog']);
         echo $blog;
+    }
+    public function savecontent(Request $request)
+    {
+        $contentHtml = json_encode($request->input('content'));
+        // $contentHtml = $request->input('content');
+
+        // Save content to database
+        echo $contentHtml;
+    }
+
+
+    public function upload(Request $request)
+    {
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = $file->store('images', 'public'); // Store in the 'public/images' directory
+
+            return response()->json(['url' => Storage::url($path)]);
+        }
+
+        return response()->json(['error' => 'No image uploaded'], 400);
     }
 }
