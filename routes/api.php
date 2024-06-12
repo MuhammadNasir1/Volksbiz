@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/updateProfile', [authController::class, 'updateSettings']);
     Route::post('logout', [authController::class, 'logout']);
     Route::get('/getUser', [authController::class, 'getUserProfile']);
+    Route::get('/getOrders', [AddBusinessController::class, 'getOrders']);
 });
 
 // category api

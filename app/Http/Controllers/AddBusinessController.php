@@ -121,4 +121,25 @@ class AddBusinessController extends Controller
             return response()->json(['sucess' => false, 'message' => $e->getMessage()], 500);
         }
     }
+
+    public function getOrders()
+    {
+        try {
+            $user = Auth()->user();
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
+            }
+            $userId  =  $user->id;
+            $orders = Order::where('user_id', $userId)->get();
+            foreach ($orders as $order) {
+                $businessId = $order['businuess_id'];
+                $businesses = AddBusiness::where('id', $businessId)->first();
+                $businesses->images = json_decode($businesses->images);
+                $order->business = $businesses;
+            }
+            return response()->json(['success' => true, 'message' => 'Data add successfully', 'data' => $orders], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 }

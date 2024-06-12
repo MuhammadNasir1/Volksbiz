@@ -145,8 +145,9 @@ class userController extends Controller
     }
     public function savecontent(Request $request)
     {
-        $contentHtml = json_encode($request->input('content'));
+        // $contentHtml = json_encode($request->input('content'));
         // $contentHtml = $request->input('content');
+        $contentHtml = htmlspecialchars($request->content);
 
         // Save content to database
         echo $contentHtml;
