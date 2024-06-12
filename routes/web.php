@@ -9,6 +9,7 @@ use App\Http\Controllers\userController;
 use App\Models\AddCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddCategoryController;
+use App\Http\Controllers\BlogsController;
 
 // language route
 Route::get('/lang', [userController::class, 'language_change']);
@@ -89,7 +90,7 @@ Route::post('/addBusiness', [AddBusinessController::class,  'addBusiness']);
 Route::get('/businessList', [AddBusinessController::class,  'bussinessList']);
 Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'])->name('delBusiness');
 
-Route::post('/blog', [userController::class,  'blog']);
-Route::post('/save-content', [userController::class,  'savecontent']);
+
+Route::post('/addblog', [BlogsController::class,  'insert']);
 // Route::post('/upload-image', [userController::class,  'uploadFile']);
-Route::post('/upload-image', [userController::class, 'upload'])->name('upload.image');
+Route::post('/upload-image', [BlogsController::class, 'upload'])->name('upload.image');

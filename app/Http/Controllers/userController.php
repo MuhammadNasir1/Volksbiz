@@ -152,18 +152,4 @@ class userController extends Controller
         // Save content to database
         echo $contentHtml;
     }
-
-
-    public function upload(Request $request)
-    {
-
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = $file->store('images', 'public'); // Store in the 'public/images' directory
-
-            return response()->json(['url' => Storage::url($path)]);
-        }
-
-        return response()->json(['error' => 'No image uploaded'], 400);
-    }
 }

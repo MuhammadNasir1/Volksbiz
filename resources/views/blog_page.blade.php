@@ -8,7 +8,8 @@
 
     <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white p-10">
         {{-- <form id="setting_data" method="post"> --}}
-        <form action="save-content" method="POST" id="blog-form">
+        <form action="addblog" method="POST" id="blog-form">
+            {{-- <form action="save-content" method="POST" id="blog-form"> --}}
             @csrf
             {{-- <div>
         <label for="title">Title:</label>
@@ -21,7 +22,7 @@
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                        name="blog_title" id="blog_title" placeholder=" @lang('lang.Title')">
+                        name="title" id="blog_title" placeholder=" @lang('lang.Title')">
                 </div>
                 <div class="lg:w-[50%] w-full">
                     <label class="text-[16px] font-semibold block  text-[#452C88]"
@@ -29,7 +30,7 @@
                     <input type="file" required
                         class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                        name="blog_title" id="blog_title" placeholder=" @lang('lang.Title')">
+                        name="image" id="blog_title" placeholder=" @lang('lang.Title')">
                 </div>
 
             </div>
@@ -41,21 +42,16 @@
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                        name="blog_author" id="blog_author" placeholder=" @lang('lang.Enter_Your_Name')">
+                        name="author" id="blog_author" placeholder=" @lang('lang.Enter_Your_Name')">
 
                 </div>
                 <div class="lg:w-[50%] w-full">
                     <label for="blog_category"
                         class="text-[16px] font-semibold block mb-2  text-[#452C88]">@lang('lang.Category')</label>
-                    <select
+                    <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                        name=blog_category" id="blog_category">
-                        <option value="" class="text-wrap"> @lang('lang.Select_Bussiness_Category')</option>
-                        <option value="today"> @lang('lang.Today')</option>
-                        <option value="last_week"> @lang('lang.This_Week')</option>
-                        <option value="last_month"> @lang('lang.This_Month')</option>
-                    </select>
+                        name="category" id="blog_category" placeholder=" @lang('lang.Category')">
                 </div>
             </div>
 

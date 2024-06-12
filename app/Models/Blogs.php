@@ -15,7 +15,7 @@ class Blogs extends Model
         'category',
         'author',
         'image',
-        'description',
+        'content',
 
     ];
     public $timestamp  = true;
