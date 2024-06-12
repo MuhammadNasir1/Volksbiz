@@ -104,4 +104,5 @@ return [
     'Business_Category' => 'Business Category',
     'Enter_Subject' => 'Enter Subject',
     'Select_Status' => 'Select Status',
+    'ADD' => 'ADD',
 ];
