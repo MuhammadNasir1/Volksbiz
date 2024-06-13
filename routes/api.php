@@ -6,6 +6,7 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\ExperienceReviewController;
 use App\Http\Controllers\userController;
+use App\Models\AddBusiness;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -38,9 +39,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('/getCategories', [AddCategoryController::class, 'getCategories']);
 
-//Business api
 
+Route::get('/searchBusiness', [AddBusinessController::class, 'searchBusiness']);
+
+//Business api
 Route::get('/getBusiness', [AddBusinessController::class, 'getBusiness']);
+Route::get('/getFilteredBusiness', [AddBusinessController::class, 'getFilteredBusiness']);
 Route::post('/orderBusiness', [AddBusinessController::class, 'orderBusiness']);
 
 
