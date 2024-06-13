@@ -28,34 +28,20 @@
                     </thead>
                     <tbody>
 
-                        <td>01</td>
-                        <td>M-Arham Waheed</td>
-                        <td>123-456-789</td>
-                        <td>customer@gmail.com</td>
-                        <td>Town , City</td>
-                        <td>Basic</td>
-                        <td>
-                            <div class="flex gap-5 items-center justify-center">
-                                <a href=""><img width="38px" src="{{ asset('images/icons/edits.svg') }}"
-                                        alt="update"></a>
-                                <a href=""> <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                        alt="Delete"></a>
-
-                            </div>
-                        </td>
-                        {{-- @foreach ($customers as $x => $data)
+                        @foreach ($customers as $x => $data)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
                                 <td>{{ $data->name }}</td>
-                                <td>{{ $data->email }}</td>
                                 <td>{{ $data->phone }}</td>
+                                <td>{{ $data->email }}</td>
                                 <td>{{ $data->role }}</td>
+                                <td>{{ $data->package }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
                                         <button data-modal-target="updatecustomermodal"
                                             data-modal-toggle="updatecustomermodal"
-                                            class=" updateBtn cursor-pointer  w-[42px] md:w-full"
+                                            class=" updateBtn cursor-pointer  w-[42px] "
                                             updateId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
                                         <a class="w-[42px] md:w-full" href="../delCustomer/{{ $data->id }}"><img
@@ -64,7 +50,7 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
 
                     </tbody>
                 </table>
