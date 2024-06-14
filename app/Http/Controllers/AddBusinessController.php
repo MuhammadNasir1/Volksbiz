@@ -104,13 +104,15 @@ class AddBusinessController extends Controller
     public function getFilteredBusiness(Request $request)
     {
         try {
-            $query = AddBusiness::query();
+            $query = addBusiness::query();
 
-            if ($request->has('min_price') && $request->has('max_price')) {
+            // Filter by price range (if both min and max are provided)
+            if ($request->has('min_price') && !empty($request->min_price) && $request->has('max_price') && !empty($request->max_price)) {
                 $query->whereBetween('price', [$request->min_price, $request->max_price]);
             }
 
-            if ($request->has('location')) {
+            // Filter by location (country or city)
+            if ($request->has('location') && !empty($request->location)) {
                 $location = $request->location;
                 $query->where(function ($q) use ($location) {
                     $q->where('country', $location)
@@ -118,7 +120,8 @@ class AddBusinessController extends Controller
                 });
             }
 
-            if ($request->has('search')) {
+            // Filter by search term (title or description)
+            if ($request->has('search') && !empty($request->search)) {
                 $search = $request->search;
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'LIKE', "%{$search}%")
@@ -126,18 +129,18 @@ class AddBusinessController extends Controller
                 });
             }
 
-            if ($request->has('category')) {
+            // Filter by category (if provided)
+            if ($request->has('category') && !empty($request->category)) {
                 $query->where('category', $request->category);
             }
 
             // Fetch the businesses
             $businesses = $query->get();
 
-            // Decode the images JSON for each business
+            // Fetch and decode images for each business efficiently
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
             }
-
             return response()->json(['sucess' => true, 'message' => 'Data Get Sucessfully', 'business' => $businesses], 200);
         } catch (\Exception $e) {
             return response()->json(['sucess' => false, 'message' => $e->getMessage()], 500);
