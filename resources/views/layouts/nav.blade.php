@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li>
-                <a href="../businessList"
+                <a href="../businesses"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <img src="{{ asset('./images/icons/list.svg') }}" width="20" height="20" alt="">
                     </svg>

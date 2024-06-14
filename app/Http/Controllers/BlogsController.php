@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class BlogsController extends Controller
 {
-
+    public function index()
+    {
+        $blogs = Blogs::all();
+        return view("blogs", compact("blogs"));
+    }
 
     public function upload(Request $request)
     {

@@ -7,14 +7,8 @@
     </div>
 
     <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white p-10">
-        {{-- <form id="setting_data" method="post"> --}}
-        <form action="addblog" method="POST" id="blog-form">
-            {{-- <form action="save-content" method="POST" id="blog-form"> --}}
+        <form action="addblog" method="POST" id="blog-form" enctype="multipart/form-data">
             @csrf
-            {{-- <div>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-    </div> --}}
             <div class="w-full  lg:gap-9 mt-5 lg:items-center flex lg:flex-row flex-col">
                 <div class="lg:w-[50%] w-full">
                     <label class="text-[16px] font-semibold block  text-[#452C88]"
@@ -22,7 +16,7 @@
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                        name="title" id="blog_title" placeholder=" @lang('lang.Title')">
+                        name="title" id="blog_title" placeholder=" @lang('lang.Title')" required>
                 </div>
                 <div class="lg:w-[50%] w-full">
                     <label class="text-[16px] font-semibold block  text-[#452C88]"
@@ -30,7 +24,7 @@
                     <input type="file" required
                         class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                        name="image" id="blog_title" placeholder=" @lang('lang.Title')">
+                        name="image" id="blog_title" required>
                 </div>
 
             </div>
@@ -42,7 +36,7 @@
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                        name="author" id="blog_author" placeholder=" @lang('lang.Enter_Your_Name')">
+                        name="author" id="blog_author" placeholder=" @lang('lang.Enter_Your_Name')" required>
 
                 </div>
                 <div class="lg:w-[50%] w-full">
@@ -51,7 +45,7 @@
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                        name="category" id="blog_category" placeholder=" @lang('lang.Category')">
+                        name="category" id="blog_category" placeholder=" @lang('lang.Category')" required>
                 </div>
             </div>
 

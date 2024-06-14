@@ -65,10 +65,6 @@ Route::get('reviewsAndExperience', function () {
 
     return view("review");
 });
-Route::get('blogs', function () {
-
-    return view("blogs");
-});
 Route::get('addBlog', function () {
 
     return view("blog_page");
@@ -92,6 +88,7 @@ Route::get('/businesses', [AddBusinessController::class,  'businesses']);
 Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'])->name('delBusiness');
 
 
+Route::get('/blogs', [BlogsController::class,  'index']);
 Route::post('/addblog', [BlogsController::class,  'insert']);
 Route::post('/upload-image', [BlogsController::class, 'upload'])->name('upload.image');
 Route::get('/getBlogs', [BlogsController::class, 'getBlogs']);

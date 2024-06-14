@@ -218,7 +218,7 @@
                                 class="w-full border-[#DEE2E6] rounded-[4px]
                             focus:border-primary   h-[40px] text-[14px]"
                                 name="country" id="bus_country">
-                                <option value=""> @lang('lang.Select_Country')</option>
+                                <option selected disabled> @lang('lang.Select_Country')</option>
                                 @include('includes.countrieslist')
                             </select>
                         </div>

@@ -13,10 +13,11 @@
                 <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Blogs_List')</h3>
 
                 <div>
-
-                    <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
-                        class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                        @lang('lang.Add_Blog')</button>
+                    <a href="addBlog">
+                        <button
+                            class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
+                            @lang('lang.Add_Blog')</button>
+                    </a>
                 </div>
 
             </div>
@@ -24,60 +25,40 @@
                 <table id="datatable">
                     <thead class="py-6 bg-primary text-white">
                         <tr>
-                            <th class="whitespace-nowrap">@lang('lang.Videos')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Image')</th>
                             <th class="whitespace-nowrap">@lang('lang.Title')</th>
                             <th class="whitespace-nowrap">@lang('lang.Category')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Description')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Location')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Author')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <video src="{{ asset('videos/try.mp4') }}" controls loop width="250px"></video>
-                            </td>
-                            <td>Title</td>
-                            <td>Category Data</td>
-                            <td>Lorem ipsum dolor sit amet.</td>
-                            <td>Location Data</td>
-                            <td>
-                                <div class="flex gap-5 items-center justify-center">
-                                    <button data-modal-target="updatecustomermodal"
-                                        data-modal-toggle="updatecustomermodal" class="cursor-pointer ">
-                                        <img width="38px" src="{{ asset('images/icons/views.svg') }}"
-                                            alt="View"></button>
-                                    <a href=""><img width="38px" src="{{ asset('images/icons/edits.svg') }}"
-                                            alt="update"></a>
-                                    <a href=""> <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                            alt="Delete"></a>
+                        @foreach ($blogs as $blog)
+                            <tr>
+                                <td>
+                                    <div class="h-28 flex justify-content-center ">
+                                        <img src="{{ asset($blog->image) }}" class="object-contain w-full">
+                                    </div>
+                                </td>
+                                <td>{{ $blog->title }}</td>
+                                <td>{{ $blog->category }}</td>
+                                <td>{{ $blog->author }}</td>
 
-                                </div>
-                            </td>
-                        </tr>
-                        {{-- @foreach ($customers as $x => $data)
-                            <tr class="pt-4">
-                                <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ $data->phone }}</td>
-                                <td>{{ $data->role }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
-
                                         <button data-modal-target="updatecustomermodal"
-                                            data-modal-toggle="updatecustomermodal"
-                                            class=" updateBtn cursor-pointer  w-[42px] md:w-full"
-                                            updateId="{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <a class="w-[42px] md:w-full" href="../delCustomer/{{ $data->id }}"><img
-                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="update"></button></a>
+                                            data-modal-toggle="updatecustomermodal" class="cursor-pointer ">
+                                            <img width="38px" src="{{ asset('images/icons/views.svg') }}"
+                                                alt="View"></button>
+                                        <a href=""><img width="38px"
+                                                src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
+                                        <a href=""> <img width="38px"
+                                                src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
+
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach --}}
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>
