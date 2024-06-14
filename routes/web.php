@@ -52,11 +52,6 @@ Route::get('email', function () {
     return view("emails.parent");
 });
 
-
-Route::get('saleRequests', function () {
-
-    return view("sale_requests");
-});
 Route::get('orders', function () {
 
     return view("orders");
@@ -81,6 +76,9 @@ Route::controller(AddCategoryController::class)->group(function () {
 
 //     Route::post('addBusiness', 'addBusiness')->name('addBusiness');
 // });
+
+Route::get('/saleRequests', [AddBusinessController::class,  'getBusOrders']);
+
 
 Route::post('/addBusiness', [AddBusinessController::class,  'addBusiness']);
 Route::get('/businessList', [AddBusinessController::class,  'bussinessList']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AddBusiness;
 use App\Models\AddCategory;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Calculation\Category;
 use Spatie\LaravelIgnition\FlareMiddleware\AddJobs;
@@ -197,5 +198,22 @@ class AddBusinessController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+
+    public function getBusOrders()
+    {
+        $orders = Order::all();
+        foreach ($orders as $order) {
+            $businessId = $order['businuess_id'];
+            $businesses = AddBusiness::where('id', $businessId)->first();
+            $businesses->images = json_decode($businesses->images);
+            $order->business = $businesses;
+
+            $userId = $order['user_id'];
+            $user = User::where('id', $userId)->first();
+            $order->user = $user;
+        }
+        return view("sale_requests", ['orders' => $orders]);
     }
 }
