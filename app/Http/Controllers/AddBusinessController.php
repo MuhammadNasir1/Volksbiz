@@ -214,6 +214,6 @@ class AddBusinessController extends Controller
             $user = User::where('id', $userId)->first();
             $order->user = $user;
         }
-        return view("sale_requests", ['orders' => $orders]);
+        return view("orders", ['orders' => $orders]);
     }
 }

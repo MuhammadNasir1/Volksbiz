@@ -77,6 +77,7 @@ Route::controller(AddCategoryController::class)->group(function () {
 //     Route::post('addBusiness', 'addBusiness')->name('addBusiness');
 // });
 
+Route::get('/orders', [AddBusinessController::class,  'getBusOrders']);
 Route::get('/saleRequests', [AddBusinessController::class,  'getBusOrders']);
 
 
