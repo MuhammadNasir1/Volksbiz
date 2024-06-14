@@ -104,14 +104,7 @@ class AddBusinessController extends Controller
     public function getFilteredBusiness(Request $request)
     {
         try {
-
-            // Start with all businesses
             $query = AddBusiness::query();
-
-            // Apply filters based on request parameters
-            if ($request->has('category')) {
-                $query->where('category', $request->category);
-            }
 
             if ($request->has('min_price') && $request->has('max_price')) {
                 $query->whereBetween('price', [$request->min_price, $request->max_price]);
@@ -125,14 +118,25 @@ class AddBusinessController extends Controller
                 });
             }
 
-            // Execute the query and get the businesses
+            if ($request->has('search')) {
+                $search = $request->search;
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'LIKE', "%{$search}%")
+                        ->orWhere('description', 'LIKE', "%{$search}%");
+                });
+            }
+
+            if ($request->has('category')) {
+                $query->where('category', $request->category);
+            }
+
+            // Fetch the businesses
             $businesses = $query->get();
 
             // Decode the images JSON for each business
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
             }
-
 
             return response()->json(['sucess' => true, 'message' => 'Data Get Sucessfully', 'business' => $businesses], 200);
         } catch (\Exception $e) {
