@@ -33,51 +33,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <video src="https://videos.pexels.com/video-files/4974708/4974708-sd_640_360_25fps.mp4"
-                                    controls loop width="250px"></video>
-                            </td>
-                            <td>Title</td>
-                            <td>Category Data</td>
-                            <td>Lorem ipsum dolor sit amet.</td>
-                            <td>Location Data</td>
-                            <td>
-                                <div class="flex gap-5 items-center justify-center">
-                                    <button data-modal-target="updatecustomermodal"
-                                        data-modal-toggle="updatecustomermodal" class="cursor-pointer ">
-                                        <img width="38px" src="{{ asset('images/icons/views.svg') }}"
-                                            alt="View"></button>
-                                    <a href=""><img width="38px" src="{{ asset('images/icons/edits.svg') }}"
-                                            alt="update"></a>
-                                    <a href=""> <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                            alt="Delete"></a>
-
-                                </div>
-                            </td>
-                        </tr>
-                        {{-- @foreach ($customers as $x => $data)
-                            <tr class="pt-4">
-                                <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ $data->phone }}</td>
-                                <td>{{ $data->role }}</td>
+                        @foreach ($bussinesses as $bussiness)
+                            <tr>
+                                <td>
+                                    <video {{-- src="https://videos.pexels.com/video-files/4974708/4974708-sd_640_360_25fps.mp4" --}} src="{{ asset($bussiness->video) }}" controls
+                                        width="250px"></video>
+                                </td>
+                                <td>{{ $bussiness->title }}</td>
+                                <td>{{ $bussiness->category }}</td>
+                                <td>{{ $bussiness->descrription }}</td>
+                                <td>{{ $bussiness->city }} {{ $bussiness->country }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
-
                                         <button data-modal-target="updatecustomermodal"
-                                            data-modal-toggle="updatecustomermodal"
-                                            class=" updateBtn cursor-pointer  w-[42px] md:w-full"
-                                            updateId="{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <a class="w-[42px] md:w-full" href="../delCustomer/{{ $data->id }}"><img
-                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="update"></button></a>
+                                            data-modal-toggle="updatecustomermodal" class="cursor-pointer ">
+                                            <img width="38px" src="{{ asset('images/icons/views.svg') }}"
+                                                alt="View"></button>
+                                        <a href=""><img width="38px"
+                                                src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
+                                        <a href=""> <img width="38px"
+                                                src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
+
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -217,10 +197,11 @@
                             class="w-full border-[#DEE2E6] rounded-[4px]
                              focus:border-primary   h-[40px] text-[14px]"
                             name="category" id="bus_category">
-                            <option value=""> @lang('lang.Select_Category')</option>
-                            <option value="today"> @lang('lang.Today')</option>
-                            <option value="last_week"> @lang('lang.This_Week')</option>
-                            <option value="last_month"> @lang('lang.This_Month')</option>
+                            <option selected disabled> @lang('lang.Select_Category')</option>
+                            @foreach ($categories as $category)
+                                <option value=" {{ $category->category_name }}"> {{ $category->category_name }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class=" flex gap-20 mt-5 items-center">
@@ -238,22 +219,15 @@
                             focus:border-primary   h-[40px] text-[14px]"
                                 name="country" id="bus_country">
                                 <option value=""> @lang('lang.Select_Country')</option>
-                                <option value="today"> @lang('lang.Today')</option>
-                                <option value="last_week"> @lang('lang.This_Week')</option>
-                                <option value="last_month"> @lang('lang.This_Month')</option>
+                                @include('includes.countrieslist')
                             </select>
                         </div>
                         <div class="lg:w-[50%] w-full flex items-center  gap-6">
                             <label for="bus_city">@lang('lang.City')</label>
-                            <select
-                                class="w-full border-[#DEE2E6] rounded-[4px]
-                         focus:border-primary   h-[40px] text-[14px]"
-                                name="city" id="bus_city">
-                                <option value=""> @lang('lang.Select_City')</option>
-                                <option value="today"> @lang('lang.Today')</option>
-                                <option value="last_week"> @lang('lang.This_Week')</option>
-                                <option value="last_month"> @lang('lang.This_Month')</option>
-                            </select>
+                            <input type="text" required
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
+                              h-[40px] text-[14px]"
+                                name="city" id="bus_city" placeholder=" @lang('lang.City')">
                         </div>
                     </div>
                     <div class=" flex gap-5 mt-5 ">

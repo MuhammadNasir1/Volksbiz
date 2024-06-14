@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\AddBusiness;
+use App\Models\AddCategory;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Calculation\Category;
 use Spatie\LaravelIgnition\FlareMiddleware\AddJobs;
 
 class AddBusinessController extends Controller
@@ -40,15 +42,6 @@ class AddBusinessController extends Controller
                     $validatedData[$imageField] = null;
                 }
             }
-            if ($request->hasFile('bus_video')) {
-                $video = $request->file('bus_video');
-                $videoName = time() . '.' . $video->getClientOriginalExtension();
-                $video->storeAs('public/busniess_videos', $videoName);
-                $validatedData['bus_video'] = 'storage/busniess_videos/' . $videoName;
-            } else {
-                $validatedData['bus_video'] =  null;
-            }
-
 
             $add_business = AddBusiness::create([
                 'images' => json_encode($imagePaths),
@@ -60,18 +53,25 @@ class AddBusinessController extends Controller
                 'description' => $validatedData['description'],
                 'price' => $validatedData['price'],
             ]);
+            if ($request->hasFile('video')) {
+                $video = $request->file('video');
+                $videoName = time() . '.' . $video->getClientOriginalExtension();
+                $video->storeAs('public/busniess_videos', $videoName);
+                $add_business->video = 'storage/busniess_videos/' . $videoName;
+            }
 
             $add_business->save();
-            return redirect('businessList');
+            return redirect('businesses');
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
         }
     }
 
-    public function bussinessList()
+    public function businesses()
     {
-        $bussiness_list = AddBusiness::all();
-        return view('businesses_list', compact('bussiness_list'));
+        $bussinesses = AddBusiness::all();
+        $categories = AddCategory::all();
+        return view('businesses_list', compact('bussinesses', 'categories'));
     }
 
     public function delBusiness(string $id)
