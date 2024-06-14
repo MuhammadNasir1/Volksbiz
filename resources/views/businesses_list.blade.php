@@ -202,7 +202,7 @@
                                             class="font-semibold">@lang('lang.Upload_Video')</span> </p>
 
                                 </div>
-                                <input id="dropzone-file5" type="file" name="bus_video" class="hidden" />
+                                <input id="dropzone-file5" type="file" name="video" class="hidden" />
                             </label>
 
 
@@ -216,7 +216,7 @@
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px]
                              focus:border-primary   h-[40px] text-[14px]"
-                            name="bus_category" id="bus_category">
+                            name="category" id="bus_category">
                             <option value=""> @lang('lang.Select_Category')</option>
                             <option value="today"> @lang('lang.Today')</option>
                             <option value="last_week"> @lang('lang.This_Week')</option>
@@ -228,7 +228,7 @@
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                            name="bus_title" id="bus_title" placeholder=" @lang('lang.Title')">
+                            name="title" id="bus_title" placeholder=" @lang('lang.Title')">
                     </div>
                     <div class="w-full  lg:gap-9 mt-5 lg:items-center flex lg:flex-row flex-col">
                         <div class="lg:w-[50%] w-full flex items-center  lg:mt-0 mt-5 gap-12">
@@ -236,7 +236,7 @@
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px]
                             focus:border-primary   h-[40px] text-[14px]"
-                                name="bus_country" id="bus_country">
+                                name="country" id="bus_country">
                                 <option value=""> @lang('lang.Select_Country')</option>
                                 <option value="today"> @lang('lang.Today')</option>
                                 <option value="last_week"> @lang('lang.This_Week')</option>
@@ -248,7 +248,7 @@
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px]
                          focus:border-primary   h-[40px] text-[14px]"
-                                name="bus_city" id="bus_city">
+                                name="city" id="bus_city">
                                 <option value=""> @lang('lang.Select_City')</option>
                                 <option value="today"> @lang('lang.Today')</option>
                                 <option value="last_week"> @lang('lang.This_Week')</option>
@@ -258,7 +258,7 @@
                     </div>
                     <div class=" flex gap-5 mt-5 ">
                         <label class="" for="bus_description">@lang('lang.Description')</label>
-                        <textarea name="bus_description" id="bus_description"
+                        <textarea name="description" id="bus_description"
                             class="w-full h-28  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
                             placeholder="@lang('lang.Description')"></textarea>
                     </div>
@@ -267,7 +267,7 @@
                         <input type="text" required
                             class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                            name="bus_price" id="bus_price" placeholder=" @lang('lang.Price')">
+                            name="price" id="bus_price" placeholder=" @lang('lang.Price')">
                     </div>
                 </div>
 
