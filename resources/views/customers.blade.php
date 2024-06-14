@@ -37,16 +37,15 @@
                                 <td>{{ $data->role }}</td>
                                 <td>{{ $data->package }}</td>
                                 <td>
+
                                     <div class="flex gap-5 items-center justify-center">
 
-                                        <button data-modal-target="updatecustomermodal"
-                                            data-modal-toggle="updatecustomermodal"
-                                            class=" updateBtn cursor-pointer  w-[42px] "
-                                            updateId="{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <a class="w-[42px] md:w-full" href="../delCustomer/{{ $data->id }}"><img
-                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="update"></button></a>
+
+                                        <a href=""><img width="38px"
+                                                src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
+                                        <a href="../delCustomer/{{ $data->id }}"> <img width="38px"
+                                                src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
+
                                     </div>
                                 </td>
                             </tr>

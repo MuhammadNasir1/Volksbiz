@@ -49,14 +49,14 @@
                     <span class="ms-3">@lang('lang.Category_List')</span>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="../saleRequests"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <img src="{{ asset('./images/icons/sale.svg') }}" width="20" height="20" alt="">
                     </svg>
                     <span class="ms-3">@lang('lang.Sale_Requests')</span>
                 </a>
-            </li>
+            </li> --}}
             <li>
                 <a href="../customers"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
