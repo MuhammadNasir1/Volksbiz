@@ -34,8 +34,11 @@
                         @foreach ($category_data as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td> <img class="h-20 w-20 rounded-full" src="{{ asset($data->category_image) }}"
-                                        alt="product Image">
+                                <td>
+                                    <div class="h-20 w-20 ">
+                                        <img class="object-contain rounded-full h-full w-full"
+                                            src="{{ asset($data->category_image) }}" alt="product Image">
+                                    </div>
                                 </td>
                                 <td>{{ $data->category_name }}</td>
                                 <td>
@@ -48,31 +51,8 @@
 
                                     </div>
                                 </td>
-                                {{-- <td><img src="{{ asset($data->category_name) }}" alt=""></td> --}}
                             </tr>
                         @endforeach
-                        {{-- @foreach ($customers as $x => $data)
-                            <tr class="pt-4">
-                                <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ $data->phone }}</td>
-                                <td>{{ $data->role }}</td>
-                                <td>
-                                    <div class="flex gap-5 items-center justify-center">
-
-                                        <button data-modal-target="updatecustomermodal"
-                                            data-modal-toggle="updatecustomermodal"
-                                            class=" updateBtn cursor-pointer  w-[42px] md:w-full"
-                                            updateId="{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <a class="w-[42px] md:w-full" href="../delCustomer/{{ $data->id }}"><img
-                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="update"></button></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach --}}
 
                     </tbody>
                 </table>
