@@ -173,6 +173,11 @@ class AddBusinessController extends Controller
                 'businuess_id' => $validatedData['businuess_id'],
                 'status' => "pending",
             ]);
+            $businessId = $OrderData['businuess_id'];
+            $businesses = AddBusiness::where('id', $businessId)->first();
+            $businesses->images = json_decode($businesses->images);
+            $OrderData->business = $businesses;
+
             return response()->json(['sucess' => true, 'message' => 'Data add sucessfully', 'data' => $OrderData], 201);
         } catch (\Exception $e) {
             return response()->json(['sucess' => false, 'message' => $e->getMessage()], 500);
