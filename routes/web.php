@@ -64,10 +64,7 @@ Route::get('addBlog', function () {
 
     return view("blog_page");
 });
-Route::get('inquiry', function () {
 
-    return view("inquiry");
-});
 Route::get('subscriptionPlan', function () {
 
     return view("subscription_plan");
@@ -99,3 +96,6 @@ Route::get('/blogs', [BlogsController::class,  'index']);
 Route::post('/addblog', [BlogsController::class,  'insert']);
 Route::post('/upload-image', [BlogsController::class, 'upload'])->name('upload.image');
 Route::get('/getBlogs', [BlogsController::class, 'getBlogs']);
+
+
+Route::get('/inquiry', [userController::class, 'getInquiry']);

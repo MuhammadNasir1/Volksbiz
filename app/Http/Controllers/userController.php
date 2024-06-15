@@ -152,4 +152,11 @@ class userController extends Controller
         // Save content to database
         echo $contentHtml;
     }
+
+    public function getInquiry()
+    {
+
+        $inquiries = Contact_us::all();
+        return view("inquiry",  compact("inquiries"));
+    }
 }

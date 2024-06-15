@@ -25,14 +25,13 @@
                     </thead>
                     <tbody>
 
-                        {{-- @foreach ($customers as $x => $data)
+                        @foreach ($inquiries as $x => $inquiry)
                             <tr class="pt-4">
                                 <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->phone }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ $data->role }}</td>
-                                <td>{{ $data->package }}</td>
+                                <td>{{ $inquiry->name }}</td>
+                                <td>{{ $inquiry->email }}</td>
+                                <td>{{ $inquiry->subject }}</td>
+                                <td>{{ $inquiry->message }}</td>
                                 <td>
 
                                     <div class="flex gap-5 items-center justify-center">
@@ -46,7 +45,7 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
 
                     </tbody>
                 </table>
