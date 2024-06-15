@@ -105,6 +105,7 @@ return [
     'Enter_Subject' => 'Enter Subject',
     'Select_Status' => 'Select Status',
     'ADD' => 'ADD',
+    'Options' => 'Options',
     'Inquiries' => 'Inquiries',
     'Meassage' => 'Meassage',
     'Plan_Options' => 'Plan Options',

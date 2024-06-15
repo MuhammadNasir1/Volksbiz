@@ -20,13 +20,15 @@
                 </div>
 
             </div>
+
             <div class="overflow-x-auto">
                 <table id="datatable">
                     <thead class="py-6 bg-primary text-white">
                         <tr>
                             <th class="whitespace-nowrap">@lang('lang.Sr')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Icon')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Category')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Name')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Price')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Options')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
@@ -112,20 +114,26 @@
                             <div class="w-full mt-4">
                                 <label class="text-[16px] font-semibold block  text-[#452C88]"
                                     for="plan_options">@lang('lang.Plan_Options')</label>
+
+                                <div id="inputContainer"></div>
                                 <div class="flex gap-4">
                                     <input type="text"
-                                        class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                                        class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]"
                                         name="plan_options" id="plan_options" placeholder="@lang('lang.Enter_Plan_Options')">
-                                    <button
-                                        class="bg-primary text-white rounded-[4px] mt-2   px-4 py-2 addBtn  font-semibold ">
+                                    <button type="button"
+                                        class="bg-primary text-white rounded-[4px] mt-2 px-4 py-2 addBtn font-semibold"
+                                        id="addOption">
                                         +
                                     </button>
                                 </div>
+
                             </div>
 
                         </div>
                     </div>
                 </div>
+
+
 
 
 
@@ -166,3 +174,37 @@
 
 
 @include('layouts.footer')
+<script>
+    document.getElementById('addOption').addEventListener('click', () => {
+        // Create a new input element
+        var newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = 'plan_options';
+        newInput.placeholder = '@lang('lang.Enter_Plan_Options')';
+        newInput.className =
+            'w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]';
+
+        // Create a new delete button
+        var deleteButton = document.createElement('button');
+        deleteButton.type = 'button';
+        deleteButton.className =
+            'text-white rounded-[4px] mt-2 px-3.5 py-1.5 deleteBtn font-semibold bg-red-900';
+        deleteButton.innerHTML = '<i class="fa-solid fa-trash text-white"></i>';
+
+        // Create a container div for the input and delete button
+        var inputContainer = document.createElement('div');
+        inputContainer.className = 'flex gap-4 mt-2';
+
+        // Append the new input element and delete button to the container div
+        inputContainer.appendChild(newInput);
+        inputContainer.appendChild(deleteButton);
+
+        // Append the container div to the main input container
+        document.getElementById('inputContainer').appendChild(inputContainer);
+
+        // Add an event listener to the delete button
+        deleteButton.addEventListener('click', () => {
+            inputContainer.remove();
+        });
+    });
+</script>
