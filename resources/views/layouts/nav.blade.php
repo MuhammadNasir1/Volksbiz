@@ -111,9 +111,17 @@
                 </a>
             </li>
             <li>
+                <a href="../subscriptionPlan"
+                    class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <img src="{{ asset('./images/icons/dollar.svg') }}" width="12" height="12" alt="">
+                    </svg>
+                    <span class="ms-3">@lang('lang.Subscription_Plan')</span>
+                </a>
+            </li>
+            <li>
                 <a href="../inquiry"
                     class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <img src="{{ asset('./images/icons/review.svg') }}" width="20" height="20" alt="">
+                    <i class="fa-solid fa-file-signature"></i>
                     </svg>
                     <span class="ms-3">@lang('lang.Inquiries')</span>
                 </a>
