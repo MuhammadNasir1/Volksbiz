@@ -26,8 +26,9 @@
                     <thead class="py-6 bg-primary text-white">
                         <tr>
                             <th class="whitespace-nowrap">@lang('lang.Sr')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Icon')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Category')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Name')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Price')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Options')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
