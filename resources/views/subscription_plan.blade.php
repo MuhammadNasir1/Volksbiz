@@ -113,34 +113,7 @@
                             <div class="w-full mt-4">
                                 <label class="text-[16px] font-semibold block  text-[#452C88]"
                                     for="plan_options">@lang('lang.Plan_Options')</label>
-                                {{-- <div class="flex gap-4">
-                                    <input type="text"
-                                        class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]"
-                                        name="plan_options" id="plan_options" placeholder="@lang('lang.Enter_Plan_Options')">
-                                    <button type="button"
-                                        class="bg-primary text-white rounded-[4px] mt-2 px-4 py-2 addBtn font-semibold"
-                                        id="addOption">
-                                        +
-                                    </button>
-                                    <div id="inputContainer"></div>
-                                </div> --}}
-                                {{-- <div id="inputContainer"></div>
-                                <div class="flex gap-4">
-                                    <input type="text"
-                                        class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]"
-                                        name="plan_options" id="plan_options" placeholder="@lang('lang.Enter_Plan_Options')">
-                                    <button type="button"
-                                        class="bg-primary text-white rounded-[4px] mt-2 px-4 py-2 addBtn font-semibold"
-                                        id="addOption">
-                                        +
 
-                                    </button>
-                                    <button type="button"
-                                        class=" text-white rounded-[4px] mt-2 px-4 py-2 addBtn font-semibold"
-                                        id="deleteOption">
-                                        <img src="{{ asset('images/icons/delete.svg') }}" width="40" alt="">
-                                    </button>
-                                </div> --}}
                                 <div id="inputContainer"></div>
                                 <div class="flex gap-4">
                                     <input type="text"
@@ -201,21 +174,6 @@
 
 @include('layouts.footer')
 <script>
-    // document.getElementById('addOption').addEventListener('click', () => {
-    //     // Create a new input element
-    //     var newInput = document.createElement('input');
-
-    //     // Set the attributes for the new input element
-    //     newInput.type = 'text';
-    //     newInput.name = 'plan_options';
-    //     newInput.placeholder = '@lang('lang.Enter_Plan_Options')';
-    //     newInput.className =
-    //         'w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]';
-
-    //     // Append the new input element to the container
-    //     document.getElementById('inputContainer').appendChild(newInput);
-    // });
-
     document.getElementById('addOption').addEventListener('click', () => {
         // Create a new input element
         var newInput = document.createElement('input');
