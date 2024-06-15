@@ -64,6 +64,10 @@ Route::get('addBlog', function () {
 
     return view("blog_page");
 });
+Route::get('inquiry', function () {
+
+    return view("inquiry");
+});
 
 
 Route::controller(AddCategoryController::class)->group(function () {

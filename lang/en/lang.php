@@ -105,4 +105,6 @@ return [
     'Enter_Subject' => 'Enter Subject',
     'Select_Status' => 'Select Status',
     'ADD' => 'ADD',
+    'Inquiries' => 'Inquiries',
+    'Meassage' => 'Meassage',
 ];
