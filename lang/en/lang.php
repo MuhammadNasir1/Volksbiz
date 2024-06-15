@@ -107,4 +107,11 @@ return [
     'ADD' => 'ADD',
     'Inquiries' => 'Inquiries',
     'Meassage' => 'Meassage',
+    'Plan_Options' => 'Plan Options',
+    'Plan_Price' => 'Plan Price',
+    'Plan_Name' => 'Plan Name',
+    'Add_Plan' => 'Add Plan',
+    'Subscription_Plans' => 'Subscription Plans',
+    'Enter_Plan_Name' => 'Enter Plan Name',
+    'Enter_Plan_Options' => 'Enter Plan Options',
 ];

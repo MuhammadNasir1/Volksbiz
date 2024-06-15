@@ -68,6 +68,10 @@ Route::get('inquiry', function () {
 
     return view("inquiry");
 });
+Route::get('subscriptionPlan', function () {
+
+    return view("subscription_plan");
+});
 
 
 Route::controller(AddCategoryController::class)->group(function () {
