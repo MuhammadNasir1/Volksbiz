@@ -1,5 +1,37 @@
 @include('layouts.header')
 @include('layouts.nav')
+
+<style>
+    #dropzone-file1 {
+        display: none;
+    }
+
+    .label-container {
+        position: relative;
+        width: 144px;
+        height: 144px;
+        border: 2px solid #DEE2E6;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: #F9FAFB;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .label-container img {
+        display: none;
+    }
+
+    .label-container.has-image div,
+    .label-container.has-image svg,
+    .label-container.has-image p {
+        display: none;
+    }
+</style>
 <div class="md:mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Reviews_&_Experience')</h1>
@@ -256,8 +288,9 @@
 
                         <label for="exp_subject" class="ps-1">@lang('lang.Image')</label>
 
-                        <label for="dropzone-file"
-                            class="flex flex-col items-center justify-center w-[331px] text-ecnter h-[180px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+
+                        <label for="dropzone-file1"
+                            class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                             <div class="flex flex-col items-center justify-center pt-5 text-center">
                                 <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -265,12 +298,12 @@
                                         stroke-width="2"
                                         d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                 </svg>
-                                <p class=" text-sm text-gray-500 dark:text-gray-400"><span
-                                        class="font-semibold">@lang('lang.Upload_Image')</span> </p>
-
+                                <p class="text-sm text-gray-500 dark:text-gray-400"><span
+                                        class="font-semibold">@lang('lang.Upload_Image')</span></p>
                             </div>
-                            <input id="dropzone-file" type="file" class="hidden" />
+                            <input id="dropzone-file1" type="file" class="hidden" name="bus_img1" />
                         </label>
+
 
 
                     </div>
@@ -309,3 +342,26 @@
 </div>
 
 @include('layouts.footer')
+
+
+<script>
+    const fileInput = document.getElementById('dropzone-file1');
+    const labelContainer = document.querySelector('.label-container');
+
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                labelContainer.style.backgroundImage = `url(${e.target.result})`;
+                labelContainer.classList.add('has-image');
+            };
+            reader.readAsDataURL(file);
+        }
+        labelContainer.addEventListener('click', function(event) {
+            if (!event.target.closest('input')) {
+                fileInput.click();
+            }
+        });
+    });
+</script>
