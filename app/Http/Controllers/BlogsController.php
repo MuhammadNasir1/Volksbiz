@@ -56,9 +56,11 @@ class BlogsController extends Controller
             }
 
             $blog->save();
-            return response()->json(['success' => true, "message" => "Data add successfully", "data"  => $blog], 201);
+            return redirect('blogs');
+            // return response()->json(['success' => true, "message" => "Data add successfully", "data"  => $blog], 201);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, "message" => $e->getMessage()], 400);
+            return redirect('blogs');
+            // return response()->json(['success' => false, "message" => $e->getMessage()], 400);
         }
     }
 

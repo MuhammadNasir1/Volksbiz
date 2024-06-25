@@ -140,6 +140,7 @@ class authController extends Controller
                 'password' => "required|string|min:8",
             ]);
 
+            return response()->json(['success' => true, 'message' => 'Profile Updated!']);
 
             $user = User::where('email',  $request->email)->first();
             if ($user && Hash::check($request->password, $user->password)) {
