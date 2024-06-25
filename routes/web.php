@@ -10,6 +10,7 @@ use App\Models\AddCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddCategoryController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\SubscriptionController;
 
 // language route
 Route::get('/lang', [userController::class, 'language_change']);
@@ -65,10 +66,7 @@ Route::get('addBlog', function () {
     return view("blog_page");
 });
 
-Route::get('subscriptionPlan', function () {
-
-    return view("subscription_plan");
-});
+Route::get('subscriptionPlan', [SubscriptionController::class, 'index']);
 
 
 Route::controller(AddCategoryController::class)->group(function () {
@@ -99,3 +97,5 @@ Route::get('/getBlogs', [BlogsController::class, 'getBlogs']);
 
 
 Route::get('/inquiry', [userController::class, 'getInquiry']);
+
+Route::post('addSubscription', [SubscriptionController::class, 'insert']);

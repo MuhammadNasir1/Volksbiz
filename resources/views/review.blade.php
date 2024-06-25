@@ -50,7 +50,7 @@
                     </div>
                     <div>
 
-                        <button data-modal-target="updatecustomermodal" data-modal-toggle="updatecustomermodal"
+                        <button data-modal-target="updatecustomermodal" data-modal-toggle="updatecustomermbodal"
                             class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                             @lang('lang.Experience')</button>
                     </div>

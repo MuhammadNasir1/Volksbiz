@@ -33,28 +33,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($category_data as $data)
+                        @foreach ($subscriptionData as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>
-                                    <div class="h-20 w-20 ">
-                                        <img class="object-contain rounded-full h-full w-full"
-                                            src="{{ asset($data->category_image) }}" alt="product Image">
-                                    </div>
-                                </td>
-                                <td>{{ $data->category_name }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->price }}</td>
+                                <td>{{ $data->option }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
                                         <a href=""><img width="38px"
                                                 src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
-                                        <a href="{{ route('deleteCategory', $data->id) }}"> <img width="38px"
+                                        <a href=""> <img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
 
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -69,7 +65,7 @@
 <div id="addcustomermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full  rounded-3xl  max-w-3xl max-h-full ">
-        <form id="customerData" action="{{ route('addCategory') }}" method="post" enctype="multipart/form-data">
+        <form action="../addSubscription" method="post" enctype="multipart/form-data">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -96,14 +92,14 @@
                                     for="plan_name">@lang('lang.Plan_Name')</label>
                                 <input type="text"
                                     class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                    name="plan_name" id="plan_name" placeholder="@lang('lang.Enter_Plan_Name')">
+                                    name="name" id="plan_name" placeholder="@lang('lang.Enter_Plan_Name')">
                             </div>
                             <div class="w-full lg:mt-4">
                                 <label class="text-[16px] font-semibold block  text-[#452C88]"
                                     for="plan_price">@lang('lang.Plan_Price')</label>
                                 <input type="text"
                                     class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                    name="plan_price" id="plan_price" placeholder="@lang('lang.Plan_Price')">
+                                    name="price" id="plan_price" placeholder="@lang('lang.Plan_Price')">
                             </div>
 
                         </div>
@@ -119,7 +115,7 @@
                                 <div class="flex gap-4">
                                     <input type="text"
                                         class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]"
-                                        name="plan_options" id="plan_options" placeholder="@lang('lang.Enter_Plan_Options')">
+                                        name="option[]" id="plan_options" placeholder="@lang('lang.Enter_Plan_Options')">
                                     <button type="button"
                                         class="bg-primary text-white rounded-[4px] mt-2 px-4 py-2 addBtn font-semibold"
                                         id="addOption">
@@ -179,7 +175,7 @@
         // Create a new input element
         var newInput = document.createElement('input');
         newInput.type = 'text';
-        newInput.name = 'plan_options';
+        newInput.name = 'option[]';
         newInput.placeholder = '@lang('lang.Enter_Plan_Options')';
         newInput.className =
             'w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]';

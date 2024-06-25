@@ -5,6 +5,7 @@ use App\Http\Controllers\AddCategoryController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\ExperienceReviewController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\userController;
 use App\Models\AddBusiness;
 use Illuminate\Http\Request;
@@ -60,3 +61,4 @@ Route::post('addContactUs', [userController::class, 'addContactUs']);
 
 
 Route::get('/getBlogs', [BlogsController::class, 'getBlogs']);
+Route::get('/getSubscription', [SubscriptionController::class, 'getSubscriptionData']);
