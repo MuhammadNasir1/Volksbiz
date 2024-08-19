@@ -134,7 +134,7 @@
                                     <p class=" text-sm text-gray-500 dark:text-gray-400"><span
                                             class="font-semibold">100*100</span> </p>
                                 </div>
-                                <input id="dropzone-file1" type="file" class="hidden" name="bus_img1" />
+                                <input id="dropzone-file1" type="file" class="hidden" name="category_image" />
                             </label>
 
                         </div>

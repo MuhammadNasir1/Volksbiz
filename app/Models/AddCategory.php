@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class AddCategory extends Model
 {
     use HasFactory;
-
+    protected $table = 'add_categories';
     public $timestamps = false;
 
-    // protected $fillable = [
-    //     'category_name',
-    //     'category_image',
-    // ];
+    protected $fillable = [
+
+        'category_name',
+        'category_image',
+    ];
 }
