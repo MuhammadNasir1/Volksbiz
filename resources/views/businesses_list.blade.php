@@ -128,8 +128,31 @@
 
                         <div class="flex items-center  w-full gap-14 flex-wrap">
 
+                            <!-- Upload and Preview Container 1 -->
                             <label for="dropzone-file1"
                                 class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <img id="preview1"
+                                    class="absolute inset-0 w-full h-full object-cover hidden bg-gray-100 dark:bg-gray-700 rounded-lg" />
+                                <div class="flex flex-col items-center justify-center pt-5 text-center"
+                                    id="label-container1">
+                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                    </svg>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400"><span
+                                            class="font-semibold">Upload</span></p>
+                                </div>
+                                <input id="dropzone-file1" type="file" class="hidden" name="bus_img1"
+                                    accept="image/*" />
+                            </label>
+
+                            <!-- Upload and Preview Container 2 -->
+                            <label for="dropzone-file2"
+                                class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <img id="preview2"
+                                    class="absolute inset-0 w-full h-full object-cover hidden bg-gray-100 dark:bg-gray-700 rounded-lg" />
                                 <div class="flex flex-col items-center justify-center pt-5 text-center">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -140,26 +163,15 @@
                                     <p class="text-sm text-gray-500 dark:text-gray-400"><span
                                             class="font-semibold">Upload</span></p>
                                 </div>
-                                <input id="dropzone-file1" type="file" class="hidden" name="bus_img1" />
+                                <input id="dropzone-file2" type="file" class="hidden" name="bus_img2"
+                                    accept="image/*" />
                             </label>
 
-                            <label for="dropzone-file2"
-                                class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                <div class="flex flex-col items-center justify-center pt-5 text-center">
-                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                    </svg>
-                                    <p class=" text-sm text-gray-500 dark:text-gray-400"><span
-                                            class="font-semibold">Upload</span> </p>
-                                </div>
-                                <input id="dropzone-file2" type="file" class="hidden" name="bus_img2" />
-                            </label>
-
+                            <!-- Upload and Preview Container 3 -->
                             <label for="dropzone-file3"
                                 class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <img id="preview3"
+                                    class="absolute inset-0 w-full h-full object-cover hidden bg-gray-100 dark:bg-gray-700 rounded-lg" />
                                 <div class="flex flex-col items-center justify-center pt-5 text-center">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -167,14 +179,18 @@
                                             stroke-width="2"
                                             d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                     </svg>
-                                    <p class=" text-sm text-gray-500 dark:text-gray-400"><span
-                                            class="font-semibold">Upload</span> </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400"><span
+                                            class="font-semibold">Upload</span></p>
                                 </div>
-                                <input id="dropzone-file3" type="file" class="hidden" name="bus_img3" />
+                                <input id="dropzone-file3" type="file" class="hidden" name="bus_img3"
+                                    accept="image/*" />
                             </label>
 
+                            <!-- Upload and Preview Container 4 -->
                             <label for="dropzone-file4"
                                 class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <img id="preview4"
+                                    class="absolute inset-0 w-full h-full object-cover hidden bg-gray-100 dark:bg-gray-700 rounded-lg" />
                                 <div class="flex flex-col items-center justify-center pt-5 text-center">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -182,10 +198,11 @@
                                             stroke-width="2"
                                             d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                     </svg>
-                                    <p class=" text-sm text-gray-500 dark:text-gray-400"><span
-                                            class="font-semibold">Upload</span> </p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400"><span
+                                            class="font-semibold">Upload</span></p>
                                 </div>
-                                <input id="dropzone-file4" type="file" class="hidden" name="bus_img4" />
+                                <input id="dropzone-file4" type="file" class="hidden" name="bus_img4"
+                                    accept="image/*" />
                             </label>
 
 
@@ -198,25 +215,32 @@
 
                         <div class="">@lang('lang.Videos')</div>
 
-                        <div class="flex items-center  w-full gap-14">
-                            <label for="dropzone-file5"
-                                class="flex flex-col items-center justify-center w-[331px] text-ecnter h-[180px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                <div class="flex flex-col items-center justify-center pt-5 text-center">
+                        <div class="flex items-center w-full gap-14">
+                            <!-- Upload and Preview Container -->
+                            <div id="upload-container"
+                                class="relative w-[331px] h-[180px] border-2 border-[#DEE2E6] border-solid rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 cursor-pointer flex items-center justify-center">
+                                <!-- Video Preview -->
+                                <video id="video-preview" controls
+                                    class="absolute inset-0 w-full h-full hidden bg-gray-100 dark:bg-gray-700 rounded-lg">
+                                    Your browser does not support the video tag.
+                                </video>
+
+                                <!-- Upload Area -->
+                                <div class="flex flex-col items-center justify-center w-full h-full">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2"
                                             d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                     </svg>
-                                    <p class=" text-sm text-gray-500 dark:text-gray-400"><span
-                                            class="font-semibold">@lang('lang.Upload_Video')</span> </p>
-
+                                    <p class="text-sm text-gray-500 dark:text-gray-400"><span
+                                            class="font-semibold">@lang('lang.Upload_Video')</span></p>
                                 </div>
-                                <input id="dropzone-file5" type="file" name="video" class="hidden" />
-                            </label>
-
-
+                                <input id="dropzone-file5" type="file" name="video" class="hidden"
+                                    accept="video/*" />
+                            </div>
                         </div>
+
 
 
                     </div>
@@ -375,7 +399,8 @@
                         <div class="flex gap-6 pt-3">
                             <h5 class="font-bold text-nowrap">
                                 @lang('lang.Description') :</h5>
-                            <p>sjdhmnsbdfjbd Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt similique
+                            <p class="text-justify">sjdhmnsbdfjbd Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Nesciunt similique
                                 illo doloremque nostrum natus dolorum harum. Autem ducimus ex perspiciatis cum, aliquam
                                 fuga expedita nulla vel illum nesciunt vero enim.</p>
                         </div>
@@ -396,23 +421,52 @@
 
 @include('layouts.footer')
 <script>
-    const fileInput = document.getElementById('dropzone-file1');
-    const labelContainer = document.querySelector('.label-container');
+    // Function to handle file input and preview image
+    function setupFileInput(inputId, previewId) {
+        const fileInput = document.getElementById(inputId);
+        const previewImage = document.getElementById(previewId);
 
-    fileInput.addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                labelContainer.style.backgroundImage = `url(${e.target.result})`;
-                labelContainer.classList.add('has-image');
-            };
-            reader.readAsDataURL(file);
-        }
-        labelContainer.addEventListener('click', function(event) {
-            if (!event.target.closest('input')) {
-                fileInput.click();
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const objectURL = URL.createObjectURL(file);
+                previewImage.src = objectURL;
+                previewImage.style.display = 'block'; // Show the image element
+
+                // Clean up the object URL after image is loaded
+                previewImage.addEventListener('load', () => {
+                    URL.revokeObjectURL(objectURL);
+                }, {
+                    once: true
+                });
             }
         });
+    }
+
+    // Setup each file input and preview
+    setupFileInput('dropzone-file1', 'preview1');
+    setupFileInput('dropzone-file2', 'preview2');
+    setupFileInput('dropzone-file3', 'preview3');
+    setupFileInput('dropzone-file4', 'preview4');
+
+    document.getElementById('upload-container').addEventListener('click', function() {
+        document.getElementById('dropzone-file5').click();
+    });
+
+    document.getElementById('dropzone-file5').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const videoPreview = document.getElementById('video-preview');
+            const objectURL = URL.createObjectURL(file);
+            videoPreview.src = objectURL;
+            videoPreview.style.display = 'block'; // Show the video element
+
+            // Clean up the object URL after video preview is finished
+            videoPreview.addEventListener('loadeddata', () => {
+                URL.revokeObjectURL(objectURL);
+            }, {
+                once: true
+            });
+        }
     });
 </script>
