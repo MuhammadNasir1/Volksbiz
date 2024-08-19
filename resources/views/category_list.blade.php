@@ -65,8 +65,8 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
-                                    <div class="h-20 w-20 ">
-                                        <img class="object-contain rounded-full h-full w-full"
+                                    <div class="h-20 w-20">
+                                        <img class="object-contain rounded-full h-full w-full bg-black  border border-blue-600"
                                             src="{{ asset($data->category_image) }}" alt="product Image">
                                     </div>
                                 </td>
