@@ -54,10 +54,10 @@
                 <table id="datatable">
                     <thead class="py-6 bg-primary text-white">
                         <tr>
+                            <th class="whitespace-nowrap">@lang('lang.Sr')</th>
                             <th class="whitespace-nowrap">@lang('lang.Videos')</th>
                             <th class="whitespace-nowrap">@lang('lang.Title')</th>
                             <th class="whitespace-nowrap">@lang('lang.Category')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Description')</th>
                             <th class="whitespace-nowrap">@lang('lang.Location')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
@@ -65,13 +65,15 @@
                     <tbody>
                         @foreach ($bussinesses as $bussiness)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>
                                     @php
                                         $images = json_decode($bussiness->images);
                                     @endphp
 
                                     @if (!empty($images) && isset($images[0]))
-                                        <img src="{{ asset($images[0]) }}" alt="Business Image" width="200px">
+                                        <img src="{{ asset($images[0]) }}" alt="Business Image"
+                                            class="size-[150px] object-contain">
                                     @else
                                         <img src="{{ asset('images/default-placeholder.png') }}"
                                             alt="No Image Available" width="250px">
@@ -79,7 +81,6 @@
                                 </td>
                                 <td>{{ $bussiness->title }}</td>
                                 <td>{{ $bussiness->category }}</td>
-                                <td>{{ $bussiness->descrription }}</td>
                                 <td>{{ $bussiness->city }} {{ $bussiness->country }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
@@ -92,7 +93,7 @@
 
                                         <a href="#"><img width="38px"
                                                 src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
-                                        <a href="#"><img width="38px"
+                                        <a href="{{ route('delBuissness', $bussiness->id) }}"><img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
                                     </div>
                                 </td>
@@ -493,7 +494,8 @@
                             // Display the first image
                             var firstImage = images[0];
                             firstImageContainer.append('<img src="' + asset(firstImage) +
-                                '" alt="First Image" class="h-[350px] w-[500px]">');
+                                '" alt="First Image" class="h-[350px] w-[500px] object-contain">'
+                            );
 
                             // Display the last three images, excluding the first one
                             var lastThreeImages = images.slice(-3); // Get the last 3 images
