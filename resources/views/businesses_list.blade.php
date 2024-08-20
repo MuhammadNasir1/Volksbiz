@@ -160,7 +160,7 @@
                         <!-- Upload and Preview Container 1 -->
                         <label for="dropzone-file1"
                             class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                            style="background-image: url('{{ isset($buissnessData) ? asset($image[0]) : '' }}')">
+                            style="background-image: url('{{ isset($buissnessData) && isset($image[0]) ? asset($image[0]) : '' }}')">
                             <img id="preview1"
                                 class="absolute inset-0 w-full h-full object-cover hidden bg-gray-100 dark:bg-gray-700 rounded-lg" />
                             <div class="flex flex-col items-center justify-center pt-5 text-center {{ isset($buissnessData) ? 'hidden' : '' }}"
@@ -181,7 +181,7 @@
                         <!-- Upload and Preview Container 2 -->
                         <label for="dropzone-file2"
                             class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                            style="background-image: url('{{ isset($buissnessData) ? asset($image[1]) : '' }}')">
+                            style="background-image: url('{{ isset($buissnessData) && isset($image[1]) ? asset($image[1]) : '' }}')">
                             <img id="preview2"
                                 class="absolute inset-0 w-full h-full object-cover hidden bg-gray-100 dark:bg-gray-700 rounded-lg" />
                             <div
@@ -202,7 +202,7 @@
                         <!-- Upload and Preview Container 3 -->
                         <label for="dropzone-file3"
                             class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                            style="background-image: url('{{ isset($buissnessData) ? asset($image[2]) : '' }}')">
+                            style="background-image: url('{{ isset($buissnessData) && isset($image[2]) ? asset($image[2]) : '' }}')">
                             <img id="preview3"
                                 class="absolute inset-0 w-full h-full object-cover hidden bg-gray-100 dark:bg-gray-700 rounded-lg" />
                             <div
@@ -223,7 +223,7 @@
                         <!-- Upload and Preview Container 4 -->
                         <label for="dropzone-file4"
                             class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                            style="background-image: url('{{ isset($buissnessData) ? asset($image[3]) : '' }}')">
+                            style="background-image: url('{{ isset($buissnessData) && isset($image[3]) ? asset($image[3]) : '' }}')">
                             <img id="preview4"
                                 class="absolute inset-0 w-full h-full object-cover hidden bg-gray-100 dark:bg-gray-700 rounded-lg" />
                             <div
