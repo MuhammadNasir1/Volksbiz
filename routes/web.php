@@ -93,6 +93,8 @@ Route::middleware('custom')->group(function () {
     Route::get('/businesses', [AddBusinessController::class,  'businesses']);
     Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'])->name('delBusiness');
     Route::get('/bussinesses/{id}', [AddBusinessController::class,  'show'])->name('bussinesses.show');
+    Route::get('/bussinessesDel/{id}', [AddBusinessController::class,  'delBuissness'])->name('delBuissness');
+
 
     Route::get('/blogs', [BlogsController::class,  'index']);
     Route::post('/addblog', [BlogsController::class,  'insert']);
@@ -102,6 +104,7 @@ Route::middleware('custom')->group(function () {
 
     Route::get('/inquiry', [ContactUsController::class, 'getInquiry']);
     Route::post('/updInqStatus', [ContactUsController::class, 'updateStatus']);
+    Route::post('/delInquiry/{$id}', [ContactUsController::class, 'delete']);
 
     Route::post('addSubscription', [SubscriptionController::class, 'insert']);
 });

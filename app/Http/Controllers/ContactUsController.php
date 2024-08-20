@@ -55,4 +55,11 @@ class ContactUsController extends Controller
             // return response()->json(['success', false, 'message' => $e->getMessage()], 500);
         }
     }
+
+    public function delInquiry($id)
+    {
+        $inquiry = Contact_us::find($id);
+        $inquiry->delete();
+        return redirect('inquiry');
+    }
 }
