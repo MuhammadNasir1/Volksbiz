@@ -76,4 +76,57 @@ class BlogsController extends Controller
             return response()->json(['success' => false, "message" => $e->getMessage()], 400);
         }
     }
+
+    function delete($id)
+    {
+        $blog = Blogs::find($id);
+        $image = $blog->image;
+
+        // Delete the image from storage
+        if (Storage::exists($image)) {
+            Storage::delete($image);
+        }
+        $blog->delete();
+        return redirect('../blogs');
+    }
+    function editBlogData($id)
+    {
+
+        $blogData = Blogs::find($id);
+        // foreach ($blogData as $blog) {
+        $blogData->content = htmlspecialchars_decode($blogData->content);
+        // }
+        return view("blog_page", compact("blogData"));
+    }
+
+    function update(Request $request, $id)
+    {
+        try {
+            $validatedData = $request->validate([
+
+                "title" => "required",
+                "category" => "required",
+                "author" => "required",
+                "content" => "required",
+            ]);
+            $blog = Blogs::find($id);
+            $blog->title = $validatedData['title'];
+            $blog->category = $validatedData['category'];
+            $blog->author = $validatedData['author'];
+            $blog->content = htmlspecialchars($validatedData['content']);
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/blog_images', $imageName);
+                $blog->image = 'storage/blog_images/' . $imageName;
+            }
+
+            $blog->update();
+            return redirect('blogs');
+        } catch (\Exception $e) {
+            return redirect('blogs');
+            // return response()->json($e->getMessage());
+        }
+    }
 }
