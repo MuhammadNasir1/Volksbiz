@@ -115,4 +115,9 @@ return [
     'Subscription_Plans' => 'Subscription Plans',
     'Enter_Plan_Name' => 'Enter Plan Name',
     'Enter_Plan_Options' => 'Enter Plan Options',
+
+
+    'Update_Category' => 'Update Category',
+
+
 ];

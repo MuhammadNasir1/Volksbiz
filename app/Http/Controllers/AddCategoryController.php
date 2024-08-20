@@ -31,9 +31,9 @@ class AddCategoryController extends Controller
 
             $category->save();
 
-            return  redirect('categoryList');
+            return response()->json(['success' => true, 'message' => 'Category add successfully'], 201);
         } catch (\Exception $e) {
-            return response()->json($e->getMessage());
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 400);
         }
     }
 
@@ -57,6 +57,41 @@ class AddCategoryController extends Controller
             return response()->json(['success' => true, 'message' => "Data  get successfully", 'categories' => $categories], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+
+    public function updateCategoryData($id)
+    {
+        $categoryData = addcategory::find($id);
+        $category_data = AddCategory::all();
+
+        return view('category_list', compact('categoryData', 'category_data'));
+    }
+
+    public function updateCategory(Request $request, $id)
+    {
+
+        try {
+            $validatedData = $request->validate([
+                'category_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+                'category_name' => 'required',
+            ]);
+            $category =  addcategory::find($id);
+            $category->category_name = $validatedData['category_name'];
+
+            if ($request->hasFile('category_image')) {
+                $image = $request->file('category_image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/category_images', $imageName);
+                $category->category_image =  $validatedData['category_image'] = 'storage/category_images/' . $imageName;
+            }
+
+
+            $category->update();
+            return response()->json(['success' => true, 'message' => 'Category update successfully'], 201);
+        } catch (\Exception $e) {
+
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 400);
         }
     }
 }
