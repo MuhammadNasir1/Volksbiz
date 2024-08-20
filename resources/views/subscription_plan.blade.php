@@ -152,7 +152,8 @@
                             <label class="text-[16px] font-semibold block  text-[#452C88]"
                                 for="plan_options">@lang('lang.Plan_Options')</label>
                             <div class="flex gap-4">
-                                <input type="text" value="{{ isset($options[0]) ? $options[0] : '' }}"
+                                <input type="text"
+                                    value="{{ isset($editData) && isset($options[0]) ? $options[0] : '' }}"
                                     class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]"
                                     name="option[]" id="plan_options" placeholder="@lang('lang.Enter_Plan_Options')">
                                 <button type="button"
@@ -161,21 +162,25 @@
                                     +
                                 </button>
                             </div>
-                            <div id="inputContainer">
-                                @if (isset($options) && is_array($options))
-                                    @foreach (array_slice($options, 1) as $option)
-                                        <div class="flex gap-4 mt-2">
-                                            <input type="text" value="{{ $option }}" name="option[]"
-                                                class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]" />
+                            @if (isset($editData))
+                                <div id="inputContainer">
+                                    @if (isset($options) && is_array($options))
+                                        @foreach (array_slice($options, 1) as $option)
+                                            <div class="flex gap-4 mt-2">
+                                                <input type="text" value="{{ $option }}" name="option[]"
+                                                    class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]" />
 
-                                            <button type="button"
-                                                class="text-white rounded-[4px] mt-2 px-3.5 py-1.5 deleteBtn font-semibold bg-red-900">
-                                                <i class="fa-solid fa-trash text-white"></i>
-                                            </button>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
+                                                <button type="button"
+                                                    class="text-white rounded-[4px] mt-2 px-3.5 py-1.5 deleteBtn font-semibold bg-red-900">
+                                                    <i class="fa-solid fa-trash text-white"></i>
+                                                </button>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            @else
+                                <div id="inputContainer"></div>
+                            @endif
                         </div>
 
                     </div>
@@ -290,6 +295,7 @@
                     $('#addBtn').attr('disabled', true);
                 },
                 success: function(response) {
+
                     window.location.href = '../subscriptionPlan';
 
                 },
@@ -307,6 +313,7 @@
                     $('#addBtn').attr('disabled', false);
                 }
             });
+            $('#plan_options').val() = '';
         });
     });
 </script>
