@@ -123,5 +123,7 @@ return [
     'Unfix' => 'Unfix',
     'Update_Status' => 'Update Status',
 
+    'Update_Business' => 'Update Business',
+
 
 ];
