@@ -110,4 +110,6 @@ Route::middleware('custom')->group(function () {
 
     Route::post('addSubscription', [SubscriptionController::class, 'insert']);
     Route::get('deleteSubscription/{id}', [SubscriptionController::class, 'delete']);
+    Route::get('/editSubscription/{id}', [SubscriptionController::class, 'editSubscriptionData']);
+    Route::get('/UpdateSubscription/{id}', [SubscriptionController::class, 'update']);
 });
