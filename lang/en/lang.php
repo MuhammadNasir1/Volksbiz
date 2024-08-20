@@ -128,6 +128,7 @@ return [
     'Seller' => 'Seller',
 
     'Update_Business' => 'Update Business',
+    'Update_Plan' => 'Update Plan',
 
 
 ];
