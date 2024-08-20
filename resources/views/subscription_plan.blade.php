@@ -47,7 +47,7 @@
 
                                         <a href=""><img width="38px"
                                                 src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
-                                        <a href=""> <img width="38px"
+                                        <a href="../deleteSubscription/{{ $data->id }}"> <img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
 
                                     </div>

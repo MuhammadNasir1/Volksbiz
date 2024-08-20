@@ -109,4 +109,5 @@ Route::middleware('custom')->group(function () {
     Route::get('/delinquiry/{id}', [ContactUsController::class, 'delete']);
 
     Route::post('addSubscription', [SubscriptionController::class, 'insert']);
+    Route::get('deleteSubscription/{id}', [SubscriptionController::class, 'delete']);
 });
