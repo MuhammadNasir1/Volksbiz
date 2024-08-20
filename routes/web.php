@@ -91,7 +91,7 @@ Route::post('/addBusiness', [AddBusinessController::class,  'addBusiness']);
 Route::get('/businessList', [AddBusinessController::class,  'bussinessList']);
 Route::get('/businesses', [AddBusinessController::class,  'businesses']);
 Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'])->name('delBusiness');
-
+Route::get('/bussinesses/{id}', [AddBusinessController::class,  'show'])->name('bussinesses.show');
 
 Route::get('/blogs', [BlogsController::class,  'index']);
 Route::post('/addblog', [BlogsController::class,  'insert']);
