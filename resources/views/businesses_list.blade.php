@@ -365,11 +365,15 @@
                 <div class="flex p-5 w-full lg:flex-row flex-col">
                     <div class="flex gap-4 lg:w-[50%] w-full lg:justify-start justify-center">
                         <div class="video-container flex flex-col py-7">
-                            <div>
-                                <video src="" controls loop class="h-[300px] w-[500px]"></video>
+                            <div class="first-image">
+                                <img src="" alt="" class="h-[250px] w-[300px]">
                             </div>
                             <div class="flex gap-3 py-3 flex-wrap">
-                                <!-- Images will be dynamically loaded here -->
+                                <div class="images flex gap-3 py-3 flex-wrap">
+                                    <!-- Last three images will be appended here -->
+                                </div>
+                                <video src="" controls loop class="h-[116px] mt-3 w-[116px]"
+                                    id="videoTag"></video>
                             </div>
                         </div>
                     </div>
@@ -466,23 +470,43 @@
                 method: 'GET',
                 success: function(data) {
                     // Populate the modal fields
-                    $('#updatecustomermodal video').attr('src', data.video);
+                    $('#videoTag').attr('src', data.video);
                     $('#updatecustomermodal h1').text(data.title);
                     $('#updatecustomermodal .category').text(data.category);
                     $('#updatecustomermodal .location').text(data.city + ' ' + data
                         .country);
                     $('#updatecustomermodal .description').text(data.description);
                     $('#updatecustomermodal .date').text(data.date);
+
                     var imagesContainer = $(
-                        '#updatecustomermodal .video-container .flex-wrap');
+                        '#updatecustomermodal .video-container .images');
+                    var firstImageContainer = $('#updatecustomermodal .first-image');
+
                     imagesContainer.empty();
+                    firstImageContainer.empty();
+
                     try {
                         var images = JSON.parse(data
                             .images); // Assuming 'images' is the field name
-                        images.forEach(function(image) {
-                            imagesContainer.append('<img src="' + asset(image) +
-                                '" alt="Business Image" width="116px">');
-                        });
+
+                        if (images.length > 0) {
+                            // Display the first image
+                            var firstImage = images[0];
+                            firstImageContainer.append('<img src="' + asset(firstImage) +
+                                '" alt="First Image" class="h-[350px] w-[500px]">');
+
+                            // Display the last three images, excluding the first one
+                            var lastThreeImages = images.slice(-3); // Get the last 3 images
+                            lastThreeImages.forEach(function(image) {
+                                if (image !==
+                                    firstImage) { // Exclude the first image
+                                    imagesContainer.append('<img src="' + asset(
+                                            image) +
+                                        '" alt="Business Image" width="116px">');
+                                }
+                            });
+                        }
+
                     } catch (e) {
                         console.error("Error parsing images:", e);
                     }
