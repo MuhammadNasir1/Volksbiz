@@ -122,6 +122,10 @@ return [
     'Resolved' => 'Resolved',
     'Unfix' => 'Unfix',
     'Update_Status' => 'Update Status',
+    'Plan_For' => 'Plan For',
+    'Select_For' => 'Select For',
+    'Buyer' => 'Buyer',
+    'Seller' => 'Seller',
 
     'Update_Business' => 'Update Business',
 

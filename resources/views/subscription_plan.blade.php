@@ -38,7 +38,10 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->price }}</td>
-                                <td>{{ $data->option }}</td>
+                                @php
+                                    $options = json_decode($data->option, true);
+                                @endphp
+                                <td>{{ implode(', ', $options) }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
@@ -105,6 +108,15 @@
                         </div>
                     </div>
 
+                    <div class="w-full mt-2">
+                        <label class="text-[16px] font-semibold block  text-[#452C88]"
+                            for="plan_price">@lang('lang.Plan_For')</label>
+                        <select name="plan_for" id="plan_for">
+                            <option value="" selected disabled>@lang('lang.Select_For')</option>
+                            <option value="buyer">@lang('lang.Buyer')</option>
+                            <option value="seller">@lang('lang.Seller')</option>
+                        </select>
+                    </div>
                     <div class="mt-2">
                         <div class="flex w-full lg:flex-row flex-col gap-5">
                             <div class="w-full mt-4">

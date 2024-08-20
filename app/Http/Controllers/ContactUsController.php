@@ -39,6 +39,13 @@ class ContactUsController extends Controller
         $inquiries = Contact_us::all();
         return view("inquiry",  compact("inquiries"));
     }
+    public function editInquiryData($id)
+    {
+
+        $inquiries = Contact_us::all();
+        $inquiryData = Contact_us::find($id);
+        return view("inquiry",  compact("inquiries", 'inquiryData'));
+    }
 
     public function updateStatus(Request $request)
     {
@@ -56,7 +63,7 @@ class ContactUsController extends Controller
         }
     }
 
-    public function delInquiry($id)
+    public function delete($id)
     {
         $inquiry = Contact_us::find($id);
         $inquiry->delete();
