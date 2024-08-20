@@ -74,6 +74,9 @@ Route::controller(AddCategoryController::class)->group(function () {
     Route::post('addCategory', 'addcategory')->name('addCategory');
     Route::get('categoryList', 'categoryData')->name('categoryData');
     Route::get('deleteCategory/{id}', 'delCategory')->name('deleteCategory');
+    Route::get('editCategory/{id}', 'updateCategoryData');
+
+    Route::post('updateCategory/{id}', 'updateCategory');
 });
 // Route::controller(AddBusinessController::class)->group(function () {
 
