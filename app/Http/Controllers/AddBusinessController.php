@@ -70,6 +70,58 @@ class AddBusinessController extends Controller
             return response()->json(['message' => $e->getMessage()]);
         }
     }
+    public function updateBusiness(Request $request, string $id)
+    {
+        try {
+            $validatedData = $request->validate([
+                'bus_img1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+                'bus_img2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+                'bus_img3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+                'bus_img4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+                'video' => 'nullable',
+                'category' => 'required',
+                'title' => 'required',
+                'country' => 'required',
+                'city' => 'required',
+                'description' => 'required',
+                'price' => 'required',
+            ]);
+            $update_business = AddBusiness::find($id);
+            $update_business->category = $validatedData['category'];
+            $update_business->title = $validatedData['title'];
+            $update_business->country = $validatedData['country'];
+            $update_business->city = $validatedData['city'];
+            $update_business->description = $validatedData['description'];
+            $update_business->price = $validatedData['price'];
+            $imageFields = ['bus_img1', 'bus_img2', 'bus_img3', 'bus_img4'];
+            $imagePaths = [];
+
+            foreach ($imageFields as $index => $imageField) {
+                if ($request->hasFile($imageField)) {
+                    $image = $request->file($imageField);
+                    $imageName = time() . ($index + 1) . '.' . $image->getClientOriginalExtension();
+                    $image->storeAs('public/busniess_images', $imageName);
+                    $validatedData[$imageField] = 'storage/busniess_images/' . $imageName;
+                    $imagePaths[] = 'storage/busniess_images/' . $imageName; // Add the file path to the array
+                    $update_business->images = json_encode($imagePaths);
+                }
+            }
+            if ($request->hasFile('video')) {
+                $video = $request->file('video');
+                $videoName = time() . '.' . $video->getClientOriginalExtension();
+                $video->storeAs('public/busniess_videos', $videoName);
+                $videoPath = 'storage/busniess_videos/' . $videoName;
+                $update_business->video = $videoPath;
+            }
+
+
+
+            $update_business->update();
+            return response()->json(['success' => true, 'message' => 'Buissness Update successfully'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 400);
+        }
+    }
 
     public function businesses()
     {
@@ -246,5 +298,16 @@ class AddBusinessController extends Controller
         $del = AddBusiness::find($id);
         $del->delete();
         return redirect()->back();
+    }
+    public function updateBuissnessData($id)
+    {
+        $buissnessData = AddBusiness::find($id);
+        $categories = AddCategory::all();
+        $bussinesses = AddBusiness::all();
+        // foreach ($buissnessData as $business) {
+        //     $business->images = json_decode($business->images);
+        // }
+
+        return view('businesses_list', compact('buissnessData', 'categories', 'bussinesses'));
     }
 }
