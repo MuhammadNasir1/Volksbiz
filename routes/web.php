@@ -102,6 +102,9 @@ Route::middleware('custom')->group(function () {
     Route::post('/addblog', [BlogsController::class,  'insert']);
     Route::post('/upload-image', [BlogsController::class, 'upload'])->name('upload.image');
     Route::get('/getBlogs', [BlogsController::class, 'getBlogs']);
+    Route::get('/deleteBlog/{id}', [BlogsController::class, 'delete']);
+    Route::get('/editBlog/{id}', [BlogsController::class, 'editBlogData']);
+    Route::post('/updateBlog/{id}', [BlogsController::class, 'update']);
 
 
     Route::get('/inquiry', [ContactUsController::class, 'getInquiry']);
@@ -111,5 +114,5 @@ Route::middleware('custom')->group(function () {
     Route::post('addSubscription', [SubscriptionController::class, 'insert']);
     Route::get('deleteSubscription/{id}', [SubscriptionController::class, 'delete']);
     Route::get('/editSubscription/{id}', [SubscriptionController::class, 'editSubscriptionData']);
-    Route::get('/UpdateSubscription/{id}', [SubscriptionController::class, 'update']);
+    Route::post('/UpdateSubscription/{id}', [SubscriptionController::class, 'update']);
 });

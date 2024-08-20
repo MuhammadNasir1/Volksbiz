@@ -50,9 +50,9 @@
                                             data-modal-toggle="updatecustomermodal" class="cursor-pointer ">
                                             <img width="38px" src="{{ asset('images/icons/views.svg') }}"
                                                 alt="View"></button>
-                                        <a href=""><img width="38px"
+                                        <a href="../editBlog/{{ $blog->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
-                                        <a href=""> <img width="38px"
+                                        <a href="../deleteBlog/{{ $blog->id }}"> <img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
 
                                     </div>
@@ -222,8 +222,7 @@
                     <div class="w-full px-10">
 
 
-                        <video src="{{ asset('videos/try.mp4') }}" controls loop width="100%"></video>
-
+                        <img src="" class="w-full" alt="">
                     </div>
                     <div class="px-10 py-7 w-full">
                         <h1 class="text-[36px] font-bold">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et,
