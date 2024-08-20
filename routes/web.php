@@ -101,6 +101,7 @@ Route::middleware('custom')->group(function () {
 
 
     Route::get('/inquiry', [ContactUsController::class, 'getInquiry']);
+    Route::post('/updInqStatus', [ContactUsController::class, 'updateStatus']);
 
     Route::post('addSubscription', [SubscriptionController::class, 'insert']);
 });

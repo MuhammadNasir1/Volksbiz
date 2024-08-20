@@ -32,8 +32,27 @@
                                 <td>{{ $inquiry->name }}</td>
                                 <td>{{ $inquiry->email }}</td>
                                 <td>{{ $inquiry->subject }}</td>
+                                @php
+                                    $bgColorClass = '';
+                                    switch ($inquiry->status) {
+                                        case 'pending':
+                                            $bgColorClass = 'bg-red-500';
+                                            break;
+                                        case 'unfix':
+                                            $bgColorClass = 'bg-blue-800';
+                                            break;
+
+                                        case 'resolved':
+                                            $bgColorClass = 'bg-green-500';
+                                            break;
+
+                                        default:
+                                            $bgColorClass = 'bg-red-500';
+                                            break;
+                                    }
+                                @endphp
                                 <td><button
-                                        class="text-white py-1 px-2 bg-red-600 font-semibold  rounded-md">{{ $inquiry->status }}</button>
+                                        class="text-white py-1 px-2 {{ $bgColorClass }} font-semibold  rounded-md">{{ $inquiry->status }}</button>
                                 </td>
                                 <td>{{ $inquiry->message }}</td>
                                 <td>
@@ -45,8 +64,9 @@
                                                 src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
                                         <a href="../delInquiry/{{ $inquiry->id }}"> <img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
-                                        <button data-modal-target="changeStatus" data-modal-toggle="changeStatus"
-                                            class="text-white py-2 px-2 bg-primary font-semibold  rounded-md">@lang('lang.Change_Status')</button>
+                                        <button updateId={{ $inquiry->id }} data-modal-target="changeStatus"
+                                            data-modal-toggle="changeStatus"
+                                            class="text-white py-2 px-2 bg-primary font-semibold  rounded-md updateBtn">@lang('lang.Change_Status')</button>
 
                                     </div>
                                 </td>
@@ -69,9 +89,9 @@
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
     <div class="relative p-4 w-full   max-w-2xl max-h-full ">
-        <form id="OrderStatusData" method="post" enctype="multipart/form-data">
+        <form id="OrderStatusData" action="updInqStatus" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" id="update_id">
+            <input type="hidden" id="update_id" name="inquiry_id">
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                     <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -93,11 +113,11 @@
                             <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="order_status" id="Status">
+                                name="status" id="Status">
                                 <option selected disabled>@lang('lang.Change_Status')</option>
                                 <option value="pending">@lang('lang.Pending')</option>
-                                <option value="confirmed">@lang('lang.Resolved')</option>
-                                <option value="shipped">@lang('lang.Unfix')</option>
+                                <option value="resolved">@lang('lang.Resolved')</option>
+                                <option value="unfix">@lang('lang.Unfix')</option>
                             </select>
 
                         </div>
@@ -135,3 +155,25 @@
 
 
 @include('layouts.footer')
+
+<script>
+    $(document).ready(function() {
+        function updateDatafun() {
+
+            $('.updateBtn').click(function() {
+                let updId = $(this).attr('updateId');
+                $('#update_id').val(updId);
+                $('#changeStatus').removeClass("hidden");
+                $('#changeStatus').addClass("flex");
+
+            });
+
+        }
+        updateDatafun();
+        var table = $('#datatable').DataTable();
+        table.on('draw', function() {
+            updateDatafun();
+
+        });
+    });
+</script>

@@ -44,9 +44,15 @@ class ContactUsController extends Controller
     {
 
         try {
-            return response()->json(['success' => true,  'message'  => "Data add successfully"], 201);
+            $upd_id = $request['inquiry_id'];
+            $inquiry = Contact_us::find($upd_id);
+            $inquiry->status = $request['status'];
+            $inquiry->update();
+            return redirect('inquiry');
+            // return response()->json(['success' => $upd_id,  'message'  => "Data add successfully"], 201);
         } catch (\Exception $e) {
-            return response()->json(['success', false, 'message' => $e->getMessage()], 500);
+            return redirect('inquiry');
+            // return response()->json(['success', false, 'message' => $e->getMessage()], 500);
         }
     }
 }
