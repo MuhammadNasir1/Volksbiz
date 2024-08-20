@@ -49,6 +49,8 @@ class AddBusinessController extends Controller
                 $videoName = time() . '.' . $video->getClientOriginalExtension();
                 $video->storeAs('public/busniess_videos', $videoName);
                 $videoPath = 'storage/busniess_videos/' . $videoName;
+            } else {
+                $videoPath = 'null';
             }
 
             $add_business = AddBusiness::create([
