@@ -58,11 +58,7 @@
                                 <td>
 
                                     <div class="flex gap-5 items-center justify-center">
-
-
-                                        <a href=""><img width="38px"
-                                                src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
-                                        <a href="../delInquiry/{{ $inquiry->id }}"> <img width="38px"
+                                        <a href="../delinquiry/{{ $inquiry->id }}"> <img width="38px"
                                                 src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
                                         <button updateId={{ $inquiry->id }} data-modal-target="changeStatus"
                                             data-modal-toggle="changeStatus"
