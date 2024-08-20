@@ -240,4 +240,11 @@ class AddBusinessController extends Controller
             'uploaded_at' => $business->created_at->format('M d, Y H:i:s'), // Format the uploaded date
         ]);
     }
+
+    public function delBuissness(string $id)
+    {
+        $del = AddBusiness::find($id);
+        $del->delete();
+        return redirect()->back();
+    }
 }
