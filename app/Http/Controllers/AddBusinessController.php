@@ -6,6 +6,7 @@ use App\Models\AddBusiness;
 use App\Models\AddCategory;
 use App\Models\Order;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Calculation\Category;
 use Spatie\LaravelIgnition\FlareMiddleware\AddJobs;
@@ -43,10 +44,16 @@ class AddBusinessController extends Controller
                     $validatedData[$imageField] = null;
                 }
             }
+            if ($request->hasFile('video')) {
+                $video = $request->file('video');
+                $videoName = time() . '.' . $video->getClientOriginalExtension();
+                $video->storeAs('public/busniess_videos', $videoName);
+                $videoPath = 'storage/busniess_videos/' . $videoName;
+            }
 
             $add_business = AddBusiness::create([
                 'images' => json_encode($imagePaths),
-                'video' => $request['video'],
+                'video' => $videoPath,
                 'category' => $validatedData['category'],
                 'title' => $validatedData['title'],
                 'country' => $validatedData['country'],
@@ -54,12 +61,6 @@ class AddBusinessController extends Controller
                 'description' => $validatedData['description'],
                 'price' => $validatedData['price'],
             ]);
-            if ($request->hasFile('video')) {
-                $video = $request->file('video');
-                $videoName = time() . '.' . $video->getClientOriginalExtension();
-                $video->storeAs('public/busniess_videos', $videoName);
-                $add_business->video = 'storage/busniess_videos/' . $videoName;
-            }
 
             $add_business->save();
             return redirect('businesses');
@@ -220,5 +221,21 @@ class AddBusinessController extends Controller
             $order->user = $user;
         }
         return view("orders", ['orders' => $orders]);
+    }
+    public function show($id)
+    {
+        $business = AddBusiness::findOrFail($id);
+
+        return response()->json([
+            'title' => $business->title,
+            'category' => $business->category,
+            'city' => $business->city,
+            'country' => $business->country,
+            'description' => $business->description,
+            'video' => asset($business->video),
+            'images' => $business->images, // Assuming images is a JSON field
+            'date' => $business->created_at->format('M d, Y'), // Format the date as needed
+            'uploaded_at' => $business->created_at->format('M d, Y H:i:s'), // Format the uploaded date
+        ]);
     }
 }
