@@ -66,8 +66,16 @@
                         @foreach ($bussinesses as $bussiness)
                             <tr>
                                 <td>
-                                    <video {{-- src="https://videos.pexels.com/video-files/4974708/4974708-sd_640_360_25fps.mp4" --}} src="{{ asset($bussiness->video) }}" controls
-                                        width="250px"></video>
+                                    @php
+                                        $images = json_decode($bussiness->images);
+                                    @endphp
+
+                                    @if (!empty($images) && isset($images[0]))
+                                        <img src="{{ asset($images[0]) }}" alt="Business Image" width="200px">
+                                    @else
+                                        <img src="{{ asset('images/default-placeholder.png') }}"
+                                            alt="No Image Available" width="250px">
+                                    @endif
                                 </td>
                                 <td>{{ $bussiness->title }}</td>
                                 <td>{{ $bussiness->category }}</td>
@@ -76,18 +84,21 @@
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
                                         <button data-modal-target="updatecustomermodal"
-                                            data-modal-toggle="updatecustomermodal" class="cursor-pointer ">
+                                            data-modal-toggle="updatecustomermodal" data-id="{{ $bussiness->id }}"
+                                            class="cursor-pointer view-button">
                                             <img width="38px" src="{{ asset('images/icons/views.svg') }}"
-                                                alt="View"></button>
-                                        <a href=""><img width="38px"
-                                                src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
-                                        <a href=""> <img width="38px"
-                                                src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
+                                                alt="View">
+                                        </button>
 
+                                        <a href="#"><img width="38px"
+                                                src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
+                                        <a href="#"><img width="38px"
+                                                src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
                                     </div>
                                 </td>
                             </tr>
                         @endforeach
+
 
                     </tbody>
                 </table>
@@ -331,20 +342,17 @@
 </div>
 
 
-{{-- ============ update  customer modal  =========== --}}
-<div id="updatecustomermodal" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
-    <div class="relative p-4 w-full   max-w-6xl max-h-full ">
+<div id="updatecustomermodal"
+    class="fixed inset-0 z-50 overflow-y-scroll hidden flex items-center justify-center bg-black bg-opacity-50">
+    <div class="relative p-4 w-full max-w-6xl max-h-full">
         <form id="UpdatecustomerData" method="post" enctype="multipart/form-data">
             @csrf
-
-            <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
-                <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
-                    <h3 class="text-xl font-semibold text-white ">
+            <div class="relative bg-white shadow-dark rounded-lg dark:bg-gray-700">
+                <div class="flex items-center justify-between p-5 rounded-t bg-primary">
+                    <h3 class="text-xl font-semibold text-white">
                         @lang('lang.Details')
                     </h3>
-                    <button type="button"
-                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                    <button type="button" class="text-white bg-transparent rounded-lg text-sm w-8 h-8"
                         data-modal-hide="updatecustomermodal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
@@ -354,68 +362,48 @@
                     </button>
                 </div>
 
-
-
                 <div class="flex p-5 w-full lg:flex-row flex-col">
-
-                    <div class="flex  gap-4 lg:w-[50%] w-full lg:justify-start justify-center">
-                        <div class="video-container flex flex-col py-7 ">
+                    <div class="flex gap-4 lg:w-[50%] w-full lg:justify-start justify-center">
+                        <div class="video-container flex flex-col py-7">
                             <div>
-                                <video src="https://videos.pexels.com/video-files/4974708/4974708-sd_640_360_25fps.mp4"
-                                    controls loop width="500px"></video>
+                                <video src="" controls loop class="h-[300px] w-[500px]"></video>
                             </div>
                             <div class="flex gap-3 py-3 flex-wrap">
-                                <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600"
-                                    alt="" width="116px">
-                                <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600"
-                                    alt="" width="116px">
-                                <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600"
-                                    alt="" width="116px">
-                                <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600"
-                                    alt="" width="116px">
+                                <!-- Images will be dynamically loaded here -->
                             </div>
                         </div>
-
-
-
                     </div>
-                    <div class="px-5 py-7 w-full  lg:w-[50%]">
-
+                    <div class="px-5 py-7 w-full lg:w-[50%]">
                         <h1 class="text-4xl font-bold">@lang('lang.Title')</h1>
                         <div class="h-1 bg-black w-40 mt-3"></div>
-
                         <div class="flex gap-10 pt-7">
                             <h5 class="font-bold">@lang('lang.Category') :</h5>
-                            <p> Campus Name</p>
+                            <p class="category"></p>
                         </div>
                         <div class="flex gap-12 pt-3">
                             <h5 class="font-bold">@lang('lang.Location') :</h5>
-                            <p> Student Name</p>
+                            <p class="location"></p>
                         </div>
                         <div class="flex gap-20 pt-3">
                             <h5 class="font-bold">@lang('lang.Date') :</h5>
-                            <p> Dec 21, 2024</p>
+                            <p class="date"></p>
                         </div>
                         <div class="flex gap-6 pt-3">
                             <h5 class="font-bold text-nowrap">
                                 @lang('lang.Description') :</h5>
-                            <p class="text-justify">sjdhmnsbdfjbd Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Nesciunt similique
-                                illo doloremque nostrum natus dolorum harum. Autem ducimus ex perspiciatis cum, aliquam
-                                fuga expedita nulla vel illum nesciunt vero enim.</p>
+                            <p class="text-justify description break-words"></p>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </form>
-        <div>
-
-        </div>
-
     </div>
 </div>
+
+
+
+
+
 
 
 
@@ -469,4 +457,52 @@
             });
         }
     });
+    $(document).ready(function() {
+        $('.view-button').on('click', function() {
+            var businessId = $(this).data('id');
+
+            $.ajax({
+                url: '/bussinesses/' + businessId,
+                method: 'GET',
+                success: function(data) {
+                    // Populate the modal fields
+                    $('#updatecustomermodal video').attr('src', data.video);
+                    $('#updatecustomermodal h1').text(data.title);
+                    $('#updatecustomermodal .category').text(data.category);
+                    $('#updatecustomermodal .location').text(data.city + ' ' + data
+                        .country);
+                    $('#updatecustomermodal .description').text(data.description);
+                    $('#updatecustomermodal .date').text(data.date);
+                    var imagesContainer = $(
+                        '#updatecustomermodal .video-container .flex-wrap');
+                    imagesContainer.empty();
+                    try {
+                        var images = JSON.parse(data
+                            .images); // Assuming 'images' is the field name
+                        images.forEach(function(image) {
+                            imagesContainer.append('<img src="' + asset(image) +
+                                '" alt="Business Image" width="116px">');
+                        });
+                    } catch (e) {
+                        console.error("Error parsing images:", e);
+                    }
+
+                    // Show the modal
+                    $('#updatecustomermodal').removeClass('hidden');
+                },
+                error: function() {
+                    alert('Error fetching data.');
+                }
+            });
+        });
+
+        // Hide modal on close button click
+        $('[data-modal-hide="updatecustomermodal"]').on('click', function() {
+            $('#updatecustomermodal').addClass('hidden');
+        });
+    });
+
+    function asset(path) {
+        return '{{ asset('') }}' + path; // Use Laravel's asset helper
+    }
 </script>
