@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use NunoMaduro\Collision\Adapters\Phpunit\Subscribers\Subscriber;
 
 class SubscriptionController extends Controller
 {
@@ -23,6 +24,7 @@ class SubscriptionController extends Controller
                 'name' => 'required',
                 'price' => 'required',
                 'option' => 'required',
+                'plan_for' => 'required',
             ]);
             $optionsJson = json_encode($validateData['option']);
             $subscribtion = Subscription::create([
@@ -30,6 +32,7 @@ class SubscriptionController extends Controller
                 'name' => $validateData['name'],
                 'price' => $validateData['price'],
                 'option' => $optionsJson,
+                'plan_for' => $validateData['plan_for'],
             ]);
 
 
@@ -52,5 +55,12 @@ class SubscriptionController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function delete($id)
+    {
+        $subscribtion = Subscription::find($id);
+        $subscribtion->delete();
+        return redirect('../subscriptionPlan');
     }
 }
