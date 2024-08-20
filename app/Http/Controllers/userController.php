@@ -112,32 +112,6 @@ class userController extends Controller
         }
     }
 
-    public function addContactUs(Request $request)
-    {
-        try {
-            $validateData = $request->validate([
-                "name" => "required",
-                "email" => "required",
-                "subject" => "nullable",
-                "message" => "required",
-
-            ]);
-
-            $contactData = Contact_us::create([
-                "name" => $validateData['name'],
-                "email" => $validateData['email'],
-                "subject" => $validateData['subject'],
-                "message" => $validateData['message'],
-
-            ]);
-
-            return response()->json(['success' => true,  'message'  => "Data add successfully", "data" => $contactData], 201);
-        } catch (\Exception $e) {
-            return response()->json(['success', false, 'message' => $e->getMessage()], 500);
-        }
-    }
-
-
     public function blog(Request $request)
     {
         $blog  =   json_encode($request['addBlog']);
@@ -151,12 +125,5 @@ class userController extends Controller
 
         // Save content to database
         echo $contentHtml;
-    }
-
-    public function getInquiry()
-    {
-
-        $inquiries = Contact_us::all();
-        return view("inquiry",  compact("inquiries"));
     }
 }

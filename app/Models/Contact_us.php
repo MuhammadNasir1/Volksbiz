@@ -14,6 +14,7 @@ class Contact_us extends Model
         'name',
         'email',
         'subject',
+        'status',
         'message',
 
     ];

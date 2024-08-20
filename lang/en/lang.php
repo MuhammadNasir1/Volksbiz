@@ -118,6 +118,10 @@ return [
 
 
     'Update_Category' => 'Update Category',
+    'Change_Status' => 'Change Status',
+    'Resolved' => 'Resolved',
+    'Unfix' => 'Unfix',
+    'Update_Status' => 'Update Status',
 
 
 ];

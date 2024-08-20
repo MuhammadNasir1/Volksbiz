@@ -10,6 +10,7 @@ use App\Models\AddCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddCategoryController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\SubscriptionController;
 
 // language route
@@ -45,60 +46,61 @@ Route::middleware('custom')->group(function () {
     Route::get('/delCustomer/{user_id}', [userController::class,  'delCustomer']);
     Route::get('/CustomerUpdateData/{user_id}', [userController::class,  'CustomerUpdateData']);
     Route::post('/CustomerUpdate/{user_id}', [userController::class,  'CustomerUpdate']);
+
+
+
+    Route::get('email', function () {
+
+        return view("emails.parent");
+    });
+
+    Route::get('orders', function () {
+
+        return view("orders");
+    });
+    Route::get('reviewsAndExperience', function () {
+
+        return view("review");
+    });
+    Route::get('addBlog', function () {
+
+        return view("blog_page");
+    });
+
+    Route::get('subscriptionPlan', [SubscriptionController::class, 'index']);
+
+
+    Route::controller(AddCategoryController::class)->group(function () {
+
+        Route::post('addCategory', 'addcategory')->name('addCategory');
+        Route::get('categoryList', 'categoryData')->name('categoryData');
+        Route::get('deleteCategory/{id}', 'delCategory')->name('deleteCategory');
+        Route::get('editCategory/{id}', 'updateCategoryData');
+
+        Route::post('updateCategory/{id}', 'updateCategory');
+    });
+    // Route::controller(AddBusinessController::class)->group(function () {
+
+    //     Route::post('addBusiness', 'addBusiness')->name('addBusiness');
+    // });
+
+    Route::get('/orders', [AddBusinessController::class,  'getBusOrders']);
+    Route::get('/saleRequests', [AddBusinessController::class,  'getBusOrders']);
+
+
+    Route::post('/addBusiness', [AddBusinessController::class,  'addBusiness']);
+    Route::get('/businessList', [AddBusinessController::class,  'bussinessList']);
+    Route::get('/businesses', [AddBusinessController::class,  'businesses']);
+    Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'])->name('delBusiness');
+    Route::get('/bussinesses/{id}', [AddBusinessController::class,  'show'])->name('bussinesses.show');
+
+    Route::get('/blogs', [BlogsController::class,  'index']);
+    Route::post('/addblog', [BlogsController::class,  'insert']);
+    Route::post('/upload-image', [BlogsController::class, 'upload'])->name('upload.image');
+    Route::get('/getBlogs', [BlogsController::class, 'getBlogs']);
+
+
+    Route::get('/inquiry', [ContactUsController::class, 'getInquiry']);
+
+    Route::post('addSubscription', [SubscriptionController::class, 'insert']);
 });
-
-
-Route::get('email', function () {
-
-    return view("emails.parent");
-});
-
-Route::get('orders', function () {
-
-    return view("orders");
-});
-Route::get('reviewsAndExperience', function () {
-
-    return view("review");
-});
-Route::get('addBlog', function () {
-
-    return view("blog_page");
-});
-
-Route::get('subscriptionPlan', [SubscriptionController::class, 'index']);
-
-
-Route::controller(AddCategoryController::class)->group(function () {
-
-    Route::post('addCategory', 'addcategory')->name('addCategory');
-    Route::get('categoryList', 'categoryData')->name('categoryData');
-    Route::get('deleteCategory/{id}', 'delCategory')->name('deleteCategory');
-    Route::get('editCategory/{id}', 'updateCategoryData');
-
-    Route::post('updateCategory/{id}', 'updateCategory');
-});
-// Route::controller(AddBusinessController::class)->group(function () {
-
-//     Route::post('addBusiness', 'addBusiness')->name('addBusiness');
-// });
-
-Route::get('/orders', [AddBusinessController::class,  'getBusOrders']);
-Route::get('/saleRequests', [AddBusinessController::class,  'getBusOrders']);
-
-
-Route::post('/addBusiness', [AddBusinessController::class,  'addBusiness']);
-Route::get('/businessList', [AddBusinessController::class,  'bussinessList']);
-Route::get('/businesses', [AddBusinessController::class,  'businesses']);
-Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'])->name('delBusiness');
-Route::get('/bussinesses/{id}', [AddBusinessController::class,  'show'])->name('bussinesses.show');
-
-Route::get('/blogs', [BlogsController::class,  'index']);
-Route::post('/addblog', [BlogsController::class,  'insert']);
-Route::post('/upload-image', [BlogsController::class, 'upload'])->name('upload.image');
-Route::get('/getBlogs', [BlogsController::class, 'getBlogs']);
-
-
-Route::get('/inquiry', [userController::class, 'getInquiry']);
-
-Route::post('addSubscription', [SubscriptionController::class, 'insert']);
