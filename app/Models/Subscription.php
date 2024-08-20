@@ -14,5 +14,6 @@ class Subscription extends Model
         'name',
         'price',
         'option',
+        'plan_for',
     ];
 }
