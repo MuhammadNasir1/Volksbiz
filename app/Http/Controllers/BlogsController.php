@@ -129,4 +129,13 @@ class BlogsController extends Controller
             // return response()->json($e->getMessage());
         }
     }
+
+    function getBlogDetail($id)
+    {
+        $blogData = Blogs::find($id);
+
+        $blogData->content = htmlspecialchars_decode($blogData->content);
+
+        return response()->json(["data" => $blogData], 200);
+    }
 }

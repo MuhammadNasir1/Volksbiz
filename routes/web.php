@@ -106,6 +106,8 @@ Route::middleware('custom')->group(function () {
     Route::get('/editBlog/{id}', [BlogsController::class, 'editBlogData']);
     Route::post('/updateBlog/{id}', [BlogsController::class, 'update']);
 
+    Route::get('/getBlogDetail/{id}', [BlogsController::class, 'getBlogDetail']);
+
 
     Route::get('/inquiry', [ContactUsController::class, 'getInquiry']);
     Route::post('/updInqStatus', [ContactUsController::class, 'updateStatus']);

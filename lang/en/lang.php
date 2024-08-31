@@ -130,5 +130,10 @@ return [
     'Update_Business' => 'Update Business',
     'Update_Plan' => 'Update Plan',
 
+    'Are_You_Sure' => 'Are You Sure',
+    'Yes' => 'Yes',
+    'No' => 'No',
+    'Update_Blog' => 'Update Blog',
+
 
 ];
