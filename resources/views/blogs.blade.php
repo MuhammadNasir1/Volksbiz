@@ -27,6 +27,7 @@
                         <tr>
                             <th class="whitespace-nowrap">@lang('lang.Image')</th>
                             <th class="whitespace-nowrap">@lang('lang.Title')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Added_Date')</th>
                             <th class="whitespace-nowrap">@lang('lang.Category')</th>
                             <th class="whitespace-nowrap">@lang('lang.Author')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
@@ -41,6 +42,8 @@
                                     </div>
                                 </td>
                                 <td>{{ $blog->title }}</td>
+                                <td>{{ $blog->created_at->format('F d, Y') }}</td>
+
                                 <td>{{ $blog->category }}</td>
                                 <td>{{ $blog->author }}</td>
 
@@ -183,45 +186,46 @@
 
         </div>
     </div>
-    @include('layouts.footer')
+</div>
+@include('layouts.footer')
 
 
-    <script>
-        $(document).ready(function() {
-            function getBlogViewData() {
-                $('.blogDetBtn').click(function() {
-                    let url = '../getBlogDetail/' + $(this).attr('blogId');
-                    $.ajax({
-                        method: "Get",
-                        url: url,
-                        success: function(respose) {
-                            let data = respose.data;
-                            $('#blogBanner').attr('src', data.image)
-                            $('#blogTitle').text(data.title)
-                            $('#blogDet').html(data.content)
+<script>
+    $(document).ready(function() {
+        function getBlogViewData() {
+            $('.blogDetBtn').click(function() {
+                let url = '../getBlogDetail/' + $(this).attr('blogId');
+                $.ajax({
+                    method: "Get",
+                    url: url,
+                    success: function(respose) {
+                        let data = respose.data;
+                        $('#blogBanner').attr('src', data.image)
+                        $('#blogTitle').text(data.title)
+                        $('#blogDet').html(data.content)
 
-                        }
-                    });
-
-
-                })
-
-            }
-            getBlogViewData();
-
-            function deleteDatafun() {
-
-                $('.delButton').click(function() {
-                    $('#deleteData').removeClass("hidden");
-                    var id = $(this).attr('delId');
-                    $('#delLink').attr('href', '../deleteBlog/' + id);
+                    }
                 });
 
-            }
-            deleteDatafun();
-            $('#datatable').on('draw.dt', function() {
-                getBlogViewData();
-                deleteDatafun();
+
+            })
+
+        }
+        getBlogViewData();
+
+        function deleteDatafun() {
+
+            $('.delButton').click(function() {
+                $('#deleteData').removeClass("hidden");
+                var id = $(this).attr('delId');
+                $('#delLink').attr('href', '../deleteBlog/' + id);
             });
-        })
-    </script>
+
+        }
+        deleteDatafun();
+        $('#datatable').on('draw.dt', function() {
+            getBlogViewData();
+            deleteDatafun();
+        });
+    })
+</script>

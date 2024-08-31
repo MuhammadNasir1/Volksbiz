@@ -134,6 +134,7 @@ return [
     'Yes' => 'Yes',
     'No' => 'No',
     'Update_Blog' => 'Update Blog',
+    'Added_Date' => 'Added Date',
 
 
 ];
