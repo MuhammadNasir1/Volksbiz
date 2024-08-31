@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\Calculation\Category;
 use Spatie\LaravelIgnition\FlareMiddleware\AddJobs;
 
@@ -93,19 +94,27 @@ class AddBusinessController extends Controller
             $update_business->city = $validatedData['city'];
             $update_business->description = $validatedData['description'];
             $update_business->price = $validatedData['price'];
+            $existingImages = json_decode($update_business->images, true);
             $imageFields = ['bus_img1', 'bus_img2', 'bus_img3', 'bus_img4'];
-            $imagePaths = [];
+            $imagePaths = $existingImages ?? []; // Start with existing images
 
             foreach ($imageFields as $index => $imageField) {
                 if ($request->hasFile($imageField)) {
+                    // Delete old image if it exists
+                    if (isset($existingImages[$index])) {
+                        Storage::delete(str_replace('storage/', 'public/', $existingImages[$index]));
+                    }
+
+                    // Upload new image
                     $image = $request->file($imageField);
                     $imageName = time() . ($index + 1) . '.' . $image->getClientOriginalExtension();
                     $image->storeAs('public/busniess_images', $imageName);
-                    $validatedData[$imageField] = 'storage/busniess_images/' . $imageName;
-                    $imagePaths[] = 'storage/busniess_images/' . $imageName; // Add the file path to the array
-                    $update_business->images = json_encode($imagePaths);
+                    $imagePaths[$index] = 'storage/busniess_images/' . $imageName; // Update the file path in the array
                 }
             }
+
+            // Update the images in the database
+            $update_business->images = json_encode($imagePaths);
             if ($request->hasFile('video')) {
                 $video = $request->file('video');
                 $videoName = time() . '.' . $video->getClientOriginalExtension();

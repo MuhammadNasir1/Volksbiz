@@ -13,7 +13,7 @@ class AddCategoryController extends Controller
         try {
             $validatedData = $request->validate([
                 'category_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-                'category_name' => 'required',
+                'category_name' => 'required|unique:add_categories,category_name',
             ]);
 
             if ($request->hasFile('category_image')) {

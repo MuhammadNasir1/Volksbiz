@@ -93,7 +93,7 @@ Route::middleware('custom')->group(function () {
     Route::get('/businesses', [AddBusinessController::class,  'businesses']);
     Route::get('/deleteBusiness/{id}', [AddBusinessController::class,  'delBusiness'])->name('delBusiness');
     Route::get('/bussinesses/{id}', [AddBusinessController::class,  'show'])->name('bussinesses.show');
-    Route::get('/bussinessesDel/{id}', [AddBusinessController::class,  'delBuissness'])->name('delBuissness');
+    Route::get('/bussinessesDel/{id}', [AddBusinessController::class,  'delBuissness']);
     Route::get('/bussinesses-update/{id}', [AddBusinessController::class,  'updateBuissnessData']);
     Route::post('/updateBusinessData/{id}', [AddBusinessController::class,  'updateBusiness']);
 

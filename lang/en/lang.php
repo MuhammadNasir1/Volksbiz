@@ -135,6 +135,7 @@ return [
     'No' => 'No',
     'Update_Blog' => 'Update Blog',
     'Added_Date' => 'Added Date',
+    'No_OF_Business' => 'No OF Business',
 
 
 ];
