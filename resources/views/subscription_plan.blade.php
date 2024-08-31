@@ -9,8 +9,20 @@
     </div>
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
-            <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Subscription_Plans')</h3>
+            <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3 w-full">
+                <form method="get" id="filterForm">
+
+                    <label class="text-[16px] font-semibold block  text-[#452C88]"
+                        for="type">@lang('lang.Subscription_Type')</label>
+                    <select name="type" id="type" class="w-52">
+                        <option value="All" {{ request('type') == 'All' ? 'selected' : '' }}>@lang('lang.All')
+                        </option>
+                        <option value="buyer" {{ request('type') == 'buyer' ? 'selected' : '' }}>@lang('lang.Buyer')
+                        </option>
+                        <option value="seller" {{ request('type') == 'seller' ? 'selected' : '' }}>@lang('lang.Seller')
+                        </option>
+                    </select>
+                </form>
 
                 <div>
 
@@ -395,5 +407,10 @@
         $('#datatable').on('draw.dt', function() {
             deleteDatafun();
         });
+
+        $('#type').change(function() {
+            $('#filterForm').submit();
+
+        })
     });
 </script>

@@ -136,6 +136,8 @@ return [
     'Update_Blog' => 'Update Blog',
     'Added_Date' => 'Added Date',
     'No_OF_Business' => 'No OF Business',
+    'All' => 'All',
+    'Subscription_Type' => 'Subscription Type',
 
 
 ];

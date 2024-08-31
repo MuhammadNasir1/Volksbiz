@@ -9,9 +9,16 @@ use NunoMaduro\Collision\Adapters\Phpunit\Subscribers\Subscriber;
 class SubscriptionController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $subscriptionData = Subscription::all();
+
+        if ($request->has('type') && $request['type'] !== "All") {
+
+            $subscriptionData = Subscription::where('plan_for', $request['type'])->get();
+        } else {
+
+            $subscriptionData = Subscription::all();
+        }
         return view('subscription_plan', compact('subscriptionData'));
     }
     public function insert(Request $request)
