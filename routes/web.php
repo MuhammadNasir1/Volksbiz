@@ -122,4 +122,5 @@ Route::middleware('custom')->group(function () {
 
     // review and Experience
     Route::post('/insertReview', [ExperienceReviewController::class, 'insertReview']);
+    Route::post('/insertExperience', [ExperienceReviewController::class, 'insertExperience']);
 });

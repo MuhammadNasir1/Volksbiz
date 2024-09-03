@@ -146,10 +146,49 @@ class ExperienceReviewController extends Controller
             $review->image = 'storage/review/' . $imageName;
 
             $review->save();
-            return response()->json(["success"  => true, "message" => "Experience add successfully"], 201);
+            return redirect('../reviewsAndExperience');
+            // return response()->json(["success"  => true, "message" => "Experience add successfully"], 201);
         } catch (\Exception $e) {
 
+            return redirect('../reviewsAndExperience');
             return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+        }
+    }
+
+
+    public function insertExperience(Request $request)
+    {
+
+
+        try {
+            $validateData = $request->validate([
+                "user_id" => "required",
+                "location" => "required",
+                "image" => "nullable|image|mimes:jpeg,png,jpg,gif,svg",
+                "subject" => "nullable",
+                "category" => "required",
+                "description" => "required",
+            ]);
+
+
+            $experience = Experience::create([
+                'status' => "de-active",
+                'user_id' => $validateData['user_id'],
+                'location' => $validateData['location'],
+                'subject' => $validateData['subject'],
+                'category' => $validateData['category'],
+                'description' => $validateData['description'],
+            ]);
+
+
+            $image = $request->file('image');
+            $imageName = time() .  '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/experience_images', $imageName);
+            $experience->image = 'storage/experience_images/' . $imageName;
+            $experience->save();
+            return redirect('../reviewsAndExperience');
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
         }
     }
 }

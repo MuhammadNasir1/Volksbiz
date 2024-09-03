@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('subject')->nullable();
             $table->string('category');
             $table->text('description');
+            $table->string('name')->nullable();
+            $table->string('role')->nullable();
             $table->timestamps();
         });
     }

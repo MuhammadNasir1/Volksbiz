@@ -50,7 +50,7 @@
                     </div>
                     <div>
 
-                        <button data-modal-target="updatecustomermodal" data-modal-toggle="updatecustomermbodal"
+                        <button data-modal-target="experienceModal" data-modal-toggle="experienceModal"
                             class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                             @lang('lang.Experience')</button>
                     </div>
@@ -84,7 +84,7 @@
                                         alt="update"></a>
                                 <a href=""> <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                         alt="Delete"></a>
-                                <button data-modal-target="updatecustomermodal" data-modal-toggle="updatecustomermodal"
+                                <button data-modal-target="experienceModal" data-modal-toggle="experienceModal"
                                     class="cursor-pointer ">
                                     <img width="38px" src="{{ asset('images/icons/views.svg') }}"
                                         alt="View"></button>
@@ -101,8 +101,8 @@
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
-                                        <button data-modal-target="updatecustomermodal"
-                                            data-modal-toggle="updatecustomermodal"
+                                        <button data-modal-target="experienceModal"
+                                            data-modal-toggle="experienceModal"
                                             class=" updateBtn cursor-pointer  w-[42px] md:w-full"
                                             updateId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
@@ -252,12 +252,11 @@
 
 
 {{-- ============ update  customer modal  =========== --}}
-<div id="updatecustomermodal" data-modal-backdrop="static"
+<div id="experienceModal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-2xl max-h-full ">
-        <form id="UpdatecustomerData" method="post" action="../addExperience" enctype="multipart/form-data">
+        <form method="post" action="../insertExperience" enctype="multipart/form-data">
             @csrf
-
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                     <h3 class="text-xl font-semibold text-white ">
@@ -265,7 +264,7 @@
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
-                        data-modal-hide="updatecustomermodal">
+                        data-modal-hide="experienceModal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -279,55 +278,39 @@
 
                 <div class="p-5 px-10">
 
-                    <div class="w-full flex items-center gap-16  lg:mt-0 mt-5">
-                        <label for="blog_category">@lang('lang.Status')</label>
+                    <div class="w-full   lg:mt-0 mt-5">
+                        <label for="expStatus">@lang('lang.Status')</label>
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px]
                              focus:border-primary   h-[40px] text-[14px]"
-                            name=blog_category" id="blog_category">
-                            <option value="" class="text-wrap"> @lang('lang.Select_Status')</option>
-                            <option value="today"> @lang('lang.Today')</option>
-                            <option value="last_week"> @lang('lang.This_Week')</option>
-                            <option value="last_month"> @lang('lang.This_Month')</option>
+                            name=status" id="expStatus">
+                            <option selected disabled> @lang('lang.Select_Status')</option>
+                            <option value="active"> @lang('lang.Active')</option>
+                            <option value="de-active"> @lang('lang.De_Active')</option>
                         </select>
                     </div>
-
-                    <div class="flex mt-5 gap-12">
-
-                        <div><img src="{{ asset('./images/Headshot.svg') }}" alt="" class="rounded-full">
-                        </div>
-                        <div class="flex flex-col ps-1 justify-center">
-                            <h1 class="font-bold">M-Arham Waheed</h1>
-                            <p>Project Marketing Services Specialist</p>
-                        </div>
-
+                    <div class="  mt-2 ">
+                        <label for="Name">@lang('lang.Name')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
+                              h-[40px] text-[14px]"
+                            name="name" id="Name" placeholder=" @lang('lang.Name')">
                     </div>
-
-                    <div class="flex items-center  w-full gap-14 mt-5">
-
-                        <label for="exp_subject" class="ps-1">@lang('lang.Image')</label>
-
-
-                        <label for="dropzone-file1"
-                            class="label-container flex flex-col items-center justify-center w-[144px] text-center h-[144px] border-2 border-[#DEE2E6] border-solid rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                            <div class="flex flex-col items-center justify-center pt-5 text-center">
-                                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                </svg>
-                                <p class="text-sm text-gray-500 dark:text-gray-400"><span
-                                        class="font-semibold">@lang('lang.Upload_Image')</span></p>
-                            </div>
-                            <input id="dropzone-file1" type="file" class="hidden" name="bus_img1" />
-                        </label>
-
-
-
+                    <div class="  mt-2 ">
+                        <label for="Role">@lang('lang.Role')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
+                              h-[40px] text-[14px]"
+                            name="role" id="Role" placeholder=" @lang('lang.Role')">
                     </div>
-
-                    <div class=" flex gap-12 mt-5 items-center">
+                    <div class="  mt-2 ">
+                        <label for="ProfilePicture">@lang('lang.Profile_Picture')</label>
+                        <input type="file" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
+                              h-[40px] text-[14px]"
+                            name="image" id="ProfilePicture">
+                    </div>
+                    <div class=" mt-2">
                         <label for="exp_subject">@lang('lang.Subject')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
@@ -335,7 +318,7 @@
                             name="exp_subject" class="ps-1" id="exp_subject" placeholder=" @lang('lang.Enter_Subject')">
                     </div>
 
-                    <div class=" flex gap-8 mt-5 items-center">
+                    <div class=" mt-2">
                         <label for="exp_category"">@lang('lang.Category')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
@@ -343,15 +326,23 @@
                             name="exp_category" id="exp_category" class="ps-1" placeholder=" @lang('lang.Business_Category')">
                     </div>
 
-                    <div class=" flex gap-5 mt-5 ">
+                    <div class="mt-2 ">
                         <label class="" for="exp_description">@lang('lang.Description')</label>
                         <textarea name="exp_description" id="exp_description"
                             class="w-full h-28  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
                             placeholder="@lang('lang.Enter_Your_Experience')"></textarea>
                     </div>
 
+                    <div class="flex justify-end ">
+                        <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px] font-semibold "
+                            id="addBtn">
+                            <div>
+                                @lang('lang.Save')
+                            </div>
+
+                        </button>
+                    </div>
                 </div>
-            </div>
         </form>
         <div>
 
