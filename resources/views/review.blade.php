@@ -106,7 +106,7 @@
                                             class=" updateBtn cursor-pointer  w-[42px] md:w-full"
                                             updateId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <a class="w-[42px] md:w-full" href="../delCustomer/{{ $data->id }}"><img
+                                        <a class="w-[42px] md:w-full" href="../delCustomer/{{ Name$data->id }}"><img
                                                 width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="update"></button></a>
                                     </div>
@@ -304,6 +304,14 @@
                             name="role" id="Role" placeholder=" @lang('lang.Role')">
                     </div>
                     <div class="  mt-2 ">
+                        <label for="location">@lang('lang.Location')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
+                              h-[40px] text-[14px]"
+                            name="location" id="location" placeholder=" @lang('lang.Location')">
+                    </div>
+
+                    <div class="  mt-2 ">
                         <label for="ProfilePicture">@lang('lang.Profile_Picture')</label>
                         <input type="file" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
@@ -315,7 +323,7 @@
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                            name="exp_subject" class="ps-1" id="exp_subject" placeholder=" @lang('lang.Enter_Subject')">
+                            name="subject" class="ps-1" id="exp_subject" placeholder=" @lang('lang.Enter_Subject')">
                     </div>
 
                     <div class=" mt-2">
@@ -323,12 +331,12 @@
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                            name="exp_category" id="exp_category" class="ps-1" placeholder=" @lang('lang.Business_Category')">
+                            name="category" id="exp_category" class="ps-1" placeholder=" @lang('lang.Business_Category')">
                     </div>
 
                     <div class="mt-2 ">
                         <label class="" for="exp_description">@lang('lang.Description')</label>
-                        <textarea name="exp_description" id="exp_description"
+                        <textarea name="description" id="exp_description"
                             class="w-full h-28  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
                             placeholder="@lang('lang.Enter_Your_Experience')"></textarea>
                     </div>

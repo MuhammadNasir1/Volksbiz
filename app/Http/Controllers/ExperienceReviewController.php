@@ -126,7 +126,6 @@ class ExperienceReviewController extends Controller
                 "description" => "required",
                 "name" => "required",
                 "role" => "required",
-                "role" => "required",
                 "image" => "required",
 
             ]);
@@ -162,22 +161,25 @@ class ExperienceReviewController extends Controller
 
         try {
             $validateData = $request->validate([
-                "user_id" => "required",
                 "location" => "required",
                 "image" => "nullable|image|mimes:jpeg,png,jpg,gif,svg",
                 "subject" => "nullable",
                 "category" => "required",
                 "description" => "required",
+                "name" => "required",
+                "role" => "required",
             ]);
 
 
             $experience = Experience::create([
-                'status' => "de-active",
-                'user_id' => $validateData['user_id'],
+                'status' => "active",
+                "user_id" => session('user_det')['user_id'],
                 'location' => $validateData['location'],
                 'subject' => $validateData['subject'],
                 'category' => $validateData['category'],
                 'description' => $validateData['description'],
+                'name' => $validateData['name'],
+                'role' => $validateData['role'],
             ]);
 
 
