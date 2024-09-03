@@ -16,5 +16,8 @@ class Reviews extends Model
         'rating',
         'location',
         'description',
+        'name',
+        'role',
+        'image',
     ];
 }

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddCategoryController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\ExperienceReviewController;
 use App\Http\Controllers\SubscriptionController;
 
 // language route
@@ -117,4 +118,8 @@ Route::middleware('custom')->group(function () {
     Route::get('deleteSubscription/{id}', [SubscriptionController::class, 'delete']);
     Route::get('/editSubscription/{id}', [SubscriptionController::class, 'editSubscriptionData']);
     Route::post('/UpdateSubscription/{id}', [SubscriptionController::class, 'update']);
+
+
+    // review and Experience
+    Route::post('/insertReview', [ExperienceReviewController::class, 'insertReview']);
 });

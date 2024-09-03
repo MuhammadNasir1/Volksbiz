@@ -44,7 +44,7 @@
 
                     <div>
 
-                        <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
+                        <button data-modal-target="reviewModal" data-modal-toggle="reviewModal"
                             class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                             @lang('lang.Review')</button>
                     </div>
@@ -125,10 +125,10 @@
 
 {{-- Add Offer Modal --}}
 
-<div id="addcustomermodal" data-modal-backdrop="static"
+<div id="reviewModal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full  rounded-3xl  max-w-2xl max-h-full ">
-        <form id="customerData" method="post" enctype="multipart/form-data">
+        <form action="insertReview" method="post" enctype="multipart/form-data">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -137,7 +137,7 @@
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
-                        data-modal-hide="addcustomermodal">
+                        data-modal-hide="reviewModal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -149,20 +149,39 @@
 
                 <div class="p-5 px-10">
 
-                    <div class="w-full flex items-center gap-16  lg:mt-0 mt-5">
+                    <div class="w-full   lg:mt-0 mt-5">
                         <label for="blog_category">@lang('lang.Status')</label>
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px]
                              focus:border-primary   h-[40px] text-[14px]"
-                            name=blog_category" id="blog_category">
-                            <option value="" class="text-wrap"> @lang('lang.Select_Status')</option>
-                            <option value="today"> @lang('lang.Today')</option>
-                            <option value="last_week"> @lang('lang.This_Week')</option>
-                            <option value="last_month"> @lang('lang.This_Month')</option>
+                            name=status" id="Status">
+                            <option selected disabled> @lang('lang.Select_Status')</option>
+                            <option value="active"> @lang('lang.Active')</option>
+                            <option value="de-active"> @lang('lang.De_Active')</option>
                         </select>
                     </div>
-
-                    <div class="flex mt-5 gap-12">
+                    <div class="  mt-2 ">
+                        <label for="Name">@lang('lang.Name')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
+                              h-[40px] text-[14px]"
+                            name="name" id="Name" placeholder=" @lang('lang.Name')">
+                    </div>
+                    <div class="  mt-2 ">
+                        <label for="Role">@lang('lang.Role')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
+                              h-[40px] text-[14px]"
+                            name="role" id="Role" placeholder=" @lang('lang.Role')">
+                    </div>
+                    <div class="  mt-2 ">
+                        <label for="ProfilePicture">@lang('lang.Profile_Picture')</label>
+                        <input type="file" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
+                              h-[40px] text-[14px]"
+                            name="image" id="ProfilePicture">
+                    </div>
+                    {{-- <div class="flex mt-5 gap-12">
 
                         <div><img src="{{ asset('./images/Headshot.svg') }}" alt="" class="rounded-full"></div>
                         <div class="flex flex-col ps-1 justify-center">
@@ -170,30 +189,30 @@
                             <p>Project Marketing Services Specialist</p>
                         </div>
 
+                    </div> --}}
+
+                    <div class=" mt-2 ">
+                        <div><label for="rating">@lang('lang.Rating')</label></div>
+                        <select name="rating" id="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </div>
 
-                    <div class="flex mt-5 gap-12">
-                        <div><label for="blog_category">@lang('lang.Rating')</label></div>
-                        <div class="flex gap-3 ps-2.5">
-                            <img src="{{ asset('./images/yellow-star.svg') }}" alt="">
-                            <img src="{{ asset('./images/yellow-star.svg') }}" alt="">
-                            <img src="{{ asset('./images/yellow-star.svg') }}" alt="">
-                            <img src="{{ asset('./images/star.svg') }}" alt="">
-                            <img src="{{ asset('./images/star.svg') }}" alt="">
-                        </div>
-                    </div>
-
-                    <div class=" flex gap-11 mt-5 items-center">
-                        <label for="review_demo">@lang('lang.Location')</label>
+                    <div class="  mt-2 ">
+                        <label for="location">@lang('lang.Location')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                            name="review_demo" id="review_demo" placeholder=" @lang('lang.Location')">
+                            name="location" id="location" placeholder=" @lang('lang.Location')">
                     </div>
 
-                    <div class=" flex gap-5 mt-5 ">
+                    <div class="  mt-2 ">
                         <label class="" for="review_description">@lang('lang.Description')</label>
-                        <textarea name="review_description" id="review_description"
+                        <textarea name="description" id="review_description"
                             class="w-full h-28  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
                             placeholder="@lang('lang.Description')"></textarea>
                     </div>

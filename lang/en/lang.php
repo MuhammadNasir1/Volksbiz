@@ -138,6 +138,11 @@ return [
     'No_OF_Business' => 'No OF Business',
     'All' => 'All',
     'Subscription_Type' => 'Subscription Type',
+    'Active' => 'Active',
+    'Role' => 'Role',
+    'Un_Active' => 'Un Active',
+    'De_Active' => 'De Active',
+    'Profile_Picture' => 'Profile Picture',
 
 
 ];

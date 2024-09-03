@@ -111,4 +111,45 @@ class ExperienceReviewController extends Controller
             return response()->json(['success' => true,  "message" => $e->getMessage()], 500);
         }
     }
+
+    // custom review and  Experience
+
+    public function insertReview(Request $request)
+    {
+
+
+        try {
+
+            $validateData = $request->validate([
+                "rating" => "required|numeric",
+                "location" => "required",
+                "description" => "required",
+                "name" => "required",
+                "role" => "required",
+                "role" => "required",
+                "image" => "required",
+
+            ]);
+
+            $review = Reviews::create([
+                'status' => "active",
+                "user_id" => session('user_det')['user_id'],
+                "rating" => $validateData['rating'],
+                "location" => $validateData['location'],
+                "description" => $validateData['description'],
+                "name" => $validateData['name'],
+                "role" => $validateData['role'],
+            ]);
+            $image = $request->file('image');
+            $imageName = time() .  '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/review', $imageName);
+            $review->image = 'storage/review/' . $imageName;
+
+            $review->save();
+            return response()->json(["success"  => true, "message" => "Experience add successfully"], 201);
+        } catch (\Exception $e) {
+
+            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+        }
+    }
 }
