@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 class ExperienceReviewController extends Controller
 {
 
+    public function index()
+    {
+        $reviews = Reviews::all();
+        $experiences = Experience::all();
+        return view('review', compact('reviews', 'experiences'));
+    }
+
     public function addExperience(Request $request)
     {
         try {

@@ -18,6 +18,8 @@ class Experience extends Model
         'category',
         'description',
         'image',
+        'name',
+        'role',
 
     ];
 }

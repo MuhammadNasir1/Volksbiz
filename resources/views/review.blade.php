@@ -1,37 +1,5 @@
 @include('layouts.header')
 @include('layouts.nav')
-
-<style>
-    #dropzone-file1 {
-        display: none;
-    }
-
-    .label-container {
-        position: relative;
-        width: 144px;
-        height: 144px;
-        border: 2px solid #DEE2E6;
-        border-radius: 8px;
-        cursor: pointer;
-        background-color: #F9FAFB;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .label-container img {
-        display: none;
-    }
-
-    .label-container.has-image div,
-    .label-container.has-image svg,
-    .label-container.has-image p {
-        display: none;
-    }
-</style>
 <div class="md:mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Reviews_&_Experience')</h1>
@@ -41,7 +9,22 @@
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
                 <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Review_&_Experience')</h3>
                 <div class="flex gap-5">
-
+                    <div class="flex gap-4 items-center">
+                        <div class="flex items-center ">
+                            <input id="review" type="radio" value="" name="default-radio"
+                                {{ @$_GET['type'] === 'review' ? 'checked' : '' }}
+                                class="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="sending"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Review</label>
+                        </div>
+                        <div class="flex items-center ">
+                            <input id="experience" type="radio" value="" name="default-radio"
+                                {{ @$_GET['type'] == 'review' ? '' : 'checked' }}
+                                class="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="request"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Experience</label>
+                        </div>
+                    </div>
                     <div>
 
                         <button data-modal-target="reviewModal" data-modal-toggle="reviewModal"
@@ -58,64 +41,95 @@
                 </div>
             </div>
             <div class="overflow-x-auto">
-                <table id="datatable">
-                    <thead class="py-6 bg-primary text-white">
-                        <tr>
-                            <th class="whitespace-nowrap">@lang('lang.Sr')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Type')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Address')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Date')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Status')</th>
-                            <th class="flex  justify-center">@lang('lang.Action')</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <td>01</td>
-                        <td>M-Arham Waheed</td>
-                        <td>123-456-789</td>
-                        <td>Town , City</td>
-                        <td>Town , City</td>
-                        <td>Town , City</td>
-                        <td>
-                            <div class="flex gap-5 items-center justify-center">
-                                <a href=""><img width="38px" src="{{ asset('images/icons/edits.svg') }}"
-                                        alt="update"></a>
-                                <a href=""> <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                        alt="Delete"></a>
-                                <button data-modal-target="experienceModal" data-modal-toggle="experienceModal"
-                                    class="cursor-pointer ">
-                                    <img width="38px" src="{{ asset('images/icons/views.svg') }}"
-                                        alt="View"></button>
-
-                            </div>
-                        </td>
-                        {{-- @foreach ($customers as $x => $data)
-                            <tr class="pt-4">
-                                <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ $data->phone }}</td>
-                                <td>{{ $data->role }}</td>
-                                <td>
-                                    <div class="flex gap-5 items-center justify-center">
-
-                                        <button data-modal-target="experienceModal"
-                                            data-modal-toggle="experienceModal"
-                                            class=" updateBtn cursor-pointer  w-[42px] md:w-full"
-                                            updateId="{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <a class="w-[42px] md:w-full" href="../delCustomer/{{ Name$data->id }}"><img
-                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="update"></button></a>
-                                    </div>
-                                </td>
+                @if (@$_GET['type'] == 'review')
+                    <table id="datatable">
+                        <thead class="py-6 bg-primary text-white">
+                            <tr>
+                                <th class="whitespace-nowrap">@lang('lang.Sr')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Profile_Picture')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Name')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Role')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Location')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Rating')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Description')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Status')</th>
+                                <th class="flex  justify-center">@lang('lang.Action')</th>
                             </tr>
-                        @endforeach --}}
+                        </thead>
+                        <tbody>
+                            @foreach ($reviews as $review)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td><img class="h-24 w-24 rounded-full bg-black object-contain"
+                                            src="{{ asset($review->image) }}" alt="profile"></td>
+                                    <td>{{ $review->name }}</td>
+                                    <td>{{ $review->role }}</td>
+                                    <td>{{ $review->location }}</td>
+                                    <td>{{ $review->rating }}</td>
+                                    <td>{{ $review->description }}</td>
+                                    <td> <span
+                                            class="font-semibold {{ $review->status == 'active' ? 'text-green-500' : 'text-red-800' }}">
+                                            {{ $review->status }} </span></td>
+                                    <td>
+                                        <div class="flex gap-5 items-center justify-center">
+                                            <a href=""><img width="38px"
+                                                    src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
+                                            <a href=""> <img width="38px"
+                                                    src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
 
-                    </tbody>
-                </table>
+
+                        </tbody>
+                    </table>
+                @else
+                    <table id="datatable">
+                        <thead class="py-6 bg-primary text-white">
+                            <tr>
+                                <th class="whitespace-nowrap">@lang('lang.Sr')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Profile_Picture')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Name')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Role')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Location')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Subject')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Category')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Description')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Status')</th>
+                                <th class="flex  justify-center">@lang('lang.Action')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($experiences as $experience)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td><img class="h-24 w-24 rounded-full bg-black object-contain"
+                                            src="{{ asset($experience->image) }}" alt="profile"></td>
+                                    <td>{{ $experience->name }}</td>
+                                    <td>{{ $experience->role }}</td>
+                                    <td>{{ $experience->location }}</td>
+                                    <td>{{ $experience->subject }}</td>
+                                    <td>{{ $experience->category }}</td>
+                                    <td>{{ $experience->description }}</td>
+                                    <td> <span
+                                            class="font-semibold {{ $experience->status == 'active' ? 'text-green-500' : 'text-red-800' }}">
+                                            {{ $experience->status }} </span></td>
+                                    <td>
+                                        <div class="flex gap-5 items-center justify-center">
+                                            <a href=""><img width="38px"
+                                                    src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
+                                            <a href=""> <img width="38px"
+                                                    src="{{ asset('images/icons/delete.svg') }}" alt="Delete"></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+
+                        </tbody>
+                    </table>
+                @endif
             </div>
 
         </div>
@@ -363,22 +377,18 @@
 
 
 <script>
-    const fileInput = document.getElementById('dropzone-file1');
-    const labelContainer = document.querySelector('.label-container');
+    $(document).ready(function() {
 
-    fileInput.addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                labelContainer.style.backgroundImage = `url(${e.target.result})`;
-                labelContainer.classList.add('has-image');
-            };
-            reader.readAsDataURL(file);
-        }
-        labelContainer.addEventListener('click', function(event) {
-            if (!event.target.closest('input')) {
-                fileInput.click();
+        $('#review').change(function() {
+            if ($(this).is(':checked')) {
+                // Redirect to the desired page
+                window.location.href = '../reviewsAndExperience?type=review';
+            }
+        });
+        $('#experience').change(function() {
+            if ($(this).is(':checked')) {
+                // Redirect to the desired page
+                window.location.href = '../reviewsAndExperience';
             }
         });
     });

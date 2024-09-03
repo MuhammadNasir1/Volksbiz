@@ -59,10 +59,7 @@ Route::middleware('custom')->group(function () {
 
         return view("orders");
     });
-    Route::get('reviewsAndExperience', function () {
-
-        return view("review");
-    });
+    Route::get('reviewsAndExperience', [ExperienceReviewController::class, 'index']);
     Route::get('addBlog', function () {
 
         return view("blog_page");
