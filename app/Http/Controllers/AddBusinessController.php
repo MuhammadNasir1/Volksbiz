@@ -277,6 +277,7 @@ class AddBusinessController extends Controller
             $businessId = $order['businuess_id'];
             $businesses = AddBusiness::where('id', $businessId)->first();
             $businesses->images = json_decode($businesses->images);
+            return response()->json($businesses);
             $order->business = $businesses;
 
             $userId = $order['user_id'];
