@@ -15,7 +15,7 @@
                     <div class="h-[200px] w-[200px] relative  rounded-[50%]">
                         <img id="img_view" height="200px" width="200px"
                             class="h-[200px] w-[200px]  border border-primary  rounded-[50%] cursor-pointer object-contain "
-                            src=" {{ isset($user->user_image) ? asset($user->user_image) : 'images/owlicon.svg' }}"
+                            src=" {{ isset($company->logo) ? asset($company->logo) : 'images/owlicon.svg' }}"
                             alt="user">
                         <input class="absolute top-0 opacity-0     h-[210px] w-[200px] z-50 cursor-pointer "
                             type="file" name="logo" id="user_image">
@@ -40,7 +40,8 @@
                             for="name">@lang('lang.Company_Name')</label>
                         <input type="text"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="name" id="name" placeholder="@lang('lang.Enter_Your_Name')">
+                            name="name" id="name" placeholder="@lang('lang.Enter_Your_Name')"
+                            value="{{ $company['name'] ?? '' }}">
                     </div>
 
                     <div class="  w-full mt-4">
@@ -48,14 +49,16 @@
                             for="phone">@lang('lang.Phone_Number')</label>
                         <input type="number"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="phone" id="phone" placeholder="@lang('lang.Enter_Your_Number')">
+                            name="phone" id="phone" placeholder="@lang('lang.Enter_Your_Number')"
+                            value="{{ $company['phone'] ?? '' }}">
                     </div>
                     <div class="w-full mt-4">
                         <label class="text-[16px] font-semibold block  text-[#452C88]"
                             for="email">@lang('lang.business_Email')</label>
                         <input type="text"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="email" id="email" placeholder="@lang('lang.Enter_City')">
+                            name="email" id="email" placeholder="@lang('lang.business_Email')"
+                            value="{{ $company['email'] ?? '' }}">
                     </div>
                 </div>
 
@@ -65,7 +68,7 @@
                             <label class="text-[16px] font-semibold block  text-[#452C88]"
                                 for="address">@lang('lang.Address')</label>
                             <textarea name="address"
-                                class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[90px] text-[14px]"></textarea>
+                                class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[90px] text-[14px]">{{ $company['address'] ?? '' }}</textarea>
                         </div>
 
                     </div>
@@ -78,28 +81,32 @@
                                 for="Facebook_Link">@lang('lang.Facebook_Link')</label>
                             <input type="text"
                                 class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="facebook" id="Facebook_Link" placeholder="@lang('lang.Enter_Facebook_Url')">
+                                name="facebook" id="Facebook_Link" placeholder="@lang('lang.Enter_Facebook_Url')"
+                                value="{{ $company['facebook'] ?? '' }}">
                         </div>
                         <div class="w-full lg:mt-4">
                             <label class="text-[16px] font-semibold block  text-[#452C88]"
                                 for="Whatsapp_Number">@lang('lang.Whatsapp_Number')</label>
                             <input type="text"
                                 class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="whatsapp" id="Whatsapp_Number" placeholder="@lang('lang.Enter_Whatsapp_Number')">
+                                name="whatsapp" id="Whatsapp_Number" placeholder="@lang('lang.Enter_Whatsapp_Number')"
+                                value="{{ $company['whatsapp'] ?? '' }}">
                         </div>
                         <div class="w-full lg:mt-4">
                             <label class="text-[16px] font-semibold block  text-[#452C88]"
                                 for="Linkedin_Link">@lang('lang.Linkedin_Link')</label>
                             <input type="text"
                                 class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="linkedin" id="Linkedin_Link" placeholder="@lang('lang.Enter_Linkedin_Url')">
+                                name="linkedin" id="Linkedin_Link" placeholder="@lang('lang.Enter_Linkedin_Url')"
+                                value="{{ $company['linkedin'] ?? '' }}">
                         </div>
                         <div class="w-full lg:mt-4">
                             <label class="text-[16px] font-semibold block  text-[#452C88]"
                                 for="Twitter_Link">@lang('lang.Twitter_Link')</label>
                             <input type="text"
                                 class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="twitter" id="Twitter_Link" placeholder="@lang('lang.Enter_Twitter_Url')">
+                                name="twitter" id="Twitter_Link" placeholder="@lang('lang.Enter_Twitter_Url')"
+                                value="{{ $company['twitter'] ?? '' }}">
                         </div>
                     </div>
                 </div>
