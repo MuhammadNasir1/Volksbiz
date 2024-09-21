@@ -27,5 +27,15 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'role' => 'admin',
         ]);
+        DB::table('company')->insert([
+            'name' => 'TWC',
+            'email' => 'twc@gmail.com',
+            'phone' => '12345678',
+            'address' => 'Pakistan',
+            'facebook' => 'https://www.facebook.com/',
+            'whatsapp' => 'https://www.whatsapp.com/',
+            'linkedin' => 'https://www.linkedin.com/',
+            'twitter' => 'https://www.twitter.com/',
+        ]);
     }
 }
