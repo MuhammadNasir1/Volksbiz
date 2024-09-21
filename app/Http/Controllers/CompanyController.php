@@ -31,4 +31,10 @@ class CompanyController extends Controller
 
         return redirect('company')->with('success', true);
     }
+
+    public function getCompany()
+    {
+        $company = Company::find(1);
+        return response()->json(['success' => true, 'message' => 'Data get successfully', 'data' => $company], 200);
+    }
 }
