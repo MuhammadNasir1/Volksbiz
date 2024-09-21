@@ -143,6 +143,17 @@ return [
     'Un_Active' => 'Un Active',
     'De_Active' => 'De Active',
     'Profile_Picture' => 'Profile Picture',
+    'Company_Setting' => 'Company Setting',
+    'Company_Name' => 'Company Name',
+    'business_Email' => 'business Email',
+    'Facebook_Link' => 'Facebook Link',
+    'Enter_Facebook_Url' => 'Enter Facebook Url',
+    'Whatsapp_Number' => 'Whatsapp Number',
+    'Enter_Whatsapp_Number' => 'Enter Whatsapp Number',
+    'Enter_Twitter_Url' => 'Enter Twitter Number',
+    'Twitter_Link' => 'Twitter Link',
+    'Linkedin_Link' => 'Linkedin Link',
+    'Enter_Linkedin_Url' => 'Enter Linkedin Url',
 
 
 ];

@@ -10,6 +10,7 @@ use App\Models\AddCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddCategoryController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ExperienceReviewController;
 use App\Http\Controllers\SubscriptionController;
@@ -120,4 +121,8 @@ Route::middleware('custom')->group(function () {
     // review and Experience
     Route::post('/insertReview', [ExperienceReviewController::class, 'insertReview']);
     Route::post('/insertExperience', [ExperienceReviewController::class, 'insertExperience']);
+
+
+    Route::get('company', [CompanyController::class, 'company']);
+    Route::post('storeCompany', [CompanyController::class, 'store']);
 });
