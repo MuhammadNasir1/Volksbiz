@@ -10,21 +10,30 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon(32X32).png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        .bg {
+            background-image: url("{{ asset('images/bus-bg.svg') }}");
+
+        }
+    </style>
 </head>
 
-<body class="bg-white">
-    <div class=" h-screen w-full flex justify-center items-center shadow-dark">
+<body class="">
+    <div class=" h-screen w-full flex justify-center items-center shadow-dark  bg bg-no-repeat relative">
+        <div class="bg-black opacity-75 h-full w-full absolute z-0">
+
+        </div>
         <div
-            class="bg-primary w-full sm:w-1/2 md:w-9/12 lg:w-1/2 shadow-md flex flex-col md:flex-row items-center mx-5 sm:m-0 rounded ">
+            class="bg-primary w-full sm:w-1/2 md:w-9/12 lg:w-1/2 shadow-md flex flex-col md:flex-row items-center mx-5 sm:m-0 rounded-lg z-30">
             <div class="w-full md:w-1/2 hidden md:flex flex-col justify-center items-center text-white relative">
                 <div>
-                    <img class="w-52    absolute left-1/2  -translate-x-[50%] top-[-100%]"
-                        src="{{ asset('./images/logo.svg') }}" alt="LOGO">
+                    <img class="w-32    absolute left-1/2  -top-40 -translate-x-1/2"
+                        src="{{ asset('images/compnay-logo.svg') }}" alt="Volksbiz">
                 </div>
                 <h1 class="text-3xl">Hello</h1>
                 <p class="text-5xl font-extrabold">Welcome!</p>
             </div>
-            <div class="bg-white w-full md:w-1/2 flex flex-col items-center py-32 px-8">
+            <div class="bg-white w-full md:w-1/2 flex flex-col items-center py-32 px-8 rounded-r-lg">
                 <div class="md:hidden block pb-5">
                     <img class="w-52 " src="{{ asset('./images/logo.svg') }}" alt="LOGO">
                 </div>
@@ -37,9 +46,13 @@
                         <input type="email" placeholder="Email" name="email"
                             class="w-full p-3 rounded border placeholder-gray-400 focus:outline-none focus:border-green-600" />
                     </div>
-                    <div class="mb-4">
+                    <div class="mb-4 relative">
                         <input type="password" placeholder="Password" name="password"
-                            class="w-full p-3 rounded border placeholder-gray-400 focus:outline-none focus:border-green-600" />
+                            class="w-full p-3 rounded border placeholder-gray-400 focus:outline-none focus:border-green-600"
+                            id="password" />
+                        <img id="changePasswordViewbtn"
+                            class="absolute w-6 h-6 top-1/2 -translate-y-1/2 right-2 cursor-pointer"
+                            src="{{ asset('images/icons/eye.svg') }}" alt="eye-icon">
                     </div>
                     <button class="bg-primary font-bold text-white focus:outline-none rounded p-3">
                         <div class=" text-center hidden" id="spinner">
@@ -54,7 +67,7 @@
                                     fill="currentFill" />
                             </svg>
                         </div>
-                        <div class="text-white  font-semibold" id="text">
+                        <div class="text-white   font-semibold" id="text">
                             Login
                         </div>
                     </button>
@@ -67,6 +80,19 @@
 
     <script>
         $(document).ready(function() {
+            $('#changePasswordViewbtn').click(function() {
+                let passwordInput = $('#password');
+                let type = passwordInput.attr('type');
+
+                if (type === 'password') {
+                    passwordInput.attr('type', 'text');
+                    $(this).attr('src', "{{ asset('./images/icons/eye-slash.svg') }}");
+                } else {
+                    passwordInput.attr('type', 'password');
+                    $(this).attr('src', "{{ asset('images/icons/eye.svg') }}");
+                }
+            });
+
             $("#login_data").submit(function(event) {
                 event.preventDefault();
                 var formData = $(this).serialize();
