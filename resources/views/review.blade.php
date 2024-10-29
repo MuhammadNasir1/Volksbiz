@@ -7,8 +7,8 @@
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Review_&_Experience')</h3>
-                <div class="flex gap-5">
+                <div class="flex gap-5 items-center">
+                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Review_&_Experience')</h3>
                     <div class="flex gap-4 items-center">
                         <div class="flex items-center ">
                             <input id="review" type="radio" value="" name="default-radio"
@@ -25,6 +25,9 @@
                                 class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Experience</label>
                         </div>
                     </div>
+                </div>
+                <div class="flex gap-5">
+
                     <div>
 
                         <button data-modal-target="reviewModal" data-modal-toggle="reviewModal"
@@ -154,8 +157,8 @@
                         data-modal-hide="reviewModal">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                     </button>
                 </div>

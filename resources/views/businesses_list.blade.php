@@ -55,8 +55,9 @@
                     <thead class="py-6 bg-primary text-white">
                         <tr>
                             <th class="whitespace-nowrap">@lang('lang.Sr')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Videos')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Image')</th>
                             <th class="whitespace-nowrap">@lang('lang.Title')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Price')</th>
                             <th class="whitespace-nowrap">@lang('lang.Category')</th>
                             <th class="whitespace-nowrap">@lang('lang.Location')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
@@ -80,6 +81,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $bussiness->title }}</td>
+                                <td>{{ $bussiness->price }}</td>
                                 <td>{{ $bussiness->category }}</td>
                                 <td>{{ $bussiness->city }} {{ $bussiness->country }}</td>
                                 <td>
@@ -299,12 +301,12 @@
 
 
                 </div>
-                <div class="w-full  lg:gap-9 mt-5 lg:items-center grid grid-cols-2">
-                    <div class=" w-full flex items-center  lg:mt-0 mt-5 gap-12">
-                        <label for="bus_category">@lang('lang.Category')</label>
+                <div class="w-full  gap-x-4 gap-y-2 mt-5 grid grid-cols-2">
+                    <div>
+                        <label class="block mb-2" for="bus_category">@lang('lang.Category')</label>
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px]
-                             focus:border-primary   h-[40px] text-[14px]"
+                             focus:border-primary  h-[40px] text-[14px]"
                             name="category" id="bus_category">
                             <option selected disabled> @lang('lang.Select_Category')</option>
                             @foreach ($categories as $category)
@@ -319,18 +321,17 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class=" flex gap-12  items-center">
-                        <label for="bus_title">@lang('lang.Title')</label>
+                    <div>
+                        <label class="block mb-2" for="bus_title">@lang('lang.Title')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
                             name="title" id="bus_title" placeholder=" @lang('lang.Title')"
                             value="{{ !isset($buissnessData) ? '' : $buissnessData->title }}">
                     </div>
-                </div>
-                <div class="w-full  lg:gap-9 mt-5 lg:items-center flex lg:flex-row flex-col">
-                    <div class="lg:w-[50%] w-full flex items-center  lg:mt-0 mt-5 gap-12">
-                        <label for="bus_country">@lang('lang.Country')</label>
+
+                    <div>
+                        <label class="block mb-2" for="bus_country">@lang('lang.Country')</label>
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px]
                             focus:border-primary   h-[40px] text-[14px]"
@@ -343,28 +344,28 @@
                             @include('includes.countrieslist')
                         </select>
                     </div>
-                    <div class="lg:w-[50%] w-full flex items-center  gap-6">
-                        <label for="bus_city">@lang('lang.City')</label>
+                    <div>
+                        <label class="block mb-2" for="bus_city">@lang('lang.City')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
                             name="city" id="bus_city" placeholder=" @lang('lang.City')"
                             value="{{ !isset($buissnessData) ? '' : $buissnessData->city }}">
                     </div>
-                </div>
-                <div class=" flex gap-5 mt-5 ">
-                    <label class="" for="bus_description">@lang('lang.Description')</label>
-                    <textarea name="description" id="bus_description"
-                        class="w-full h-28  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
-                        placeholder="@lang('lang.Description')">{{ !isset($buissnessData) ? '' : $buissnessData->description }}</textarea>
-                </div>
-                <div class=" flex gap-16 ps-2 mt-5 items-center">
-                    <label for="bus_price">@lang('lang.Price')</label>
-                    <input type="text" required
-                        class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary
+                    <div class=" col-span-2  ">
+                        <label class="block mb-2" for="bus_description">@lang('lang.Description')</label>
+                        <textarea name="description" id="bus_description"
+                            class="w-full h-28  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
+                            placeholder="@lang('lang.Description')">{{ !isset($buissnessData) ? '' : $buissnessData->description }}</textarea>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block mb-2" for="bus_price">@lang('lang.Price')</label>
+                        <input type="text" required
+                            class="w-[50%] border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                        name="price" id="bus_price" placeholder=" @lang('lang.Price')"
-                        value="{{ !isset($buissnessData) ? '' : $buissnessData->price }}">
+                            name="price" id="bus_price" placeholder=" @lang('lang.Price')"
+                            value="{{ !isset($buissnessData) ? '' : $buissnessData->price }}">
+                    </div>
                 </div>
             </div>
 

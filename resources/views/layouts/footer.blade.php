@@ -1,8 +1,5 @@
 </div>
-<script
-      src="https://kit.fontawesome.com/b6b9586b26.js"
-      crossorigin="anonymous"
-    ></script>
+<script src="https://kit.fontawesome.com/b6b9586b26.js" crossorigin="anonymous"></script>
 <script src="{{ asset('javascript/jquery.js') }}"></script>
 <script src="{{ asset('javascript/canvas.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -18,6 +15,9 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+    $(window).on('load', function() {
+        $('#loading').hide();
+    })
     $(document).ready(function() {
         $('select').select2({
             width: '100%'

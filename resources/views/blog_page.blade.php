@@ -56,16 +56,16 @@
             </div>
         </div>
 
-        <div class="mt-5">
+        <div class="mt-5 relative">
             <label for="content">Content:</label>
-            <div id="editor" class="min-h-60">
+            <div id="editor" class="">
                 @php
                     if (isset($blogData->content)) {
                         echo $blogData->content;
                     }
                 @endphp
             </div>
-            <textarea name="content" id="content" style="display:none;" class=""></textarea>
+            <textarea name="content" id="content" style="display:none;"></textarea>
         </div>
         {{-- <button type="submit">Save Blog</button> --}}
         <div class="mt-10  flex justify-end">
