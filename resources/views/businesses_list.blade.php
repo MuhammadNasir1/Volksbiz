@@ -299,33 +299,34 @@
 
 
                 </div>
-
-                <div class="w-[50%] flex gap-9 mt-5 items-center">
-                    <label for="bus_category">@lang('lang.Category')</label>
-                    <select
-                        class="w-full border-[#DEE2E6] rounded-[4px]
+                <div class="w-full  lg:gap-9 mt-5 lg:items-center grid grid-cols-2">
+                    <div class=" w-full flex items-center  lg:mt-0 mt-5 gap-12">
+                        <label for="bus_category">@lang('lang.Category')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px]
                              focus:border-primary   h-[40px] text-[14px]"
-                        name="category" id="bus_category">
-                        <option selected disabled> @lang('lang.Select_Category')</option>
-                        @foreach ($categories as $category)
-                            @if (isset($buissnessData))
-                                <option {{ !isset($buissnessData) == $buissnessData->category ? '' : 'selected' }}
-                                    value=" {{ $category->category_name }}"> {{ $category->category_name }}
-                                </option>
-                            @else
-                                <option value="{{ $category->category_name }}"> {{ $category->category_name }}
-                                </option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-                <div class=" flex gap-20 mt-5 items-center">
-                    <label for="bus_title">@lang('lang.Title')</label>
-                    <input type="text" required
-                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
+                            name="category" id="bus_category">
+                            <option selected disabled> @lang('lang.Select_Category')</option>
+                            @foreach ($categories as $category)
+                                @if (isset($buissnessData))
+                                    <option {{ !isset($buissnessData) == $buissnessData->category ? '' : 'selected' }}
+                                        value=" {{ $category->category_name }}"> {{ $category->category_name }}
+                                    </option>
+                                @else
+                                    <option value="{{ $category->category_name }}"> {{ $category->category_name }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class=" flex gap-12  items-center">
+                        <label for="bus_title">@lang('lang.Title')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                        name="title" id="bus_title" placeholder=" @lang('lang.Title')"
-                        value="{{ !isset($buissnessData) ? '' : $buissnessData->title }}">
+                            name="title" id="bus_title" placeholder=" @lang('lang.Title')"
+                            value="{{ !isset($buissnessData) ? '' : $buissnessData->title }}">
+                    </div>
                 </div>
                 <div class="w-full  lg:gap-9 mt-5 lg:items-center flex lg:flex-row flex-col">
                     <div class="lg:w-[50%] w-full flex items-center  lg:mt-0 mt-5 gap-12">
