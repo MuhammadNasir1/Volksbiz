@@ -75,7 +75,7 @@
                             class="w-full p-3 rounded border placeholder-gray-400 focus:outline-none focus:border-green-600"
                             id="password" />
                         <img id="changePasswordViewbtn"
-                            class="absolute w-6 h-6 top-1/2 -translate-y-1/2 right-2 cursor-pointer"
+                            class="absolute w-5 h-5 top-1/2 -translate-y-1/2 right-2 cursor-pointer"
                             src="{{ asset('images/icons/eye.svg') }}" alt="eye-icon">
                     </div>
                     <button class="bg-primary font-bold text-white focus:outline-none rounded p-3">

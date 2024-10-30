@@ -74,7 +74,7 @@
 
                                         <button updateId={{ $inquiry->id }} data-modal-target="changeStatus"
                                             data-modal-toggle="changeStatus"
-                                            class="text-white py-2 px-2 bg-primary font-semibold  rounded-md updateBtn">@lang('lang.Change_Status')</button>
+                                            class="text-white py-2 px-2 bg-primary font-semibold whitespace-nowrap  rounded-md updateBtn">@lang('lang.Change_Status')</button>
 
                                     </div>
                                 </td>

@@ -188,8 +188,8 @@
                                         stroke-width="2"
                                         d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                 </svg>
-                                <p class="text-sm text-gray-500 dark:text-gray-400"><span
-                                        class="font-semibold">Upload</span></p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 text-center"><span
+                                        class="font-semibold">Upload</span> <br> <span>100*100</span></p>
                             </div>
                             <input id="dropzone-file1" type="file" class="hidden" name="bus_img1"
                                 value="{{ isset($buissnessData) && isset($image[0]) ? $image[0] : '' }}"
@@ -210,8 +210,8 @@
                                         stroke-width="2"
                                         d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                 </svg>
-                                <p class="text-sm text-gray-500 dark:text-gray-400"><span
-                                        class="font-semibold">Upload</span></p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 text-center"><span
+                                        class="font-semibold">Upload</span> <br> <span>100*100</span></p>
                             </div>
                             <input id="dropzone-file2" type="file" class="hidden" name="bus_img2"
                                 value="{{ isset($buissnessData) && isset($image[1]) ? $image[1] : '' }}"
@@ -232,8 +232,8 @@
                                         stroke-width="2"
                                         d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                 </svg>
-                                <p class="text-sm text-gray-500 dark:text-gray-400"><span
-                                        class="font-semibold">Upload</span></p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 text-center"><span
+                                        class="font-semibold">Upload</span> <br> <span>100*100</span></p>
                             </div>
                             <input id="dropzone-file3" type="file" class="hidden" name="bus_img3"
                                 value="{{ isset($buissnessData) && isset($image[2]) ? $image[2] : '' }}"
@@ -254,12 +254,11 @@
                                         stroke-width="2"
                                         d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                 </svg>
-                                <p class="text-sm text-gray-500 dark:text-gray-400"><span
-                                        class="font-semibold">Upload</span></p>
-                            </div>
-                            <input id="dropzone-file4" type="file" class="hidden" name="bus_img4"
-                                value="{{ isset($buissnessData) && isset($image[3]) ? $image[3] : '' }}"
-                                accept="image/*" />
+                                <p class="text-sm text-gray-500 dark:text-gray-400 text-center"><span
+                                        class="font-semibold">Upload</span> <br> <span>1920*1080</span></p>
+                                <input id="dropzone-file4" type="file" class="hidden" name="bus_img4"
+                                    value="{{ isset($buissnessData) && isset($image[3]) ? $image[3] : '' }}"
+                                    accept="image/*" />
                         </label>
 
 
