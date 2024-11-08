@@ -16,6 +16,7 @@ class Order extends Model
         'buyer_name',
         'buyer_contact',
         'budget',
+        'desired_location',
         'status',
 
     ];

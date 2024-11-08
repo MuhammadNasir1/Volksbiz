@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('buyer_name');
             $table->string('buyer_contact');
             $table->string('budget');
+            $table->string('desired_location');
             $table->string('status');
             $table->timestamps();
         });

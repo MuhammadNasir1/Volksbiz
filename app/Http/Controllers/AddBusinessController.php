@@ -233,6 +233,7 @@ class AddBusinessController extends Controller
                 'buyer_name' => "required",
                 'buyer_contact' => "required",
                 'budget' => "required",
+                'desired_location' => "required",
             ]);
 
             $OrderData = Order::create([
@@ -241,6 +242,7 @@ class AddBusinessController extends Controller
                 'buyer_name' => $validatedData['buyer_name'],
                 'buyer_contact' => $validatedData['buyer_contact'],
                 'budget' => $validatedData['budget'],
+                'desired_location' => $validatedData['desired_location'],
                 'status' => "pending",
             ]);
             $businessId = $OrderData['business_id'];
