@@ -12,7 +12,10 @@ class Order extends Model
     public $table = "orders";
     protected $fillable = [
         'user_id',
-        'businuess_id',
+        'business_id',
+        'buyer_name',
+        'buyer_contact',
+        'budget',
         'status',
 
     ];

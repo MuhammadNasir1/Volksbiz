@@ -229,15 +229,21 @@ class AddBusinessController extends Controller
 
             $validatedData = $request->validate([
                 'user_id' => "required",
-                'businuess_id' => "required",
+                'business_id' => "required",
+                'buyer_name' => "required",
+                'buyer_contact' => "required",
+                'budget' => "required",
             ]);
 
             $OrderData = Order::create([
                 'user_id' => $validatedData['user_id'],
-                'businuess_id' => $validatedData['businuess_id'],
+                'business_id' => $validatedData['business_id'],
+                'buyer_name' => $validatedData['buyer_name'],
+                'buyer_contact' => $validatedData['buyer_contact'],
+                'budget' => $validatedData['budget'],
                 'status' => "pending",
             ]);
-            $businessId = $OrderData['businuess_id'];
+            $businessId = $OrderData['business_id'];
             $businesses = AddBusiness::where('id', $businessId)->first();
             $businesses->images = json_decode($businesses->images);
             $OrderData->business = $businesses;
