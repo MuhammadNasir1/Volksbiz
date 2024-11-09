@@ -91,7 +91,8 @@
         <x-slot name="body">
             <form id="postDataForm" url="addCategory" method="post">
                 @csrf
-                <x-file-uploader id="categoryImage" name="image"></x-file-uploader>
+                <x-file-uploader id="categoryImage" name="image" title="upload Category Image"
+                    requirements="SVG, PNG, JPG or GIF (MAX. 600x600px)"></x-file-uploader>
                 <div class="mt-3">
                     <x-input id="categoryNameEn" label="{{ __('lang.Category') }}(EN)"
                         placeholder="{{ __('lang.Name_In_English') }}" name='name_en' type="text"></x-input>

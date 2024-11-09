@@ -10,10 +10,14 @@ class FileUploader extends Component
 {
     public $name;
     public $id;
-    public function __construct($name, $id)
+    public $title;
+    public $requirements;
+    public function __construct($name, $id, $title, $requirements)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->title = $title;
+        $this->requirements = $requirements;
     }
 
     /**

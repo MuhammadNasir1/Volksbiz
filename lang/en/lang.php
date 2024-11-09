@@ -160,4 +160,10 @@ return [
     'Name_In_German' => 'Name In German',
     'Category_En' => 'Category(En)',
     'Category_De' => 'Category(De)',
+    'Title_In_English' => 'Title In English',
+    'Title_In_German' => 'Title In German',
+    'Info_In_English' => 'Info In English',
+    'Info_In_German' => 'Info In German',
+    'info' => 'info',
+    'Enter_price' => 'Enter price',
 ];
