@@ -266,7 +266,7 @@ class AddBusinessController extends Controller
             $userId  =  $user->id;
             $orders = Order::where('user_id', $userId)->get();
             foreach ($orders as $order) {
-                $businessId = $order['businuess_id'];
+                $businessId = $order['business_id'];
                 $businesses = AddBusiness::where('id', $businessId)->first();
                 $businesses->images = json_decode($businesses->images);
                 $order->business = $businesses;
@@ -282,7 +282,7 @@ class AddBusinessController extends Controller
     {
         $orders = Order::all();
         foreach ($orders as $order) {
-            $businessId = $order['businuess_id'];
+            $businessId = $order['business_id'];
             $businesses = AddBusiness::where('id', $businessId)->first();
             $businesses->images = json_decode($businesses->images);
             $order->business = $businesses;
