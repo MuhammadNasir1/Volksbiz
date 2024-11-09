@@ -13,7 +13,9 @@ class AddCategory extends Model
 
     protected $fillable = [
 
-        'category_name',
-        'category_image',
+        'image',
+        'name_en',
+        'name_de',
+        'status',
     ];
 }

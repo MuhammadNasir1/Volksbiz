@@ -12,22 +12,24 @@ class AddCategoryController extends Controller
 
         try {
             $validatedData = $request->validate([
-                'category_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-                'category_name' => 'required|unique:add_categories,category_name',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'name_en' => 'required|unique:add_categories,name_en',
+                'name_de' => 'required|unique:add_categories,name_en',
             ]);
 
-            if ($request->hasFile('category_image')) {
-                $image = $request->file('category_image');
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $image->storeAs('public/category_images', $imageName); // Adjust storage path as needed
-                $img =  $validatedData['category_image'] = 'storage/category_images/' . $imageName;
+                $img =  $validatedData['image'] = 'storage/category_images/' . $imageName;
             } else {
                 $img = 'null';
             }
 
             $category =  new AddCategory;
-            $category->category_name = $validatedData['category_name'];
-            $category->category_image = $img;
+            $category->name_en = $validatedData['name_en'];
+            $category->name_de = $validatedData['name_de'];
+            $category->image = $img;
 
             $category->save();
 
@@ -39,16 +41,18 @@ class AddCategoryController extends Controller
 
     public function categoryData()
     {
-        $category_data = AddCategory::all();
+        $category_data = AddCategory::where('status', 1)->get();
         return view('category_list', compact('category_data'));
     }
 
     public function delCategory(string $id)
     {
-        $delCat = AddCategory::find($id);
-        $delCat->delete();
-        return redirect()->route('categoryData');
+        $category = AddCategory::find($id);
+        $category->status = 0;
+        $category->update();
+        return response()->json(["success" => true, "message" => "Category deleted"], 200);
     }
+
 
     public function getCategories()
     {
@@ -60,32 +64,26 @@ class AddCategoryController extends Controller
         }
     }
 
-    public function updateCategoryData($id)
-    {
-        $categoryData = addcategory::find($id);
-        $category_data = AddCategory::all();
-
-        return view('category_list', compact('categoryData', 'category_data'));
-    }
 
     public function updateCategory(Request $request, $id)
     {
 
         try {
             $validatedData = $request->validate([
-                'category_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-                'category_name' => 'required',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+                'name_en' => 'required',
+                'name_de' => 'required',
             ]);
+
             $category =  addcategory::find($id);
-            $category->category_name = $validatedData['category_name'];
-
-            if ($request->hasFile('category_image')) {
-                $image = $request->file('category_image');
+            $category->name_en = $validatedData['name_en'];
+            $category->name_de = $validatedData['name_de'];
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('public/category_images', $imageName);
-                $category->category_image =  $validatedData['category_image'] = 'storage/category_images/' . $imageName;
+                $image->storeAs('public/category_images', $imageName); // Adjust storage path as needed
+                $category->image  = 'storage/category_images/' . $imageName;
             }
-
 
             $category->update();
             return response()->json(['success' => true, 'message' => 'Category update successfully'], 201);

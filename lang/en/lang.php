@@ -156,4 +156,8 @@ return [
     'Enter_Linkedin_Url' => 'Enter Linkedin Url',
 
 
+    'Name_In_English' => 'Name In English',
+    'Name_In_German' => 'Name In German',
+    'Category_En' => 'Category(En)',
+    'Category_De' => 'Category(De)',
 ];
