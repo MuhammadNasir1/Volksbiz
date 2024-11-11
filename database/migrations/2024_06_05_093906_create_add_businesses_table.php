@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('description_de');
             $table->string('price');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
