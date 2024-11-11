@@ -41,7 +41,7 @@ class AddBusinessController extends Controller
                     $image = $request->file($imageField);
                     $imageName = time() . ($index + 1) . '.' . $image->getClientOriginalExtension();
                     $image->storeAs('public/busniess_images', $imageName);
-                    $validatedData[$imageField] = 'storage/busniess_images/' . $imageName;
+                    $validatedData[$imageField] =  'storage/busniess_images/' . $imageName;
                     $imagePaths[] = 'storage/busniess_images/' . $imageName; // Add the file path to the array
                 } else {
                     $validatedData[$imageField] = null;
@@ -73,6 +73,50 @@ class AddBusinessController extends Controller
 
             $add_business->save();
             return response()->json(['success' => true, 'message' => "Business add successfully"], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+
+
+    public function addSellerBusiness(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'user_id' => 'required',
+                'images' => 'nullable|array',
+                'video' => 'nullable',
+                'category' => 'required',
+                'title' => 'required',
+                'title_de' => 'required',
+                'country' => 'required',
+                'city' => 'required',
+                'description' => 'required',
+                'description_de' => 'required',
+                'price' => 'required',
+            ]);
+
+            $business = AddBusiness::create([
+                'user_id' => $validatedData['user_id'],
+                'images' => json_encode($validatedData['images']),
+                'video' => $validatedData['video'],
+                'category' => $validatedData['category'],
+                'title' => $validatedData['title'],
+                'title_de' => $validatedData['title_de'],
+                'country' => $validatedData['country'],
+                'city' => $validatedData['city'],
+                'description' => $validatedData['description'],
+                'description_de' => $validatedData['description_de'],
+                'price' => $validatedData['price'],
+            ]);
+
+            $business->save();
+            $business->images = json_decode($business->images, true);
+            $category = AddCategory::where('id', "$business->category")->first();
+            $business->category = $category->category_name;
+            $business->category_de = $category->category_name_de;
+            return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $business], 201);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -153,7 +197,7 @@ class AddBusinessController extends Controller
     {
         $business_details = AddBusiness::find($id);
         $business_details->delete();
-        return redirect('../businessList');
+        return response()->json(['success' => true, 'message' => "Business delete successfully"], 200);;
     }
 
     public function getBusiness()
@@ -311,80 +355,14 @@ class AddBusinessController extends Controller
         }
         return view("orders", ['orders' => $orders]);
     }
-    public function show($id)
+
+    public function getSingleBusinesses($id)
     {
-        $business = AddBusiness::findOrFail($id);
-
-        return response()->json([
-            'title' => $business->title,
-            'category' => $business->category,
-            'city' => $business->city,
-            'country' => $business->country,
-            'description' => $business->description,
-            'video' => asset($business->video),
-            'images' => $business->images, // Assuming images is a JSON field
-            'date' => $business->created_at->format('M d, Y'), // Format the date as needed
-            'uploaded_at' => $business->created_at->format('M d, Y H:i:s'), // Format the uploaded date
-        ]);
-    }
-
-    public function delBuissness(string $id)
-    {
-        $del = AddBusiness::find($id);
-        $del->delete();
-        return response()->json(['success' => true, 'message' => "Business delete successfully"], 200);;
-    }
-    public function updateBuissnessData($id)
-    {
-        $buissnessData = AddBusiness::find($id);
-        $categories = AddCategory::all();
-        $bussinesses = AddBusiness::all();
-        // foreach ($buissnessData as $business) {
-        //     $business->images = json_decode($business->images);
-        // }
-
-        return view('businesses_list', compact('buissnessData', 'categories', 'bussinesses'));
-    }
-
-    public function addSellerBusiness(Request $request)
-    {
-        try {
-            $validatedData = $request->validate([
-                'user_id' => 'required',
-                'images' => 'nullable|array',
-                'video' => 'nullable',
-                'category' => 'required',
-                'title' => 'required',
-                'title_de' => 'required',
-                'country' => 'required',
-                'city' => 'required',
-                'description' => 'required',
-                'description_de' => 'required',
-                'price' => 'required',
-            ]);
-
-            $business = AddBusiness::create([
-                'user_id' => $validatedData['user_id'],
-                'images' => json_encode($validatedData['images']),
-                'video' => $validatedData['video'],
-                'category' => $validatedData['category'],
-                'title' => $validatedData['title'],
-                'title_de' => $validatedData['title_de'],
-                'country' => $validatedData['country'],
-                'city' => $validatedData['city'],
-                'description' => $validatedData['description'],
-                'description_de' => $validatedData['description_de'],
-                'price' => $validatedData['price'],
-            ]);
-
-            $business->save();
-            $business->images = json_decode($business->images, true);
-            $category = AddCategory::where('id', "$business->category")->first();
-            $business->category = $category->category_name;
-            $business->category_de = $category->category_name_de;
-            return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $business], 201);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
-        }
+        $business =  addBusiness::where('id', $id)->first();
+        $business->images = json_decode($business->images, true);
+        $category = AddCategory::where('id', "$business->category")->first();
+        $business->category = $category->category_name;
+        $business->category_de = $category->category_name_de;
+        return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $business], 201);
     }
 }

@@ -56,18 +56,24 @@
                                 <td>{{ $bussiness->city }} {{ $bussiness->country }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
-                                        <button data-modal-target="updatecustomermodal"
-                                            data-modal-toggle="updatecustomermodal" data-id="{{ $bussiness->id }}"
+                                        <button data-modal-target="business-detail-modal"
+                                            data-modal-toggle="business-detail-modal" data-id="{{ $bussiness->id }}"
                                             class="cursor-pointer view-button">
                                             <img width="38px" src="{{ asset('images/icons/views.svg') }}" alt="View">
                                         </button>
+                                        <button class="updateDataBtn">
+                                            <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
+                                                xmlns='http://www.w3.org/2000/svg'>
+                                                <circle opacity='0.1' cx='18' cy='18' r='18'
+                                                    fill='#233A85' />
+                                                <path fill-rule='evenodd' clip-rule='evenodd'
+                                                    d='M16.1637 23.6188L22.3141 15.665C22.6484 15.2361 22.7673 14.7402 22.6558 14.2353C22.5593 13.7763 22.277 13.3399 21.8536 13.0088L20.8211 12.1886C19.9223 11.4737 18.8081 11.549 18.1693 12.3692L17.4784 13.2654C17.3893 13.3775 17.4116 13.543 17.523 13.6333C17.523 13.6333 19.2686 15.0329 19.3058 15.063C19.4246 15.1759 19.5137 15.3264 19.536 15.507C19.5732 15.8607 19.328 16.1918 18.9641 16.2369C18.7932 16.2595 18.6298 16.2068 18.511 16.109L16.6762 14.6492C16.5871 14.5822 16.4534 14.5965 16.3791 14.6868L12.0188 20.3304C11.7365 20.6841 11.64 21.1431 11.7365 21.5871L12.2936 24.0025C12.3233 24.1304 12.4348 24.2207 12.5685 24.2207L15.0197 24.1906C15.4654 24.1831 15.8814 23.9799 16.1637 23.6188ZM19.5958 22.8672H23.5929C23.9829 22.8672 24.3 23.1885 24.3 23.5835C24.3 23.9794 23.9829 24.2999 23.5929 24.2999H19.5958C19.2059 24.2999 18.8887 23.9794 18.8887 23.5835C18.8887 23.1885 19.2059 22.8672 19.5958 22.8672Z'
+                                                    fill='#233A85' />
+                                            </svg>
+                                        </button>
 
-                                        <a href="../bussinesses-update/{{ $bussiness->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
-                                        <button data-modal-target="deleteData" data-modal-toggle="deleteData"
-                                            class="hidden"></button>
 
-                                        <button class="deleteDataBtn" delUrl="bussinessesDel/{{ $bussiness->id }}">
+                                        <button class="deleteDataBtn" delUrl="deleteBusiness/{{ $bussiness->id }}">
                                             <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
                                                 xmlns='http://www.w3.org/2000/svg'>
                                                 <circle opacity='0.1' cx='18' cy='18' r='18'
@@ -179,71 +185,61 @@
 
 
 
-
-    <div id="updatecustomermodal"
-        class="fixed inset-0 z-50 overflow-y-scroll hidden flex items-center justify-center bg-black bg-opacity-50">
-        <div class="fixed inset-0 transition-opacity">
-            <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
-        </div>
-        <div class="relative p-4 w-full max-w-6xl max-h-full">
-            <form id="UpdatecustomerData" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="relative bg-white shadow-dark rounded-lg dark:bg-gray-700">
-                    <div class="flex items-center justify-between p-5 rounded-t bg-primary">
-                        <h3 class="text-xl font-semibold text-white">
-                            @lang('lang.Details')
-                        </h3>
-                        <button type="button" class="text-white bg-transparent rounded-lg text-sm w-8 h-8"
-                            data-modal-hide="updatecustomermodal">
-                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <div class="flex p-5 w-full lg:flex-row flex-col">
-                        <div class="flex gap-4 lg:w-[50%] w-full lg:justify-start justify-center">
-                            <div class="video-container flex flex-col py-7">
-                                <div class="first-image">
-                                    <img src="" alt="" class="h-[250px] w-[300px]">
-                                </div>
-                                <div class="flex gap-3 py-3 flex-wrap">
-                                    <div class="images flex gap-3 py-3 flex-wrap">
-                                        <!-- Last three images will be appended here -->
-                                    </div>
-                                    <video src="" controls loop class="h-[116px] mt-3 w-[116px]"
-                                        id="videoTag"></video>
-                                </div>
-                            </div>
+    <x-modal id="business-detail-modal">
+        <x-slot name="title">@lang('lang.Details')</x-slot>
+        <x-slot name="modal_width">max-w-6xl</x-slot>
+        <x-slot name="body">
+            <div id="modal-loading">
+                <div class=" text-center h-[400px] w-full flex justify-center items-center  ">
+                    <svg aria-hidden="true" class="w-12 h-12 mx-auto text-center text-gray animate-spin fill-primary"
+                        viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                            fill="currentColor" />
+                        <path
+                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                            fill="currentFill" />
+                    </svg>
+                </div>
+            </div>
+            <div class="flex p-5 w-full lg:flex-row flex-col hidden">
+                <div class="flex gap-4 lg:w-[50%] w-full lg:justify-start justify-center">
+                    <div class="video-container flex flex-col py-7">
+                        <div class="first-image">
+                            <img src="" alt="" class="h-[250px] w-[300px]">
                         </div>
-                        <div class="px-5 py-7 w-full lg:w-[50%]">
-                            <h1 class="text-4xl font-bold">@lang('lang.Title')</h1>
-                            <div class="h-1 bg-black w-40 mt-3"></div>
-                            <div class="flex gap-10 pt-7">
-                                <h5 class="font-bold">@lang('lang.Category') :</h5>
-                                <p class="category"></p>
+                        <div class="flex gap-3 py-3 flex-wrap">
+                            <div class="images flex gap-3 py-3 flex-wrap">
+                                <!-- Last three images will be appended here -->
                             </div>
-                            <div class="flex gap-12 pt-3">
-                                <h5 class="font-bold">@lang('lang.Location') :</h5>
-                                <p class="location"></p>
-                            </div>
-                            <div class="flex gap-20 pt-3">
-                                <h5 class="font-bold">@lang('lang.Date') :</h5>
-                                <p class="date"></p>
-                            </div>
-                            <div class="flex gap-6 pt-3">
-                                <h5 class="font-bold text-nowrap">
-                                    @lang('lang.Description') :</h5>
-                                <p class="text-justify description break-words"></p>
-                            </div>
+                            <video src="" controls loop class="h-[116px] mt-3 w-[116px]" id="videoTag"></video>
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
-    </div>
+                <div class="px-5 py-7 w-full lg:w-[50%]">
+                    <h1 class="text-4xl font-bold">@lang('lang.Title')</h1>
+                    <div class="h-1 bg-black w-40 mt-3"></div>
+                    <div class="flex gap-10 pt-7">
+                        <h5 class="font-bold">@lang('lang.Category') :</h5>
+                        <p class="category"></p>
+                    </div>
+                    <div class="flex gap-12 pt-3">
+                        <h5 class="font-bold">@lang('lang.Location') :</h5>
+                        <p class="location"></p>
+                    </div>
+                    <div class="flex gap-20 pt-3">
+                        <h5 class="font-bold">@lang('lang.Date') :</h5>
+                        <p class="date"></p>
+                    </div>
+                    <div class="flex gap-6 pt-3">
+                        <h5 class="font-bold text-nowrap">
+                            @lang('lang.Description') :</h5>
+                        <p class="text-justify description break-words"></p>
+                    </div>
+                </div>
+            </div>
+        </x-slot>
+    </x-modal>
 @endsection
 @section('js')
     <script>
