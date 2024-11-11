@@ -57,11 +57,12 @@
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
                                         <button data-modal-target="business-detail-modal"
+                                            url="../singleBusinesses/{{ $bussiness->id }}"
                                             data-modal-toggle="business-detail-modal" data-id="{{ $bussiness->id }}"
-                                            class="cursor-pointer view-button">
+                                            class="cursor-pointer view-button getDataBtn">
                                             <img width="38px" src="{{ asset('images/icons/views.svg') }}" alt="View">
                                         </button>
-                                        <button class="updateDataBtn">
+                                        <button class="updateDataBtn" url="../singleBusinesses/{{ $bussiness->id }}">
                                             <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
                                                 xmlns='http://www.w3.org/2000/svg'>
                                                 <circle opacity='0.1' cx='18' cy='18' r='18'
@@ -115,11 +116,31 @@
                             requirements="SVG, PNG or JPG (MAX. 600x600px)"></x-file-uploader>
                     </div>
                     <div class="col-span-3 grid grid-cols-2 gap-4 mt-4">
-                        <x-file-uploader id="video" name="video" title="Upload business video"
-                            requirements="Mp4 (MAX. 1080x1920px)"></x-file-uploader>
+                        <div class="relative flex items-center justify-center w-full h-full">
+                            <label
+                                class="file-upload-label flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-md cursor-pointer bg-gray-50">
+                                <div class="file-upload-content flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                    </svg>
+                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                            class="font-semibold">Upload business video</span>
+                                    </p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Mp4 (MAX. 1080x1920px)</p>
+                                </div>
+                                <input type="file" class="file-input hidden" name="video"
+                                    onchange="previewFile(event)" />
+                                <video
+                                    class="file-preview absolute top-0 left-0 w-full h-full object-contain hidden bg-black rounded-lg"></video>
+                            </label>
+                        </div>
                         <div>
                             <ul class="list-disc list-inside">
-                                <li class="text-sm">Lorem ipsum dolor sit a met consectetur adipisicing elit. Enim, debitis?
+                                <li class="text-sm">Lorem ipsum dolor sit a met consectetur adipisicing elit. Enim,
+                                    debitis?
                                 </li>
                                 <li class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, debitis?
                                 </li>
@@ -144,8 +165,8 @@
                         </x-slot>
 
                     </x-select>
-                    <x-input id="price" label="{{ __('lang.Price') }}(€)" placeholder="{{ __('lang.Enter_price') }}"
-                        name='price' type="text"></x-input>
+                    <x-input id="price" label="{{ __('lang.Price') }}(€)"
+                        placeholder="{{ __('lang.Enter_price') }}" name='price' type="text"></x-input>
                     {{-- <x-select id="categoryNameDe" label="{{ __('lang.Category') }}(DE)" name='name_en'>
                     <x-slot name="options">
                         <option selected disabled>@lang('lang.Select_Category')</option>
@@ -189,7 +210,7 @@
         <x-slot name="title">@lang('lang.Details')</x-slot>
         <x-slot name="modal_width">max-w-6xl</x-slot>
         <x-slot name="body">
-            <div id="modal-loading">
+            <div class="modal-loading hidden">
                 <div class=" text-center h-[400px] w-full flex justify-center items-center  ">
                     <svg aria-hidden="true" class="w-12 h-12 mx-auto text-center text-gray animate-spin fill-primary"
                         viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -202,14 +223,15 @@
                     </svg>
                 </div>
             </div>
-            <div class="flex p-5 w-full lg:flex-row flex-col hidden">
+            <div class="flex p-5 w-full lg:flex-row flex-col modal-content ">
                 <div class="flex gap-4 lg:w-[50%] w-full lg:justify-start justify-center">
                     <div class="video-container flex flex-col py-7">
                         <div class="first-image">
-                            <img src="" alt="" class="h-[250px] w-[300px]">
+                            <img id="dimage-1" src="" alt=""
+                                class="h-[250px] w-[300px] object-contain bg-black">
                         </div>
                         <div class="flex gap-3 py-3 flex-wrap">
-                            <div class="images flex gap-3 py-3 flex-wrap">
+                            <div class="images flex gap-3 py-3 " id="image-container">
                                 <!-- Last three images will be appended here -->
                             </div>
                             <video src="" controls loop class="h-[116px] mt-3 w-[116px]" id="videoTag"></video>
@@ -217,24 +239,29 @@
                     </div>
                 </div>
                 <div class="px-5 py-7 w-full lg:w-[50%]">
-                    <h1 class="text-4xl font-bold">@lang('lang.Title')</h1>
+                    <h1 class="text-4xl font-bold">@lang('lang.Details')</h1>
                     <div class="h-1 bg-black w-40 mt-3"></div>
-                    <div class="flex gap-10 pt-7">
+                    <div class="flex gap-20 pt-7">
+                        <h5 class="font-bold text-nowrap">
+                            @lang('lang.Title') :</h5>
+                        <p class="text-justify break-words" id="dTitle"></p>
+                    </div>
+                    <div class="flex gap-10 pt-3">
                         <h5 class="font-bold">@lang('lang.Category') :</h5>
-                        <p class="category"></p>
+                        <p class="category" id="dCategory"></p>
                     </div>
                     <div class="flex gap-12 pt-3">
                         <h5 class="font-bold">@lang('lang.Location') :</h5>
-                        <p class="location"></p>
+                        <p class="location" id="dLocation"></p>
                     </div>
                     <div class="flex gap-20 pt-3">
                         <h5 class="font-bold">@lang('lang.Date') :</h5>
-                        <p class="date"></p>
+                        <p class="date" id='Date'></p>
                     </div>
                     <div class="flex gap-6 pt-3">
                         <h5 class="font-bold text-nowrap">
                             @lang('lang.Description') :</h5>
-                        <p class="text-justify description break-words"></p>
+                        <p class="text-justify description break-words" id="dDescription"></p>
                     </div>
                 </div>
             </div>
@@ -279,6 +306,34 @@
             if (response.success) {
                 $('.modalCloseBtn').click();
             } else {}
+        });
+        $(document).on("getResponse", function(event, response) {
+            console.log(response);
+
+            if (response.success) {
+                let data = response.data;
+                $('#dCategory').text(data.category + "/" + data.category_de)
+                $('#dLocation').text(data.city + "/" + data.country)
+                $('#Date').text(data.date)
+                $('#dDescription').text(data.description)
+                $('#dTitle').text(data.title)
+                $('#videoTag').attr('src', data.video)
+                $('#dimage-1').attr('src', data.video)
+                const $imageContainer = $('#image-container');
+
+                $('#dimage-1').attr('src', data.images[0]);
+                data.images.forEach((src, index) => {
+                    // Create an img element
+                    const $img = $('<img>').attr('src', src).attr('id', `dimage-${index + 1}`).attr(
+                        'class',
+                        'h-[116px] mt-3 w-[116px] object-contain bg-black ');
+                    $imageContainer.append($img);
+                });
+            } else {
+
+                $(".modal-loading").removeClass("hidden");
+                $(".modal-content").addClass("hidden");
+            }
         });
     </script>
 @endsection

@@ -358,11 +358,16 @@ class AddBusinessController extends Controller
 
     public function getSingleBusinesses($id)
     {
-        $business =  addBusiness::where('id', $id)->first();
-        $business->images = json_decode($business->images, true);
-        $category = AddCategory::where('id', "$business->category")->first();
-        $business->category = $category->category_name;
-        $business->category_de = $category->category_name_de;
-        return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $business], 201);
+        try {
+            $business =  addBusiness::where('id', $id)->first();
+            $business->images = json_decode($business->images, true);
+            $category = AddCategory::where('id', "$business->category")->first();
+            $business->category = $category->category_name;
+            $business->category_de = $category->category_name_de;
+            $business->date = $business->created_at->format('M d, Y');
+            return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $business], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 }
