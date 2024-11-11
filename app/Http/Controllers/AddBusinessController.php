@@ -25,9 +25,11 @@ class AddBusinessController extends Controller
                 'video' => 'nullable',
                 'category' => 'required',
                 'title' => 'required',
+                'title_de' => 'required',
                 'country' => 'required',
                 'city' => 'required',
                 'description' => 'required',
+                'description_de' => 'required',
                 'price' => 'required',
             ]);
 
@@ -55,20 +57,23 @@ class AddBusinessController extends Controller
             }
 
             $add_business = AddBusiness::create([
+                'user_id' => session('user_det')['user_id'],
                 'images' => json_encode($imagePaths),
                 'video' => $videoPath,
                 'category' => $validatedData['category'],
                 'title' => $validatedData['title'],
+                'title_de' => $validatedData['title_de'],
                 'country' => $validatedData['country'],
                 'city' => $validatedData['city'],
                 'description' => $validatedData['description'],
+                'description_de' => $validatedData['description_de'],
                 'price' => $validatedData['price'],
             ]);
 
             $add_business->save();
-            return redirect('businesses');
+            return response()->json(['success' => true, 'message' => "Business add successfully"], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
     public function updateBusiness(Request $request, string $id)
@@ -82,17 +87,21 @@ class AddBusinessController extends Controller
                 'video' => 'nullable',
                 'category' => 'required',
                 'title' => 'required',
+                'title_de' => 'required',
                 'country' => 'required',
                 'city' => 'required',
                 'description' => 'required',
+                'description_de' => 'required',
                 'price' => 'required',
             ]);
             $update_business = AddBusiness::find($id);
             $update_business->category = $validatedData['category'];
             $update_business->title = $validatedData['title'];
+            $update_business->title_de = $validatedData['title_de'];
             $update_business->country = $validatedData['country'];
             $update_business->city = $validatedData['city'];
             $update_business->description = $validatedData['description'];
+            $update_business->description_de = $validatedData['description_de'];
             $update_business->price = $validatedData['price'];
             $existingImages = json_decode($update_business->images, true);
             $imageFields = ['bus_img1', 'bus_img2', 'bus_img3', 'bus_img4'];
@@ -135,7 +144,7 @@ class AddBusinessController extends Controller
     public function businesses()
     {
         $bussinesses = AddBusiness::all();
-        $categories = AddCategory::all();
+        $categories = AddCategory::where('status', 1)->get();
         return view('businesses_list', compact('bussinesses', 'categories'));
     }
 

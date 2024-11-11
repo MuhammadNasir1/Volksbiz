@@ -40,13 +40,13 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
                                     @php
-                                        $images = json_decode($bussiness->images);
+                                        $images = json_decode($bussiness->images, true);
                                     @endphp
 
 
                                     <div class="h-20 w-20">
                                         <img class="object-contain rounded-full h-full w-full bg-black  border border-primary"
-                                            src="{{ isset($images[0]) && !empty($images) ? asset($bussiness->bus_img1) : asset('images/default-logo.png') }}"
+                                            src="{{ isset($images[0]) && !empty($images) ? asset($images[0]) : asset('images/default-logo.png') }}"
                                             alt="No Image ">
                                     </div>
                                 </td>
@@ -114,14 +114,15 @@
                     </div>
 
                     <x-input id="titleEn" label="{{ __('lang.Title') }}(EN)"
-                        placeholder="{{ __('lang.Title_In_English') }}" name='title_en' type="text"></x-input>
+                        placeholder="{{ __('lang.Title_In_English') }}" name='title' type="text"></x-input>
                     <x-input id="titleDe" label="{{ __('lang.Title') }}(De)"
-                        placeholder="{{ __('lang.Title_In_German') }}" name='title_en' type="text"></x-input>
-                    <x-select id="categoryNameEn" label="{{ __('lang.Category') }}" name='name_en'>
+                        placeholder="{{ __('lang.Title_In_German') }}" name='title_de' type="text"></x-input>
+                    <x-select id="categoryNameDe" label="{{ __('lang.Category') }}" name='category'>
                         <x-slot name="options">
                             <option selected disabled> @lang('lang.Select_Category')</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}"> {{ $category->name_en }} / {{ $category->name_de }}
+                                <option value="{{ $category->id }}"> {{ $category->category_name }} /
+                                    {{ $category->category_name_de }}
                                 </option>
                             @endforeach
                         </x-slot>
@@ -147,9 +148,9 @@
                         name='city' type="text"></x-input>
                     <div class="col-span-3 grid grid-cols-2 gap-4">
                         <x-textarea id="infoEn" label="{{ __('lang.info') }}(EN)"
-                            placeholder="{{ __('lang.Info_In_English') }}" name='info_en'></x-textarea>
+                            placeholder="{{ __('lang.Info_In_English') }}" name='description'></x-textarea>
                         <x-textarea id="infoEn" label="{{ __('lang.info') }}(De)"
-                            placeholder="{{ __('lang.Info_In_German') }}" name='info_en'></x-textarea>
+                            placeholder="{{ __('lang.Info_In_German') }}" name='description_de'></x-textarea>
                     </div>
 
 
@@ -233,4 +234,45 @@
             </form>
         </div>
     </div>
+@endsection
+@section('js')
+    <script>
+        function updateDatafun() {
+
+            $('.updateDataBtn').click(function() {
+                $('#business-modal').removeClass("hidden");
+                $('#business-modal').addClass('flex');
+
+                $('#postDataForm').attr('url', 'updateCategory/' + $(this).attr('CategoryId'));
+
+
+                $('#categoryNameEn').val($(this).attr('nameEn'));
+                $('#categoryNameDe').val($(this).attr('nameDe'));
+                let fileImg = $('#business-modal .file-preview');
+                fileImg.removeClass('hidden').attr('src', $(this).attr('image'));
+
+                $('#business-modal #modalTitle').text("Edit Category");
+                $('#business-modal #submitBtn').text("Update");
+
+            });
+        }
+        updateDatafun();
+        // $('#addModalBtn').click(function() {
+        //     $('#postDataForm')[0].reset();
+        //     $('#postDataForm').attr('url', 'addCategory');
+        //     let fileImg = $('#business-modal .file-preview');
+        //     fileImg.addClass('hidden');
+        //     $('#business-modal #modalTitle').text("Add Category");
+        //     $('#business-modal #submitBtn').text("Add");
+
+        // })
+        // Listen for the custom form submission response event
+        $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
+            console.log(response);
+
+            if (response.success) {
+                $('.modalCloseBtn').click();
+            } else {}
+        });
+    </script>
 @endsection

@@ -12,13 +12,16 @@ class AddBusiness extends Model
     public $timestamps = true;
 
     protected  $fillable = [
+        'user_id',
         'images',
         'video',
         'category',
         'title',
+        'title_de',
         'country',
         'city',
         'description',
+        'description_de',
         'price',
     ];
 }

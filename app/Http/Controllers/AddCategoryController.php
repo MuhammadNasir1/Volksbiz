@@ -12,13 +12,13 @@ class AddCategoryController extends Controller
 
         try {
             $validatedData = $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-                'name_en' => 'required|unique:add_categories,name_en',
-                'name_de' => 'required|unique:add_categories,name_en',
+                'category_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'category_name' => 'required|unique:add_categories,category_name',
+                'category_name_de' => 'required|unique:add_categories,category_name_de',
             ]);
 
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
+            if ($request->hasFile('category_image')) {
+                $image = $request->file('category_image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $image->storeAs('public/category_images', $imageName); // Adjust storage path as needed
                 $img =  $validatedData['image'] = 'storage/category_images/' . $imageName;
@@ -27,9 +27,9 @@ class AddCategoryController extends Controller
             }
 
             $category =  new AddCategory;
-            $category->name_en = $validatedData['name_en'];
-            $category->name_de = $validatedData['name_de'];
-            $category->image = $img;
+            $category->category_name = $validatedData['category_name'];
+            $category->category_name_de = $validatedData['category_name_de'];
+            $category->category_image = $img;
 
             $category->save();
 
@@ -70,19 +70,19 @@ class AddCategoryController extends Controller
 
         try {
             $validatedData = $request->validate([
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-                'name_en' => 'required',
-                'name_de' => 'required',
+                'category_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+                'category_name' => 'required',
+                'category_name_de' => 'required',
             ]);
 
             $category =  addcategory::find($id);
-            $category->name_en = $validatedData['name_en'];
-            $category->name_de = $validatedData['name_de'];
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
+            $category->category_name = $validatedData['category_name'];
+            $category->category_name_de = $validatedData['category_name_de'];
+            if ($request->hasFile('category_image')) {
+                $image = $request->file('category_image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $image->storeAs('public/category_images', $imageName); // Adjust storage path as needed
-                $category->image  = 'storage/category_images/' . $imageName;
+                $category->category_image  = 'storage/category_images/' . $imageName;
             }
 
             $category->update();

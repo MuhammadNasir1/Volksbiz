@@ -43,16 +43,16 @@
                                             alt="{{ $data->name }}">
                                     </div>
                                 </td>
-                                <td>{{ $data->name_en }}</td>
-                                <td>{{ $data->name_de }}</td>
-                                <td>{{ \App\Models\AddBusiness::where('category', $data->name_en)->count() }}</td>
+                                <td>{{ $data->category_name }}</td>
+                                <td>{{ $data->category_name_de }}</td>
+                                <td>{{ \App\Models\AddBusiness::where('category', $data->category_name)->count() }}</td>
 
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
                                         <button class="updateDataBtn" CategoryId="{{ $data->id }}"
-                                            nameEn="{{ $data->name_en }}" image="{{ $data->image }}"
-                                            nameDe="{{ $data->name_de }}">
+                                            nameEn="{{ $data->category_name }}" image="{{ $data->category_image }}"
+                                            nameDe="{{ $data->category_name_de }}">
                                             <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
                                                 xmlns='http://www.w3.org/2000/svg'>
                                                 <circle opacity='0.1' cx='18' cy='18' r='18'
@@ -91,15 +91,15 @@
         <x-slot name="body">
             <form id="postDataForm" url="addCategory" method="post">
                 @csrf
-                <x-file-uploader id="categoryImage" name="image" title="upload Category Image"
+                <x-file-uploader id="categoryImage" name="category_image" title="upload Category Image"
                     requirements="SVG, PNG, JPG or GIF (MAX. 600x600px)"></x-file-uploader>
                 <div class="mt-3">
                     <x-input id="categoryNameEn" label="{{ __('lang.Category') }}(EN)"
-                        placeholder="{{ __('lang.Name_In_English') }}" name='name_en' type="text"></x-input>
+                        placeholder="{{ __('lang.Name_In_English') }}" name='category_name' type="text"></x-input>
                 </div>
                 <div class="mt-3">
                     <x-input id="categoryNameDe" label="{{ __('lang.Category') }}(DE)"
-                        placeholder="{{ __('lang.Name_In_German') }}" name='name_de' type="text"></x-input>
+                        placeholder="{{ __('lang.Name_In_German') }}" name='category_name_de' type="text"></x-input>
                 </div>
                 <div class="mt-6">
 

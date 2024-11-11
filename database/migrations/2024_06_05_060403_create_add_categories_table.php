@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('add_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
-            $table->string('name_en');
-            $table->string('name_de');
+            $table->string('category_image');
+            $table->string('category_name');
+            $table->string('category_name_de');
             $table->string('status')->default(1);
-            $table->dateTime('datetime')->useCurrent();
+            $table->dateTime('cat_datetime')->useCurrent();
         });
     }
 

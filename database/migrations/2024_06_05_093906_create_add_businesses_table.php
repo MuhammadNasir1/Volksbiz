@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('businesses', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id');
             $table->string('images')->nullable();
             $table->string('video')->nullable();
             $table->string('category');
             $table->string('title');
+            $table->string('title_de');
             $table->string('country');
             $table->string('city');
             $table->text('description');
+            $table->text('description_de');
             $table->string('price');
             $table->timestamps();
         });
