@@ -98,9 +98,22 @@ class AddBusinessController extends Controller
                 'price' => 'required',
             ]);
 
+            $imagePaths = []; // Initialize an array to store image paths
+
+            foreach ($request->file('images') as $index => $image) {
+                if ($image->isValid()) {
+                    $imageName = time() . ($index + 1) . '.' . $image->getClientOriginalExtension();
+                    $image->storeAs('public/business_images', $imageName);
+                    $validatedData['images'][$index] = 'storage/business_images/' . $imageName;
+                    $imagePaths[] = 'storage/business_images/' . $imageName;
+                } else {
+                    $validatedData['images'][$index] = null;
+                }
+            }
+
             $business = AddBusiness::create([
                 'user_id' => $validatedData['user_id'],
-                'images' => json_encode($validatedData['images']),
+                'images' => json_encode($imagePaths),
                 'video' => $validatedData['video'],
                 'category' => $validatedData['category'],
                 'title' => $validatedData['title'],
