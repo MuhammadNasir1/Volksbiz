@@ -49,6 +49,7 @@ Route::get('/searchBusiness', [AddBusinessController::class, 'searchBusiness']);
 Route::post('/addBusiness', [AddBusinessController::class, 'addSellerBusiness']);
 Route::get('/getBusiness', [AddBusinessController::class, 'getBusiness']);
 Route::get('/getBusiness/{id}', [AddBusinessController::class, 'getBusiness']);
+Route::get('/deleteBusiness/{id}', [AddBusinessController::class, 'delBusiness']);
 Route::get('/getFilteredBusiness', [AddBusinessController::class, 'getFilteredBusiness']);
 Route::post('/orderBusiness', [AddBusinessController::class, 'orderBusiness']);
 
