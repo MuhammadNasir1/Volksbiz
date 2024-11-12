@@ -36,6 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [authController::class, 'logout']);
     Route::get('/getUser', [authController::class, 'getUserProfile']);
     Route::get('/getOrders', [AddBusinessController::class, 'getOrders']);
+    Route::get('/getSellerBusiness', [AddBusinessController::class, 'getSellerBusiness']);
 });
 
 // category api
@@ -48,7 +49,6 @@ Route::get('/searchBusiness', [AddBusinessController::class, 'searchBusiness']);
 //Business api
 Route::post('/addBusiness', [AddBusinessController::class, 'addSellerBusiness']);
 Route::get('/getBusiness', [AddBusinessController::class, 'getBusiness']);
-Route::get('/getSellerBusiness', [AddBusinessController::class, 'getSellerBusiness']);
 Route::get('/deleteBusiness/{id}', [AddBusinessController::class, 'delBusiness']);
 Route::post('/updateBusiness/{id}', [AddBusinessController::class, 'updateSellerBusiness']);
 Route::get('/getFilteredBusiness', [AddBusinessController::class, 'getFilteredBusiness']);
