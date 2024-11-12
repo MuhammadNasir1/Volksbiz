@@ -200,13 +200,40 @@ class AddBusinessController extends Controller
         return response()->json(['success' => true, 'message' => "Business delete successfully"], 200);;
     }
 
-    public function getBusiness($id = null)
+    public function getBusiness()
     {
         try {
-            if ($id) {
-                $businesses = AddBusiness::where('user_id',  $id)->get();
+            $businesses = AddBusiness::all();
+            foreach ($businesses as $business) {
+                $business->images = json_decode($business->images);
+                $category = AddCategory::where('id', "$business->category")->first();
+                if ($category) {
+                    $business->category = $category->category_name;
+                    $business->category_de = $category->category_name_de;
+                } else {
+                    $business->category = null;
+                    $business->category_de = null;
+                }
+            }
+            return response()->json(['success' => true, 'message' => 'Data get successfully', 'business' => $businesses], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+    public function getSellerBusiness($id = null)
+    {
+        try {
+            $user = Auth()->user();
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
+            }
+            $userId  =  $user->id;
+
+            if ($userId) {
+                $businesses = AddBusiness::where('user_id',  $userId)->get();
             } else {
-                $businesses = AddBusiness::all();
+
+                $businesses = [];
             }
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
