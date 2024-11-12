@@ -87,6 +87,7 @@ class AddBusinessController extends Controller
             $validatedData = $request->validate([
                 'user_id' => 'required',
                 'images' => 'nullable|array',
+                'images.*' => 'file|mimes:jpg,jpeg,png,gif',
                 'video' => 'nullable',
                 'category' => 'required',
                 'title' => 'required',
@@ -98,23 +99,31 @@ class AddBusinessController extends Controller
                 'price' => 'required',
             ]);
 
-            $imagePaths = []; // Initialize an array to store image paths
+            $imagePaths = []; // Initialize an array to store file paths
 
-            foreach ($request->file('images') as $index => $image) {
-                if ($image->isValid()) {
-                    $imageName = time() . ($index + 1) . '.' . $image->getClientOriginalExtension();
-                    $image->storeAs('public/business_images', $imageName);
-                    $validatedData['images'][$index] = 'storage/business_images/' . $imageName;
-                    $imagePaths[] = 'storage/business_images/' . $imageName;
-                } else {
-                    $validatedData['images'][$index] = null;
+            // Check if the request contains files in the 'images' array
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $index => $image) {
+                    if ($image->isValid()) {
+                        $imageName = time() . '_' . ($index + 1) . '.' . $image->getClientOriginalExtension();
+
+                        $image->storeAs('public/business_images', $imageName);
+                        $imagePaths[] = 'storage/business_images/' . $imageName;
+                    }
                 }
             }
-
+            if ($request->hasFile('video')) {
+                $video = $request->file('video');
+                $videoName = time() . '.' . $video->getClientOriginalExtension();
+                $video->storeAs('public/busniess_videos', $videoName);
+                $videoPath = 'storage/busniess_videos/' . $videoName;
+            } else {
+                $videoPath = 'null';
+            }
             $business = AddBusiness::create([
                 'user_id' => $validatedData['user_id'],
                 'images' => json_encode($imagePaths),
-                'video' => $validatedData['video'],
+                'video' => $videoPath,
                 'category' => $validatedData['category'],
                 'title' => $validatedData['title'],
                 'title_de' => $validatedData['title_de'],
@@ -152,7 +161,18 @@ class AddBusinessController extends Controller
                 'price' => 'required',
             ]);
             $business = AddBusiness::find($id);
-
+            $imagePaths = $business ? json_decode($business->images, true) : []; // Get existing images if available
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $index => $image) {
+                    if ($image->isValid()) {
+                        // Generate a unique file name and store the image
+                        $imageName = time() . ($index + 1) . '.' . $image->getClientOriginalExtension();
+                        $image->storeAs('public/business_images', $imageName);
+                        $imagePaths[] = 'storage/business_images/' . $imageName; // Add new file path
+                    }
+                }
+            }
+            $business->images = json_encode($imagePaths);
             $business->category = $validatedData['category'];
             $business->title = $validatedData['title'];
             $business->title_de = $validatedData['title_de'];
@@ -161,7 +181,7 @@ class AddBusinessController extends Controller
             $business->description = $validatedData['description'];
             $business->description_de = $validatedData['description_de'];
             $business->price = $validatedData['price'];
-
+            $business->update();
             return response()->json(['success' => true, 'message' => "Business update successfully", "data"  =>  $business], 201);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
