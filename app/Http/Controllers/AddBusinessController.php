@@ -200,10 +200,14 @@ class AddBusinessController extends Controller
         return response()->json(['success' => true, 'message' => "Business delete successfully"], 200);;
     }
 
-    public function getBusiness()
+    public function getBusiness($id = null)
     {
         try {
-            $businesses = AddBusiness::all();
+            if ($id) {
+                $businesses = AddBusiness::where('user_id',  $id)->get();
+            } else {
+                $businesses = AddBusiness::all();
+            }
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
                 $category = AddCategory::where('id', "$business->category")->first();
