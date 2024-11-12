@@ -121,6 +121,38 @@ class AddBusinessController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
+
+    public function updateSellerBusiness(Request $request, $id)
+    {
+        try {
+            $validatedData = $request->validate([
+                'images' => 'nullable|array',
+                'video' => 'nullable',
+                'category' => 'required',
+                'title' => 'required',
+                'title_de' => 'required',
+                'country' => 'required',
+                'city' => 'required',
+                'description' => 'required',
+                'description_de' => 'required',
+                'price' => 'required',
+            ]);
+            $business = AddBusiness::find($id);
+
+            $business->category = $validatedData['category'];
+            $business->title = $validatedData['title'];
+            $business->title_de = $validatedData['title_de'];
+            $business->country = $validatedData['country'];
+            $business->city = $validatedData['city'];
+            $business->description = $validatedData['description'];
+            $business->description_de = $validatedData['description_de'];
+            $business->price = $validatedData['price'];
+
+            return response()->json(['success' => true, 'message' => "Business update successfully", "data"  =>  $business], 201);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
     public function updateBusiness(Request $request, string $id)
     {
         try {
@@ -220,7 +252,7 @@ class AddBusinessController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
-    public function getSellerBusiness($id = null)
+    public function getSellerBusiness()
     {
         try {
             $user = Auth()->user();
@@ -228,13 +260,7 @@ class AddBusinessController extends Controller
                 return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
             }
             $userId  =  $user->id;
-
-            if ($userId) {
-                $businesses = AddBusiness::where('user_id',  $userId)->get();
-            } else {
-
-                $businesses = [];
-            }
+            $businesses = AddBusiness::where('user_id',  $userId)->get();
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
                 $category = AddCategory::where('id', "$business->category")->first();
