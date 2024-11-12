@@ -150,6 +150,7 @@ class AddBusinessController extends Controller
         try {
             $validatedData = $request->validate([
                 'images' => 'nullable|array',
+                'images.*' => 'file|mimes:jpg,jpeg,png,gif',
                 'video' => 'nullable',
                 'category' => 'required',
                 'title' => 'required',
@@ -161,18 +162,35 @@ class AddBusinessController extends Controller
                 'price' => 'required',
             ]);
             $business = AddBusiness::find($id);
-            $imagePaths = $business ? json_decode($business->images, true) : []; // Get existing images if available
+            if (!$business) {
+                return response()->json(['success' => false, 'message' => 'Business not found'], 404);
+            }
+
+            if ($request->hasFile('video')) {
+                $video = $request->file('video');
+                $videoName = time() . '.' . $video->getClientOriginalExtension();
+                $video->storeAs('public/busniess_videos', $videoName);
+                $videoPath = 'storage/busniess_videos/' . $videoName;
+            }
+
+            $imagePaths = $business->images ? json_decode($business->images, true) : [];
+
+
+            // Check if the request contains files in the 'images' array
             if ($request->hasFile('images')) {
+                $imagePaths =  [];
                 foreach ($request->file('images') as $index => $image) {
                     if ($image->isValid()) {
-                        // Generate a unique file name and store the image
-                        $imageName = time() . ($index + 1) . '.' . $image->getClientOriginalExtension();
+                        $imageName = time() . '_' . ($index + 1) . '.' . $image->getClientOriginalExtension();
+
                         $image->storeAs('public/business_images', $imageName);
-                        $imagePaths[] = 'storage/business_images/' . $imageName; // Add new file path
+                        $imagePaths[] = 'storage/business_images/' . $imageName;
                     }
                 }
             }
+
             $business->images = json_encode($imagePaths);
+            $business->video =  $videoPath ??  $business->video;
             $business->category = $validatedData['category'];
             $business->title = $validatedData['title'];
             $business->title_de = $validatedData['title_de'];
@@ -182,6 +200,10 @@ class AddBusinessController extends Controller
             $business->description_de = $validatedData['description_de'];
             $business->price = $validatedData['price'];
             $business->update();
+            $business->images = json_decode($business->images, true);
+            $category = AddCategory::where('id', "$business->category")->first();
+            $business->category = $category->category_name;
+            $business->category_de = $category->category_name_de;
             return response()->json(['success' => true, 'message' => "Business update successfully", "data"  =>  $business], 201);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
