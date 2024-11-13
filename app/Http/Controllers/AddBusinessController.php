@@ -139,6 +139,7 @@ class AddBusinessController extends Controller
             $category = AddCategory::where('id', "$business->category")->first();
             $business->category = $category->category_name;
             $business->category_de = $category->category_name_de;
+            $business->category_id = $business->category;
             return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $business], 201);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
@@ -204,6 +205,7 @@ class AddBusinessController extends Controller
             $category = AddCategory::where('id', "$business->category")->first();
             $business->category = $category->category_name;
             $business->category_de = $category->category_name_de;
+            $business->category_id = $business->category;
             return response()->json(['success' => true, 'message' => "Business update successfully", "data"  =>  $business], 201);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
@@ -298,9 +300,11 @@ class AddBusinessController extends Controller
                 if ($category) {
                     $business->category = $category->category_name;
                     $business->category_de = $category->category_name_de;
+                    $business->category_id = $category->id;
                 } else {
                     $business->category = null;
                     $business->category_de = null;
+                    $business->category_id = null;
                 }
             }
             return response()->json(['success' => true, 'message' => 'Data get successfully', 'business' => $businesses], 200);
@@ -323,9 +327,11 @@ class AddBusinessController extends Controller
                 if ($category) {
                     $business->category = $category->category_name;
                     $business->category_de = $category->category_name_de;
+                    $business->category_id = $category->id;
                 } else {
                     $business->category = null;
                     $business->category_de = null;
+                    $business->category_id = null;
                 }
             }
             return response()->json(['success' => true, 'message' => 'Data get successfully', 'business' => $businesses], 200);

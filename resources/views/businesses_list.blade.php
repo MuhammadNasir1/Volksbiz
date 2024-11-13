@@ -30,6 +30,7 @@
                         __('lang.Price'),
                         __('lang.Category'),
                         __('lang.Location'),
+                        __('lang.Status'),
                         __('lang.Action'),
                     ];
                 @endphp
@@ -54,6 +55,11 @@
                                 <td>{{ $bussiness->price }}</td>
                                 <td>{{ $bussiness->category }}</td>
                                 <td>{{ $bussiness->city }} {{ $bussiness->country }}</td>
+                                <td><button data-modal-target="chnage-status-modal" data-modal-toggle="chnage-status-modal">
+                                        {!! $bussiness->status == 1
+                                            ? "<span class='text-green-800 font-semibold text-sm'>Active</span>"
+                                            : "<span class='text-red-600 font-semibold text-sm'>In-Active</span>" !!}
+                                    </button></td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
                                         <button data-modal-target="business-detail-modal"
@@ -263,6 +269,28 @@
                             @lang('lang.Description') :</h5>
                         <p class="text-justify description break-words" id="dDescription"></p>
                     </div>
+                </div>
+            </div>
+        </x-slot>
+    </x-modal>
+
+    {{-- change status modal --}}
+    <x-modal id="chnage-status-modal">
+        <x-slot name="title">@lang('lang.Details')</x-slot>
+        <x-slot name="modal_width">max-w-2xl</x-slot>
+        <x-slot name="body">
+            <div>
+                <x-select id="status" label="{{ __('lang.Status') }}" name='Status'>
+                    <x-slot name="options">
+                        <option selected disabled> @lang('lang.Select_Status')</option>
+                        <option value="1"> @lang('lang.Active')</option>
+                        <option value="2"> @lang('lang.In-Active')</option>
+
+                    </x-slot>
+                </x-select>
+                <div class="mt-6">
+
+                    <x-modal-button title="Chnage Status"></x-modal-button>
                 </div>
             </div>
         </x-slot>

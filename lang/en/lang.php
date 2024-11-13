@@ -166,4 +166,5 @@ return [
     'Info_In_German' => 'Info In German',
     'info' => 'info',
     'Enter_price' => 'Enter price',
+    'In-Active' => 'In-Active',
 ];
