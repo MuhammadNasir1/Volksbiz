@@ -69,7 +69,8 @@ class BlogsController extends Controller
         try {
             $blogs = Blogs::all();
             foreach ($blogs as $blog) {
-                $blog->content = htmlspecialchars_decode($blog->content);
+                $content = htmlspecialchars_decode($blog->content);
+                $blog->content = stripslashes($content);
             }
             return response()->json(['success' => true, "message" => "Data add successfully", "data"  => $blogs], 201);
         } catch (\Exception $e) {
