@@ -296,7 +296,7 @@ class AddBusinessController extends Controller
             $businesses = AddBusiness::all();
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
-                $category = AddCategory::where('id', "$business->category")->first();
+                $category = AddCategory::where('id', $business->category)->first();
                 if ($category) {
                     $business->category = $category->category_name;
                     $business->category_de = $category->category_name_de;
