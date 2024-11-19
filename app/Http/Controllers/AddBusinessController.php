@@ -294,19 +294,19 @@ class AddBusinessController extends Controller
     {
         try {
             $businesses = AddBusiness::all();
-            // foreach ($businesses as $business) {
-            //     $business->images = json_decode($business->images);
-            //     $category = AddCategory::where('id', $business->category)->first();
-            //     if ($category) {
-            //         $business->category = $category->category_name;
-            //         $business->category_de = $category->category_name_de;
-            //         $business->category_id = $category->id;
-            //     } else {
-            //         $business->category = null;
-            //         $business->category_de = null;
-            //         $business->category_id = null;
-            //     }
-            // }
+            foreach ($businesses as $business) {
+                $business->images = json_decode($business->images);
+                $category = AddCategory::where('id', $business->category)->first();
+                if ($category) {
+                    $business->category = $category->category_name;
+                    $business->category_de = $category->category_name_de;
+                    $business->category_id = $category->id;
+                } else {
+                    $business->category = null;
+                    $business->category_de = null;
+                    $business->category_id = null;
+                }
+            }
             return response()->json(['success' => true, 'message' => 'Data get successfully', 'business' => $businesses], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
