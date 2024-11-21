@@ -53,6 +53,7 @@ $(document).ready(function () {
             updateDatafun();
             $("#datatable").DataTable();
             // $("#loading").hide();
+            getData()
         });
     }
 
@@ -145,36 +146,35 @@ $(document).ready(function () {
         });
     });
 
-    function getData() {
-        $(".getDataBtn").click(function () {
-            let url = $(this).attr("url");
-            $.ajax({
-                type: "GET",
-                url: url,
-                // url: url,
-                beforeSend: function () {
-                    $(".modal-loading").removeClass("hidden");
-                    $(".modal-content").addClass("hidden");
-                },
-                success: function (response) {
-                    $(".modal-loading").addClass("hidden");
-                    $(".modal-content").removeClass("hidden");
-                    $(document).trigger("getResponse", [response]);
-                },
-                error: function (jqXHR) {
-                    let response = JSON.parse(jqXHR.responseText);
-                    $(document).trigger("formSubmissionResponse", [
-                        response,
-                        WarningAlert(response.message),
-                    ]);
-                },
-            });
-        });
-    }
-    getData();
+    // function getData() {
+    //     $(".getDataBtn").click(function () {
+    //         let url = $(this).attr("url");
+    //         $.ajax({
+    //             type: "GET",
+    //             url: url,
+    //             // url: url,
+    //             beforeSend: function () {
+    //                 $(".modal-loading").removeClass("hidden");
+    //                 $(".modal-content").addClass("hidden");
+    //             },
+    //             success: function (response) {
+    //                 $(".modal-loading").addClass("hidden");
+    //                 $(".modal-content").removeClass("hidden");
+    //                 $(document).trigger("getResponse", [response]);
+    //             },
+    //             error: function (jqXHR) {
+    //                 let response = JSON.parse(jqXHR.responseText);
+    //                 $(document).trigger("formSubmissionResponse", [
+    //                     response,
+    //                     WarningAlert(response.message),
+    //                 ]);
+    //             },
+    //         });
+    //     });
+    // }
+    // getData();
     $(".dataTable").on("draw", function () {
         updateDatafun();
         delDataFun();
-        getData();
     });
 });

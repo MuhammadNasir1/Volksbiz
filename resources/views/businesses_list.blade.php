@@ -66,14 +66,24 @@
                                             url="../singleBusinesses/{{ $bussiness->id }}"
                                             data-modal-toggle="business-detail-modal" data-id="{{ $bussiness->id }}"
                                             class="cursor-pointer view-button getDataBtn">
-                                            <img width="38px" src="{{ asset('images/icons/views.svg') }}" alt="View">
+                                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="18" cy="18" r="18" fill="#323C47"
+                                                    fill-opacity="0.1" />
+                                                <path
+                                                    d="M17.75 15.3977C16.9724 15.3977 16.2267 15.7066 15.6769 16.2564C15.1271 16.8063 14.8182 17.552 14.8182 18.3295C14.8182 19.1071 15.1271 19.8528 15.6769 20.4027C16.2267 20.9525 16.9724 21.2614 17.75 21.2614C18.5276 21.2614 19.2733 20.9525 19.8231 20.4027C20.3729 19.8528 20.6818 19.1071 20.6818 18.3295C20.6818 17.552 20.3729 16.8063 19.8231 16.2564C19.2733 15.7066 18.5276 15.3977 17.75 15.3977ZM17.75 23.2159C16.4541 23.2159 15.2112 22.7011 14.2948 21.7847C13.3784 20.8684 12.8636 19.6255 12.8636 18.3295C12.8636 17.0336 13.3784 15.7907 14.2948 14.8744C15.2112 13.958 16.4541 13.4432 17.75 13.4432C19.0459 13.4432 20.2888 13.958 21.2052 14.8744C22.1216 15.7907 22.6364 17.0336 22.6364 18.3295C22.6364 19.6255 22.1216 20.8684 21.2052 21.7847C20.2888 22.7011 19.0459 23.2159 17.75 23.2159ZM17.75 11C12.8636 11 8.69068 14.0393 7 18.3295C8.69068 22.6198 12.8636 25.6591 17.75 25.6591C22.6364 25.6591 26.8093 22.6198 28.5 18.3295C26.8093 14.0393 22.6364 11 17.75 11Z"
+                                                    fill="#339B96" />
+                                            </svg>
+
                                         </button>
                                         <button class="updateDataBtn" url="../singleBusinesses/{{ $bussiness->id }}"
                                             nameEn="{{ $bussiness->title }}" nameDe="{{ $bussiness->title_de }}"
                                             category="{{ $bussiness->category_id }}" price="{{ $bussiness->price }}"
                                             country="{{ $bussiness->country }}" city="{{ $bussiness->city }}"
                                             infoDe="{{ $bussiness->description }}"
-                                            infoEn="{{ $bussiness->description_de }}" images="{{ $bussiness->images }}" video="{{$bussiness->video}}" >
+                                            infoEn="{{ $bussiness->description_de }}" images="{{ $bussiness->images }}"
+                                            video="{{ $bussiness->video }}"
+                                            updateUrl="updateBusinessData/{{ $bussiness->id }}">
                                             <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
                                                 xmlns='http://www.w3.org/2000/svg'>
                                                 <circle opacity='0.1' cx='18' cy='18' r='18'
@@ -143,9 +153,10 @@
                                     <p class="text-xs text-gray-500 dark:text-gray-400">Mp4 (MAX. 1080x1920px)</p>
                                 </div>
                                 <input type="file" class="file-input hidden" name="video"
-                                    onchange="previewFile(event)" />
+                                    onchange="previewFile(event)" id="videoLabel" />
                                 <video
-                                    class="file-preview absolute top-0 left-0 w-full h-full object-contain hidden bg-black rounded-lg"></video>
+                                    class="file-preview absolute top-0 left-0 w-full h-full object-contain hidden  bg-black rounded-lg"
+                                    controls autoplay muted accept="video/*"></video>
                             </label>
                         </div>
                         <div>
@@ -245,7 +256,7 @@
                             <div class="images flex gap-3 py-3 " id="image-container">
                                 <!-- Last three images will be appended here -->
                             </div>
-                            <video src="" controls loop class="h-[116px] mt-3 w-[116px]" id="videoTag"></video>
+                            <video src="" controls class="h-[130px] mt-3 w-[140px]" id="videoTag"></video>
                         </div>
                     </div>
                 </div>
@@ -305,13 +316,98 @@
 @endsection
 @section('js')
     <script>
-        function updateDatafun() {
+        
+        function getData() {
 
+            $(".getDataBtn").click(function() {
+                $('#business-detail-modal').removeClass('hidden').addClass('flex')
+                let url = $(this).attr("url");
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    // url: url,
+                    beforeSend: function() {
+                        $(".modal-loading").removeClass("hidden");
+                        $(".modal-content").addClass("hidden");
+                    },
+                    success: function(response) {
+                        $(".modal-loading").addClass("hidden");
+                        $(".modal-content").removeClass("hidden");
+                        $('#dCategory').text('');
+                        $('#dLocation').text('');
+                        $('#Date').text('');
+                        $('#dDescription').text('');
+                        $('#dTitle').text('');
+                        $('#videoTag').attr('src', '');
+                        $('#dimage-1').attr('src', './images/compnay-logo.svg');
+                        const $imageContainer = $('#image-container');
+                        $imageContainer.empty();
+                        if (response.success) {
+                            let data = response.data;
+                            $('#dCategory').text(data.category + "/" + data.category_de)
+                            $('#dLocation').text(data.city + "/" + data.country)
+                            $('#Date').text(data.date)
+                            $('#dDescription').text(data.description)
+                            $('#dTitle').text(data.title)
+
+                            if (data.video !== "null" || data.video !== null) {
+                                $('#videoTag').removeClass('hidden');
+                                $('#videoTag').attr('src', data.video)
+                            } else {
+                                $('#videoTag').addClass('hidden');
+
+                            }
+                            $('#dimage-1').attr('src', data.images[0])
+                            const $imageContainer = $('#image-container');
+
+                            $('#dimage-1').attr('src', data.images[0]);
+                            data.images.forEach((src, index) => {
+                                // Create an img element
+                                const $img = $('<img>').attr('src', src).attr('id',
+                                    `dimage-${index + 1}`).attr(
+                                    'class',
+                                    'h-[116px] mt-3 w-[116px] object-contain bg-black ');
+                                $imageContainer.append($img);
+                            });
+                        } else {
+
+
+                        }
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+
+                        Swal.fire({
+                            position: "center",
+                            icon: "warning",
+                            title: "Error",
+                            text: response.message,
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                        $(".modal-loading").removeClass("hidden");
+                        $(".modal-content").addClass("hidden");
+                    },
+                });
+            });
+
+        }
+        getData()
+        $(".dataTable").on("draw", function () {
+    
+        getData()
+    });
+        $('#VideoUploader .file-preview').click(function() {
+            $('#videoLabel').click();
+
+        })
+
+        function updateDatafun() {
             $('.updateDataBtn').click(function() {
                 $('#business-modal').removeClass("hidden");
                 $('#business-modal').addClass('flex');
 
-                $('#postDataForm').attr('url', 'updateCategory/' + $(this).attr('CategoryId'));
+                $('#postDataForm').attr('url', $(this).attr('updateUrl'));
 
 
                 $('#titleEn').val($(this).attr('nameEn'));
@@ -322,9 +418,14 @@
                 $('#city').val($(this).attr('city'));
                 $('#infoEn').val($(this).attr('infoEn'));
                 $('#infoDe').val($(this).attr('infoDe'));
-                $('#VideoUploader .file-preview').val($(this).attr('video')).removeClass('hidden');
                 let fileImg = $('#business-modal .file-preview');
                 fileImg.addClass('hidden');
+                const videoUrl = $(this).attr('video');
+                if (videoUrl && videoUrl !== null) {
+                    $('#VideoUploader .file-preview').attr('src', $(this).attr('video')).removeClass('hidden');
+                } else {
+                    $('#VideoUploader .file-preview').addClass('hidden');
+                }
 
                 $('#business-modal #modalTitle').text("Edit Category");
                 $('#business-modal #submitBtn').text("Update");
@@ -333,9 +434,9 @@
                 const imageArray = JSON.parse(jsonString);
                 imageArray.forEach((imageUrl, index) => {
                     const uploaderId = `#businessImage${index + 1}`;
-                    let tag  = `${uploaderId} .file-preview`;
+                    let tag = `${uploaderId} .file-preview`;
                     $(tag).attr('src', imageUrl).removeClass('hidden');
-                    
+
 
                 });
 
@@ -353,39 +454,10 @@
         })
         // Listen for the custom form submission response event
         $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
-            console.log(response);
-
             if (response.success) {
+                getData()
                 $('.modalCloseBtn').click();
             } else {}
-        });
-        $(document).on("getResponse", function(event, response) {
-            console.log(response);
-
-            if (response.success) {
-                let data = response.data;
-                $('#dCategory').text(data.category + "/" + data.category_de)
-                $('#dLocation').text(data.city + "/" + data.country)
-                $('#Date').text(data.date)
-                $('#dDescription').text(data.description)
-                $('#dTitle').text(data.title)
-                $('#videoTag').attr('src', data.video)
-                $('#dimage-1').attr('src', data.video)
-                const $imageContainer = $('#image-container');
-
-                $('#dimage-1').attr('src', data.images[0]);
-                data.images.forEach((src, index) => {
-                    // Create an img element
-                    const $img = $('<img>').attr('src', src).attr('id', `dimage-${index + 1}`).attr(
-                        'class',
-                        'h-[116px] mt-3 w-[116px] object-contain bg-black ');
-                    $imageContainer.append($img);
-                });
-            } else {
-
-                $(".modal-loading").removeClass("hidden");
-                $(".modal-content").addClass("hidden");
-            }
         });
     </script>
 @endsection
