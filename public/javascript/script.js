@@ -77,7 +77,7 @@ $(document).ready(function () {
                         type: "GET",
                         url: url,
                         beforeSend: function () {
-                            // $("#loading").show();
+                            $("#loading").show();
                         },
                         success: function (response) {
                             // $("#loading").hide();
