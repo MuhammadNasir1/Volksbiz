@@ -124,7 +124,7 @@ class BlogsController extends Controller
             $blog->category = $validatedData['category'];
             $blog->author = $validatedData['author'];
             $blog->content = htmlspecialchars($validatedData['content']);
-            $blog->content = htmlspecialchars($validatedData['content_de']);
+            $blog->content_de = htmlspecialchars($validatedData['content_de']);
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
