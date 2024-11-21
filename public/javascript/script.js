@@ -44,7 +44,7 @@ $(document).ready(function () {
         // Destroy the existing DataTable instance
         let table = $("#datatable").DataTable();
         table.destroy();
-        // $("#loading").show();
+        $("#loading").show();
 
         // Reload the table body content
         $("#tableBody").load(" #tableBody > *", function () {
@@ -52,7 +52,7 @@ $(document).ready(function () {
             delDataFun();
             updateDatafun();
             $("#datatable").DataTable();
-            // $("#loading").hide();
+            $("#loading").hide();
             getData()
         });
     }
