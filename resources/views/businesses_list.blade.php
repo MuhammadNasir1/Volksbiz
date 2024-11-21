@@ -82,7 +82,7 @@
                                             category="{{ $bussiness->category_id }}" price="{{ $bussiness->price }}"
                                             country="{{ $bussiness->country }}" city="{{ $bussiness->city }}"
                                             infoDe="{{ $bussiness->description }}"
-                                            infoEn="{{ $bussiness->description_de }}" images="{{ $bussiness->images }}"
+                                            infoEn="{{ $bussiness->description }}" images="{{ $bussiness->images }}"
                                             video="{{ $bussiness->video }}"
                                             updateUrl="updateBusinessData/{{ $bussiness->id }}">
                                             <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
