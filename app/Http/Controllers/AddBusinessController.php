@@ -309,7 +309,7 @@ class AddBusinessController extends Controller
     public function getBusiness()
     {
         try {
-            $businesses = AddBusiness::all();
+            $businesses = AddBusiness::where('status' , 1)->get();;
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
                 $category = AddCategory::where('id', $business->category)->first();
