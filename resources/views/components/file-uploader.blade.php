@@ -1,4 +1,4 @@
-<div class="relative flex items-center justify-center w-full h-full">
+<div class="relative flex items-center justify-center w-full h-full" id="{{$id}}">
     <label
         class="file-upload-label flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-md cursor-pointer bg-gray-50">
         <div class="file-upload-content flex flex-col items-center justify-center pt-5 pb-6">

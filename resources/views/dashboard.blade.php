@@ -81,18 +81,11 @@
 
     </div>
 
-    <div class="lg:flex gap-14 mt-16 px-3 ">
+    <div class="lg:flex gap-12  px-3 ">
         <div class="lg:w-[60%] w-full">
-            <div class=" shadow-med p-3 rounded-xl">
-                <h2 class="text-xl  font-semibold  ml-6">@lang('lang.Earnings')</h2>
-                <div id="earningChart" class="mt-4" style="height: 370px; width: 100%;"></div>
-
-            </div>
-
-
             <div class=" shadow-med p-3 py-5  mt-8 rounded-xl min-h-[448px]">
                 <div class="flex justify-between px-6">
-                    <h2 class="text-xl  font-semibold ">@lang('lang.Top_Product')</h2>
+                    <h2 class="text-xl  font-semibold ">@lang('lang.Latest_Businesses')</h2>
 
                 </div>
                 <div>
@@ -149,10 +142,6 @@
             </div>
         </div>
         <div class="lg:w-[40%] w-full">
-            <div class=" shadow-med p-3 rounded-xl">
-                <h2 class="text-xl  font-semibold ml-6">@lang('lang.Users_&_Plan')</h2>
-                <div id="studentChart" class="mt-4" style="height: 370px; width: 100%;"></div>
-            </div>
             <div class=" shadow-med p-3 rounded-xl mt-10">
 
                 <div>
@@ -190,131 +179,9 @@
                     "#13242C",
 
                 ]);
-            var chart = new CanvasJS.Chart("earningChart", {
-                animationEnabled: true,
-                axisX: {
-                    valueFormatString: "DDD",
-                    minimum: new Date(2017, 1, 5, 23),
-                    maximum: new Date(2017, 1, 12, 1)
-                },
-                axisY: {
-                    gridColor: "#00000016",
-                    lineDashType: "dot"
-                },
-                toolTip: {
-                    shared: true
-                },
-                data: [{
-                        name: "Received",
-                        type: "area",
-                        fillOpacity: 100,
-                        color: "#417dfc",
-                        markerSize: 0,
-                        dataPoints: [{
-                                x: new Date(2017, 1, 6),
-                                y: 550
-                            },
-                            {
-                                x: new Date(2017, 1, 7),
-                                y: 450
-                            },
-                            {
-                                x: new Date(2017, 1, 8),
-                                y: 500
-                            },
-                            {
-                                x: new Date(2017, 1, 9),
-                                y: 162
-                            },
-                            {
-                                x: new Date(2017, 1, 10),
-                                y: 150
-                            },
-                            {
-                                x: new Date(2017, 1, 11),
-                                y: 400
-                            },
-                            {
-                                x: new Date(2017, 1, 12),
-                                y: 129
-                            }
-                        ]
-                    },
-                    {
-
-                        name: "Sent",
-                        type: "area",
-                        color: "#13242C",
-                        fillOpacity: 100,
-                        markerSize: 2,
-                        dataPoints: [{
-                                x: new Date(2017, 1, 6),
-                                y: 200
-                            },
-                            {
-                                x: new Date(2017, 1, 7),
-                                y: 150
-                            },
-                            {
-                                x: new Date(2017, 1, 8),
-                                y: 300
-                            },
-                            {
-                                x: new Date(2017, 1, 9),
-                                y: 550
-                            },
-                            {
-                                x: new Date(2017, 1, 10),
-                                y: 50
-                            },
-                            {
-                                x: new Date(2017, 1, 11),
-                                y: 80
-                            },
-                            {
-                                x: new Date(2017, 1, 12),
-                                y: 200
-                            }
-                        ]
-                    }
-                ]
-            });
-
-            var chart2 = new CanvasJS.Chart("studentChart", {
-                colorSet: "colors",
-                animationEnabled: true,
-                theme: "light1",
-                axisY: {
-                    gridColor: "#00000016",
-                    suffix: "-"
-
-                },
-
-                data: [{
-                    type: "column",
-                    yValueFormatString: "#,##0.0#\"\"",
-                    dataPoints: [{
-                            label: "Jan",
-
-                            y: 78
-                        },
-                        {
-                            label: "Feb",
-                            y: 55
-                        },
-                        {
-                            label: "Mar",
-                            y: 80
-                        },
-                        {
-                            label: "Apr",
-                            y: 60
-                        },
 
 
-                    ]
-                }]
-            });
+
 
             var chart3 = new CanvasJS.Chart("attendanceChart", {
                 animationEnabled: true,
@@ -339,8 +206,6 @@
                     ]
                 }]
             });
-            chart.render();
-            chart2.render();
             chart3.render();
 
         }

@@ -46,16 +46,16 @@
 
 
                                     <div class="h-20 w-20">
-                                        <img class="object-contain rounded-full h-full w-full bg-black  border border-primary"
+                                        <img class="object-cover rounded-full h-full w-full bg-black  border border-primary"
                                             src="{{ isset($images[0]) && !empty($images) ? asset($images[0]) : asset('images/default-logo.png') }}"
                                             alt="No Image ">
                                     </div>
                                 </td>
                                 <td>{{ $bussiness->title }}</td>
-                                <td>{{ $bussiness->price }}</td>
-                                <td>{{ $bussiness->category }}</td>
+                                <td>{{ $bussiness->price }}&euro;</td>
+                                <td>{{ $bussiness->category }} / {{ $bussiness->category_de }}</td>
                                 <td>{{ $bussiness->city }} {{ $bussiness->country }}</td>
-                                <td><button data-modal-target="chnage-status-modal" data-modal-toggle="chnage-status-modal">
+                                <td><button data-modal-target="change-status-modal" data-modal-toggle="change-status-modal">
                                         {!! $bussiness->status == 1
                                             ? "<span class='text-green-800 font-semibold text-sm'>Active</span>"
                                             : "<span class='text-red-600 font-semibold text-sm'>In-Active</span>" !!}
@@ -68,7 +68,12 @@
                                             class="cursor-pointer view-button getDataBtn">
                                             <img width="38px" src="{{ asset('images/icons/views.svg') }}" alt="View">
                                         </button>
-                                        <button class="updateDataBtn" url="../singleBusinesses/{{ $bussiness->id }}">
+                                        <button class="updateDataBtn" url="../singleBusinesses/{{ $bussiness->id }}"
+                                            nameEn="{{ $bussiness->title }}" nameDe="{{ $bussiness->title_de }}"
+                                            category="{{ $bussiness->category_id }}" price="{{ $bussiness->price }}"
+                                            country="{{ $bussiness->country }}" city="{{ $bussiness->city }}"
+                                            infoDe="{{ $bussiness->description }}"
+                                            infoEn="{{ $bussiness->description_de }}" images="{{ $bussiness->images }}" video="{{$bussiness->video}}" >
                                             <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
                                                 xmlns='http://www.w3.org/2000/svg'>
                                                 <circle opacity='0.1' cx='18' cy='18' r='18'
@@ -122,7 +127,7 @@
                             requirements="SVG, PNG or JPG (MAX. 600x600px)"></x-file-uploader>
                     </div>
                     <div class="col-span-3 grid grid-cols-2 gap-4 mt-4">
-                        <div class="relative flex items-center justify-center w-full h-full">
+                        <div class="relative flex items-center justify-center w-full h-full" id="VideoUploader">
                             <label
                                 class="file-upload-label flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-md cursor-pointer bg-gray-50">
                                 <div class="file-upload-content flex flex-col items-center justify-center pt-5 pb-6">
@@ -192,7 +197,7 @@
                     <div class="col-span-3 grid grid-cols-2 gap-4">
                         <x-textarea id="infoEn" label="{{ __('lang.info') }}(EN)"
                             placeholder="{{ __('lang.Info_In_English') }}" name='description'></x-textarea>
-                        <x-textarea id="infoEn" label="{{ __('lang.info') }}(De)"
+                        <x-textarea id="infoDe" label="{{ __('lang.info') }}(De)"
                             placeholder="{{ __('lang.Info_In_German') }}" name='description_de'></x-textarea>
                     </div>
 
@@ -275,24 +280,26 @@
     </x-modal>
 
     {{-- change status modal --}}
-    <x-modal id="chnage-status-modal">
+    <x-modal id="change-status-modal">
         <x-slot name="title">@lang('lang.Details')</x-slot>
         <x-slot name="modal_width">max-w-2xl</x-slot>
         <x-slot name="body">
-            <div>
-                <x-select id="status" label="{{ __('lang.Status') }}" name='Status'>
-                    <x-slot name="options">
-                        <option selected disabled> @lang('lang.Select_Status')</option>
-                        <option value="1"> @lang('lang.Active')</option>
-                        <option value="2"> @lang('lang.In-Active')</option>
+            <form id="" method="POST">
+                <div>
+                    <x-select id="status" label="{{ __('lang.Status') }}" name='Status'>
+                        <x-slot name="options">
+                            <option selected disabled> @lang('lang.Select_Status')</option>
+                            <option value="1"> @lang('lang.Active')</option>
+                            <option value="2"> @lang('lang.In-Active')</option>
 
-                    </x-slot>
-                </x-select>
-                <div class="mt-6">
+                        </x-slot>
+                    </x-select>
+                    <div class="mt-6">
 
-                    <x-modal-button title="Chnage Status"></x-modal-button>
+                        <x-modal-button title="change Status"></x-modal-button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </x-slot>
     </x-modal>
 @endsection
@@ -307,26 +314,43 @@
                 $('#postDataForm').attr('url', 'updateCategory/' + $(this).attr('CategoryId'));
 
 
-                $('#categoryNameEn').val($(this).attr('nameEn'));
-                $('#categoryNameDe').val($(this).attr('nameDe'));
+                $('#titleEn').val($(this).attr('nameEn'));
+                $('#titleDe').val($(this).attr('nameDe'));
+                $('#categoryNameDe').val($(this).attr('category')).trigger('change');
+                $('#price').val($(this).attr('price'));
+                $('#country').val($(this).attr('country')).trigger('change');
+                $('#city').val($(this).attr('city'));
+                $('#infoEn').val($(this).attr('infoEn'));
+                $('#infoDe').val($(this).attr('infoDe'));
+                $('#VideoUploader .file-preview').val($(this).attr('video')).removeClass('hidden');
                 let fileImg = $('#business-modal .file-preview');
-                fileImg.removeClass('hidden').attr('src', $(this).attr('image'));
+                fileImg.addClass('hidden');
 
                 $('#business-modal #modalTitle').text("Edit Category");
                 $('#business-modal #submitBtn').text("Update");
 
+                let jsonString = $(this).attr('images');
+                const imageArray = JSON.parse(jsonString);
+                imageArray.forEach((imageUrl, index) => {
+                    const uploaderId = `#businessImage${index + 1}`;
+                    let tag  = `${uploaderId} .file-preview`;
+                    $(tag).attr('src', imageUrl).removeClass('hidden');
+                    
+
+                });
+
             });
         }
         updateDatafun();
-        // $('#addModalBtn').click(function() {
-        //     $('#postDataForm')[0].reset();
-        //     $('#postDataForm').attr('url', 'addCategory');
-        //     let fileImg = $('#business-modal .file-preview');
-        //     fileImg.addClass('hidden');
-        //     $('#business-modal #modalTitle').text("Add Category");
-        //     $('#business-modal #submitBtn').text("Add");
+        $('#addModalBtn').click(function() {
+            $('#postDataForm')[0].reset();
+            $('#postDataForm').attr('url', 'addBusiness');
+            let fileImg = $('#business-modal .file-preview');
+            fileImg.addClass('hidden');
+            $('#business-modal #modalTitle').text("Add Business");
+            $('#business-modal #submitBtn').text("Add");
 
-        // })
+        })
         // Listen for the custom form submission response event
         $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
             console.log(response);

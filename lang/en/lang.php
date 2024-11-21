@@ -167,4 +167,5 @@ return [
     'info' => 'info',
     'Enter_price' => 'Enter price',
     'In-Active' => 'In-Active',
+    'Latest_Businesses' => 'Latest Businesses',
 ];

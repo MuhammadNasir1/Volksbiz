@@ -130,3 +130,8 @@ table.dataTable.no-footer {
     gap: 10px;
     align-items: center;
 }
+
+.swal2-actions {
+    display: flex;
+    flex-direction: row-reverse;  /* This will reverse the order of the buttons */
+}

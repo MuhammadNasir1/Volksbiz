@@ -44,7 +44,7 @@ $(document).ready(function () {
         // Destroy the existing DataTable instance
         let table = $("#datatable").DataTable();
         table.destroy();
-        $("#loading").show();
+        // $("#loading").show();
 
         // Reload the table body content
         $("#tableBody").load(" #tableBody > *", function () {
@@ -52,7 +52,7 @@ $(document).ready(function () {
             delDataFun();
             updateDatafun();
             $("#datatable").DataTable();
-            $("#loading").hide();
+            // $("#loading").hide();
         });
     }
 
@@ -65,9 +65,10 @@ $(document).ready(function () {
                 text: "You won't be able to revert this!",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
+                confirmButtonColor: "#D42929FF",
+                cancelButtonColor: "gray",
                 confirmButtonText: "Yes, delete it!",
+                timer: 2000,
             }).then((result) => {
                 if (result.isConfirmed) {
                     // If confirmed, proceed with AJAX request to delete
@@ -75,10 +76,10 @@ $(document).ready(function () {
                         type: "GET",
                         url: url,
                         beforeSend: function () {
-                            $("#loading").show();
+                            // $("#loading").show();
                         },
                         success: function (response) {
-                            $("#loading").hide();
+                            // $("#loading").hide();
                             reloadDataTable();
 
                             const alert = Swal.fire({

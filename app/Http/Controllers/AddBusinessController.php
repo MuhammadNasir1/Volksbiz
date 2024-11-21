@@ -64,7 +64,7 @@ class AddBusinessController extends Controller
                 'category' => $validatedData['category'],
                 'title' => $validatedData['title'],
                 'title_de' => $validatedData['title_de'],
-                'country' => $validatedData['country'],
+                'country' => ucfirst($validatedData['country']),
                 'city' => $validatedData['city'],
                 'description' => $validatedData['description'],
                 'description_de' => $validatedData['description_de'],
@@ -127,7 +127,7 @@ class AddBusinessController extends Controller
                 'category' => $validatedData['category'],
                 'title' => $validatedData['title'],
                 'title_de' => $validatedData['title_de'],
-                'country' => $validatedData['country'],
+                'country' => ucfirst($validatedData['country']),
                 'city' => $validatedData['city'],
                 'description' => $validatedData['description'],
                 'description_de' => $validatedData['description_de'],
@@ -195,7 +195,7 @@ class AddBusinessController extends Controller
             $business->category = $validatedData['category'];
             $business->title = $validatedData['title'];
             $business->title_de = $validatedData['title_de'];
-            $business->country = $validatedData['country'];
+            $business->country = ucfirst($validatedData['country']);
             $business->city = $validatedData['city'];
             $business->description = $validatedData['description'];
             $business->description_de = $validatedData['description_de'];
@@ -233,7 +233,7 @@ class AddBusinessController extends Controller
             $update_business->category = $validatedData['category'];
             $update_business->title = $validatedData['title'];
             $update_business->title_de = $validatedData['title_de'];
-            $update_business->country = $validatedData['country'];
+            $update_business->country = ucfirst($validatedData['country']);
             $update_business->city = $validatedData['city'];
             $update_business->description = $validatedData['description'];
             $update_business->description_de = $validatedData['description_de'];
@@ -279,6 +279,21 @@ class AddBusinessController extends Controller
     public function businesses()
     {
         $bussinesses = AddBusiness::all();
+        foreach ($bussinesses as $business) {
+            $business->update_images = json_decode($business->images , true);
+            $category = AddCategory::where('id', $business->category)->first();
+            if ($category) {
+                $business->category = $category->category_name;
+                $business->country = ucfirst($business->country);
+                $business->category_de = $category->category_name_de;
+                $business->category_id = $category->id;
+            } else {
+                $business->category = null;
+                $business->category_de = null;
+                $business->category_id = null;
+            }
+        }
+        // return response()->json( $business);
         $categories = AddCategory::where('status', 1)->get();
         return view('businesses_list', compact('bussinesses', 'categories'));
     }
