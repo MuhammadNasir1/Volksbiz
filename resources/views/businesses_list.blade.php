@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<button data-modal-target="business-detail-modal"data-modal-toggle="business-detail-modal"></button>
     <div class="md:mx-4 mt-12">
         <div>
             <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Offers')</h1>

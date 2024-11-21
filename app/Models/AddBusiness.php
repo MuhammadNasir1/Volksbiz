@@ -23,5 +23,6 @@ class AddBusiness extends Model
         'description',
         'description_de',
         'price',
+        'status',
     ];
 }

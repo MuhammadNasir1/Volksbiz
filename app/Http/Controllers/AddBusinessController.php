@@ -69,7 +69,7 @@ class AddBusinessController extends Controller
                 'description' => $validatedData['description'],
                 'description_de' => $validatedData['description_de'],
                 'price' => $validatedData['price'],
-                'status' => 1,
+                'status' => "1",
             ]);
 
             $add_business->save();
@@ -278,7 +278,7 @@ class AddBusinessController extends Controller
 
     public function businesses()
     {
-        $bussinesses = AddBusiness::all();
+        $bussinesses = AddBusiness::where('status' , 1)->get();
         foreach ($bussinesses as $business) {
             $business->update_images = json_decode($business->images , true);
             $category = AddCategory::where('id', $business->category)->first();
@@ -301,7 +301,8 @@ class AddBusinessController extends Controller
     public function delBusiness(string $id)
     {
         $business_details = AddBusiness::find($id);
-        $business_details->delete();
+        $business_details->status = 0;
+        $business_details->update();
         return response()->json(['success' => true, 'message' => "Business delete successfully"], 200);;
     }
 
@@ -480,8 +481,10 @@ class AddBusinessController extends Controller
         foreach ($orders as $order) {
             $businessId = $order['business_id'];
             $businesses = AddBusiness::where('id', $businessId)->first();
-            $businesses->images = json_decode($businesses->images);
-            $order->business = $businesses;
+            if($businesses){
+                $businesses->images = json_decode($businesses->images);
+                $order->business = $businesses;
+            }
 
             $userId = $order['user_id'];
             $user = User::where('id', $userId)->first();

@@ -39,8 +39,8 @@
                                     <div class="h-20 w-20">
                                         <img loading="lazy"
                                             class="object-contain rounded-full h-full w-full bg-black  border border-primary"
-                                            src="{{ isset($data->image) && $data->image !== 'null' ? asset($data->image) : asset('images/default-logo.png') }}"
-                                            alt="{{ $data->name }}">
+                                            src="{{ $data->category_image ?? asset('images/default-logo.png') }}"
+                                            alt="Category Image">
                                     </div>
                                 </td>
                                 <td>{{ $data->category_name }}</td>
@@ -112,6 +112,9 @@
 
 @section('js')
     <script>
+        function getData(){
+
+        }
         function updateDatafun() {
 
             $('.updateDataBtn').click(function() {
