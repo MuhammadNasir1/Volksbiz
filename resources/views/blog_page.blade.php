@@ -13,17 +13,25 @@
                 <form id="blog-form" enctype="multipart/form-data" method="post" action="../addblog">
         @endif
         @csrf
-        <div class="w-full  lg:gap-9 mt-5 lg:items-center flex lg:flex-row flex-col">
-            <div class="lg:w-[50%] w-full">
-                <label class="text-[16px] font-semibold block  text-[#452C88]"
-                    for="old_password">@lang('lang.Title')</label>
+        <div class="grid grid-cols-3 gap-4">
+            <div class=" w-full">
+                <label class="text-[16px] font-semibold block  text-[#452C88]" for="title">@lang('lang.Title')</label>
                 <input type="text" required
                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
                     name="title" id="blog_title" placeholder=" @lang('lang.Title')" required
                     value="{{ $blogData->title ?? '' }}">
             </div>
-            <div class="lg:w-[50%] w-full">
+            <div class=" w-full">
+                <label class="text-[16px] font-semibold block  text-[#452C88]"
+                    for="blog_title_de">@lang('lang.Title_In_German')</label>
+                <input type="text" required
+                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
+                              h-[40px] text-[14px] mt-2"
+                    name="title_de" id="blog_title_de" placeholder=" @lang('lang.Title')" required
+                    value="{{ $blogData->title_de ?? '' }}">
+            </div>
+            <div class="w-full">
                 <label class="text-[16px] font-semibold block  text-[#452C88]"
                     for="old_password">@lang('lang.Image')</label>
                 <input type="file"
@@ -31,10 +39,7 @@
                               h-[40px] text-[14px] mt-2"
                     name="image"{{ !isset($blogData) ? 'required' : '' }}>
             </div>
-
-        </div>
-        <div class="w-full  lg:gap-9 mt-5 lg:items-center flex lg:flex-row flex-col">
-            <div class="lg:w-[50%] w-full ">
+            <div class=" w-full ">
 
                 <label for="blog_author"
                     class="text-[16px] font-semibold block  text-[#452C88]">@lang('lang.Author')</label>
@@ -45,28 +50,45 @@
                     value="{{ $blogData->author ?? '' }}">
 
             </div>
-            <div class="lg:w-[50%] w-full">
-                <label for="blog_category"
-                    class="text-[16px] font-semibold block mb-2  text-[#452C88]">@lang('lang.Category')</label>
+            <div class=" w-full ">
+
+                <label for="category"
+                    class="text-[16px] font-semibold block  text-[#452C88]">@lang('lang.Category')</label>
                 <input type="text" required
                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                    name="category" id="blog_category" placeholder=" @lang('lang.Category')" required
+                    name="category" id="category" placeholder=" @lang('lang.Enter_Your_Name')" required
                     value="{{ $blogData->category ?? '' }}">
+
+            </div>
+        </div>
+        <div class="lg:grid-cols-2 gap-4 ">
+            <div class="mt-5 relative">
+                <label for="content">Content:</label>
+                <div id="editor" class="">
+                    @php
+                        if (isset($blogData->content)) {
+                            echo $blogData->content;
+                        }
+                    @endphp
+                </div>
+                <textarea name="content" id="content" style="display:none;"></textarea>
+            </div>
+            <div class="mt-5 relative">
+                <label for="content">Content In German:</label>
+                <div id="editorGerman" class="">
+                    @php
+                        if (isset($blogData->content_de)) {
+                            echo $blogData->content_de;
+                        }
+                    @endphp
+                </div>
+                <textarea name="content_de" id="contentGerman" style="display:none;"></textarea>
             </div>
         </div>
 
-        <div class="mt-5 relative">
-            <label for="content">Content:</label>
-            <div id="editor" class="">
-                @php
-                    if (isset($blogData->content)) {
-                        echo $blogData->content;
-                    }
-                @endphp
-            </div>
-            <textarea name="content" id="content" style="display:none;"></textarea>
-        </div>
+
+
         {{-- <button type="submit">Save Blog</button> --}}
         <div class="mt-10  flex justify-end">
             <button type="submit" class="bg-primary  text-white h-12 px-3 rounded-[6px]  shadow-sm font-semibold "
@@ -96,6 +118,7 @@
         document.getElementById('blog-form').onsubmit = function() {
             // Populate the hidden textarea with the HTML content
             document.getElementById('content').value = quill.root.innerHTML;
+            document.getElementById('contentGerman').value = quill2.root.innerHTML;
         };
         // Initialize Quill editor with image handler
         var quill = new Quill('#editor', {
@@ -115,9 +138,30 @@
                 ]
             }
         });
+        // Initialize Quill editor with image handler
+        var quill2 = new Quill('#editorGerman', {
+            theme: 'snow', // 'snow' is the default theme
+            modules: {
+                toolbar: [
+                    [{
+                        'header': [1, 2, 3, 4, false]
+                    }],
+                    ['bold', 'italic', 'underline'],
+                    [{
+                        'list': 'ordered'
+                    }, {
+                        'list': 'bullet'
+                    }],
+                    // ['link', 'image'] // Include 'image' button in the toolbar
+                ]
+            }
+        });
 
         // Listen for image inserted event
         quill.getModule('toolbar').addHandler('image', function() {
+            selectLocalImage();
+        });
+        quill2.getModule('toolbar').addHandler('image', function() {
             selectLocalImage();
         });
 

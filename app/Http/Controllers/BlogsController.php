@@ -34,17 +34,21 @@ class BlogsController extends Controller
             $validatedData = $request->validate([
 
                 "title" => "required",
+                "title_de" => "nullable",
                 "category" => "required",
                 "author" => "required",
                 "image" => 'required',
                 "content" => "required",
+                "content_de" => "nullable",
             ]);
 
             $blog = Blogs::create([
                 "title" => $validatedData['title'],
+                "title_de" => $validatedData['title_de'],
                 "category" => $validatedData['category'],
                 "author" => $validatedData['author'],
                 "content" => htmlspecialchars($validatedData['content']),
+                "content_de" => htmlspecialchars($validatedData['content_de']),
                 "image" => "null",
             ]);
 
@@ -70,6 +74,7 @@ class BlogsController extends Controller
             $blogs = Blogs::all();
             foreach ($blogs as $blog) {
                 $blog->content = htmlspecialchars_decode($blog->content);
+                $blog->content_de = htmlspecialchars_decode($blog->content_de);
             }
             return response()->json(['success' => true, "message" => "Data add successfully", "data"  => $blogs], 201);
         } catch (\Exception $e) {
@@ -95,7 +100,9 @@ class BlogsController extends Controller
         $blogData = Blogs::find($id);
         // foreach ($blogData as $blog) {
         $blogData->content = htmlspecialchars_decode($blogData->content);
+        $blogData->content_de = htmlspecialchars_decode($blogData->content_de);
         // }
+        // return response()->json($blogData);
         return view("blog_page", compact("blogData"));
     }
 
@@ -111,9 +118,11 @@ class BlogsController extends Controller
             ]);
             $blog = Blogs::find($id);
             $blog->title = $validatedData['title'];
+            $blog->title_de = $validatedData['title_de'];
             $blog->category = $validatedData['category'];
             $blog->author = $validatedData['author'];
             $blog->content = htmlspecialchars($validatedData['content']);
+            $blog->content = htmlspecialchars($validatedData['content_de']);
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');

@@ -12,10 +12,12 @@ class Blogs extends Model
     public $table = "blogs";
     protected $fillable = [
         'title',
+        'title_de',
         'category',
         'author',
         'image',
         'content',
+        'content_de',
 
     ];
     public $timestamp  = true;
