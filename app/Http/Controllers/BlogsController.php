@@ -112,9 +112,11 @@ class BlogsController extends Controller
             $validatedData = $request->validate([
 
                 "title" => "required",
+                "title_de" => "required",
                 "category" => "required",
                 "author" => "required",
                 "content" => "required",
+                "content_de" => "required",
             ]);
             $blog = Blogs::find($id);
             $blog->title = $validatedData['title'];
@@ -144,6 +146,7 @@ class BlogsController extends Controller
         $blogData = Blogs::find($id);
 
         $blogData->content = htmlspecialchars_decode($blogData->content);
+        $blogData->content_de = htmlspecialchars_decode($blogData->content_de);
 
         return response()->json(["data" => $blogData], 200);
     }
