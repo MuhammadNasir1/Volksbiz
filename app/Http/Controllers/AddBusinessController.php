@@ -357,7 +357,7 @@ public function businessRequest(){
                 return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
             }
             $userId  =  $user->id;
-            $businesses = AddBusiness::where('user_id',  $userId)->get();
+            $businesses = AddBusiness::where('user_id',  $userId)->where('status' , "deleted")->get();
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
                 $category = AddCategory::where('id', "$business->category")->first();
