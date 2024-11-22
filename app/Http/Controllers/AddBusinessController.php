@@ -17,7 +17,7 @@ class AddBusinessController extends Controller
 {
 public function businessRequest(){
 
-    $businesses = AddBusiness::where('status' , "pending")->get();
+    $businesses = AddBusiness::where('status' , "pending")->orderBy('created_at', 'desc') ->get();
     foreach ($businesses as $business) {
         $business->update_images = json_decode($business->images , true);
         $category = AddCategory::where('id', $business->category)->first();
@@ -303,7 +303,7 @@ public function businessRequest(){
 
     public function businesses()
     {
-        $bussinesses = AddBusiness::where('status' , "active")->orwhere('status' , "sold")->get();
+        $bussinesses = AddBusiness::wherenot('status' , "deleted")->wherenot('status' , "pending")->get();
         foreach ($bussinesses as $business) {
             $business->update_images = json_decode($business->images , true);
             $category = AddCategory::where('id', $business->category)->first();

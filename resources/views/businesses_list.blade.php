@@ -8,12 +8,12 @@
 <button data-modal-target="business-detail-modal"data-modal-toggle="business-detail-modal"></button>
     <div class="md:mx-4 mt-12">
         <div>
-            <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Offers')</h1>
+            <h1 class=" font-semibold   text-2xl ">All Businesses</h1>
         </div>
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
                 <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Offers_List')</h3>
+                    <h3 class="text-[20px] text-black hidden sm:block">Businesses List</h3>
 
                     <div>
 
@@ -61,8 +61,11 @@
                                 <td>{{ $bussiness->category }} / {{ $bussiness->category_de }}</td>
                                 <td>{{ $bussiness->city }} {{ $bussiness->country }}</td>
                                 <td><button updateId={{$bussiness->id}}  class="{{$bussiness->status !== "sold" ? 'updateStatus' : ''}}">
-                                            <span class=" {{$bussiness->status == "active" ? 'text-green-800' : 'text-purple-800'}}  font-semibold text-sm ">{{ucfirst($bussiness->status)}}</span>
+                                    <span class="{{  $bussiness->status == 'active' ? 'text-green-800' : ($bussiness->status == 'sold' ? 'text-purple-800' : 'text-red-700') }} font-semibold text-sm">
+                                        {{ ucfirst($bussiness->status) }}
+                                    </span>
                                     </button></td>
+                                    
                                 <td>
                                     <div class="flex gap-5 items-center">
                                         
@@ -307,8 +310,10 @@
                 <div>
                     <x-select id="status" label="{{ __('lang.Status') }}" name='status'>
                         <x-slot name="options">
-                            {{-- <option selected disabled> @lang('lang.Select_Status')</option> --}}
-                            <option value="sold" selected>Sold</option>
+                            <option selected disabled> @lang('lang.Select_Status')</option>
+                            <option value="sold" >Sold</option>
+                            <option value="active">Active</option>
+                            <option value="reserved">Reserved</option>
 
                         </x-slot>
                     </x-select>
@@ -327,7 +332,7 @@
                                 </svg>
                             </div>
                             <div id="CbtnText">
-                           Change To Sold
+                           Change Status
                             </div>
                         </button>
                        
@@ -499,7 +504,7 @@
                             $('#Ctext').removeClass('hidden');
                             $('#Cspinner').addClass('hidden');
 
-                            window.location.href = '/';
+                            window.location.href = '../businesses';
 
                         } else if (response.success == false) {
                             Swal.fire(

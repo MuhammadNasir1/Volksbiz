@@ -8,12 +8,12 @@
 <button data-modal-target="business-detail-modal"data-modal-toggle="business-detail-modal"></button>
     <div class="md:mx-4 mt-12">
         <div>
-            <h1 class=" font-semibold   text-2xl ">All Request</h1>
+            <h1 class=" font-semibold   text-2xl ">All Offers</h1>
         </div>
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
                 <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                    <h3 class="text-[20px] text-black hidden sm:block">Request Businesses</h3>
+                    <h3 class="text-[20px] text-black hidden sm:block">Businesses Bids</h3>
 
                
 
