@@ -17,7 +17,7 @@ class AddBusinessController extends Controller
 {
 public function businessRequest(){
 
-    $businesses = AddBusiness::where('status' , 0)->get();
+    $businesses = AddBusiness::where('status' , "pending")->get();
     foreach ($businesses as $business) {
         $business->update_images = json_decode($business->images , true);
         $category = AddCategory::where('id', $business->category)->first();
@@ -303,7 +303,7 @@ public function businessRequest(){
 
     public function businesses()
     {
-        $bussinesses = AddBusiness::where('status' , 1)->wherenot('status' , "deleted")->get();
+        $bussinesses = AddBusiness::where('status' , "active")->wherenot('status' , "deleted")->get();
         foreach ($bussinesses as $business) {
             $business->update_images = json_decode($business->images , true);
             $category = AddCategory::where('id', $business->category)->first();
@@ -334,7 +334,7 @@ public function businessRequest(){
     public function getBusiness()
     {
         try {
-            $businesses = AddBusiness::where('status' , 1)->wherenot('status' , "deleted")->get();;
+            $businesses = AddBusiness::where('status' , "active")->wherenot('status' , "deleted")->get();;
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
                 $category = AddCategory::where('id', $business->category)->first();
@@ -541,7 +541,7 @@ public function businessRequest(){
                 'status' => "required",
             ]);
             $business =  addBusiness::where('id', $validatedData['update_id'])->first();
-            $business->status = 1;
+            $business->status = "active";
             $business->update(); 
     
             return response()->json(['success' => true, 'message' => "Business Request Approved"], 200);
