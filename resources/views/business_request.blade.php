@@ -39,7 +39,7 @@
                                 <td>
                                     @php
                                         $images = json_decode($business->images, true);
-                                        $user =  \App\Models\User::select('name', 'phone')->where('id', $business->user_id)->first()
+                                        $user =  \App\Models\User::select('name', 'role')->where('id', $business->user_id)->first()
                                     @endphp
 
 
@@ -49,15 +49,14 @@
                                             alt="No Image ">
                                     </div>
                                 </td>
-                                <td>  {{ $user->name }} / <a href="tel:{{ $user->phone_no }}" class="text-blue-700">{{ $user->phone_no }}</a></td>
+                                <td>  {{ $user->name }} / <a href="tel:{{ $business->phone_no }}" class="text-blue-700">{{ $business->phone_no }}</a> <span class="text-xs text-red-800">{{ $user->role == "admin" ? "(Admin)" : "" }}</span></td>
                                 <td>{{ $business->title }}</td>
                                 <td>{{ $business->price }}&euro;</td>
                                 <td>{{ $business->category }} / {{ $business->category_de }}</td>
                                 <td>{{ $business->city }} {{ $business->country }}</td>
                                 <td><button updateId={{$business->id}} class="updateStatus" data-modal-target="change-status-modal" data-modal-toggle="change-status-modal">
-                                        {!! $business->status == 1
-                                            ? "<span class='text-green-800 font-semibold text-sm'>Approved</span>"
-                                            : "<span class='text-red-600 font-semibold text-sm'>Pending</span>" !!}
+                                     
+                                    <span class='text-red-600 font-semibold text-sm'>{{ucfirst($business->status)}}</span>
                                     </button></td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
@@ -191,13 +190,13 @@
         <x-slot name="title">@lang('lang.Details')</x-slot>
         <x-slot name="modal_width">max-w-2xl</x-slot>
         <x-slot name="body">
-            <form id="postDataForm"  url="changeBusinessStatus" method="post">
+            <form id="postDataForm"  url="./changeBusinessStatus" method="post">
                 @csrf
                 <input type="hidden" id="updateStatusId" name="update_id">
                 <div>
                     <x-select id="status" label="{{ __('lang.Status') }}" name='status'>
                         <x-slot name="options">
-                            <option selected value="1">Approved</option>
+                            <option selected value="active">Approved</option>
                         </x-slot>
                     </x-select>
                     <div class="mt-6">

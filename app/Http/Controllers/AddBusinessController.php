@@ -303,7 +303,7 @@ public function businessRequest(){
 
     public function businesses()
     {
-        $bussinesses = AddBusiness::where('status' , "active")->wherenot('status' , "deleted")->get();
+        $bussinesses = AddBusiness::where('status' , "active")->orwhere('status' , "sold")->get();
         foreach ($bussinesses as $business) {
             $business->update_images = json_decode($business->images , true);
             $category = AddCategory::where('id', $business->category)->first();
@@ -541,7 +541,7 @@ public function businessRequest(){
                 'status' => "required",
             ]);
             $business =  addBusiness::where('id', $validatedData['update_id'])->first();
-            $business->status = "active";
+            $business->status = $validatedData['status'];
             $business->update(); 
     
             return response()->json(['success' => true, 'message' => "Business Request Approved"], 200);
