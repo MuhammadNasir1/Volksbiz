@@ -15,6 +15,27 @@ use Spatie\LaravelIgnition\FlareMiddleware\AddJobs;
 
 class AddBusinessController extends Controller
 {
+public function businessRequest(){
+
+    $businesses = AddBusiness::where('status' , 0)->get();
+    foreach ($businesses as $business) {
+        $business->update_images = json_decode($business->images , true);
+        $category = AddCategory::where('id', $business->category)->first();
+        if ($category) {
+            $business->category = $category->category_name;
+            $business->country = ucfirst($business->country);
+            $business->category_de = $category->category_name_de;
+            $business->category_id = $category->id;
+        } else {
+            $business->category = null;
+            $business->category_de = null;
+            $business->category_id = null;
+        }
+    }
+
+    return view('business_request', compact('businesses'));
+}
+
     public function addBusiness(Request $request)
     {
         try {
@@ -278,7 +299,7 @@ class AddBusinessController extends Controller
 
     public function businesses()
     {
-        $bussinesses = AddBusiness::where('status' , 1)->get();
+        $bussinesses = AddBusiness::where('status' , 1)->wherenot('status' , "deleted")->get();
         foreach ($bussinesses as $business) {
             $business->update_images = json_decode($business->images , true);
             $category = AddCategory::where('id', $business->category)->first();
@@ -301,7 +322,7 @@ class AddBusinessController extends Controller
     public function delBusiness(string $id)
     {
         $business_details = AddBusiness::find($id);
-        $business_details->status = 0;
+        $business_details->status = "deleted";
         $business_details->update();
         return response()->json(['success' => true, 'message' => "Business delete successfully"], 200);;
     }
@@ -309,7 +330,7 @@ class AddBusinessController extends Controller
     public function getBusiness()
     {
         try {
-            $businesses = AddBusiness::where('status' , 1)->get();;
+            $businesses = AddBusiness::where('status' , 1)->wherenot('status' , "deleted")->get();;
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
                 $category = AddCategory::where('id', $business->category)->first();
@@ -503,6 +524,23 @@ class AddBusinessController extends Controller
             $business->category_de = $category->category_name_de;
             $business->date = $business->created_at->format('M d, Y');
             return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $business], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+
+    public function changeBusinessStatus(Request $request){
+        try {
+
+            $validatedData = $request->validate([
+                'update_id' => "required",
+                'status' => "required",
+            ]);
+            $business =  addBusiness::where('id', $validatedData['update_id'])->first();
+            $business->status = 1;
+            $business->update(); 
+    
+            return response()->json(['success' => true, 'message' => "Business Request Approved"], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }

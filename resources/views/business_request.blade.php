@@ -8,41 +8,38 @@
 <button data-modal-target="business-detail-modal"data-modal-toggle="business-detail-modal"></button>
     <div class="md:mx-4 mt-12">
         <div>
-            <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Offers')</h1>
+            <h1 class=" font-semibold   text-2xl ">All Request</h1>
         </div>
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
                 <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Offers_List')</h3>
+                    <h3 class="text-[20px] text-black hidden sm:block">Request Businesses</h3>
 
-                    <div>
-
-                        <button id="addModalBtn" data-modal-target="business-modal" data-modal-toggle="business-modal"
-                            class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                            @lang('lang.Add_Business')</button>
-                    </div>
+               
 
                 </div>
                 @php
                     $headers = [
                         __('lang.Sr'),
                         __('lang.Image'),
+                        "User Name / Phone No",
                         __('lang.Title'),
                         __('lang.Price'),
                         __('lang.Category'),
                         __('lang.Location'),
-                        // __('lang.Status'),
+                        __('lang.Status'),
                         __('lang.Action'),
                     ];
                 @endphp
                 <x-table :headers="$headers">
                     <x-slot name="tablebody">
-                        @foreach ($bussinesses as $bussiness)
+                        @foreach ($businesses as $business)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
                                     @php
-                                        $images = json_decode($bussiness->images, true);
+                                        $images = json_decode($business->images, true);
+                                        $user =  \App\Models\User::select('name', 'phone')->where('id', $business->user_id)->first()
                                     @endphp
 
 
@@ -52,20 +49,21 @@
                                             alt="No Image ">
                                     </div>
                                 </td>
-                                <td>{{ $bussiness->title }}</td>
-                                <td>{{ $bussiness->price }}&euro;</td>
-                                <td>{{ $bussiness->category }} / {{ $bussiness->category_de }}</td>
-                                <td>{{ $bussiness->city }} {{ $bussiness->country }}</td>
-                                {{-- <td><button data-modal-target="change-status-modal" data-modal-toggle="change-status-modal">
-                                        {!! $bussiness->status == 1
-                                            ? "<span class='text-green-800 font-semibold text-sm'>Active</span>"
-                                            : "<span class='text-red-600 font-semibold text-sm'>In-Active</span>" !!}
-                                    </button></td> --}}
+                                <td>  {{ $user->name }} / <a href="tel:{{ $user->phone_no }}" class="text-blue-700">{{ $user->phone_no }}</a></td>
+                                <td>{{ $business->title }}</td>
+                                <td>{{ $business->price }}&euro;</td>
+                                <td>{{ $business->category }} / {{ $business->category_de }}</td>
+                                <td>{{ $business->city }} {{ $business->country }}</td>
+                                <td><button updateId={{$business->id}} class="updateStatus" data-modal-target="change-status-modal" data-modal-toggle="change-status-modal">
+                                        {!! $business->status == 1
+                                            ? "<span class='text-green-800 font-semibold text-sm'>Approved</span>"
+                                            : "<span class='text-red-600 font-semibold text-sm'>Pending</span>" !!}
+                                    </button></td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
                                         <button data-modal-target="business-detail-modal"
-                                            url="../singleBusinesses/{{ $bussiness->id }}"
-                                            data-modal-toggle="business-detail-modal" data-id="{{ $bussiness->id }}"
+                                            url="../singleBusinesses/{{ $business->id }}"
+                                            data-modal-toggle="business-detail-modal" data-id="{{ $business->id }}"
                                             class="cursor-pointer view-button getDataBtn">
                                             <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -77,14 +75,14 @@
                                             </svg>
 
                                         </button>
-                                        <button class="updateDataBtn" url="../singleBusinesses/{{ $bussiness->id }}"
-                                            nameEn="{{ $bussiness->title }}" nameDe="{{ $bussiness->title_de }}"
-                                            category="{{ $bussiness->category_id }}" price="{{ $bussiness->price }}"
-                                            country="{{ $bussiness->country }}" city="{{ $bussiness->city }}"
-                                            infoDe="{{ $bussiness->description }}"
-                                            infoEn="{{ $bussiness->description }}" images="{{ $bussiness->images }}"
-                                            video="{{ $bussiness->video }}"
-                                            updateUrl="updateBusinessData/{{ $bussiness->id }}">
+                                        {{-- <button class="updateDataBtn" url="../singleBusinesses/{{ $business->id }}"
+                                            nameEn="{{ $business->title }}" nameDe="{{ $business->title_de }}"
+                                            category="{{ $business->category_id }}" price="{{ $business->price }}"
+                                            country="{{ $business->country }}" city="{{ $business->city }}"
+                                            infoDe="{{ $business->description }}"
+                                            infoEn="{{ $business->description }}" images="{{ $business->images }}"
+                                            video="{{ $business->video }}"
+                                            updateUrl="updateBusinessData/{{ $business->id }}">
                                             <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
                                                 xmlns='http://www.w3.org/2000/svg'>
                                                 <circle opacity='0.1' cx='18' cy='18' r='18'
@@ -96,7 +94,7 @@
                                         </button>
 
 
-                                        <button class="deleteDataBtn" delUrl="deleteBusiness/{{ $bussiness->id }}">
+                                        <button class="deleteDataBtn" delUrl="deleteBusiness/{{ $business->id }}">
                                             <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
                                                 xmlns='http://www.w3.org/2000/svg'>
                                                 <circle opacity='0.1' cx='18' cy='18' r='18'
@@ -105,7 +103,7 @@
                                                     d='M23.4905 13.7423C23.7356 13.7423 23.9396 13.9458 23.9396 14.2047V14.4441C23.9396 14.6967 23.7356 14.9065 23.4905 14.9065H13.0493C12.8036 14.9065 12.5996 14.6967 12.5996 14.4441V14.2047C12.5996 13.9458 12.8036 13.7423 13.0493 13.7423H14.8862C15.2594 13.7423 15.5841 13.4771 15.6681 13.1028L15.7642 12.6732C15.9137 12.0879 16.4058 11.6992 16.9688 11.6992H19.5704C20.1273 11.6992 20.6249 12.0879 20.7688 12.6423L20.8718 13.1022C20.9551 13.4771 21.2798 13.7423 21.6536 13.7423H23.4905ZM22.557 22.4932C22.7487 20.7059 23.0845 16.4598 23.0845 16.4169C23.0968 16.2871 23.0545 16.1643 22.9705 16.0654C22.8805 15.9728 22.7665 15.918 22.6409 15.918H13.9025C13.7762 15.918 13.6562 15.9728 13.5728 16.0654C13.4883 16.1643 13.4466 16.2871 13.4527 16.4169C13.4539 16.4248 13.4659 16.5744 13.4861 16.8244C13.5755 17.9353 13.8248 21.0292 13.9858 22.4932C14.0998 23.5718 14.8074 24.2496 15.8325 24.2742C16.6235 24.2925 17.4384 24.2988 18.2717 24.2988C19.0566 24.2988 19.8537 24.2925 20.6692 24.2742C21.7298 24.2559 22.4369 23.59 22.557 22.4932Z'
                                                     fill='#D11A2A' />
                                             </svg>
-                                        </button>
+                                        </button> --}}
 
                                     </div>
                                 </td>
@@ -119,109 +117,6 @@
         </div>
     </div>
 
-    {{-- Add Offer Modal --}}
-    <x-modal id="business-modal">
-        <x-slot name="title">Add Business</x-slot>
-        <x-slot name="modal_width">max-w-6xl</x-slot>
-        <x-slot name="body">
-            <form id="postDataForm" url="addBusiness" method="post">
-                @csrf
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="flex gap-4 col-span-3">
-                        <x-file-uploader id="businessImage1" name="bus_img1" title="Upload business Image 1"
-                            requirements="SVG, PNG or JPG (MAX. 600x600px)"></x-file-uploader>
-                        <x-file-uploader id="businessImage2" name="bus_img2" title="Upload business Image 2"
-                            requirements="SVG, PNG or JPG (MAX. 600x600px)"></x-file-uploader>
-                        <x-file-uploader id="businessImage3" name="bus_img3" title="Upload business Image 3"
-                            requirements="SVG, PNG or JPG (MAX. 600x600px)"></x-file-uploader>
-                        <x-file-uploader id="businessImage4" name="bus_img4" title="Upload business Image 4"
-                            requirements="SVG, PNG or JPG (MAX. 600x600px)"></x-file-uploader>
-                    </div>
-                    <div class="col-span-3 grid grid-cols-2 gap-4 mt-4">
-                        <div class="relative flex items-center justify-center w-full h-full" id="VideoUploader">
-                            <label
-                                class="file-upload-label flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-md cursor-pointer bg-gray-50">
-                                <div class="file-upload-content flex flex-col items-center justify-center pt-5 pb-6">
-                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                    </svg>
-                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
-                                            class="font-semibold">Upload business video</span>
-                                    </p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">Mp4 (MAX. 1080x1920px)</p>
-                                </div>
-                                <input type="file" class="file-input hidden" name="video"
-                                    onchange="previewFile(event)" id="videoLabel" />
-                                <video
-                                    class="file-preview absolute top-0 left-0 w-full h-full object-contain hidden  bg-black rounded-lg"
-                                    controls autoplay muted accept="video/*"></video>
-                            </label>
-                        </div>
-                        <div>
-                            <ul class="list-disc list-inside">
-                                <li class="text-sm">Lorem ipsum dolor sit a met consectetur adipisicing elit. Enim,
-                                    debitis?
-                                </li>
-                                <li class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, debitis?
-                                </li>
-                                <li class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, debitis?
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <x-input id="titleEn" label="{{ __('lang.Title') }}(EN)"
-                        placeholder="{{ __('lang.Title_In_English') }}" name='title' type="text"></x-input>
-                    <x-input id="titleDe" label="{{ __('lang.Title') }}(De)"
-                        placeholder="{{ __('lang.Title_In_German') }}" name='title_de' type="text"></x-input>
-                    <x-select id="categoryNameDe" label="{{ __('lang.Category') }}" name='category'>
-                        <x-slot name="options">
-                            <option selected disabled> @lang('lang.Select_Category')</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}"> {{ $category->category_name }} /
-                                    {{ $category->category_name_de }}
-                                </option>
-                            @endforeach
-                        </x-slot>
-
-                    </x-select>
-                    <x-input id="price" label="{{ __('lang.Price') }}(€)"
-                        placeholder="{{ __('lang.Enter_price') }}" name='price' type="text"></x-input>
-                    {{-- <x-select id="categoryNameDe" label="{{ __('lang.Category') }}(DE)" name='name_en'>
-                    <x-slot name="options">
-                        <option selected disabled>@lang('lang.Select_Category')</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name_de }} </option>
-                        @endforeach
-                    </x-slot>
-                </x-select> --}}
-                    <x-select id="country" label="{{ __('lang.Country') }}" name='country'>
-                        <x-slot name="options">
-                            <option selected disabled> @lang('lang.Select_Country')</option>
-                            @include('includes.countrieslist')
-                        </x-slot>
-                    </x-select>
-                    <x-input id="city" label="{{ __('lang.City') }}" placeholder="{{ __('lang.Enter_City') }}"
-                        name='city' type="text"></x-input>
-                    <div class="col-span-3 grid grid-cols-2 gap-4">
-                        <x-textarea id="infoEn" label="{{ __('lang.info') }}(EN)"
-                            placeholder="{{ __('lang.Info_In_English') }}" name='description'></x-textarea>
-                        <x-textarea id="infoDe" label="{{ __('lang.info') }}(De)"
-                            placeholder="{{ __('lang.Info_In_German') }}" name='description_de'></x-textarea>
-                    </div>
-
-
-                </div>
-                <div class="mt-6">
-
-                    <x-modal-button title="Add"></x-modal-button>
-                </div>
-            </form>
-        </x-slot>
-    </x-modal>
 
 
 
@@ -296,18 +191,16 @@
         <x-slot name="title">@lang('lang.Details')</x-slot>
         <x-slot name="modal_width">max-w-2xl</x-slot>
         <x-slot name="body">
-            <form id="" method="POST">
+            <form id="postDataForm"  url="changeBusinessStatus" method="post">
+                @csrf
+                <input type="hidden" id="updateStatusId" name="update_id">
                 <div>
-                    <x-select id="status" label="{{ __('lang.Status') }}" name='Status'>
+                    <x-select id="status" label="{{ __('lang.Status') }}" name='status'>
                         <x-slot name="options">
-                            <option selected disabled> @lang('lang.Select_Status')</option>
-                            <option value="1"> @lang('lang.Active')</option>
-                            <option value="2"> @lang('lang.In-Active')</option>
-
+                            <option selected value="1">Approved</option>
                         </x-slot>
                     </x-select>
                     <div class="mt-6">
-
                         <x-modal-button title="change Status"></x-modal-button>
                     </div>
                 </div>
@@ -318,7 +211,15 @@
 @section('js')
     <script>
         
+        function updateDatafun(){
+
+            
+        }
         function getData() {
+            $(".updateStatus").click(function() {
+                $('#change-status-modal').addClass('flex').removeClass('hidden');
+                $('#updateStatusId').val($(this).attr('updateid'));
+            });
 
             $(".getDataBtn").click(function() {
                 $('#business-detail-modal').removeClass('hidden').addClass('flex')
@@ -398,62 +299,7 @@
     
         getData()
     });
-        $('#VideoUploader .file-preview').click(function() {
-            $('#videoLabel').click();
 
-        })
-
-        function updateDatafun() {
-            $('.updateDataBtn').click(function() {
-                $('#business-modal').removeClass("hidden");
-                $('#business-modal').addClass('flex');
-
-                $('#postDataForm').attr('url', $(this).attr('updateUrl'));
-
-
-                $('#titleEn').val($(this).attr('nameEn'));
-                $('#titleDe').val($(this).attr('nameDe'));
-                $('#categoryNameDe').val($(this).attr('category')).trigger('change');
-                $('#price').val($(this).attr('price'));
-                $('#country').val($(this).attr('country')).trigger('change');
-                $('#city').val($(this).attr('city'));
-                $('#infoEn').val($(this).attr('infoEn'));
-                $('#infoDe').val($(this).attr('infoDe'));
-                let fileImg = $('#business-modal .file-preview');
-                fileImg.addClass('hidden');
-                const videoUrl = $(this).attr('video');
-                if (videoUrl && videoUrl !== null) {
-                    $('#VideoUploader .file-preview').attr('src', $(this).attr('video')).removeClass('hidden');
-                } else {
-                    $('#VideoUploader .file-preview').addClass('hidden');
-                }
-
-                $('#business-modal #modalTitle').text("Edit Category");
-                $('#business-modal #submitBtn').text("Update");
-
-                let jsonString = $(this).attr('images');
-                const imageArray = JSON.parse(jsonString);
-                imageArray.forEach((imageUrl, index) => {
-                    const uploaderId = `#businessImage${index + 1}`;
-                    let tag = `${uploaderId} .file-preview`;
-                    $(tag).attr('src', imageUrl).removeClass('hidden');
-
-
-                });
-
-            });
-        }
-        updateDatafun();
-        $('#addModalBtn').click(function() {
-            $('#postDataForm')[0].reset();
-            $('#postDataForm').attr('url', 'addBusiness');
-            let fileImg = $('#business-modal .file-preview');
-            fileImg.addClass('hidden');
-            $('#business-modal #modalTitle').text("Add Business");
-            $('#business-modal #submitBtn').text("Add");
-
-        })
-        // Listen for the custom form submission response event
         $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
             if (response.success) {
                 getData()

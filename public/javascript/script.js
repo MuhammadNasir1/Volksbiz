@@ -77,10 +77,11 @@ $(document).ready(function () {
                         type: "GET",
                         url: url,
                         beforeSend: function () {
+                            // $("#BtnSpinnerShow").show();
                             $("#loading").show();
                         },
                         success: function (response) {
-                            // $("#loading").hide();
+                            $("#loading").hide();
                             reloadDataTable();
 
                             const alert = Swal.fire({
