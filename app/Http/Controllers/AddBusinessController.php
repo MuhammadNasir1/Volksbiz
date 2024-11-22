@@ -118,6 +118,7 @@ public function businessRequest(){
                 'description' => 'required',
                 'description_de' => 'required',
                 'price' => 'required',
+                'phone_no' => 'nullable',
             ]);
 
             $imagePaths = []; // Initialize an array to store file paths
@@ -153,14 +154,17 @@ public function businessRequest(){
                 'description' => $validatedData['description'],
                 'description_de' => $validatedData['description_de'],
                 'price' => $validatedData['price'],
+                'phone_no' => $validatedData['phone_no'],
             ]);
 
+  
             $business->save();
             $business->images = json_decode($business->images, true);
             $category = AddCategory::where('id', "$business->category")->first();
             $business->category = $category->category_name;
             $business->category_de = $category->category_name_de;
             $business->category_id = $business->category;
+
             return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $business], 201);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
