@@ -248,13 +248,6 @@ class authController extends Controller
         return view('setting', ['user' => $user]);
     }
 
-    public function Dashboard()
-    {
-
-        return view('dashboard');
-    }
-
-
     public function changepasword(Request $request)
     {
         try {

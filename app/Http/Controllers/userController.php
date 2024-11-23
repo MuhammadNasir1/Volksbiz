@@ -9,7 +9,9 @@ use Illuminate\Validation\ValidationException;
 use  Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpMail;
+use App\Models\AddBusiness;
 use App\Models\Contact_us;
+use App\Models\Order;
 use App\Models\students;
 use App\Models\teacher;
 use App\Models\teacher_rec;
@@ -28,6 +30,22 @@ class userController extends Controller
         session()->put('locale', $request->lang);
         return redirect()->back();
     }
+
+    public function Dashboard()
+    {
+        $totalUserCount = User::whereNot('role' , 'admin')->count();
+        $totalBusinessCount = AddBusiness::whereNot('status' , 'sold')->count();
+        $totalOrderCount = Order::whereNot('status' , 'sold')->count();
+        $totalOfferCount = AddBusiness::where('status' , 'pending')->count();
+        $reservedBusinessCount = AddBusiness::where('status' , 'reserved')->count();
+        $soldBusinessCount = AddBusiness::where('status' , 'sold')->count();
+
+
+        $allCounts = ['totalUserCount' => $totalUserCount , 'totalBusinessCount' => $totalBusinessCount  , "totalOrderCount" => $totalOrderCount , "totalOfferCount" => $totalOfferCount ];
+        // return response()->json($allCounts);
+        return view('dashboard' , ['totalUserCount' => $totalUserCount , 'totalBusinessCount' => $totalBusinessCount  , "totalOrderCount" => $totalOrderCount , "totalOfferCount" => $totalOfferCount , "reservedBusinessCount"=> $reservedBusinessCount , "soldBusinessCount"=> $soldBusinessCount]);
+    }   
+
     // dashboard  Users Couny
     public function customers()
     {

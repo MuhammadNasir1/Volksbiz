@@ -478,7 +478,7 @@ public function businessRequest(){
         }
     }
 
-    public function getOrders()
+public function getOrders()
     {
         try {
             $user = Auth()->user();

@@ -13,12 +13,12 @@
                     <div class="flex gap-1 justify-between items-center">
                         <div>
                             <p class="text-sm text-[#808191]">@lang('lang.Total_users')</p>
-                            <h2 class="text-2xl font-semibold mt-1">1</h2>
+                            <h2 class="text-2xl font-semibold mt-1">{{$totalUserCount}}</h2>
                         </div>
                         <div>
                             <div
                                 class="icon-bg h-[60px] w-[60px] bg-[#339B96] rounded-full flex justify-center items-center">
-                                <i class="fa-solid fa-users text-white text-2xl"></i>
+                                <i class="fa-solid fa-user text-white text-2xl"></i>
                             </div>
                         </div>
                     </div>
@@ -30,12 +30,12 @@
                     <div class="flex gap-1 justify-between items-center">
                         <div>
                             <p class="text-sm text-[#808191]">Total Businesses</p>
-                            <h2 class="text-2xl font-semibold mt-1">0</h2>
+                            <h2 class="text-2xl font-semibold mt-1">{{$totalBusinessCount}}</h2>
                         </div>
                         <div>
                             <div
                                 class="icon-bg h-[60px] w-[60px] bg-[#a4c2da] rounded-full  flex justify-center items-center">
-                                <i class="fa-solid fa-cart-arrow-down text-white text-2xl"></i>
+                                <i class="fa-solid fa-business-time  text-white text-2xl"></i>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     <div class="flex gap-1 justify-between items-center">
                         <div>
                             <p class="text-sm text-[#808191]">Total Order</p>
-                            <h2 class="text-2xl font-semibold mt-1">1</h2>
+                            <h2 class="text-2xl font-semibold mt-1">{{$totalOrderCount}}</h2>
                         </div>
                         <div>
                             <div
@@ -64,14 +64,13 @@
                 <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                     <div class="flex gap-1 justify-between items-center">
                         <div>
-                            <p class="text-sm text-[#808191]">@lang('lang.Total_Revenue')</p>
-                            <h2 class="text-2xl font-semibold mt-1">1</h2>
+                            <p class="text-sm text-[#808191]">Sale Offers</p>
+                            <h2 class="text-2xl font-semibold mt-1">{{$totalOfferCount}}</h2>
                         </div>
                         <div>
                             <div
                                 class="icon-bg h-[60px] w-[60px] bg-[#D95975] rounded-full flex justify-center items-center">
-                                <img src="{{ asset('./images/icons/dollar.svg') }}" width="18" height="18"
-                                    alt="">
+                                <i class="fa-solid fa-arrow-down   text-white text-2xl"></i>
                             </div>
                         </div>
                     </div>
@@ -96,7 +95,7 @@
                                 <thead class="text-sm text-gray-900  text-dblue ">
                                     <tr>
                                         <th class="px-6 py-3">
-                                            @lang('lang.Code')
+                                            Stn
                                         </th>
                                         <th class="px-6 py-3">
                                             @lang('lang.Photo')
@@ -105,30 +104,23 @@
                                             @lang('lang.Name')
                                         </th>
                                         <th class="px-6 py-3">
-                                            @lang('lang.Rank')
+                                           Location
                                         </th>
                                     </tr>
-                                </thead>
+                                </thead> 
                                 <tbody>
                                     <tr class="bg-white ">
                                         <td class="px-6 py-3 ">
                                             11
                                         </td>
                                         <td class="px-6 py-3 flex  justify-center">
-                                            <img src="{{ asset('images/favicon(32X32).png') }}" alt="Product">
+                                            <img class="h-16 w-16 object-cover rounded-full" src="{{ asset('images/favicon(32X32).png') }}" alt="Product">
                                         </td>
                                         <td class="px-6 py-3">
                                             7th Class
                                         </td>
                                         <td class="px-6 py-3">
-                                            <div class="flex items-center justify-center flex-col">
-                                                <div>
-                                                    <p class="text-dblue flex">95.06%</p>
-                                                    <div class="bg-green-100 rounded-xl w-36 h-3 relative  mt-1">
-                                                        <div class="bg-dblue w-[70%] rounded-xl h-full"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            Pak
                                         </td>
                                     </tr>
 
@@ -146,18 +138,22 @@
 
                 <div>
                     <div class="flex justify-between px-6">
-                        <h2 class="text-xl  font-semibold ">@lang('lang.Requests')</h2>
+                        <h2 class="text-xl  font-semibold ">Businesses</h2>
                     </div>
                     <div id="attendanceChart" class="mt-4" style="height: 270px; width: 100%;"></div>
                     <div class="mt-8 mx-10">
                         <div class="flex justify-around">
                             <div class="flex flex-col items-center">
-                                <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Sell')</p>
-                                <h2 class="text-secondary text-3xl  mt-2 font-bold">84%</h2>
+                                <p class="text-[#CECECE] text-lg font-semibold">Pending</p>
+                                <h2 class="text-[#B12424FF] text-3xl  mt-2 font-bold">{{$totalOfferCount}}</h2>
                             </div>
                             <div class="flex flex-col items-center">
-                                <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Buy')</p>
-                                <h2 class="text-primary text-3xl  mt-2  font-bold">34%</h2>
+                                <p class="text-[#CECECE] text-lg font-semibold">Reserved</p>
+                                <h2 class="text-primary text-3xl  mt-2  font-bold"> {{$reservedBusinessCount}}</h2>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <p class="text-[#CECECE] text-lg font-semibold">Sold</p>
+                                <h2 class="text-[#332D8FFF] text-3xl  mt-2  font-bold">{{$soldBusinessCount}}</h2>
                             </div>
 
                         </div>
@@ -171,15 +167,7 @@
 @section('js')
     <script>
         window.onload = function() {
-            CanvasJS.addColorSet("colors",
-                [
-
-                    "#417dfc",
-                    "#339B96",
-                    "#13242C",
-
-                ]);
-
+           
 
 
 
@@ -193,14 +181,19 @@
                     indexLabelFontColor: "transparent",
                     indexLabelPlacement: "inside",
                     dataPoints: [{
-                            y: 67,
-                            color: "#417dfc",
-                            label: "Students"
+                            y: {{$totalOfferCount}},
+                            color: "#B12424FF",
+                            label: "Pending"
                         },
                         {
-                            y: 28,
+                            y: {{$reservedBusinessCount}},
                             color: "#13242C",
-                            label: "Teachers"
+                            label: "Reserved"
+                        },
+                        {
+                            y: {{$soldBusinessCount}},
+                            color: "#332D8FFF",
+                            label: "Sold"
                         },
 
                     ]
