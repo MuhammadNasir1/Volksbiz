@@ -409,10 +409,21 @@ public function businessRequest(){
             }
 
             // Filter by category (if provided)
+            // if ($request->has('category') && !empty($request->category)) {
+            //     $query->where('category', $request->category);
+            // }
             if ($request->has('category') && !empty($request->category)) {
-                $query->where('category', $request->category);
+                // Get the category ID by searching for the category name
+                $category = AddCategory::where('category_name', $request->category)->orWhere('category_name_de' , $request->category)->first();
+            
+                if ($category) {
+                    // Filter the businesses by the found category ID
+                    $query->where('category', $category->id);
+                } else {
+                    // Handle the case where no category is found
+                    $query->whereRaw('1 = 0'); // This will result in an empty result
+                }
             }
-
             // Fetch the businesses
             $businesses = $query->get();
 
