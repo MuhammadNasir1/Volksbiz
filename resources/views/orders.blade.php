@@ -46,7 +46,7 @@
                                 <td><a href="tel:{{ $order->buyer_contact }}" class="text-blue-600">{{ $order->buyer_contact }}</a></td>
                                 <td>{{ $order->desired_location }}</td>
                                 <td>{{ $order->budget }}&euro;</td>
-                                <td>{{ $order->created_at->format('M-d-y') }}</td>
+                                <td class="whitespace-nowrap">{{ $order->created_at->format('M-d-y') }}</td>
                                 <td><button updateId={{$order->id}}  class="updateStatus">
                                     <span class="{{  $order->status == 'cancel' ? 'text-green-800' : ($order->status == 'sold' ? 'text-purple-800' : 'text-red-700') }} font-semibold text-sm">
                                         {{ ucfirst($order->status) }}
@@ -158,32 +158,37 @@
                 <div class="px-5 py-7 w-full lg:w-[50%]">
                     <h1 class="text-4xl font-bold">@lang('lang.Details')</h1>
                     <div class="h-1 bg-black w-40 mt-3"></div>
-                    <div class="flex gap-20 pt-7">
+                    <div class="flex gap-12 pt-7">
+                        <h5 class="font-bold text-nowrap">
+                            Added UserName :</h5>
+                        <p class="text-justify break-words" id="Username"></p>
+                    </div>
+                    <div class="flex gap-[82px] pt-3">
                         <h5 class="font-bold text-nowrap">
                             Business @lang('lang.Title') :</h5>
                         <p class="text-justify break-words" id="dTitle"></p>
                     </div>
-                    <div class="flex gap-10 pt-3">
+                    <div class="flex gap-[92px] pt-3">
                         <h5 class="font-bold">Buyer Name :</h5>
                         <p  id="dName"></p>
                     </div>
-                    <div class="flex gap-10 pt-3">
+                    <div class="flex gap-[74px] pt-3">
                         <h5 class="font-bold">Buyer Contact :</h5>
                         <p  id="dContact" class="text-blue-500"></p>
                     </div>
-                    <div class="flex gap-10 pt-3">
+                    <div class="flex gap-[132px] pt-3">
                         <h5 class="font-bold">Budget :</h5>
                         <p class="category" id="dprice"></p>
                     </div>
-                    <div class="flex gap-12 pt-3">
+                    <div class="flex gap-[122px] pt-3">
                         <h5 class="font-bold">@lang('lang.Location') :</h5>
                         <p class="location" id="dLocation"></p>
                     </div>
-                    <div class="flex gap-20 pt-3">
+                    <div class="flex gap-[100px] pt-3">
                         <h5 class="font-bold">Order @lang('lang.Date') :</h5>
                         <p class="date" id='Date'></p>
                     </div>
-                    <div class="flex gap-6 pt-3">
+                    <div class="flex gap-5 pt-3">
                         <h5 class="font-bold text-nowrap">
                           Business  @lang('lang.Description') :</h5>
                         <p class="text-justify description break-words" id="dDescription"></p>
@@ -218,6 +223,7 @@
                     success: function(response) {
                         $(".modal-loading").addClass("hidden");
                         $(".modal-content").removeClass("hidden");
+                        $('#Username').text('');
                         $('#dName').text('');
                         $('#dLocation').text('');
                         $('#dprice').text('');
@@ -231,6 +237,7 @@
                         $imageContainer.empty();
                         if (response.success) {
                             let data = response.data;
+                            $('#Username').text(data.username)
                             $('#dName').text(data.buyer_name)
                             $('#dLocation').text(data.desired_location)
                             $('#Date').text(data.date)

@@ -604,6 +604,8 @@ public function getOrders()
                 $businesses = AddBusiness::where('id', $businessId)->first();
                 $businesses->images = json_decode($businesses->images);
                 $order->business = $businesses;
+                $user = User::select('name')->where('id' , $order->user_id)->first();
+                $order->username = $user->name ;
                 $order->date =  $order->created_at->format('M d, Y');
               
             return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $order], 200);
