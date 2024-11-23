@@ -419,6 +419,16 @@ public function businessRequest(){
             // Fetch and decode images for each business efficiently
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
+                $category = AddCategory::where('id', $business->category)->first();
+                if ($category) {
+                    $business->category = $category->category_name;
+                    $business->category_de = $category->category_name_de;
+                    $business->category_id = $category->id;
+                } else {
+                    $business->category = null;
+                    $business->category_de = null;
+                    $business->category_id = null;
+                }
             }
             return response()->json(['sucess' => true, 'message' => 'Data Get Sucessfully', 'business' => $businesses], 200);
         } catch (\Exception $e) {
