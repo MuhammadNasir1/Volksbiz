@@ -77,8 +77,8 @@ $(document).ready(function () {
                         type: "GET",
                         url: url,
                         beforeSend: function () {
-                            // $("#BtnSpinnerShow").show();
                             $("#loading").show();
+                            $("#BtnSpinnerShow").show();
                         },
                         success: function (response) {
                             $("#loading").hide();

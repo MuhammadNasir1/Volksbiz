@@ -44,8 +44,8 @@
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->buyer_name }}</td>
                                 <td><a href="tel:{{ $order->buyer_contact }}" class="text-blue-600">{{ $order->buyer_contact }}</a></td>
-                                <td>{{ $order->desired_location }}</td>
                                 <td>{{ $order->budget }}&euro;</td>
+                                <td>{{ $order->desired_location }}</td>
                                 <td class="whitespace-nowrap">{{ $order->created_at->format('M-d-y') }}</td>
                                 <td><button updateId={{$order->id}}  class="updateStatus">
                                     <span class="{{  $order->status == 'cancel' ? 'text-green-800' : ($order->status == 'sold' ? 'text-purple-800' : 'text-red-700') }} font-semibold text-sm">
