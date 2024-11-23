@@ -39,11 +39,19 @@ class userController extends Controller
         $totalOfferCount = AddBusiness::where('status' , 'pending')->count();
         $reservedBusinessCount = AddBusiness::where('status' , 'reserved')->count();
         $soldBusinessCount = AddBusiness::where('status' , 'sold')->count();
+        $lastFiveBusinesses = AddBusiness::whereNot('status', 'sold')->latest()->take(5)->get();
 
-
-        $allCounts = ['totalUserCount' => $totalUserCount , 'totalBusinessCount' => $totalBusinessCount  , "totalOrderCount" => $totalOrderCount , "totalOfferCount" => $totalOfferCount ];
-        // return response()->json($allCounts);
-        return view('dashboard' , ['totalUserCount' => $totalUserCount , 'totalBusinessCount' => $totalBusinessCount  , "totalOrderCount" => $totalOrderCount , "totalOfferCount" => $totalOfferCount , "reservedBusinessCount"=> $reservedBusinessCount , "soldBusinessCount"=> $soldBusinessCount]);
+        // return response()->json($lastFiveBusinesses);
+        return view('dashboard', [
+            'totalUserCount' => $totalUserCount, 
+            'totalBusinessCount' => $totalBusinessCount, 
+            'totalOrderCount' => $totalOrderCount, 
+            'totalOfferCount' => $totalOfferCount, 
+            'reservedBusinessCount' => $reservedBusinessCount, 
+            'soldBusinessCount' => $soldBusinessCount, 
+            'lastFiveBusinesses' => $lastFiveBusinesses
+        ]);
+        
     }   
 
     // dashboard  Users Couny

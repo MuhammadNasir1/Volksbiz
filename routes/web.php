@@ -56,10 +56,6 @@ Route::middleware('custom')->group(function () {
         return view("emails.parent");
     });
 
-    Route::get('orders', function () {
-
-        return view("orders");
-    });
     Route::get('reviewsAndExperience', [ExperienceReviewController::class, 'index']);
     Route::get('addBlog', function () {
 
@@ -83,6 +79,8 @@ Route::middleware('custom')->group(function () {
     // });
 
     Route::get('/orders', [AddBusinessController::class,  'getBusOrders']);
+    Route::get('/getSingleorders/{id}', [AddBusinessController::class,  'getSingleorders']);
+    Route::post('/changeOrderStatus', [AddBusinessController::class,  'changeOrderStatus']);
     Route::get('/saleRequests', [AddBusinessController::class,  'getBusOrders']);
 
 

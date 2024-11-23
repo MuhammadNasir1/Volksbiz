@@ -60,15 +60,15 @@
                                 <td>{{ $bussiness->price }}&euro;</td>
                                 <td>{{ $bussiness->category }} / {{ $bussiness->category_de }}</td>
                                 <td>{{ $bussiness->city }} {{ $bussiness->country }}</td>
-                                <td><button updateId={{$bussiness->id}}  class="{{$bussiness->status !== "sold" ? 'updateStatus' : ''}}">
+                                <td><button updateId={{$bussiness->id}}  class="updateStatus">
                                     <span class="{{  $bussiness->status == 'active' ? 'text-green-800' : ($bussiness->status == 'sold' ? 'text-purple-800' : 'text-red-700') }} font-semibold text-sm">
                                         {{ ucfirst($bussiness->status) }}
                                     </span>
                                     </button></td>
-                                    
+
                                 <td>
                                     <div class="flex gap-5 items-center">
-                                        
+
                                         <button data-modal-target="business-detail-modal"
                                         url="../singleBusinesses/{{ $bussiness->id }}"
                                             data-modal-toggle="business-detail-modal" data-id="{{ $bussiness->id }}"
@@ -101,8 +101,8 @@
                                                     fill='#233A85' />
                                             </svg>
                                         </button>
-                                        
-                                        
+
+
                                         <button class="deleteDataBtn" delUrl="deleteBusiness/{{ $bussiness->id }}">
                                             <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
                                             xmlns='http://www.w3.org/2000/svg'>
@@ -335,7 +335,7 @@
                            Change Status
                             </div>
                         </button>
-                       
+
                     </div>
                 </div>
             </form>
@@ -344,7 +344,7 @@
 @endsection
 @section('js')
     <script>
-        
+
         function getData() {
             $(".updateStatus").click(function() {
                 $('#change-status-modal').addClass('flex').removeClass('hidden');
@@ -425,7 +425,7 @@
         }
         getData()
         $(".dataTable").on("draw", function () {
-    
+
         getData()
     });
         $('#VideoUploader .file-preview').click(function() {
@@ -480,7 +480,7 @@
             let fileImg = $('#business-modal .file-preview');
             fileImg.addClass('hidden');
             $('#business-modal #modalTitle').text("Add Business");
-            $('#business-modal #submitBtn').text("Add");
+            $('#business-modal #btnText').text("Add");
 
         })
 

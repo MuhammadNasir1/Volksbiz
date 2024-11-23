@@ -91,6 +91,7 @@
                     <div class="pt-3  mt-2 border-t  border-gray-200">
 
                         <div class="relative overflow-auto h-[300px] ">
+                          <a href="../businesses">
                             <table class="w-full text-sm text-center ">
                                 <thead class="text-sm text-gray-900  text-dblue ">
                                     <tr>
@@ -101,7 +102,7 @@
                                             @lang('lang.Photo')
                                         </th>
                                         <th class="px-6 py-3">
-                                            @lang('lang.Name')
+                                         Title
                                         </th>
                                         <th class="px-6 py-3">
                                            Location
@@ -109,23 +110,29 @@
                                     </tr>
                                 </thead> 
                                 <tbody>
+                                    @foreach ($lastFiveBusinesses as $business )
+                                        @php
+                                        $images = json_decode($business->images, true);
+                                        @endphp
                                     <tr class="bg-white ">
                                         <td class="px-6 py-3 ">
-                                            11
+                                         {{$loop->iteration}}
                                         </td>
                                         <td class="px-6 py-3 flex  justify-center">
-                                            <img class="h-16 w-16 object-cover rounded-full" src="{{ asset('images/favicon(32X32).png') }}" alt="Product">
+                                            <img class="h-16 w-16 object-cover rounded-full" src="{{  $images[0] ?? asset('images/default-logo.png')  }}" alt="Product">
                                         </td>
                                         <td class="px-6 py-3">
-                                            7th Class
+                                            {{$business->title}}
                                         </td>
                                         <td class="px-6 py-3">
-                                            Pak
+                                            {{$business->city}} {{$business->country}}
                                         </td>
                                     </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>
+                          </a>
                         </div>
 
                     </div>

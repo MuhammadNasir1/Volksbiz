@@ -542,10 +542,11 @@ public function getOrders()
                 $order->business = $businesses;
             }
 
-            $userId = $order['user_id'];
-            $user = User::where('id', $userId)->first();
-            $order->user = $user;
+            // $userId = $order['user_id'];
+            // $user = User::where('id', $userId)->first();
+            // $order->user = $user;
         }
+        // return response()->json($orders);
         return view("orders", ['orders' => $orders]);
     }
 
@@ -580,4 +581,36 @@ public function getOrders()
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
+    public function changeOrderStatus(Request $request){
+        try {
+
+            $validatedData = $request->validate([
+                'update_id' => "required",
+                'status' => "required",
+            ]);
+            $business =  Order::where('id', $validatedData['update_id'])->first();
+            $business->status = $validatedData['status'];
+            $business->update(); 
+    
+            return response()->json(['success' => true, 'message' => "Order Updated!"], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+    public function getSingleorders($id){
+        try {
+             $order = Order::where('id', $id)->first();
+                $businessId = $order['business_id'];
+                $businesses = AddBusiness::where('id', $businessId)->first();
+                $businesses->images = json_decode($businesses->images);
+                $order->business = $businesses;
+                $order->date =  $order->created_at->format('M d, Y');
+              
+            return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $order], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+
+    
 }
