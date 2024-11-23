@@ -492,6 +492,16 @@ public function getOrders()
                 $businesses = AddBusiness::where('id', $businessId)->first();
                 $businesses->images = json_decode($businesses->images);
                 $order->business = $businesses;
+                $category = AddCategory::where('id', $businesses->category)->first();
+                if ($category) {
+                    $order->business->category = $category->category_name;
+                    $order->business->category_de = $category->category_name_de;
+                    $order->business->category_id = $category->id;
+                } else {
+                    $order->business->category = null;
+                    $order->business->category_de = null;
+                    $order->business->category_id = null;
+                }
             }
             return response()->json(['success' => true, 'message' => 'Data add successfully', 'data' => $orders], 200);
         } catch (\Exception $e) {
