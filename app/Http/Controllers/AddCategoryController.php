@@ -57,7 +57,7 @@ class AddCategoryController extends Controller
     public function getCategories()
     {
         try {
-            $categories  = AddCategory::all();
+            $categories  = AddCategory::where('status' , 1)->get();
             return response()->json(['success' => true, 'message' => "Data  get successfully", 'categories' => $categories], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
