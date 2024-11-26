@@ -69,8 +69,9 @@
                                     <td>{{ $review->role }}</td>
                                     <td>{{ $review->location }}</td>
                                     <td>{{ $review->rating }}</td>
-                                    <td>{{ $review->description }}</td>
-                                    <td> <span
+                                    <td>{{ \Str::limit($review->description, 60) }}
+                                    </td>
+                                    <td class="whitespace-nowrap"> <span
                                             class="font-semibold {{ $review->status == 'active' ? 'text-green-500' : 'text-red-800' }}">
                                             {{ $review->status }} </span></td>
                                     <td>

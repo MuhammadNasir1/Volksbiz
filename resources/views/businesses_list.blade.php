@@ -88,7 +88,7 @@
                                             nameEn="{{ $bussiness->title }}" nameDe="{{ $bussiness->title_de }}"
                                             category="{{ $bussiness->category_id }}" price="{{ $bussiness->price }}"
                                             country="{{ $bussiness->country }}" city="{{ $bussiness->city }}"
-                                            infoDe="{{ $bussiness->description }}"
+                                            infoDe="{{ $bussiness->description_de }}"
                                             infoEn="{{ $bussiness->description }}" images="{{ $bussiness->images }}"
                                             video="{{ $bussiness->video }}"
                                             updateUrl="updateBusinessData/{{ $bussiness->id }}">
