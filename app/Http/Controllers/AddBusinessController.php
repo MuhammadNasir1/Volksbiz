@@ -424,7 +424,7 @@ public function businessRequest(){
                 }
             }
             // Fetch the businesses
-            $businesses = $query->get();
+            $businesses = $query->whereNot('status' , 'deleted')->get();
 
             // Fetch and decode images for each business efficiently
             foreach ($businesses as $business) {
