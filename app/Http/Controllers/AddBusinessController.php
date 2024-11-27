@@ -157,7 +157,7 @@ public function businessRequest(){
                 'phone_no' => $validatedData['phone_no'],
             ]);
 
-  
+
             $business->save();
             $business->images = json_decode($business->images, true);
             $category = AddCategory::where('id', "$business->category")->first();
@@ -383,7 +383,7 @@ public function businessRequest(){
     public function getFilteredBusiness(Request $request)
     {
         try {
-            $query = addBusiness::query();
+            $query = addBusiness::whereNot('status' , 'deleted')->query();
 
             // Filter by price range (if both min and max are provided)
             if ($request->has('min_price') && !empty($request->min_price) && $request->has('max_price') && !empty($request->max_price)) {
@@ -415,7 +415,7 @@ public function businessRequest(){
             if ($request->has('category') && !empty($request->category)) {
                 // Get the category ID by searching for the category name
                 $category = AddCategory::where('category_name', $request->category)->orWhere('category_name_de' , $request->category)->first();
-            
+
                 if ($category) {
                     // Filter the businesses by the found category ID
                     $query->where('category', $category->id);
@@ -574,8 +574,8 @@ public function getOrders()
             ]);
             $business =  addBusiness::where('id', $validatedData['update_id'])->first();
             $business->status = $validatedData['status'];
-            $business->update(); 
-    
+            $business->update();
+
             return response()->json(['success' => true, 'message' => "Business Request Approved"], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
@@ -590,8 +590,8 @@ public function getOrders()
             ]);
             $business =  Order::where('id', $validatedData['update_id'])->first();
             $business->status = $validatedData['status'];
-            $business->update(); 
-    
+            $business->update();
+
             return response()->json(['success' => true, 'message' => "Order Updated!"], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
@@ -607,12 +607,12 @@ public function getOrders()
                 $user = User::select('name')->where('id' , $order->user_id)->first();
                 $order->username = $user->name ;
                 $order->date =  $order->created_at->format('M d, Y');
-              
+
             return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $order], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
 
-    
+
 }
