@@ -383,7 +383,7 @@ public function businessRequest(){
     public function getFilteredBusiness(Request $request)
     {
         try {
-            $query = addBusiness::whereNot('status' , 'deleted')->query();
+            $query = addBusiness::query();
 
             // Filter by price range (if both min and max are provided)
             if ($request->has('min_price') && !empty($request->min_price) && $request->has('max_price') && !empty($request->max_price)) {
@@ -394,8 +394,7 @@ public function businessRequest(){
             if ($request->has('location') && !empty($request->location)) {
                 $location = $request->location;
                 $query->where(function ($q) use ($location) {
-                    $q->where('country', $location)
-                        ->orWhere('city', $location);
+                    $q->where('country', $location)->orWhere('city', $location)->whereNot('status' , 'deleted');
                 });
             }
 
@@ -404,7 +403,7 @@ public function businessRequest(){
                 $search = $request->search;
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'LIKE', "%{$search}%")
-                        ->orWhere('description', 'LIKE', "%{$search}%");
+                        ->orWhere('description', 'LIKE', "%{$search}%")->whereNot('status' , 'deleted');
                 });
             }
 
@@ -418,10 +417,10 @@ public function businessRequest(){
 
                 if ($category) {
                     // Filter the businesses by the found category ID
-                    $query->where('category', $category->id);
+                    $query->where('category', $category->id)->whereNot('status' , 'deleted');
                 } else {
                     // Handle the case where no category is found
-                    $query->whereRaw('1 = 0'); // This will result in an empty result
+                    $query->whereRaw('1 = 0')->whereNot('status' , 'deleted'); // This will result in an empty result
                 }
             }
             // Fetch the businesses
@@ -454,7 +453,7 @@ public function businessRequest(){
                 $search = $request->search;
                 $businesses = AddBusiness::where(function ($q) use ($search) {
                     $q->where('title', 'LIKE', "%{$search}%")
-                        ->orWhere('description', 'LIKE', "%{$search}%");
+                        ->orWhere('description', 'LIKE', "%{$search}%")->whereNot('status' , 'deleted');
                 })->get();
             }
             foreach ($businesses as $business) {
