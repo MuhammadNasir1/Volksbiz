@@ -33,7 +33,7 @@
                         @if (@$_GET['type'] == 'review')
                             <div>
 
-                                <button data-modal-target="reviewModal" data-modal-toggle="reviewModal"
+                                <button id="addModalBtn" url="../insertReview" data-modal-target="reviewModal" data-modal-toggle="reviewModal"
                                     class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                                     @lang('lang.Review')</button>
                             </div>
@@ -41,7 +41,7 @@
                         @if (@$_GET['type'] !== 'review')
                             <div>
 
-                                <button data-modal-target="experienceModal" data-modal-toggle="experienceModal"
+                                <button id="addModalBtn" url="../insertExperience" data-modal-target="experienceModal" data-modal-toggle="experienceModal"
                                     class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                                     @lang('lang.Experience')</button>
                             </div>
@@ -82,8 +82,17 @@
                                                 {{ $review->status }} </span></td>
                                         <td>
                                             <div class="flex gap-5 items-center justify-center">
-                                                <a href=""><img width="38px"
-                                                        src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
+                                                <button class="updateReviewBtn" url="../updateReview/{{ $review->id }}"
+                                                    Status="{{$review->status}}" Name="{{ $review->name }}"  Role="{{ $review->role }}"  Location="{{ $review->location }}" Rating="{{ $review->rating }}" Description="{{ $review->description }}">
+                                                    <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
+                                                        xmlns='http://www.w3.org/2000/svg'>
+                                                        <circle opacity='0.1' cx='18' cy='18' r='18'
+                                                            fill='#233A85' />
+                                                        <path fill-rule='evenodd' clip-rule='evenodd'
+                                                            d='M16.1637 23.6188L22.3141 15.665C22.6484 15.2361 22.7673 14.7402 22.6558 14.2353C22.5593 13.7763 22.277 13.3399 21.8536 13.0088L20.8211 12.1886C19.9223 11.4737 18.8081 11.549 18.1693 12.3692L17.4784 13.2654C17.3893 13.3775 17.4116 13.543 17.523 13.6333C17.523 13.6333 19.2686 15.0329 19.3058 15.063C19.4246 15.1759 19.5137 15.3264 19.536 15.507C19.5732 15.8607 19.328 16.1918 18.9641 16.2369C18.7932 16.2595 18.6298 16.2068 18.511 16.109L16.6762 14.6492C16.5871 14.5822 16.4534 14.5965 16.3791 14.6868L12.0188 20.3304C11.7365 20.6841 11.64 21.1431 11.7365 21.5871L12.2936 24.0025C12.3233 24.1304 12.4348 24.2207 12.5685 24.2207L15.0197 24.1906C15.4654 24.1831 15.8814 23.9799 16.1637 23.6188ZM19.5958 22.8672H23.5929C23.9829 22.8672 24.3 23.1885 24.3 23.5835C24.3 23.9794 23.9829 24.2999 23.5929 24.2999H19.5958C19.2059 24.2999 18.8887 23.9794 18.8887 23.5835C18.8887 23.1885 19.2059 22.8672 19.5958 22.8672Z'
+                                                            fill='#233A85' />
+                                                    </svg>
+                                                </button>
                                                         <button class="deleteDataBtn"
                                                         delUrl="deleteReview/{{ $review->id }}">
                                                         <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
@@ -136,8 +145,17 @@
                                                 {{ $experience->status }} </span></td>
                                         <td>
                                             <div class="flex gap-5 items-center justify-center">
-                                                <a href=""><img width="38px"
-                                                        src="{{ asset('images/icons/edits.svg') }}" alt="update"></a>
+                                                <button class="updateExpBtn" url="../updateExperience/{{ $experience->id }}"
+                                                    Status="{{$experience->status}}" Name="{{ $experience->name }}"  Role="{{ $experience->role }}"  Location="{{ $experience->location }}" Subject="{{ $experience->subject }}" Category="{{$experience->category}}" Description="{{ $experience->description }}">
+                                                    <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
+                                                        xmlns='http://www.w3.org/2000/svg'>
+                                                        <circle opacity='0.1' cx='18' cy='18' r='18'
+                                                            fill='#233A85' />
+                                                        <path fill-rule='evenodd' clip-rule='evenodd'
+                                                            d='M16.1637 23.6188L22.3141 15.665C22.6484 15.2361 22.7673 14.7402 22.6558 14.2353C22.5593 13.7763 22.277 13.3399 21.8536 13.0088L20.8211 12.1886C19.9223 11.4737 18.8081 11.549 18.1693 12.3692L17.4784 13.2654C17.3893 13.3775 17.4116 13.543 17.523 13.6333C17.523 13.6333 19.2686 15.0329 19.3058 15.063C19.4246 15.1759 19.5137 15.3264 19.536 15.507C19.5732 15.8607 19.328 16.1918 18.9641 16.2369C18.7932 16.2595 18.6298 16.2068 18.511 16.109L16.6762 14.6492C16.5871 14.5822 16.4534 14.5965 16.3791 14.6868L12.0188 20.3304C11.7365 20.6841 11.64 21.1431 11.7365 21.5871L12.2936 24.0025C12.3233 24.1304 12.4348 24.2207 12.5685 24.2207L15.0197 24.1906C15.4654 24.1831 15.8814 23.9799 16.1637 23.6188ZM19.5958 22.8672H23.5929C23.9829 22.8672 24.3 23.1885 24.3 23.5835C24.3 23.9794 23.9829 24.2999 23.5929 24.2999H19.5958C19.2059 24.2999 18.8887 23.9794 18.8887 23.5835C18.8887 23.1885 19.2059 22.8672 19.5958 22.8672Z'
+                                                            fill='#233A85' />
+                                                    </svg>
+                                                </button>
                                                 <button class="deleteDataBtn"
                                                     delUrl="deleteExperience/{{ $experience->id }}">
                                                     <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
@@ -196,7 +214,7 @@
                                 <select
                                     class="w-full border-[#DEE2E6] rounded-[4px]
                              focus:border-primary   h-[40px] text-[14px]"
-                                    name=status" id="Status">
+                                    name="status" id="Status">
                                     <option selected disabled> @lang('lang.Select_Status')</option>
                                     <option value="active"> @lang('lang.Active')</option>
                                     <option value="de-active"> @lang('lang.De_Active')</option>
@@ -234,8 +252,8 @@
                     </div> --}}
 
                             <div class=" mt-2 ">
-                                <div><label for="rating">@lang('lang.Rating')</label></div>
-                                <select name="rating" id="rating">
+                                <div><label for="Rating">@lang('lang.Rating')</label></div>
+                                <select name="rating" id="Rating">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -249,7 +267,7 @@
                                 <input type="text" required
                                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                                    name="location" id="location" placeholder=" @lang('lang.Location')">
+                                    name="location" id="Location" placeholder=" @lang('lang.Location')">
                             </div>
 
                             <div class="  mt-2 ">
@@ -283,7 +301,7 @@
                     @csrf
                     <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                         <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
-                            <h3 class="text-xl font-semibold text-white ">
+                            <h3 class="text-xl font-semibold text-white " id="modalTitle">
                                 @lang('lang.Experience')
                             </h3>
                             <button type="button"
@@ -307,7 +325,7 @@
                                 <select
                                     class="w-full border-[#DEE2E6] rounded-[4px]
                              focus:border-primary   h-[40px] text-[14px]"
-                                    name=status" id="expStatus">
+                                    name="status" id="expStatus">
                                     <option selected disabled> @lang('lang.Select_Status')</option>
                                     <option value="active"> @lang('lang.Active')</option>
                                     <option value="de-active"> @lang('lang.De_Active')</option>
@@ -332,7 +350,7 @@
                                 <input type="text" required
                                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px]"
-                                    name="location" id="location" placeholder=" @lang('lang.Location')">
+                                    name="location" id="Location" placeholder=" @lang('lang.Location')">
                             </div>
 
                             <div class="  mt-2 ">
@@ -400,18 +418,50 @@
         });
 
         function updateDatafun() {
-            $(".updateDataBtn").click(function() {
-                $('#customer-modal').addClass('flex').removeClass('hidden');
-                $('#updateStatusId').val($(this).attr('updateid'));
-
-                $('#name').val($(this).attr('name'));
-                $('#phone').val($(this).attr('phone'));
-                $('#email').val($(this).attr('email'));
+            $(".updateReviewBtn").click(function() {
+                $('#reviewModal').addClass('flex').removeClass('hidden');
+                $('#Name').val($(this).attr('Name'));
+                $('#Role').val($(this).attr('Role'));
+                $('#Rating').val($(this).attr('Rating')).trigger('change');
+                $('#Location').val($(this).attr('Location'));
+                $('#review_description').val($(this).attr('Description'));
+                $('#Status').val($(this).attr('Status')).trigger('change');
                 $('#postDataForm').attr('url', $(this).attr('url'));
+                
+                $('#ProfilePicture').removeAttr('required');
+
+                $('#reviewModal #btnText').text("Update");
+            });
+            $(".updateExpBtn").click(function() {
+                $('#experienceModal').addClass('flex').removeClass('hidden');
+                $('#Name').val($(this).attr('Name'));
+                $('#Role').val($(this).attr('Role'));
+                $('#exp_subject').val($(this).attr('subject'));
+                $('#Location').val($(this).attr('Location'));
+                $('#exp_category').val($(this).attr('category'));
+                $('#exp_description').val($(this).attr('Description'));
+                $('#expStatus').val($(this).attr('Status')).trigger('change');
+                $('#postDataForm').attr('url', $(this).attr('url'));
+                $('#ProfilePicture').removeAttr('required');
+                $('#reviewModal #btnText').text("Update");
             });
 
         }
-        updateDatafun();
+        updateDatafun()
+        
+        $('#addModalBtn').click(function() {
+            $('#postDataForm')[0].reset();
+            $('#postDataForm').attr('url' , $(this).attr('url'));
+            $('#ProfilePicture').attr('required', true);
+
+            $('#Rating').trigger('change');
+            $('#Status').trigger('change');
+
+            $('#reviewModal #btnText').text("Add");
+            let fileImg = $('#blog-modal .file-preview');
+            fileImg.addClass('hidden');
+
+        });
         $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
             if (response.success) {
                 $('.modalCloseBtn').click();

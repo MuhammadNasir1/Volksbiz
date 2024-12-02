@@ -227,4 +227,51 @@ class ExperienceReviewController extends Controller
 
         }
     }
+
+    public function updateExperience(Request $request , $id)
+    {
+
+
+        try {
+            $experience = Experience::find($id);
+            if (!$experience) {
+                return response()->json(['success' => false, 'message' => 'Experience not found'], 404);
+            }
+            $image = $request->file('image');
+            if ($image) {
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/experience_images', $imageName);
+                $experience->image = 'storage/experience_images/' . $imageName;
+            }
+            $experience->update($request->except('image'));
+            return response()->json(['success' => true, 'message' => 'Experience updated successfully'], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+
+        }
+    }
+    public function updateReview(Request $request , $id)
+    {
+
+
+        try {
+            $experience = Reviews::find($id);
+            if (!$experience) {
+                return response()->json(['success' => false, 'message' => 'Review not found'], 404);
+            }
+            $image = $request->file('image');
+            if ($image) {
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/review', $imageName);
+                $experience->image = 'storage/review/' . $imageName;
+            }
+            $experience->update($request->except('image'));
+            return response()->json(['success' => true, 'message' => 'Review updated successfully'], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+
+        }
+    }
 }

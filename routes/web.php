@@ -121,6 +121,9 @@ Route::middleware('custom')->group(function () {
     Route::get('/deleteExperience/{id}', [ExperienceReviewController::class, 'deleteExperience']);
     Route::get('/deleteReview/{id}', [ExperienceReviewController::class, 'deleteReview']);
 
+    Route::post('/updateExperience/{id}', [ExperienceReviewController::class, 'updateExperience']);
+    Route::post('/updateReview/{id}', [ExperienceReviewController::class, 'updateReview']);
+
 
     Route::get('company', [CompanyController::class, 'company']);
     Route::post('storeCompany', [CompanyController::class, 'store']);
