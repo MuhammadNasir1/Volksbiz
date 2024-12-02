@@ -43,12 +43,8 @@
                                     <div class="flex gap-5 items-center justify-center">
 
 
-                                        <a href=""><img width="38px" src="{{ asset('images/icons/edits.svg') }}"
-                                                alt="update"></a>
-                                                <button class="updateDataBtn" url="../singleBusinesses/{{ $bussiness->id }}" nameEn="{{ $bussiness->title }}" nameDe="{{ $bussiness->title_de }}"
-                                                    category="{{ $bussiness->category_id }}" price="{{ $bussiness->price }}"
-                                                    country="{{ $bussiness->country }}"
-                                                    updateUrl="updateBusinessData/{{ $bussiness->id }}">
+                                                <button class="updateDataBtn" url="../singleBusinesses/{{ $data->id }}" name="{{ $data->name }}" phone="{{ $data->phone }}"
+                                                    email="{{ $data->email }}" package="{{ $data->package }}">
                                                     <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
                                                         xmlns='http://www.w3.org/2000/svg'>
                                                         <circle opacity='0.1' cx='18' cy='18' r='18'
@@ -77,12 +73,46 @@
             </div>
         </div>
     </div>
+
+        {{-- Add Offer Modal --}}
+        <x-modal id="customer-modal">
+            <x-slot name="title">Update User</x-slot>
+            <x-slot name="modal_width">max-w-2xl</x-slot>
+            <x-slot name="body">
+                <form id="postDataForm" url="addBusiness" method="post">
+                    @csrf
+                    <div class="grid grid-cols-1 gap-4">
+                        <x-input id="name" label="{{ __('lang.Name') }}"
+                            placeholder="{{ __('lang.Name') }}" name='title' type="text"></x-input>
+                        <x-input id="email" label="{{ __('lang.Email') }}"
+                            placeholder="{{ __('lang.Email') }}" name='email' type="text"></x-input>
+                        <x-input id="phone" label="{{ __('lang.Phone_Number') }}"
+                            placeholder="{{ __('lang.Phone_Number') }}" name='phone' type="text"></x-input>
+                      
+             
+    
+    
+                    </div>
+                    <div class="mt-6">
+    
+                        <x-modal-button title="Add"></x-modal-button>
+                    </div>
+                </form>
+            </x-slot>
+        </x-modal>
 @endsection
 @section('js')
 <script>
 
     function updateDatafun(){
-
+        $(".updateDataBtn").click(function() {
+                $('#customer-modal').addClass('flex').removeClass('hidden');
+                $('#updateStatusId').val($(this).attr('updateid'));
+                
+                $('#name').val($(this).attr('name'));
+                $('#phone').val($(this).attr('phone'));
+                $('#email').val($(this).attr('email'));
+            });
 
     }
     updateDatafun();
