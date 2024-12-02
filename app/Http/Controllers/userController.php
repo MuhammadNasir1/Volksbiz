@@ -103,7 +103,7 @@ class userController extends Controller
             return response()->json(['success' => false,  'message' => $e->getMessage()]);
         }
     }
-    public function CustomerUpdate(Request $request, $user_id)
+    public function userUpdate(Request $request, $user_id)
     {
         try {
 
@@ -112,14 +112,12 @@ class userController extends Controller
             $validatedData = $request->validate([
                 'name' => 'nullable',
                 'email' => 'nullable',
-                'phone_no' => 'nullable',
-                'address' => 'nullable',
+                'phone' => 'nullable',
             ]);
 
             $customer->name = $validatedData['name'];
-            $customer->phone = $validatedData['phone_no'];
+            $customer->phone = $validatedData['phone'];
             $customer->email = $validatedData['email'];
-            $customer->address = $validatedData['address'];
             $customer->update();
             return response()->json(['success' => true,  'message' => "Data  Get Successfully", 'customer' => $customer]);
         } catch (\Exception $e) {

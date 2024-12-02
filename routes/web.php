@@ -47,7 +47,7 @@ Route::middleware('custom')->group(function () {
     Route::post('/addCustomer', [userController::class,  'addCustomer']);
     Route::get('/delCustomer/{user_id}', [userController::class,  'delCustomer']);
     Route::get('/CustomerUpdateData/{user_id}', [userController::class,  'CustomerUpdateData']);
-    Route::post('/CustomerUpdate/{user_id}', [userController::class,  'CustomerUpdate']);
+    Route::post('/userUpdate/{user_id}', [userController::class,  'userUpdate']);  
 
 
 

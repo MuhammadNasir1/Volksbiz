@@ -7,6 +7,8 @@
     <div class="md:mx-4 mt-12">
         <div>
             <h1 class=" font-semibold   text-2xl ">@lang('lang.All_Customers')</h1>
+
+            <button data-modal-target="customer-modal" data-modal-toggle="customer-modal"></button>
         </div>
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
@@ -43,8 +45,8 @@
                                     <div class="flex gap-5 items-center justify-center">
 
 
-                                                <button class="updateDataBtn" url="../singleBusinesses/{{ $data->id }}" name="{{ $data->name }}" phone="{{ $data->phone }}"
-                                                    email="{{ $data->email }}" package="{{ $data->package }}">
+                                                <button class="updateDataBtn"  name="{{ $data->name }}" phone="{{ $data->phone }}"
+                                                    email="{{ $data->email }}" url="../userUpdate/{{ $data->id }}">
                                                     <svg width='36' height='36' viewBox='0 0 36 36' fill='none'
                                                         xmlns='http://www.w3.org/2000/svg'>
                                                         <circle opacity='0.1' cx='18' cy='18' r='18'
@@ -79,11 +81,11 @@
             <x-slot name="title">Update User</x-slot>
             <x-slot name="modal_width">max-w-2xl</x-slot>
             <x-slot name="body">
-                <form id="postDataForm" url="addBusiness" method="post">
+                <form id="postDataForm" url="" method="post">
                     @csrf
                     <div class="grid grid-cols-1 gap-4">
                         <x-input id="name" label="{{ __('lang.Name') }}"
-                            placeholder="{{ __('lang.Name') }}" name='title' type="text"></x-input>
+                            placeholder="{{ __('lang.Name') }}" name='name' type="text"></x-input>
                         <x-input id="email" label="{{ __('lang.Email') }}"
                             placeholder="{{ __('lang.Email') }}" name='email' type="text"></x-input>
                         <x-input id="phone" label="{{ __('lang.Phone_Number') }}"
@@ -95,7 +97,7 @@
                     </div>
                     <div class="mt-6">
     
-                        <x-modal-button title="Add"></x-modal-button>
+                        <x-modal-button title="Update"></x-modal-button>
                     </div>
                 </form>
             </x-slot>
@@ -112,13 +114,13 @@
                 $('#name').val($(this).attr('name'));
                 $('#phone').val($(this).attr('phone'));
                 $('#email').val($(this).attr('email'));
+                $('#postDataForm').attr( 'url' ,$(this).attr('url'));
             });
 
     }
     updateDatafun();
        $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
             if (response.success) {
-                getData()
                 $('.modalCloseBtn').click();
             } else {}
         });
