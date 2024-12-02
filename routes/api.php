@@ -70,3 +70,6 @@ Route::get('/getBlogs', [BlogsController::class, 'getBlogs']);
 Route::get('/getSubscription', [SubscriptionController::class, 'getSubscriptionData']);
 
 Route::get('/getCompany', [CompanyController::class, 'getCompany']);
+
+Route::post('/forgotPassword', [authController::class, 'forgotPassword']);
+Route::post('/resetpassword', [authController::class, 'resetpassword']);

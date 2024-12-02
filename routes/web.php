@@ -53,7 +53,7 @@ Route::middleware('custom')->group(function () {
 
     Route::get('email', function () {
 
-        return view("emails.parent");
+        return view("emails.reset_password");
     });
 
     Route::get('reviewsAndExperience', [ExperienceReviewController::class, 'index']);

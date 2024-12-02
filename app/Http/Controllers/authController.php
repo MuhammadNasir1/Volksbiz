@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPassword;
 use App\Models\orders;
 use App\Models\product;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Database\Seeders\users;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 class authController extends Controller
@@ -324,4 +326,59 @@ class authController extends Controller
     //         return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
     //     }
     // }
+
+    public function forgotPassword(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'email' => "required|email",
+            ]);
+
+            $checkUser = User::where('email', $validatedData['email'])->first();
+            if (!$checkUser) {
+                return response()->json(['success' => false, 'message' => "User not found"], 404);
+            }
+            $id = Hash::make($checkUser->id);
+            $url = "https://volksbiz.com/resetPassword/" . $id;
+
+            Mail::to($validatedData['email'])->send(new ResetPassword($checkUser->name, $url));
+
+            return response()->json(['success' => true, 'message' => "Reset mail sent!"], 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['success' => false, 'message' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+
+    }
+
+    public function resetpassword(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'key' => 'required',
+                'password' => 'required',
+            ]);
+
+            $hashedUserId = $validatedData['key'];
+            $user = User::all()->first(function ($user) use ($hashedUserId) {
+                return Hash::check($user->id, $hashedUserId);
+            });
+
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'User not found'], 404);
+            }
+            $user->password = $validatedData['password'];
+            $user->save();
+            return response()->json(['success' => true, 'message' => 'Password has been reset'], 200);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            return response()->json(['success' => false, 'message' => 'Invalid user'], 400);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+
+
+        }
+    }
+
+
 }
