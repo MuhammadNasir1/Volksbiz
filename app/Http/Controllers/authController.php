@@ -339,7 +339,7 @@ class authController extends Controller
                 return response()->json(['success' => false, 'message' => "User not found"], 404);
             }
             $id = Hash::make($checkUser->id);
-            $url = "https://volksbiz.com/resetPassword/" . $id;
+            $url = "https://volksbiz.com/resetPassword?key=" . $id;
 
             Mail::to($validatedData['email'])->send(new ResetPassword($checkUser->name, $url));
 
