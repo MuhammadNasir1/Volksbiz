@@ -152,15 +152,40 @@ class ExperienceReviewController extends Controller
             $review->image = 'storage/review/' . $imageName;
 
             $review->save();
-            return redirect('../reviewsAndExperience');
-            // return response()->json(["success"  => true, "message" => "Experience add successfully"], 201);
+            return response()->json(["success"  => true, "message" => "Experience add successfully"], 201);
         } catch (\Exception $e) {
 
-            return redirect('../reviewsAndExperience');
             return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
         }
     }
 
+    public function deleteReview($id){
+        try{
+        $review = Reviews::find($id);
+        if(!$review){
+            return response()->json(['success' => false , "message"=> "Review not found"] , 422);
+        }
+        $review->delete();
+        return response()->json(['success' => true , "message"=> "Review delete successfully"] , 200);
+        
+        } catch (\Exception $e) {
+            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+        }
+
+    }
+    public function deleteExperience($id){
+        try{
+        $review = Experience::find($id);
+        if(!$review){
+            return response()->json(['success' => false , "message"=> "Experience not found"] , 422);
+        }
+        $review->delete();
+        return response()->json(['success' => true , "message"=> "Experience delete successfully"] , 200);
+        } catch (\Exception $e) {
+            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+        }
+
+    }
 
     public function insertExperience(Request $request)
     {
@@ -195,9 +220,11 @@ class ExperienceReviewController extends Controller
             $image->storeAs('public/experience_images', $imageName);
             $experience->image = 'storage/experience_images/' . $imageName;
             $experience->save();
-            return redirect('../reviewsAndExperience');
+            return response()->json(["success"  => true, "message" => "Experience add successfully"], 201);
+
         } catch (\Exception $e) {
-            return response()->json($e->getMessage());
+            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+
         }
     }
 }

@@ -101,6 +101,8 @@ $(document).ready(function () {
                                 title: "Error!",
                                 text: "There was an error deleting",
                                 icon: "error",
+                                showConfirmButton: false,
+                                timer: 2000,
                             });
                         },
                     });
