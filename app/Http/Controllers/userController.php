@@ -34,7 +34,7 @@ class userController extends Controller
     public function Dashboard()
     {
         $totalUserCount = User::whereNot('role' , 'admin')->count();
-        $totalBusinessCount = AddBusiness::whereNot('status' , 'sold')->count();
+        $totalBusinessCount = AddBusiness::whereNot('status' , 'sold')->wherenot('status' , 'deleted')->count();
         $totalOrderCount = Order::whereNot('status' , 'sold')->count();
         $totalOfferCount = AddBusiness::where('status' , 'pending')->count();
         $reservedBusinessCount = AddBusiness::where('status' , 'reserved')->count();
@@ -43,16 +43,16 @@ class userController extends Controller
 
         // return response()->json($lastFiveBusinesses);
         return view('dashboard', [
-            'totalUserCount' => $totalUserCount, 
-            'totalBusinessCount' => $totalBusinessCount, 
-            'totalOrderCount' => $totalOrderCount, 
-            'totalOfferCount' => $totalOfferCount, 
-            'reservedBusinessCount' => $reservedBusinessCount, 
-            'soldBusinessCount' => $soldBusinessCount, 
+            'totalUserCount' => $totalUserCount,
+            'totalBusinessCount' => $totalBusinessCount,
+            'totalOrderCount' => $totalOrderCount,
+            'totalOfferCount' => $totalOfferCount,
+            'reservedBusinessCount' => $reservedBusinessCount,
+            'soldBusinessCount' => $soldBusinessCount,
             'lastFiveBusinesses' => $lastFiveBusinesses
         ]);
-        
-    }   
+
+    }
 
     // dashboard  Users Couny
     public function customers()
