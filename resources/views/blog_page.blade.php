@@ -1,6 +1,10 @@
-@include('layouts.header')
-@include('layouts.nav')
+@extends('layouts.layout')
 
+@section('title')
+    Business
+@endsection
+
+@section('content')
 <div class="lg:mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl "> @lang(!isset($blogData) ? 'lang.Add_Blog' : 'lang.Update_Blog')</h1>
@@ -112,8 +116,11 @@
         </div>
     </div>
 
-    <!-- Include the Quill library -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    @endsection
+@section('js')
+
+    <!-- Include the Quill library -->
     <script>
         document.getElementById('blog-form').onsubmit = function() {
             // Populate the hidden textarea with the HTML content
@@ -214,5 +221,4 @@
             quill.insertEmbed(range.index, 'image', url, Quill.sources.USER);
         }
     </script>
-
-    @include('layouts.footer')
+@endsection

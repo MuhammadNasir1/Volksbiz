@@ -1,7 +1,10 @@
-@include('layouts.header')
-@include('layouts.nav')
+@extends('layouts.layout')
 
+@section('title')
+    Subscription Plans
+@endsection
 
+@section('content')
 
 <div class="md:mx-4 mt-12">
     <div>
@@ -310,7 +313,8 @@
         </div>
     </div>
 </div>
-@include('layouts.footer')
+@endsection
+@section('js')
 @if (isset($editData))
     <script>
         $(document).ready(function() {
@@ -419,3 +423,4 @@
         })
     });
 </script>
+@endsection
