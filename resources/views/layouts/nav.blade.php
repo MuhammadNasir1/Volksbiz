@@ -41,7 +41,7 @@
                             fill="currentcolor" />
                     </svg>
 
-                    <span class="ms-3">@lang('lang.Businesses_List')</span>
+                    <span class="ms-3">@lang('lang.Businesses')</span>
                 </a>
             </li>
             <li class="{{ request()->is('requestBusiness') ? 'active bg-white text-black rounded-md ' : '' }}">
@@ -53,7 +53,7 @@
                             fill="currentcolor" />
                     </svg>
 
-                    <span class="ms-3">Business Requests</span>
+                    <span class="ms-3">Sale Offers</span>
                 </a>
             </li>
             <li class="{{ request()->is('categoryList') ? 'active bg-white text-black rounded-md ' : '' }}">

@@ -45,7 +45,7 @@
                                 </td>
                                 <td>{{ $data->category_name }}</td>
                                 <td>{{ $data->category_name_de }}</td>
-                                <td>{{ \App\Models\AddBusiness::where('category', $data->category_name)->count() }}</td>
+                                <td>{{ \App\Models\AddBusiness::where('category', $data->id)->count() }}</td>
 
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
