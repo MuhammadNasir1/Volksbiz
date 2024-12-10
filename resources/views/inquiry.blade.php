@@ -1,5 +1,10 @@
-@include('layouts.header')
-@include('layouts.nav')
+@extends('layouts.layout')
+
+@section('title')
+Inquiry
+@endsection
+
+@section('content')
 <div class="md:mx-4 mt-12">
 
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
@@ -209,8 +214,8 @@
     </div>
 </div>
 
-
-@include('layouts.footer')
+@endsection
+@section('js')
 
 <script>
     $(document).ready(function() {
@@ -246,3 +251,5 @@
         });
     });
 </script>
+
+@endsection

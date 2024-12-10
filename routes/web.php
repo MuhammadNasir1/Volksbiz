@@ -25,7 +25,7 @@ Route::get('/login', function () {
     return view('login');
 });
 Route::get('/notifications', function () {
-    return view('notification');
+    return view('notifications');
 });
 
 
@@ -47,7 +47,7 @@ Route::middleware('custom')->group(function () {
     Route::post('/addCustomer', [userController::class,  'addCustomer']);
     Route::get('/delCustomer/{user_id}', [userController::class,  'delCustomer']);
     Route::get('/CustomerUpdateData/{user_id}', [userController::class,  'CustomerUpdateData']);
-    Route::post('/userUpdate/{user_id}', [userController::class,  'userUpdate']);  
+    Route::post('/userUpdate/{user_id}', [userController::class,  'userUpdate']);
 
 
 

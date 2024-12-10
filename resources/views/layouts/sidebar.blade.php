@@ -230,6 +230,18 @@
                     <span class="ms-3">@lang('lang.Inquiries')</span>
                 </a>
             </li>
+            <li class="{{ request()->is('notifications') ? 'active bg-white text-black rounded-md ' : '' }}">
+                <a href="../notifications" class=" flex items-center p-2">
+                    <svg class="flex-shrink-0 w-5 h-5  transition duration-75 dark:text-gray-400  {{ request()->is('notifications') ? 'active  text-black rounded-md ' : 'text-white' }}"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path fill="currentcolor"
+                            d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+                    </svg>
+
+                    <span class="flex-1 ms-3 whitespace-nowrap">@lang('lang.Notifications')</span>
+                </a>
+            </li>
             <li class="{{ request()->is('setting') ? 'active bg-white text-black rounded-md ' : '' }}">
                 <a href="../setting" class=" flex items-center p-2">
                     <svg width="20" height="20" viewBox="0 0 20 22" fill="none"
@@ -274,7 +286,7 @@
     <nav>
         <div class="flex justify-end items-center gap-5">
 <div class="hidden">
-    
+
             {{-- =============language dropdown======================== --}}
             <button type="button" data-dropdown-toggle="language-dropdown-menu"
                 class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
