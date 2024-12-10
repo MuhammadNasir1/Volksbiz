@@ -17,7 +17,7 @@ class AddBusinessController extends Controller
 {
 public function businessRequest(){
 
-    $businesses = AddBusiness::where('status' , "pending")->orderBy('created_at', 'desc') ->get();
+    $businesses = AddBusiness::where('added_by' , "user")->orderBy('created_at', 'desc') ->get();
     foreach ($businesses as $business) {
         $business->update_images = json_decode($business->images , true);
         $category = AddCategory::where('id', $business->category)->first();
@@ -91,6 +91,8 @@ public function businessRequest(){
                 'description_de' => $validatedData['description_de'],
                 'price' => $validatedData['price'],
                 'status' => "1",
+                'added_by' => "user",
+
             ]);
 
             $add_business->save();
@@ -155,6 +157,7 @@ public function businessRequest(){
                 'description_de' => $validatedData['description_de'],
                 'price' => $validatedData['price'],
                 'phone_no' => $validatedData['phone_no'],
+                'added_by' => "user",
             ]);
 
 

@@ -210,7 +210,7 @@
                         <div class="p-5 px-10">
 
                             <div class="w-full   lg:mt-0 mt-5">
-                                <label for="blog_category">@lang('lang.Status')</label>
+                            <label for="blog_category">@lang('lang.Status')</label>
                                 <select
                                     class="w-full border-[#DEE2E6] rounded-[4px]
                              focus:border-primary   h-[40px] text-[14px]"
@@ -427,7 +427,7 @@
                 $('#review_description').val($(this).attr('Description'));
                 $('#Status').val($(this).attr('Status')).trigger('change');
                 $('#postDataForm').attr('url', $(this).attr('url'));
-                
+
                 $('#ProfilePicture').removeAttr('required');
 
                 $('#reviewModal #btnText').text("Update");
@@ -448,7 +448,7 @@
 
         }
         updateDatafun()
-        
+
         $('#addModalBtn').click(function() {
             $('#postDataForm')[0].reset();
             $('#postDataForm').attr('url' , $(this).attr('url'));

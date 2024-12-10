@@ -50,7 +50,7 @@
 
 
                                     <div class="h-20 w-20">
-                                        <img class="object-cover rounded-full h-full w-full bg-black  border border-primary"
+                                        <img class="object-cover rounded-full h-full w-full bg-black  border border-primary" loading="lazy"
                                             src="{{ isset($images[0]) && !empty($images) ? asset($images[0]) : asset('images/default-logo.png') }}"
                                             alt="No Image ">
                                     </div>

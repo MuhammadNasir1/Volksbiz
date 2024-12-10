@@ -25,5 +25,6 @@ class AddBusiness extends Model
         'price',
         'status',
         'phone_no',
+        'added_by',
     ];
 }

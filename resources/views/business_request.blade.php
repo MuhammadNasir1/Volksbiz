@@ -15,7 +15,7 @@
                 <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
                     <h3 class="text-[20px] text-black hidden sm:block">Businesses Bids</h3>
 
-               
+
 
                 </div>
                 @php
@@ -44,7 +44,7 @@
 
 
                                     <div class="h-20 w-20">
-                                        <img class="object-cover rounded-full h-full w-full bg-black  border border-primary"
+                                        <img class="object-cover rounded-full h-full w-full bg-black  border border-primary" loading="lazy"
                                             src="{{ isset($images[0]) && !empty($images) ? asset($images[0]) : asset('images/default-logo.png') }}"
                                             alt="No Image ">
                                     </div>
@@ -55,8 +55,10 @@
                                 <td>{{ $business->category }} / {{ $business->category_de }}</td>
                                 <td>{{ $business->city }} {{ $business->country }}</td>
                                 <td><button updateId={{$business->id}} class="updateStatus" data-modal-target="change-status-modal" data-modal-toggle="change-status-modal">
-                                     
-                                    <span class='text-red-600 font-semibold text-sm'>{{ucfirst($business->status)}}</span>
+
+                                    <span class="{{  $business->status == 'active' ? 'text-green-800' : ($business->status == 'sold' ? 'text-purple-800' : 'text-red-700') }} font-semibold text-sm">
+                                        {{ ucfirst($business->status) }}
+                                    </span>
                                     </button></td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
@@ -196,7 +198,10 @@
                 <div>
                     <x-select id="status" label="{{ __('lang.Status') }}" name='status'>
                         <x-slot name="options">
-                            <option selected value="active">Approved</option>
+                            <option selected disabled> @lang('lang.Select_Status')</option>
+                            <option value="sold" >Sold</option>
+                            <option value="active">Active</option>
+                            <option value="reserved">Reserved</option>
                         </x-slot>
                     </x-select>
                     <div class="mt-6">
@@ -209,10 +214,10 @@
 @endsection
 @section('js')
     <script>
-        
+
         function updateDatafun(){
 
-            
+
         }
         function getData() {
             $(".updateStatus").click(function() {
@@ -295,7 +300,7 @@
         }
         getData()
         $(".dataTable").on("draw", function () {
-    
+
         getData()
     });
 
