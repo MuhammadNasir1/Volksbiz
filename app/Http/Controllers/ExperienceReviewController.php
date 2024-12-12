@@ -152,7 +152,7 @@ class ExperienceReviewController extends Controller
             $review->image = 'storage/review/' . $imageName;
 
             $review->save();
-            return response()->json(["success"  => true, "message" => "Experience add successfully"], 201);
+            return response()->json(["success"  => true, "message" => "Review add successfully"], 201);
         } catch (\Exception $e) {
 
             return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
@@ -167,7 +167,7 @@ class ExperienceReviewController extends Controller
         }
         $review->delete();
         return response()->json(['success' => true , "message"=> "Review delete successfully"] , 200);
-        
+
         } catch (\Exception $e) {
             return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
         }

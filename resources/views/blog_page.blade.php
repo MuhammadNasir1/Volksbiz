@@ -50,7 +50,7 @@
                 <input type="text" required
                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                    name="author" id="blog_author" placeholder=" @lang('lang.Enter_Your_Name')" required
+                    name="author" id="blog_author" placeholder="Enter Author Name" required
                     value="{{ $blogData->author ?? '' }}">
 
             </div>
@@ -61,7 +61,7 @@
                 <input type="text" required
                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary
                               h-[40px] text-[14px] mt-2"
-                    name="category" id="category" placeholder=" @lang('lang.Enter_Your_Name')" required
+                    name="category" id="category" placeholder="Enter Category" required
                     value="{{ $blogData->category ?? '' }}">
 
             </div>

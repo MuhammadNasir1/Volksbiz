@@ -20,7 +20,7 @@
                         <div class="h-[200px] w-[200px] relative  rounded-[50%]">
                             <img id="img_view" height="200px" width="200px"
                                 class="h-[200px] w-[200px]  border border-primary  rounded-[50%] cursor-pointer object-contain "
-                                src=" {{ isset($user->user_image) ? asset($user->user_image) : 'images/owlicon.svg' }}"
+                                src=" {{ $user->user_image ?? asset('images/default-logo.png') }}"
                                 alt="user">
                             <input class="absolute top-0 opacity-0     h-[210px] w-[200px] z-50 cursor-pointer "
                                 type="file" name="upload_image" id="user_image">
@@ -45,7 +45,7 @@
                                 for="name">@lang('lang.full_name')</label>
                             <input type="text"
                                 class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="name" id="name" placeholder="@lang('lang.Enter_Your_Name')">
+                                name="name" id="name" placeholder="@lang('lang.Enter_Your_Name')" value="{{$user->name}}">
                         </div>
 
                         <div class="md:w-[50%]  w-full mt-4">
@@ -53,46 +53,11 @@
                                 for="phone">@lang('lang.Phone_Number')</label>
                             <input type="number"
                                 class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="phone" id="phone" placeholder="@lang('lang.Enter_Your_Number')">
+                                name="phone" id="phone" placeholder="@lang('lang.Enter_Your_Number')" value="{{$user->phone}}">
                         </div>
                     </div>
 
-                    <div class=" mt-4">
-                        <div class="flex w-full lg:flex-row flex-col gap-5">
-                            <div class="w-full mt-4">
-                                <label class="text-[16px] font-semibold block  text-[#452C88]"
-                                    for="city">@lang('lang.City')</label>
-                                <input type="text"
-                                    class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                    name="city" id="city" placeholder="@lang('lang.Enter_City')">
-                            </div>
-                            <div class="w-full lg:mt-4">
-                                <label class="text-[16px] font-semibold block  text-[#452C88]"
-                                    for="country">@lang('lang.Country')</label>
-                                <input type="text"
-                                    class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                    name="country" id="country" placeholder="@lang('lang.Enter_Country')">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-[30px] mt-4">
-                        <div class="lg:w-[50%] w-full mt-4">
-                            <label class="text-[16px] font-semibold block mb-4 text-[#452C88]"
-                                for="language">@lang('lang.Change_Language')</label>
-                            <select
-                                class="w-full mt-4 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="language" id="language">
-                                <option>@lang('lang.Select_Language')</option>
-                                <option {{ $user->language == 'english' ? 'selected' : '' }} value="english">English
-                                </option>
-                                <option {{ $user->language == 'german' ? 'selected' : '' }} value="german">German
-                                </option>
-                            </select>
-                        </div>
-
-                    </div>
-
+                    
                     <div class=" mt-4">
                         <div class="flex w-full lg:flex-row flex-col gap-5">
                             <div class="w-full mt-4">
@@ -179,15 +144,8 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        if (response.success == true) {
                             window.location.href = '../setting';
-                        } else if (response.success == false) {
-                            Swal.fire(
-                                'Warning!',
-                                response.message,
-                                'warning'
-                            );
-                        }
+                       
                     },
                     error: function(jqXHR) {
                         let response = JSON.parse(jqXHR.responseText);

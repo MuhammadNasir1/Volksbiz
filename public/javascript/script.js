@@ -88,6 +88,8 @@ $(document).ready(function () {
                                 title: "Deleted!",
                                 text: response.message,
                                 icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500,
                             });
 
                             $(document).trigger("formSubmissionResponse", [

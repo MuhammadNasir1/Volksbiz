@@ -17,7 +17,7 @@ class AddBusinessController extends Controller
 {
 public function businessRequest(){
 
-    $businesses = AddBusiness::where('added_by' , "user")->orderBy('created_at', 'desc') ->get();
+    $businesses = AddBusiness::where('added_by' , "user")->whereNot('status' , 0)->orderBy('created_at', 'desc') ->get();
     foreach ($businesses as $business) {
         $business->update_images = json_decode($business->images , true);
         $category = AddCategory::where('id', $business->category)->first();
@@ -32,7 +32,7 @@ public function businessRequest(){
             $business->category_id = null;
         }
     }
-
+// return response()->json($businesses);
     return view('business_request', compact('businesses'));
 }
 
@@ -90,8 +90,8 @@ public function businessRequest(){
                 'description' => $validatedData['description'],
                 'description_de' => $validatedData['description_de'],
                 'price' => $validatedData['price'],
-                'status' => "1",
-                'added_by' => "user",
+                'status' => "active",
+                'added_by' => "admin",
 
             ]);
 
@@ -601,7 +601,11 @@ public function getOrders()
     }
     public function getSingleorders($id){
         try {
-             $order = Order::where('id', $id)->first();
+             $order = Order::find($id);
+                if(!$order){
+
+                    return response()->json(['success' => false , 'message' => "Order not found" ] , 422);
+                }
                 $businessId = $order['business_id'];
                 $businesses = AddBusiness::where('id', $businessId)->first();
                 $businesses->images = json_decode($businesses->images);
@@ -609,7 +613,6 @@ public function getOrders()
                 $user = User::select('name')->where('id' , $order->user_id)->first();
                 $order->username = $user->name ;
                 $order->date =  $order->created_at->format('M d, Y');
-
             return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $order], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);

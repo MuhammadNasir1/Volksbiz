@@ -58,7 +58,7 @@
                                     $options = json_decode($data->option, true);
                                 @endphp
                                 <td>{{ implode(', ', $options) }}</td>
-                                <td>{!!  $data->plan_for  = "buyer" ? '<span class="font-semibold text-red-900">Buyer</span>' : '<span class="font-semibold text-green-900">Seller</span>' !!}</td>
+                                <td>{!!  $data->plan_for  == "buyer" ? '<span class="font-semibold text-red-900">Buyer</span>' : '<span class="font-semibold text-green-900">Seller</span>' !!}</td>
                                 <td>
                                     <div class="flex gap-5  items-center justify-center">
 
@@ -167,7 +167,7 @@
                     <label class="text-[16px] font-semibold block  text-[#452C88]"
                         for="plan_price">@lang('lang.Plan_For')</label>
                     <select name="plan_for" id="plan_for">
-                        <option value="" selected disabled>@lang('lang.Select_For')</option>
+                        <option selected disabled>@lang('lang.Select_For')</option>
                         @if (isset($editData))
                             <option value="buyer" {{ $editData->plan_for == 'buyer' ? 'selected' : '' }}>
                                 @lang('lang.Buyer')

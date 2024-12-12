@@ -23,10 +23,9 @@ class SubscriptionController extends Controller
     }
     public function insert(Request $request)
     {
-
         try {
 
-            $validateData =    $request->validate([
+            $validateData = $request->validate([
 
                 'name' => 'required',
                 'price' => 'required',
@@ -34,8 +33,7 @@ class SubscriptionController extends Controller
                 'plan_for' => 'required',
             ]);
             $optionsJson = json_encode($validateData['option']);
-            $subscribtion = Subscription::create([
-
+            Subscription::create([
                 'name' => $validateData['name'],
                 'price' => $validateData['price'],
                 'option' => $optionsJson,

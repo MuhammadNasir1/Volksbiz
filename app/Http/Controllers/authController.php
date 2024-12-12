@@ -211,14 +211,12 @@ class authController extends Controller
                 'user_id' => 'required',
                 'name' => 'nullable',
                 'phone' => 'nullable',
-                'address' => 'nullable',
                 'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             ]);
 
             $user = User::where('id', $validatedData['user_id'])->first();
             $user->name = $validatedData['name'];
             $user->phone = $validatedData['phone'];
-            $user->address = $validatedData['address'];
 
 
 
@@ -246,7 +244,6 @@ class authController extends Controller
     {
         $user_id  = session('user_det')['user_id'];
         $user = User::where('id', $user_id)->first();
-
         return view('setting', ['user' => $user]);
     }
 
@@ -349,7 +346,6 @@ class authController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
-
     }
 
     public function resetpassword(Request $request)
@@ -375,10 +371,6 @@ class authController extends Controller
             return response()->json(['success' => false, 'message' => 'Invalid user'], 400);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
-
-
         }
     }
-
-
 }

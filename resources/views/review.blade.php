@@ -70,7 +70,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td><img class="h-24 w-24 rounded-full bg-black object-contain"
-                                                src="{{ asset($review->image) }}" alt="profile"></td>
+                                                src="{{ asset($review->image)        }}" alt="profile"></td>
                                         <td>{{ $review->name }}</td>
                                         <td>{{ $review->role }}</td>
                                         <td>{{ $review->location }}</td>
@@ -78,7 +78,7 @@
                                         <td>{{ \Str::limit($review->description, 60) }}
                                         </td>
                                         <td class="whitespace-nowrap"> <span
-                                                class="font-semibold {{ $review->status == 'active' ? 'text-green-500' : 'text-red-800' }}">
+                                                class="font-semibold whitespace-nowrap {{ $review->status == 'active' ? 'text-green-500' : 'text-red-800' }}">
                                                 {{ $review->status }} </span></td>
                                         <td>
                                             <div class="flex gap-5 items-center justify-center">
@@ -141,7 +141,7 @@
                                         <td>{{ $experience->category }}</td>
                                         <td>{{ $experience->description }}</td>
                                         <td> <span
-                                                class="font-semibold {{ $experience->status == 'active' ? 'text-green-500' : 'text-red-800' }}">
+                                                class="font-semibold whitespace-nowrap {{ $experience->status == 'active' ? 'text-green-500' : 'text-red-800' }}">
                                                 {{ $experience->status }} </span></td>
                                         <td>
                                             <div class="flex gap-5 items-center justify-center">
