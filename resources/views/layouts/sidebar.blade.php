@@ -287,8 +287,19 @@
 <div class="p-4 sm:ml-[240px] bg-white relative sm:z-50 rounded-[20px] min-h-[100vh] ">
     <nav>
         <div class="flex justify-end items-center gap-5">
-            <div class="flex justify-end gap-6">
-                <button>
+            <div class="flex justify-end gap-6 items-center">
+                <a href="../notifications">
+                    <svg width="19" height="21" viewBox="0 0 19 21" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.13043 0.130859C4.80824 0.130859 1.30439 3.63472 1.30439 7.95694V12.6341L0.38207 13.5564C0.00902661 13.9294 -0.10256 14.4904 0.0993266 14.9779C0.301214 15.4653 0.776831 15.783 1.30439 15.783H16.9565C17.4841 15.783 17.9597 15.4653 18.1616 14.9779C18.3635 14.4904 18.2519 13.9294 17.8788 13.5564L16.9565 12.6341V7.95694C16.9565 3.63472 13.4527 0.130859 9.13043 0.130859Z"
+                        fill="#67748E" />
+                    <path
+                        d="M9.13082 21C6.96971 21 5.21777 19.2481 5.21777 17.0869H13.0439C13.0439 19.2481 11.292 21 9.13082 21Z"
+                        fill="#67748E" />
+                </svg>
+                </a>
+                {{-- <button>
 
 
                     <button id="dropdownNotificationB   utton" data-dropdown-toggle="dropdownNotification"
@@ -304,12 +315,11 @@
                                 fill="#67748E" />
                         </svg>
 
-                        {{-- <div
+                        <div
                             class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900">
-                        </div> --}}
+                        </div>
                     </button>
 
-                    <!-- Dropdown menu -->
                     <div id="dropdownNotification"
                         class="z-20 hidden w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700"
                         aria-labelledby="dropdownNotificationButton">
@@ -318,7 +328,7 @@
                         </div>
                         <div class="divide-y divide-white mr-5">
                             <p class="text-center my-3">No Recent Notification</p>
-                            {{-- <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
 
                                 <div class="w-full ps-3 pb-3 border-b-2 border-primary">
                                     <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
@@ -326,7 +336,7 @@
                                         what's up? All set for the presentation?"</div>
                                     <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
                                 </div>
-                            </a> --}}
+                            </a>
 
 
 
@@ -345,7 +355,8 @@
                         </a>
                     </div>
 
-                </button>
+                </button> --}}
+             
                 <div class="flex items-center gap-2">
                     <div class="leading-tight  text-end">
                         <h2 class="text-md">{{ session('user_det')['name'] }}</h2>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact_us;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
@@ -25,6 +26,13 @@ class ContactUsController extends Controller
                 "subject" => $validateData['subject'],
                 "status" => "pending",
                 "message" => $validateData['message'],
+
+            ]);
+
+            Notification::create([
+                'heading' =>  $validateData['name'] . ' ' .  "Add query",
+                'description' => "New query  added ",
+                'type' => "inquiry",
 
             ]);
 

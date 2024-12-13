@@ -13,6 +13,7 @@ use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ExperienceReviewController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SubscriptionController;
 
 // language route
@@ -24,9 +25,8 @@ Route::match(['get',  'post'], 'weblogout', [authController::class, 'weblogout']
 Route::get('/login', function () {
     return view('login');
 });
-Route::get('/notifications', function () {
-    return view('notifications');
-});
+Route::get('/notifications' , [NotificationController::class , 'index']);
+Route::get('/delNotification/{id}' , [NotificationController::class , 'delete']);
 
 
 Route::middleware('custom')->group(function () {

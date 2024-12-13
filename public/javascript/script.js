@@ -7,7 +7,7 @@ $(document).ready(function () {
         $("#btnText").addClass("hidden");
         $("#submitBtn").attr("disabled", true);
     }
-
+    
     // submit btn loading spinner hide function
     function BtnSpinnerHide() {
         $("#btnSpinner").addClass("hidden");
@@ -104,7 +104,7 @@ $(document).ready(function () {
                                 text: "There was an error deleting",
                                 icon: "error",
                                 showConfirmButton: false,
-                                timer: 2000,
+                                timer: 1500,
                             });
                         },
                     });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experience;
+use App\Models\Notification;
 use App\Models\Reviews;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -50,12 +51,18 @@ class ExperienceReviewController extends Controller
             ]);
 
             $experience->save();
+            $user_name = User::where('id',  $validateData['user_id'])->value('name');
+            Notification::create([
+                'heading' =>  $user_name . ' ' .  "Add experience",
+                'description' => "New experience  added ",
+                'type' => "reviewsAndExperience",
 
+            ]);
 
             return response()->json(["success"  => true, "message" => "Experience add successfully", "data" => $experience], 201);
         } catch (\Exception $e) {
 
-            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+            return response()->json(["success"  => false, "message" => $e->getMessage()], 500);
         }
     }
 
@@ -70,7 +77,7 @@ class ExperienceReviewController extends Controller
             }
             return response()->json(["success" => true, "message" => "Data get successfull", "data" => $experiences], 200);
         } catch (\Exception $e) {
-            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+            return response()->json(["success"  => false, "message" => $e->getMessage()], 500);
         }
     }
 
@@ -92,14 +99,21 @@ class ExperienceReviewController extends Controller
 
             $review = Reviews::create([
                 'status' => "de-active",
-                "user_id" => $validateData['user_id'],
+                "user_id" => $validateData['user_id'],      
                 "rating" => $validateData['rating'],
                 "location" => $validateData['location'],
                 "description" => $validateData['description'],
             ]);
+            $user_name = User::where('id',  $validateData['user_id'])->value('name');
+            Notification::create([
+                'heading' =>  $user_name . ' ' .  "Add review",
+                'description' => "New review  added ",
+                'type' => "reviewsAndExperience",
+
+            ]);
             return response()->json(['success' => true,  "message" => "Review  add successfully", "data" => $review], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => true,  "message" => $e->getMessage()], 500);
+            return response()->json(['success' => false,  "message" => $e->getMessage()], 500);
         }
     }
     public function getReviews()
@@ -115,7 +129,7 @@ class ExperienceReviewController extends Controller
 
             return response()->json(['success' => true,  "message" => "Review  get successfully", "data" => $reviews], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => true,  "message" => $e->getMessage()], 500);
+            return response()->json(['success' => false,  "message" => $e->getMessage()], 500);
         }
     }
 
@@ -155,36 +169,35 @@ class ExperienceReviewController extends Controller
             return response()->json(["success"  => true, "message" => "Review add successfully"], 201);
         } catch (\Exception $e) {
 
-            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+            return response()->json(["success"  => false, "message" => $e->getMessage()], 500);
         }
     }
 
-    public function deleteReview($id){
-        try{
-        $review = Reviews::find($id);
-        if(!$review){
-            return response()->json(['success' => false , "message"=> "Review not found"] , 422);
-        }
-        $review->delete();
-        return response()->json(['success' => true , "message"=> "Review delete successfully"] , 200);
-
+    public function deleteReview($id)
+    {
+        try {
+            $review = Reviews::find($id);
+            if (!$review) {
+                return response()->json(['success' => false, "message" => "Review not found"], 422);
+            }
+            $review->delete();
+            return response()->json(['success' => true, "message" => "Review delete successfully"], 200);
         } catch (\Exception $e) {
-            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+            return response()->json(["success"  => false, "message" => $e->getMessage()], 500);
         }
-
     }
-    public function deleteExperience($id){
-        try{
-        $review = Experience::find($id);
-        if(!$review){
-            return response()->json(['success' => false , "message"=> "Experience not found"] , 422);
-        }
-        $review->delete();
-        return response()->json(['success' => true , "message"=> "Experience delete successfully"] , 200);
+    public function deleteExperience($id)
+    {
+        try {
+            $review = Experience::find($id);
+            if (!$review) {
+                return response()->json(['success' => false, "message" => "Experience not found"], 422);
+            }
+            $review->delete();
+            return response()->json(['success' => true, "message" => "Experience delete successfully"], 200);
         } catch (\Exception $e) {
-            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
+            return response()->json(["success"  => false, "message" => $e->getMessage()], 500);
         }
-
     }
 
     public function insertExperience(Request $request)
@@ -221,14 +234,12 @@ class ExperienceReviewController extends Controller
             $experience->image = 'storage/experience_images/' . $imageName;
             $experience->save();
             return response()->json(["success"  => true, "message" => "Experience add successfully"], 201);
-
         } catch (\Exception $e) {
-            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
-
+            return response()->json(["success"  => false, "message" => $e->getMessage()], 500);
         }
     }
 
-    public function updateExperience(Request $request , $id)
+    public function updateExperience(Request $request, $id)
     {
 
 
@@ -245,13 +256,11 @@ class ExperienceReviewController extends Controller
             }
             $experience->update($request->except('image'));
             return response()->json(['success' => true, 'message' => 'Experience updated successfully'], 200);
-
         } catch (\Exception $e) {
-            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
-
+            return response()->json(["success"  => false, "message" => $e->getMessage()], 500);
         }
     }
-    public function updateReview(Request $request , $id)
+    public function updateReview(Request $request, $id)
     {
 
 
@@ -268,10 +277,8 @@ class ExperienceReviewController extends Controller
             }
             $experience->update($request->except('image'));
             return response()->json(['success' => true, 'message' => 'Review updated successfully'], 200);
-
         } catch (\Exception $e) {
-            return response()->json(["success"  => true, "message" => $e->getMessage()], 500);
-
+            return response()->json(["success"  => false, "message" => $e->getMessage()], 500);
         }
     }
 }

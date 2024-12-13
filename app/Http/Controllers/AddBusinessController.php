@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AddBusiness;
 use App\Models\AddCategory;
+use App\Models\Notification;
 use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
@@ -15,26 +16,27 @@ use Spatie\LaravelIgnition\FlareMiddleware\AddJobs;
 
 class AddBusinessController extends Controller
 {
-public function businessRequest(){
+    public function businessRequest()
+    {
 
-    $businesses = AddBusiness::where('added_by' , "user")->whereNot('status' , "deleted")->orderBy('created_at', 'desc') ->get();
-    foreach ($businesses as $business) {
-        $business->update_images = json_decode($business->images , true);
-        $category = AddCategory::where('id', $business->category)->first();
-        if ($category) {
-            $business->category = $category->category_name;
-            $business->country = ucfirst($business->country);
-            $business->category_de = $category->category_name_de;
-            $business->category_id = $category->id;
-        } else {
-            $business->category = null;
-            $business->category_de = null;
-            $business->category_id = null;
+        $businesses = AddBusiness::where('added_by', "user")->whereNot('status', "deleted")->orderBy('created_at', 'desc')->get();
+        foreach ($businesses as $business) {
+            $business->update_images = json_decode($business->images, true);
+            $category = AddCategory::where('id', $business->category)->first();
+            if ($category) {
+                $business->category = $category->category_name;
+                $business->country = ucfirst($business->country);
+                $business->category_de = $category->category_name_de;
+                $business->category_id = $category->id;
+            } else {
+                $business->category = null;
+                $business->category_de = null;
+                $business->category_id = null;
+            }
         }
+        // return response()->json($businesses);
+        return view('business_request', compact('businesses'));
     }
-// return response()->json($businesses);
-    return view('business_request', compact('businesses'));
-}
 
     public function addBusiness(Request $request)
     {
@@ -167,6 +169,14 @@ public function businessRequest(){
             $business->category = $category->category_name;
             $business->category_de = $category->category_name_de;
             $business->category_id = $business->category;
+
+            $user_name = User::where('id',  $validatedData['user_id'])->value('name');
+            Notification::create([
+                'heading' =>  $user_name . ' ' .  "add business sale offer",
+                'description' => "New business sale offer added ",
+                'type' => "requestBusiness",
+
+            ]);
 
             return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $business], 201);
         } catch (\Exception $e) {
@@ -306,9 +316,9 @@ public function businessRequest(){
 
     public function businesses()
     {
-        $bussinesses = AddBusiness::wherenot('status' , "deleted")->wherenot('status' , "pending")->get();
+        $bussinesses = AddBusiness::wherenot('status', "deleted")->wherenot('status', "pending")->get();
         foreach ($bussinesses as $business) {
-            $business->update_images = json_decode($business->images , true);
+            $business->update_images = json_decode($business->images, true);
             $category = AddCategory::where('id', $business->category)->first();
             if ($category) {
                 $business->category = $category->category_name;
@@ -337,7 +347,7 @@ public function businessRequest(){
     public function getBusiness()
     {
         try {
-            $businesses = AddBusiness::where('status' , "active")->wherenot('status' , "deleted")->get();;
+            $businesses = AddBusiness::where('status', "active")->wherenot('status', "deleted")->get();;
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
                 $category = AddCategory::where('id', $business->category)->first();
@@ -364,7 +374,7 @@ public function businessRequest(){
                 return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
             }
             $userId  =  $user->id;
-            $businesses = AddBusiness::where('user_id',  $userId)->wherenot('status' , "deleted")->get();
+            $businesses = AddBusiness::where('user_id',  $userId)->wherenot('status', "deleted")->get();
             foreach ($businesses as $business) {
                 $business->images = json_decode($business->images);
                 $category = AddCategory::where('id', "$business->category")->first();
@@ -397,7 +407,7 @@ public function businessRequest(){
             if ($request->has('location') && !empty($request->location)) {
                 $location = $request->location;
                 $query->where(function ($q) use ($location) {
-                    $q->where('country', $location)->orWhere('city', $location)->whereNot('status' , 'deleted');
+                    $q->where('country', $location)->orWhere('city', $location)->whereNot('status', 'deleted');
                 });
             }
 
@@ -406,7 +416,7 @@ public function businessRequest(){
                 $search = $request->search;
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'LIKE', "%{$search}%")
-                        ->orWhere('description', 'LIKE', "%{$search}%")->whereNot('status' , 'deleted');
+                        ->orWhere('description', 'LIKE', "%{$search}%")->whereNot('status', 'deleted');
                 });
             }
 
@@ -416,18 +426,18 @@ public function businessRequest(){
             // }
             if ($request->has('category') && !empty($request->category)) {
                 // Get the category ID by searching for the category name
-                $category = AddCategory::where('category_name', $request->category)->orWhere('category_name_de' , $request->category)->first();
+                $category = AddCategory::where('category_name', $request->category)->orWhere('category_name_de', $request->category)->first();
 
                 if ($category) {
                     // Filter the businesses by the found category ID
-                    $query->where('category', $category->id)->whereNot('status' , 'deleted');
+                    $query->where('category', $category->id)->whereNot('status', 'deleted');
                 } else {
                     // Handle the case where no category is found
-                    $query->whereRaw('1 = 0')->whereNot('status' , 'deleted'); // This will result in an empty result
+                    $query->whereRaw('1 = 0')->whereNot('status', 'deleted'); // This will result in an empty result
                 }
             }
             // Fetch the businesses
-            $businesses = $query->whereNot('status' , 'deleted')->get();
+            $businesses = $query->whereNot('status', 'deleted')->get();
 
             // Fetch and decode images for each business efficiently
             foreach ($businesses as $business) {
@@ -456,7 +466,7 @@ public function businessRequest(){
                 $search = $request->search;
                 $businesses = AddBusiness::where(function ($q) use ($search) {
                     $q->where('title', 'LIKE', "%{$search}%")
-                        ->orWhere('description', 'LIKE', "%{$search}%")->whereNot('status' , 'deleted');
+                        ->orWhere('description', 'LIKE', "%{$search}%")->whereNot('status', 'deleted');
                 })->get();
             }
             foreach ($businesses as $business) {
@@ -494,14 +504,20 @@ public function businessRequest(){
             $businesses = AddBusiness::where('id', $businessId)->first();
             $businesses->images = json_decode($businesses->images);
             $OrderData->business = $businesses;
+            $user_name = User::where('id',  $validatedData['user_id'])->value('name');
+            Notification::create([
+                'heading' =>  $user_name . ' ' .  "order business",
+                'description' => "New business order added ",
+                'type' => "orders",
 
+            ]);
             return response()->json(['sucess' => true, 'message' => 'Data add sucessfully', 'data' => $OrderData], 201);
         } catch (\Exception $e) {
             return response()->json(['sucess' => false, 'message' => $e->getMessage()], 500);
         }
     }
 
-public function getOrders()
+    public function getOrders()
     {
         try {
             $user = Auth()->user();
@@ -539,7 +555,7 @@ public function getOrders()
         foreach ($orders as $order) {
             $businessId = $order['business_id'];
             $businesses = AddBusiness::where('id', $businessId)->first();
-            if($businesses){
+            if ($businesses) {
                 $businesses->images = json_decode($businesses->images);
                 $order->business = $businesses;
             }
@@ -567,7 +583,8 @@ public function getOrders()
         }
     }
 
-    public function changeBusinessStatus(Request $request){
+    public function changeBusinessStatus(Request $request)
+    {
         try {
 
             $validatedData = $request->validate([
@@ -583,7 +600,8 @@ public function getOrders()
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
-    public function changeOrderStatus(Request $request){
+    public function changeOrderStatus(Request $request)
+    {
         try {
 
             $validatedData = $request->validate([
@@ -599,25 +617,24 @@ public function getOrders()
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
-    public function getSingleorders($id){
+    public function getSingleorders($id)
+    {
         try {
-             $order = Order::find($id);
-                if(!$order){
+            $order = Order::find($id);
+            if (!$order) {
 
-                    return response()->json(['success' => false , 'message' => "Order not found" ] , 422);
-                }
-                $businessId = $order['business_id'];
-                $businesses = AddBusiness::where('id', $businessId)->first();
-                $businesses->images = json_decode($businesses->images);
-                $order->business = $businesses;
-                $user = User::select('name')->where('id' , $order->user_id)->first();
-                $order->username = $user->name ;
-                $order->date =  $order->created_at->format('M d, Y');
+                return response()->json(['success' => false, 'message' => "Order not found"], 422);
+            }
+            $businessId = $order['business_id'];
+            $businesses = AddBusiness::where('id', $businessId)->first();
+            $businesses->images = json_decode($businesses->images);
+            $order->business = $businesses;
+            $user = User::select('name')->where('id', $order->user_id)->first();
+            $order->username = $user->name;
+            $order->date =  $order->created_at->format('M d, Y');
             return response()->json(['success' => true, 'message' => "Business add successfully", "data"  =>  $order], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
-
-
 }

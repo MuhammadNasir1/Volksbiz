@@ -403,8 +403,6 @@
 
             <div class="flex justify-end gap-6">
                 <button>
-
-
                     <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification"
                         class="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400"
                         type="button">
@@ -423,7 +421,6 @@
                         </div>
                     </button>
 
-                    <!-- Dropdown menu -->
                     <div id="dropdownNotification"
                         class="z-20 hidden w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700"
                         aria-labelledby="dropdownNotificationButton">
@@ -432,7 +429,7 @@
                         </div>
                         <div class="divide-y divide-white mr-5">
                             <p class="text-center my-3">No Recent Notification</p>
-                            {{-- <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+<a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
 
                                 <div class="w-full ps-3 pb-3 border-b-2 border-primary">
                                     <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
@@ -440,7 +437,7 @@
                                         what's up? All set for the presentation?"</div>
                                     <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
                                 </div>
-                            </a> --}}
+                            </a>
 
 
 
