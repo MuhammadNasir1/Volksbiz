@@ -17,7 +17,7 @@ class AddBusinessController extends Controller
 {
 public function businessRequest(){
 
-    $businesses = AddBusiness::where('added_by' , "user")->whereNot('status' , 0)->orderBy('created_at', 'desc') ->get();
+    $businesses = AddBusiness::where('added_by' , "user")->whereNot('status' , "deleted")->orderBy('created_at', 'desc') ->get();
     foreach ($businesses as $business) {
         $business->update_images = json_decode($business->images , true);
         $category = AddCategory::where('id', $business->category)->first();
