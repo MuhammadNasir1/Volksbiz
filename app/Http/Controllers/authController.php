@@ -212,6 +212,9 @@ class authController extends Controller
                 'name' => 'nullable',
                 'phone' => 'nullable',
                 'upload_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+                'old_password' => 'nullable',
+                'new_password' => 'nullable|min:8',
+                'confirm_password' => 'nullable|same:new_password',
             ]);
 
             $user = User::where('id', $validatedData['user_id'])->first();
@@ -226,6 +229,11 @@ class authController extends Controller
                 $image->storeAs('public/user_images', $imageName); // Adjust storage path as needed
                 $user->user_image = 'storage/user_images/' . $imageName;
             }
+
+            if (!Hash::check($validatedData['old_password'], $user->password)) {
+                return response()->json(['success' => false, 'message' => 'The old password is incorrect'], 400);
+            }
+            $user->password = Hash::make($validatedData['new_password']);
 
             session(['user_image' => [
                 'user_image' => $user['user_image'],

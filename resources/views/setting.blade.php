@@ -11,8 +11,8 @@
         </div>
 
         <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
-            {{-- <form id="setting_data" method="post"> --}}
-            <form action="../updateSettings" method="post" enctype="multipart/form-data">
+            <form id="setting_data" method="post">
+            {{-- <form action="../updateSettings" method="post" enctype="multipart/form-data"> --}}
                 @csrf
                 <input type="hidden" name="user_id" value="{{ session('user_det')['user_id'] }}" autocomplete="off">
                 <div class="p-8">
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="mt-10  flex justify-end">
-                        <button class="bg-primary  text-white h-12 px-3 rounded-[6px]  shadow-sm font-semibold "
+                        <button class="bg-primary min-w-[80px] text-white h-12 px-3 rounded-[6px]  shadow-sm font-semibold "
                             id="addBtn">
                             <div class=" text-center hidden" id="spinner">
                                 <svg aria-hidden="true"
@@ -150,11 +150,14 @@
                     error: function(jqXHR) {
                         let response = JSON.parse(jqXHR.responseText);
                         console.log("error");
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        );
+                        Swal.fire({
+                            title: "Error!",
+                            text: response.message,
+                            icon: "warning",
+                            showConfirmButton: false,
+                            timer: 1500,
+                            
+                    });
 
                         $('#text').removeClass('hidden');
                         $('#spinner').addClass('hidden');

@@ -304,9 +304,9 @@
                                 fill="#67748E" />
                         </svg>
 
-                        <div
+                        {{-- <div
                             class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900">
-                        </div>
+                        </div> --}}
                     </button>
 
                     <!-- Dropdown menu -->
