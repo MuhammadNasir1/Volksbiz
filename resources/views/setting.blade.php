@@ -57,30 +57,45 @@
                         </div>
                     </div>
 
-                    
+
                     <div class=" mt-4">
                         <div class="flex w-full lg:flex-row flex-col gap-5">
-                            <div class="w-full mt-4">
-                                <label class="text-[16px] font-semibold block  text-[#452C88]"
-                                    for="old_password">@lang('lang.Old_Password')</label>
-                                <input type="text"
-                                    class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                    name="old_password" id="old_password" placeholder="@lang('lang.Enter_Old_Password')">
+                            <div class="w-full mt-4 relative">
+                                <label class="text-[16px] font-semibold block text-[#452C88]" for="old_password">@lang('lang.Old_Password')</label>
+                                <div class="relative">
+                                    <input type="password"
+                                           class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                                           name="old_password" id="old_password" placeholder="@lang('lang.Enter_Old_Password')">
+                                    <span class="absolute inset-y-0 flex items-center cursor-pointer right-4 top-3 toggle-password" toggle="#old_password">
+                                        <i class="fa-solid fa-eye-slash text-customGrayColorDark"></i>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="w-full lg:mt-4">
-                                <label class="text-[16px] font-semibold block  text-[#452C88]"
-                                    for="new_password">@lang('lang.New_Password')</label>
-                                <input type="text"
-                                    class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                    name="new_password" id="new_password" placeholder="@lang('lang.Enter_New_Password')">
+
+                            <div class="w-full lg:mt-4 relative">
+                                <label class="text-[16px] font-semibold block text-[#452C88]" for="new_password">@lang('lang.New_Password')</label>
+                                <div class="relative">
+                                    <input type="password"
+                                           class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                                           name="new_password" id="new_password" placeholder="@lang('lang.Enter_New_Password')">
+                                    <span class="absolute inset-y-0 flex items-center cursor-pointer right-4 top-3 toggle-password" toggle="#new_password">
+                                        <i class="fa-solid fa-eye-slash text-customGrayColorDark"></i>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="w-full lg:mt-4">
-                                <label class="text-[16px] font-semibold block  text-[#452C88]"
-                                    for="confirm_password">@lang('lang.Confirm_Password')</label>
-                                <input type="text"
-                                    class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                    name="confirm_password" id="confirm_password" placeholder="@lang('lang.Enter_Confirm_Password')">
+
+                            <div class="w-full lg:mt-4 relative">
+                                <label class="text-[16px] font-semibold block text-[#452C88]" for="confirm_password">@lang('lang.Confirm_Password')</label>
+                                <div class="relative">
+                                    <input type="password"
+                                           class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                                           name="confirm_password" id="confirm_password" placeholder="@lang('lang.Enter_Confirm_Password')">
+                                    <span class="absolute inset-y-0 flex items-center cursor-pointer right-4 top-3 toggle-password" toggle="#confirm_password">
+                                        <i class="fa-solid fa-eye-slash text-customGrayColorDark"></i>
+                                    </span>
+                                </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -128,6 +143,18 @@
         });
 
         $(document).ready(function() {
+            $(".toggle-password").click(function () {
+        const input = $($(this).attr("toggle")); // Get the target input field
+        const icon = $(this).find("i");
+
+        if (input.attr("type") === "password") {
+            input.attr("type", "text");
+            icon.removeClass("fa-eye-slash").addClass("fa-eye");
+        } else {
+            input.attr("type", "password");
+            icon.removeClass("fa-eye").addClass("fa-eye-slash");
+        }
+    });
             $("#setting_data").submit(function(event) {
                 event.preventDefault();
                 var formData = new FormData(this);
@@ -145,7 +172,7 @@
                     },
                     success: function(response) {
                             window.location.href = '../setting';
-                       
+
                     },
                     error: function(jqXHR) {
                         let response = JSON.parse(jqXHR.responseText);
@@ -156,7 +183,7 @@
                             icon: "warning",
                             showConfirmButton: false,
                             timer: 1500,
-                            
+
                     });
 
                         $('#text').removeClass('hidden');

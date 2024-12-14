@@ -208,8 +208,9 @@
                 </x-select> --}}
                     <x-select id="country" label="{{ __('lang.Country') }}" name='country'>
                         <x-slot name="options">
-                            <option selected disabled> @lang('lang.Select_Country')</option>
-                            @include('includes.countrieslist')
+                            {{-- <option selected disabled> @lang('lang.Select_Country')</option> --}}
+                            {{-- @include('includes.countrieslist') --}}
+                            <option selected value="Germany">Germany</option>
                         </x-slot>
                     </x-select>
                     <x-input id="city" label="{{ __('lang.City') }}" placeholder="{{ __('lang.Enter_City') }}"
