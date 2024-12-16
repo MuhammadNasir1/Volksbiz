@@ -25,8 +25,8 @@ Route::match(['get',  'post'], 'weblogout', [authController::class, 'weblogout']
 Route::get('/login', function () {
     return view('login');
 });
-Route::get('/notifications' , [NotificationController::class , 'index']);
-Route::get('/delNotification/{id}' , [NotificationController::class , 'delete']);
+Route::get('/notifications', [NotificationController::class, 'index']);
+Route::get('/delNotification/{id}', [NotificationController::class, 'delete']);
 
 
 Route::middleware('custom')->group(function () {

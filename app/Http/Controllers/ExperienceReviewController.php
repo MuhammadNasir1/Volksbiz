@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Reviews;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ExperienceReviewController extends Controller
 {
@@ -99,7 +100,7 @@ class ExperienceReviewController extends Controller
 
             $review = Reviews::create([
                 'status' => "de-active",
-                "user_id" => $validateData['user_id'],      
+                "user_id" => $validateData['user_id'],
                 "rating" => $validateData['rating'],
                 "location" => $validateData['location'],
                 "description" => $validateData['description'],
@@ -148,11 +149,12 @@ class ExperienceReviewController extends Controller
                 "name" => "required",
                 "role" => "required",
                 "image" => "required",
+                "status" => "required",
 
             ]);
 
             $review = Reviews::create([
-                'status' => "active",
+                "status" => $validateData['status'],
                 "user_id" => session('user_det')['user_id'],
                 "rating" => $validateData['rating'],
                 "location" => $validateData['location'],
@@ -180,6 +182,19 @@ class ExperienceReviewController extends Controller
             if (!$review) {
                 return response()->json(['success' => false, "message" => "Review not found"], 422);
             }
+            if ($review->image) {
+                Storage::delete($review->image_path);
+            }
+
+            if ($review->image) {
+                $filePath = public_path($review->image);
+
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
+
+
             $review->delete();
             return response()->json(['success' => true, "message" => "Review delete successfully"], 200);
         } catch (\Exception $e) {
@@ -189,11 +204,18 @@ class ExperienceReviewController extends Controller
     public function deleteExperience($id)
     {
         try {
-            $review = Experience::find($id);
-            if (!$review) {
+            $experience = Experience::find($id);
+            if (!$experience) {
                 return response()->json(['success' => false, "message" => "Experience not found"], 422);
             }
-            $review->delete();
+            if ($experience->image) {
+                $filePath = public_path($experience->image);
+
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
+            $experience->delete();
             return response()->json(['success' => true, "message" => "Experience delete successfully"], 200);
         } catch (\Exception $e) {
             return response()->json(["success"  => false, "message" => $e->getMessage()], 500);
@@ -213,11 +235,12 @@ class ExperienceReviewController extends Controller
                 "description" => "required",
                 "name" => "required",
                 "role" => "required",
+                "status" => "required",
             ]);
 
 
             $experience = Experience::create([
-                'status' => "active",
+                'status' => $validateData['status'],
                 "user_id" => session('user_det')['user_id'],
                 'location' => $validateData['location'],
                 'subject' => $validateData['subject'],

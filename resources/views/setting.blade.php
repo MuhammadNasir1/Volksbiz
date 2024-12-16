@@ -154,7 +154,7 @@
             input.attr("type", "password");
             icon.removeClass("fa-eye").addClass("fa-eye-slash");
         }
-    });
+    }); 
             $("#setting_data").submit(function(event) {
                 event.preventDefault();
                 var formData = new FormData(this);
